@@ -173,7 +173,7 @@ point_count = 2
 curve = SubResource("Curve_qinqh")
 
 [sub_resource type="Curve" id="Curve_2wdri"]
-_data = [Vector2(0, 1), 0.0, -1.7162919, 0, 0, Vector2(1, 0.04494381), -1.8823861, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, -2.6574843, 0, 0, Vector2(1, 0), -1.0297775, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_3j1us"]
