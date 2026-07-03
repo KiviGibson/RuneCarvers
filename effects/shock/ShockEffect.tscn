@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://rf7qgakau3is"]
+
+[ext_resource type="ArrayMesh" uid="uid://b115lfrr8n6rj" path="res://effects/shock/shock_mesh.tres" id="1_lwee2"]
+
+[sub_resource type="Curve" id="Curve_55wmq"]
+_data = [Vector2(0.3729433, 0), 0.0, 0.0, 0, 0, Vector2(0.49725774, 0.49999994), 7.437285, 7.437285, 0, 0, Vector2(0.69469833, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_1t003"]
+curve = SubResource("Curve_55wmq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6yq8t"]
+particle_flag_align_y = true
+emission_shape = 2
+emission_sphere_radius = 0.7
+angle_min = -179.99998
+angle_max = 180.00002
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 0.009997765
+radial_accel_max = 0.009997765
+scale_min = 40.0
+scale_max = 70.0
+scale_curve = SubResource("CurveTexture_1t003")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lwee2"]
+albedo_color = Color(0.34901962, 0.5529412, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5yvxn"]
+material = SubResource("StandardMaterial3D_lwee2")
+
+[node name="Node3D" type="Node3D" unique_id=123602805]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1050879009]
+amount = 5
+amount_ratio = 0.3
+lifetime = 0.2
+fixed_fps = 0
+transform_align = 2
+process_material = SubResource("ParticleProcessMaterial_6yq8t")
+draw_pass_1 = ExtResource("1_lwee2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=344352401]
+mesh = SubResource("CapsuleMesh_5yvxn")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1368406825]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 3.136953, 10, 2.487167)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1628366307]
+transform = Transform3D(0.8112211, 0.40132904, -0.42527074, 0, 0.72728246, 0.68633825, 0.58473945, -0.55677205, 0.5899869, 0, 19.734722, 0)
