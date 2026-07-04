@@ -1,17 +1,23 @@
 extends Node
+class_name InputSystem
 
+# Interface do zastosowania
 signal carved_symbol(value: int)
 signal movement_vector_change(value: Vector2)
 signal interact()
 signal activation(value: bool)
+signal target_vector_change(value: Vector2)
+
 
 var owner_id: int ## Coop requirement
 var hold_carving: bool = true ## Accessability feature (switch/hold)
 var next_carving_state: bool = true ## for (switch) accessability feature
+var dead_zone: float = 0.04
+# Targeting
+var target_vector: Vector2
 
 # Multiplayer
 var is_in_carving_state: bool = false
-var current_movement_vector: Vector2 = Vector2.ZERO
 
 # Funkcja lokalna
 func _process(delta: float) -> void:
@@ -19,7 +25,6 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("carving"):
 		if hold_carving: carving(true)
 		else: carving(next_carving_state)
-	
 	elif Input.is_action_just_released("carving"):
 		if hold_carving: carving(false)
 		else: next_carving_state = ! next_carving_state
@@ -31,9 +36,23 @@ func _process(delta: float) -> void:
 	var y := Input.get_axis("downward", "upward")
 	var x := Input.get_axis("left", "right")
 	movement_input(Vector2(x, y))
-	
-# RPC for server
+	update_targeting(target_vector)
 
+
+func _input(event: InputEvent) -> void:
+	# Sprawdź ownera
+	if event is InputEventMouseMotion:
+		var screen_size: Vector2 = get_viewport().get_visible_rect().size/2
+		target_vector = (event.position-screen_size).normalized()
+	if event is InputEventJoypadMotion: # Hard coded, becouse why not
+		if event.axis == 3: # Up down
+			if abs(event.axis_value) < dead_zone: target_vector.y = 0.0
+			else: target_vector.y = snappedf(event.axis_value, 0.01)
+		if event.axis == 2: # left right
+			if abs(event.axis_value) < dead_zone: target_vector.x = 0.0
+			else:target_vector.x = snappedf(event.axis_value, 0.01)
+
+# RPC for server
 func activate_rune(value: bool) -> void:
 	activation.emit(value)
 
@@ -45,6 +64,10 @@ func carving(value: bool) -> void:
 
 func movement_input(value: Vector2) -> void:
 	movement_vector_change.emit(value)
+
+func update_targeting(value: Vector2) -> void:
+	print(target_vector)
+	target_vector_change.emit(target_vector)
 
 func carving_input(value: int) -> void:
 	if is_in_carving_state:
