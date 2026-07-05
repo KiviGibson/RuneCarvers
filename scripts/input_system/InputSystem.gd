@@ -7,7 +7,8 @@ signal movement_vector_change(value: Vector2)
 signal interact()
 signal activation(value: bool)
 signal target_vector_change(value: Vector2)
-
+signal carving_change(state: bool)
+# Dodanie sygnału esc_key
 
 var owner_id: int ## Coop requirement
 var hold_carving: bool = true ## Accessability feature (switch/hold)
@@ -16,11 +17,14 @@ var dead_zone: float = 0.04
 # Targeting
 var target_vector: Vector2
 
-# Multiplayer
-var is_in_carving_state: bool = false
+# Multiplayer state
+var is_in_carving_state: bool = false: 
+	set(value):
+		carving_change.emit(value)
+		is_in_carving_state = value
 
 # Funkcja lokalna
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Check for correct user
 	if Input.is_action_just_pressed("carving"):
 		if hold_carving: carving(true)
@@ -33,6 +37,11 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("activate"): activate_rune(true)
 	elif Input.is_action_just_released("activate"): activate_rune(false)
 	
+	if Input.is_action_just_pressed("carve_up"): carving_input(0)
+	if Input.is_action_just_pressed("carve_down"): carving_input(1)
+	if Input.is_action_just_pressed("carve_left"): carving_input(2)
+	if Input.is_action_just_pressed("carve_right"): carving_input(3)
+
 	var y := Input.get_axis("downward", "upward")
 	var x := Input.get_axis("left", "right")
 	movement_input(Vector2(x, y))
@@ -66,7 +75,6 @@ func movement_input(value: Vector2) -> void:
 	movement_vector_change.emit(value)
 
 func update_targeting(value: Vector2) -> void:
-	print(target_vector)
 	target_vector_change.emit(target_vector)
 
 func carving_input(value: int) -> void:

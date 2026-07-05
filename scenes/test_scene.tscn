@@ -1,6 +1,63 @@
 [gd_scene format=3 uid="uid://4foimi5jglgk"]
 
 [ext_resource type="Script" uid="uid://bbqbp1p043by2" path="res://scripts/input_system/InputSystem.gd" id="1_g7g4h"]
+[ext_resource type="Script" uid="uid://qpy2uevlwsjk" path="res://scripts/input_system/carving_system/CarvingSystem.gd" id="2_7ddre"]
+[ext_resource type="Script" uid="uid://nrajgkybshxf" path="res://scripts/input_system/carving_system/Carvings.gd" id="3_qjeyg"]
+[ext_resource type="PackedScene" uid="uid://g8d1aj0ym3lb" path="res://scenes/CarvingUI.tscn" id="4_3qnke"]
+
+[sub_resource type="Resource" id="Resource_7ddre"]
+script = ExtResource("3_qjeyg")
+pattern = Array[int]([0, 1, 2, 3])
+metadata/_custom_type_script = "uid://nrajgkybshxf"
 
 [node name="TestScene" type="Node3D" unique_id=1666680966]
+
+[node name="InputSystem" type="Node" parent="." unique_id=804145743]
 script = ExtResource("1_g7g4h")
+metadata/_custom_type_script = "uid://bbqbp1p043by2"
+
+[node name="CarvingSystem" type="Node" parent="." unique_id=143855151 node_paths=PackedStringArray("ui")]
+script = ExtResource("2_7ddre")
+carvings = Array[ExtResource("3_qjeyg")]([SubResource("Resource_7ddre"), null, null, null])
+ui = [NodePath("../UI/Control/Panel/VBoxContainer/HBoxContainer"), NodePath("../UI/Control/Panel/VBoxContainer/HBoxContainer2"), NodePath("../UI/Control/Panel/VBoxContainer/HBoxContainer3"), NodePath("../UI/Control/Panel/VBoxContainer/HBoxContainer4")]
+metadata/_custom_type_script = "uid://qpy2uevlwsjk"
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1699529609]
+
+[node name="Control" type="Control" parent="UI" unique_id=1427293323]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 200.0
+offset_bottom = 117.0
+
+[node name="Panel" type="Panel" parent="UI/Control" unique_id=560934769]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/Panel" unique_id=1451016778]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="HBoxContainer" parent="UI/Control/Panel/VBoxContainer" unique_id=1919036124 instance=ExtResource("4_3qnke")]
+layout_mode = 2
+
+[node name="HBoxContainer2" parent="UI/Control/Panel/VBoxContainer" unique_id=131270294 instance=ExtResource("4_3qnke")]
+layout_mode = 2
+
+[node name="HBoxContainer3" parent="UI/Control/Panel/VBoxContainer" unique_id=2052647315 instance=ExtResource("4_3qnke")]
+layout_mode = 2
+
+[node name="HBoxContainer4" parent="UI/Control/Panel/VBoxContainer" unique_id=892158073 instance=ExtResource("4_3qnke")]
+layout_mode = 2
+
+[connection signal="carved_symbol" from="InputSystem" to="CarvingSystem" method="carve_symbol"]
+[connection signal="carving_change" from="InputSystem" to="CarvingSystem" method="carving_state_change"]

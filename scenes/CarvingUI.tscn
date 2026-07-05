@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://g8d1aj0ym3lb"]
+
+[ext_resource type="Texture2D" uid="uid://ddgs6y20giaql" path="res://icon.svg" id="1_c8ph0"]
+[ext_resource type="Script" uid="uid://d1qjqjm27w84l" path="res://scripts/input_system/carving_system/CarvingUI.gd" id="1_t2g00"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6yq8t"]
+line_spacing = 0.0
+font_size = 12
+
+[node name="HBoxContainer" type="HBoxContainer" unique_id=1919036124 node_paths=PackedStringArray("status_icon", "carving_node", "name_code")]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 17.0
+grow_horizontal = 2
+script = ExtResource("1_t2g00")
+status_icon = NodePath("TextureRect")
+carving_node = NodePath("HBoxContainer")
+name_code = NodePath("Label")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=855169577]
+custom_minimum_size = Vector2(24, 24)
+custom_maximum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("1_c8ph0")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=750899619]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="." unique_id=1230945496]
+layout_mode = 2
+text = "BMB"
+label_settings = SubResource("LabelSettings_6yq8t")
+horizontal_alignment = 2
