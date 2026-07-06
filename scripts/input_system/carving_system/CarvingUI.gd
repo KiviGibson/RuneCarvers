@@ -6,14 +6,22 @@ const up: CompressedTexture2D = preload("res://kenney_cursor-pack/PNG/Basic/Defa
 const down: CompressedTexture2D = preload("res://kenney_cursor-pack/PNG/Basic/Default/arrow_s.png")
 const left: CompressedTexture2D = preload("res://kenney_cursor-pack/PNG/Basic/Default/arrow_w.png")
 const right: CompressedTexture2D = preload("res://kenney_cursor-pack/PNG/Basic/Default/arrow_e.png")
-
+const temp_rune_icon: CompressedTexture2D = preload("res://icon.svg")
+const clock_fill: Array[CompressedTexture2D] = [
+	preload("res://kenney_cursor-pack/Vector/Basic/progress_CW_25.svg"),
+	preload("res://kenney_cursor-pack/Vector/Basic/progress_CW_50.svg"),
+	preload("res://kenney_cursor-pack/Vector/Basic/progress_CW_75.svg"),
+	preload("res://kenney_cursor-pack/Vector/Basic/progress_full.svg")
+]
 @export var status_icon: TextureRect
 @export var carving_node: Control
 @export var name_code: Label 
+@export var animator: AnimationPlayer
+
 @export var fragments: Array[PatternFragmentUI]
 
 var current_fragment: int
-
+var current_index: int = 0
 func set_pattern(pattern: Array[int]) -> void:
 	while carving_node.get_child_count() > 0:
 		carving_node.remove_child(carving_node.get_child(0))
@@ -35,3 +43,16 @@ func reset() -> void:
 	for i in range(current_fragment):
 		fragments[i].reset()
 	current_fragment = 0
+
+func update_status(progress: float) -> void:
+	var index := clampi(int(progress * 4), 0, 3)
+	if index != current_index:
+		animator.stop()
+		animator.play("timer_update")
+		status_icon.texture = clock_fill[index]
+		current_index = index
+
+func able_to_use() -> void:
+	animator.stop()
+	animator.play("timer_update")
+	status_icon.texture = temp_rune_icon

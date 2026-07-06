@@ -10,6 +10,21 @@ script = ExtResource("3_qjeyg")
 pattern = Array[int]([0, 1, 2, 3])
 metadata/_custom_type_script = "uid://nrajgkybshxf"
 
+[sub_resource type="Resource" id="Resource_5rxlc"]
+script = ExtResource("3_qjeyg")
+pattern = Array[int]([0, 0, 0])
+metadata/_custom_type_script = "uid://nrajgkybshxf"
+
+[sub_resource type="Resource" id="Resource_ghlvj"]
+script = ExtResource("3_qjeyg")
+pattern = Array[int]([0, 1, 1, 3, 3])
+metadata/_custom_type_script = "uid://nrajgkybshxf"
+
+[sub_resource type="Resource" id="Resource_55al8"]
+script = ExtResource("3_qjeyg")
+pattern = Array[int]([2, 2, 0])
+metadata/_custom_type_script = "uid://nrajgkybshxf"
+
 [node name="TestScene" type="Node3D" unique_id=1666680966]
 
 [node name="InputSystem" type="Node" parent="." unique_id=804145743]
@@ -18,17 +33,28 @@ metadata/_custom_type_script = "uid://bbqbp1p043by2"
 
 [node name="CarvingSystem" type="Node" parent="." unique_id=143855151 node_paths=PackedStringArray("ui")]
 script = ExtResource("2_7ddre")
-carvings = Array[ExtResource("3_qjeyg")]([SubResource("Resource_7ddre"), null, null, null])
+carvings = Array[ExtResource("3_qjeyg")]([SubResource("Resource_7ddre"), SubResource("Resource_5rxlc"), SubResource("Resource_ghlvj"), SubResource("Resource_55al8")])
 ui = [NodePath("../UI/Control/Panel/VBoxContainer/HBoxContainer"), NodePath("../UI/Control/Panel/VBoxContainer/HBoxContainer2"), NodePath("../UI/Control/Panel/VBoxContainer/HBoxContainer3"), NodePath("../UI/Control/Panel/VBoxContainer/HBoxContainer4")]
 metadata/_custom_type_script = "uid://qpy2uevlwsjk"
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1699529609]
+scale = Vector2(0.6, 0.6)
+transform = Transform2D(0.6, 0, 0, 0.6, 0, 0)
 
 [node name="Control" type="Control" parent="UI" unique_id=1427293323]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 200.0
-offset_bottom = 117.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -105.0
+offset_right = 125.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 0.0
 
 [node name="Panel" type="Panel" parent="UI/Control" unique_id=560934769]
 layout_mode = 1
@@ -43,9 +69,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -10.0
+offset_bottom = 84.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 2
 
 [node name="HBoxContainer" parent="UI/Control/Panel/VBoxContainer" unique_id=1919036124 instance=ExtResource("4_3qnke")]
 layout_mode = 2

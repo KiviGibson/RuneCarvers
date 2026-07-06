@@ -3,9 +3,13 @@ class_name Carvings ## Resource Gameplay Specific generated
 
 @export var pattern: Array[int]
 @export var rune: PackedScene
+@export var cd: float = 1.0
+
 var misspelled: bool = false ## Blokuje rune
 var current_symbol: int = 0
-var cd: float = 1.0
+var current_cd: float = 0.0
+var on_cd: bool = false
+
 
 func next_symbol(symbol: int) -> bool: ## Dodaj symbol do kombinacji - Zwraca czy to poprawny symbol
 	if misspelled: return false
@@ -24,7 +28,17 @@ func restart() -> void: ## Czyści aktualną próbę wykonania kombinacji
 	current_symbol = 0
 
 func can_get_rune() -> bool: ## Sprawdza czy kombinacja została poprawnie wprowadzona
-	return current_symbol == len(pattern) and not misspelled
+	return current_symbol == len(pattern) and not misspelled and not on_cd
 
 func get_rune() -> PackedScene: ## Zwraca działającą runę
+	current_cd = cd
+	on_cd = true
 	return rune
+
+func tick_cooldown(delta: float) -> bool:
+	if on_cd:
+		current_cd -= delta
+		if current_cd <= 0:
+			on_cd = false
+			return true
+	return false

@@ -22,15 +22,27 @@ func start_carving() -> void: ## Rozpocznij rycie/ wyczyść
 			c.restart()
 
 func carve_symbol(symbol: int) -> void: ## Dodaj symbol do runy
-	var i := 0
+	var i := -1
 	for carve in carvings:
-		if carve == null: continue
+		i += 1
+		if carve == null: 
+			continue
 		if carve.misspelled: continue
 		var correct := carve.next_symbol(symbol)
 		if correct: ui[i].correct()
 		else: ui[i].reset()
-		i += 1
 	chek_and_reset()
+	
+func _process(delta: float) -> void:
+	var i := 0
+	for c in carvings:
+		if c.on_cd:
+			var off_cd := c.tick_cooldown(delta)
+			if off_cd:
+				ui[i].able_to_use()
+			else:
+				ui[i].update_status(c.current_cd/c.cd)
+		i += 1
 
 func chek_and_reset() -> void:
 	for c in carvings:
@@ -44,7 +56,7 @@ func stop_carving() -> void: ## Ukończ rycie
 	for carve in carvings:
 		if carve == null: continue
 		if carve.can_get_rune():
-			successful_carving.emit(carve.rune)
+			successful_carving.emit(carve.get_rune())
 			break
 	for c in carvings:
 		if c != null:
