@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://g8d1aj0ym3lb"]
 
-[ext_resource type="Texture2D" uid="uid://ddgs6y20giaql" path="res://icon.svg" id="1_c8ph0"]
 [ext_resource type="Script" uid="uid://d1qjqjm27w84l" path="res://scripts/input_system/carving_system/CarvingUI.gd" id="1_t2g00"]
+[ext_resource type="Script" uid="uid://btilifto0d5kf" path="res://scripts/multiplayer_system/spawners/FragmentSpawner.gd" id="3_k3wd6"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0mp85"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
 
 [sub_resource type="LabelSettings" id="LabelSettings_6yq8t"]
 line_spacing = 0.0
@@ -36,7 +39,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_dn37w"]
 resource_name = "timer_update"
-length = 0.19999999999999998
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -68,7 +71,7 @@ _data = {
 &"timer_update": SubResource("Animation_dn37w")
 }
 
-[node name="HBoxContainer" type="HBoxContainer" unique_id=1919036124 node_paths=PackedStringArray("status_icon", "carving_node", "name_code", "animator")]
+[node name="HBoxContainer" type="HBoxContainer" unique_id=1919036124 node_paths=PackedStringArray("status_icon", "carving_node", "name_code", "animator", "spawner")]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 17.0
@@ -78,6 +81,7 @@ status_icon = NodePath("Panel/TextureRect")
 carving_node = NodePath("VBoxContainer/HBoxContainer")
 name_code = NodePath("VBoxContainer/Label")
 animator = NodePath("AnimationPlayer")
+spawner = NodePath("MultiplayerSpawner")
 
 [node name="Panel" type="Panel" parent="." unique_id=2142479926]
 self_modulate = Color(1, 1, 1, 0)
@@ -100,7 +104,7 @@ offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(24, 24)
-texture = ExtResource("1_c8ph0")
+texture = SubResource("CompressedTexture2D_0mp85")
 expand_mode = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1333859311]
@@ -121,3 +125,8 @@ size_flags_vertical = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=404291840]
 libraries/ = SubResource("AnimationLibrary_u7s7b")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=30058383]
+_spawnable_scenes = PackedStringArray("uid://78m72orxdb0f")
+spawn_path = NodePath("../VBoxContainer/HBoxContainer")
+script = ExtResource("3_k3wd6")

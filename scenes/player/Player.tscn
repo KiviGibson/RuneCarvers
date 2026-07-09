@@ -1,0 +1,136 @@
+[gd_scene format=3 uid="uid://4foimi5jglgk"]
+
+[ext_resource type="Script" uid="uid://bbqbp1p043by2" path="res://scripts/input_system/InputSystem.gd" id="1_524rm"]
+[ext_resource type="Script" uid="uid://dcb74rvqbwjiq" path="res://scripts/unit/Player.gd" id="1_tpg5x"]
+[ext_resource type="Script" uid="uid://qpy2uevlwsjk" path="res://scripts/input_system/carving_system/CarvingSystem.gd" id="2_tpg5x"]
+[ext_resource type="Script" uid="uid://nrajgkybshxf" path="res://scripts/input_system/carving_system/Carvings.gd" id="3_c3xxp"]
+[ext_resource type="PackedScene" uid="uid://g8d1aj0ym3lb" path="res://scenes/carving_components/CarvingUI.tscn" id="4_npwbq"]
+[ext_resource type="Script" uid="uid://d1ggxehy2ph1q" path="res://scripts/unit/movement_controler.gd" id="6_c3xxp"]
+
+[sub_resource type="Resource" id="Resource_7ddre"]
+script = ExtResource("3_c3xxp")
+pattern = Array[int]([0, 1, 2, 3])
+cd = 5.0
+metadata/_custom_type_script = "uid://nrajgkybshxf"
+
+[sub_resource type="Resource" id="Resource_5rxlc"]
+script = ExtResource("3_c3xxp")
+pattern = Array[int]([0, 0, 0])
+cd = 3.0
+metadata/_custom_type_script = "uid://nrajgkybshxf"
+
+[sub_resource type="Resource" id="Resource_ghlvj"]
+script = ExtResource("3_c3xxp")
+pattern = Array[int]([0, 1, 1, 3, 3])
+cd = 10.0
+metadata/_custom_type_script = "uid://nrajgkybshxf"
+
+[sub_resource type="Resource" id="Resource_55al8"]
+script = ExtResource("3_c3xxp")
+pattern = Array[int]([2, 2, 0])
+cd = 20.0
+metadata/_custom_type_script = "uid://nrajgkybshxf"
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_khinc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_6yq8t"]
+size = Vector3(0.1, 0.1, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6yq8t"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mdl7e"]
+properties/0/path = NodePath("Puppet:rotation")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Puppet:scale")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Puppet:position")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:position")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+
+[node name="Player" type="Node3D" unique_id=1666680966 node_paths=PackedStringArray("input_system", "carving_system", "carving_ui", "model")]
+script = ExtResource("1_tpg5x")
+input_system = NodePath("InputSystem")
+carving_system = NodePath("CarvingSystem")
+carving_ui = NodePath("UI")
+model = NodePath("Puppet")
+
+[node name="InputSystem" type="Node" parent="." unique_id=804145743]
+script = ExtResource("1_524rm")
+metadata/_custom_type_script = "uid://bbqbp1p043by2"
+
+[node name="CarvingSystem" type="Node" parent="." unique_id=143855151 node_paths=PackedStringArray("ui")]
+script = ExtResource("2_tpg5x")
+carvings = Array[ExtResource("3_c3xxp")]([SubResource("Resource_7ddre"), SubResource("Resource_5rxlc"), SubResource("Resource_ghlvj"), SubResource("Resource_55al8")])
+ui = [NodePath("../UI/Panel/MarginContainer/VBoxContainer/HBoxContainer"), NodePath("../UI/Panel/MarginContainer/VBoxContainer/HBoxContainer2"), NodePath("../UI/Panel/MarginContainer/VBoxContainer/HBoxContainer3"), NodePath("../UI/Panel/MarginContainer/VBoxContainer/HBoxContainer4")]
+metadata/_custom_type_script = "uid://qpy2uevlwsjk"
+
+[node name="UI" type="Control" parent="." unique_id=1427293323]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel" type="Panel" parent="UI" unique_id=560934769]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Panel" unique_id=1178485980]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Panel/MarginContainer" unique_id=1451016778]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" parent="UI/Panel/MarginContainer/VBoxContainer" unique_id=1919036124 instance=ExtResource("4_npwbq")]
+layout_mode = 2
+
+[node name="HBoxContainer2" parent="UI/Panel/MarginContainer/VBoxContainer" unique_id=131270294 instance=ExtResource("4_npwbq")]
+layout_mode = 2
+
+[node name="HBoxContainer3" parent="UI/Panel/MarginContainer/VBoxContainer" unique_id=2052647315 instance=ExtResource("4_npwbq")]
+layout_mode = 2
+
+[node name="HBoxContainer4" parent="UI/Panel/MarginContainer/VBoxContainer" unique_id=892158073 instance=ExtResource("4_npwbq")]
+layout_mode = 2
+
+[node name="Puppet" type="CharacterBody3D" parent="." unique_id=52327527]
+script = ExtResource("6_c3xxp")
+
+[node name="Model" type="MeshInstance3D" parent="Puppet" unique_id=1363839945]
+mesh = SubResource("CapsuleMesh_khinc")
+
+[node name="Direction" type="MeshInstance3D" parent="Puppet/Model" unique_id=60768259]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+mesh = SubResource("BoxMesh_6yq8t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Puppet" unique_id=1819267064]
+shape = SubResource("CapsuleShape3D_6yq8t")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2085177374]
+replication_config = SubResource("SceneReplicationConfig_mdl7e")
+
+[connection signal="carved_symbol" from="InputSystem" to="CarvingSystem" method="carve_symbol"]
+[connection signal="carving_change" from="InputSystem" to="CarvingSystem" method="carving_state_change"]
+[connection signal="movement_vector_change" from="InputSystem" to="Puppet" method="set_movement_vector"]
+[connection signal="target_vector_change" from="InputSystem" to="Puppet" method="set_rotation_vector"]

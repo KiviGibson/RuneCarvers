@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://bk3wugnxnrdyw"]
+
+[ext_resource type="Script" uid="uid://cm0qmfmjp8c82" path="res://scripts/multiplayer_system/game_scene.gd" id="1_jpbhf"]
+[ext_resource type="Script" uid="uid://du3idwes8fp8o" path="res://scripts/multiplayer_system/spawners/PlayerSpawner.gd" id="2_cw6cr"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_6yq8t"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1j5yo"]
+albedo_color = Color(0, 0.08627451, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6yq8t"]
+material = SubResource("StandardMaterial3D_1j5yo")
+size = Vector2(20, 20)
+
+[node name="Game" type="Node3D" unique_id=1160267840 node_paths=PackedStringArray("game_overlay", "player_spawner")]
+script = ExtResource("1_jpbhf")
+game_overlay = NodePath("game_overlay/MarginContainer/HBoxContainer")
+player_spawner = NodePath("PlayerSpawner")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=41207583]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 3, 0)
+
+[node name="StaticMap" type="StaticBody3D" parent="." unique_id=881072130]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticMap" unique_id=1340238656]
+shape = SubResource("WorldBoundaryShape3D_6yq8t")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticMap" unique_id=1904857005]
+mesh = SubResource("PlaneMesh_6yq8t")
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=748622085 node_paths=PackedStringArray("game_overlay")]
+spawn_path = NodePath("../Players")
+spawn_limit = 2
+script = ExtResource("2_cw6cr")
+game_overlay = NodePath("../game_overlay/MarginContainer/HBoxContainer")
+
+[node name="Players" type="Node3D" parent="." unique_id=2135037073]
+
+[node name="game_overlay" type="CanvasLayer" parent="." unique_id=1861279910]
+
+[node name="MarginContainer" type="MarginContainer" parent="game_overlay" unique_id=167608764]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -218.0
+offset_bottom = 1.9991455
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="game_overlay/MarginContainer" unique_id=835005547]
+layout_mode = 2
+theme_override_constants/separation = 400
+alignment = 1
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=647554647]
+transform = Transform3D(0.546579, -0.60909915, 0.5746735, 0, 0.6862531, 0.7273629, -0.8374075, -0.39756128, 0.37509152, 0, 3.212193, 5.9742565)

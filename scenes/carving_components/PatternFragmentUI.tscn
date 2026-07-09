@@ -93,6 +93,14 @@ _data = {
 &"reset": SubResource("Animation_s2j88")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_3gb2a"]
+properties/0/path = NodePath(".:size")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:modulate")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+
 [node name="PatternFragment" type="TextureRect" unique_id=978716006 node_paths=PackedStringArray("animator")]
 modulate = Color(1, 1, 1, 0.49803922)
 custom_minimum_size = Vector2(28, 28)
@@ -116,3 +124,6 @@ animator = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=266057122]
 libraries/ = SubResource("AnimationLibrary_a0oyl")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1853026450]
+replication_config = SubResource("SceneReplicationConfig_3gb2a")

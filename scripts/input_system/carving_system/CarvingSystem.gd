@@ -8,15 +8,18 @@ signal successful_carving(rune: PackedScene) ## Po ukończeniu rycia wysyła syg
 @export var ui: Array[CarvingUI]
 
 func _ready() -> void:
+	if not multiplayer.is_server(): return
 	successful_carving.connect(success_test)
 	for i in range(max_carvings):
 		if carvings[i] == null: 
 			ui[i].visible = false
 			continue
 		ui[i].visible = true
+		carvings[i] = carvings[i].duplicate(true)
 		ui[i].set_pattern(carvings[i].pattern)
 		
 func start_carving() -> void: ## Rozpocznij rycie/ wyczyść
+	if not multiplayer.is_server(): return
 	for c in carvings:
 		if c != null:
 			c.restart()
@@ -34,6 +37,7 @@ func carve_symbol(symbol: int) -> void: ## Dodaj symbol do runy
 	chek_and_reset()
 	
 func _process(delta: float) -> void:
+	if not multiplayer.is_server(): return
 	var i := 0
 	for c in carvings:
 		if c.on_cd:
@@ -53,6 +57,7 @@ func chek_and_reset() -> void:
 			c.restart()
 
 func stop_carving() -> void: ## Ukończ rycie
+	if not multiplayer.is_server(): return
 	for carve in carvings:
 		if carve == null: continue
 		if carve.can_get_rune():
@@ -65,8 +70,9 @@ func stop_carving() -> void: ## Ukończ rycie
 		u.reset()
 
 func carving_state_change(value: bool) -> void:
+	if not multiplayer.is_server(): return
 	if value: start_carving()
 	else: stop_carving()
 
-func success_test(rune:PackedScene) -> void:
-	print("Done!")
+func success_test(_rune:PackedScene) -> void:
+	print("Done: " + get_parent().name)
