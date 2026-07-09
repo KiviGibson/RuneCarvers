@@ -1,6 +1,7 @@
 extends Node
 
 signal player_connected(peer_id: int)
+@warning_ignore("unused_signal")
 signal player_disconnnected(peer_id: int)
 
 const port := 2137

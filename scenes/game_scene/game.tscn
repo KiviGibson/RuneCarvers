@@ -17,9 +17,6 @@ script = ExtResource("1_jpbhf")
 game_overlay = NodePath("game_overlay/MarginContainer/HBoxContainer")
 player_spawner = NodePath("PlayerSpawner")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=41207583]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 3, 0)
-
 [node name="StaticMap" type="StaticBody3D" parent="." unique_id=881072130]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticMap" unique_id=1340238656]
