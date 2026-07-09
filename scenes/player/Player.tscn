@@ -2,10 +2,15 @@
 
 [ext_resource type="Script" uid="uid://bbqbp1p043by2" path="res://scripts/input_system/InputSystem.gd" id="1_524rm"]
 [ext_resource type="Script" uid="uid://dcb74rvqbwjiq" path="res://scripts/unit/Player.gd" id="1_tpg5x"]
+[ext_resource type="Script" uid="uid://bffwh1ds00jub" path="res://scripts/unit/damage_system/Stats.gd" id="2_npwbq"]
 [ext_resource type="Script" uid="uid://qpy2uevlwsjk" path="res://scripts/input_system/carving_system/CarvingSystem.gd" id="2_tpg5x"]
 [ext_resource type="Script" uid="uid://nrajgkybshxf" path="res://scripts/input_system/carving_system/Carvings.gd" id="3_c3xxp"]
 [ext_resource type="PackedScene" uid="uid://g8d1aj0ym3lb" path="res://scenes/carving_components/CarvingUI.tscn" id="4_npwbq"]
 [ext_resource type="Script" uid="uid://d1ggxehy2ph1q" path="res://scripts/unit/movement_controler.gd" id="6_c3xxp"]
+
+[sub_resource type="Resource" id="Resource_c3xxp"]
+script = ExtResource("2_npwbq")
+metadata/_custom_type_script = "uid://bffwh1ds00jub"
 
 [sub_resource type="Resource" id="Resource_7ddre"]
 script = ExtResource("3_c3xxp")
@@ -62,6 +67,7 @@ carving_system = NodePath("CarvingSystem")
 carving_ui = NodePath("UI")
 camera = NodePath("Puppet/Camera3D")
 model = NodePath("Puppet")
+stats = SubResource("Resource_c3xxp")
 
 [node name="InputSystem" type="Node" parent="." unique_id=804145743]
 script = ExtResource("1_524rm")
