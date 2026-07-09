@@ -13,7 +13,7 @@ signal carving_change(state: bool)
 var owner_id: int ## Coop requirement
 var hold_carving: bool = true ## Accessability feature (switch/hold)
 var next_carving_state: bool = true ## for (switch) accessability feature
-var dead_zone: float = 0.04
+var dead_zone: float = 0.05
 # Targeting
 var target_vector: Vector2
 
@@ -25,31 +25,31 @@ var is_in_carving_state: bool = false:
 
 # Funkcja lokalna
 func _process(_delta: float) -> void:
-	# Check for correct user
+	if multiplayer.get_unique_id() != owner_id: return
 	if Input.is_action_just_pressed("carving"):
-		if hold_carving: carving(true)
-		else: carving(next_carving_state)
+		if hold_carving: carving.rpc_id(1, true)
+		else: carving.rpc_id(1, next_carving_state)
 	elif Input.is_action_just_released("carving"):
-		if hold_carving: carving(false)
+		if hold_carving: carving.rpc_id(1, false)
 		else: next_carving_state = ! next_carving_state
 	
-	if Input.is_action_just_pressed("interact"): interact_rtc()
-	if Input.is_action_just_pressed("activate"): activate_rune(true)
-	elif Input.is_action_just_released("activate"): activate_rune(false)
+	if Input.is_action_just_pressed("interact"): interact_rtc.rpc_id(1)
+	if Input.is_action_just_pressed("activate"): activate_rune.rpc_id(1, true)
+	elif Input.is_action_just_released("activate"): activate_rune.rpc_id(1, false)
 	
-	if Input.is_action_just_pressed("carve_up"): carving_input(0)
-	if Input.is_action_just_pressed("carve_down"): carving_input(1)
-	if Input.is_action_just_pressed("carve_left"): carving_input(2)
-	if Input.is_action_just_pressed("carve_right"): carving_input(3)
+	if Input.is_action_just_pressed("carve_up"): carving_input.rpc_id(1, 0)
+	if Input.is_action_just_pressed("carve_down"): carving_input.rpc_id(1, 1)
+	if Input.is_action_just_pressed("carve_left"): carving_input.rpc_id(1, 2)
+	if Input.is_action_just_pressed("carve_right"): carving_input.rpc_id(1, 3)
 
 	var y := Input.get_axis("downward", "upward")
 	var x := Input.get_axis("left", "right")
-	movement_input(Vector2(x, y))
-	update_targeting(target_vector)
+	movement_input.rpc_id(1, Vector2(x, y))
+	update_targeting.rpc_id(1, target_vector.normalized())
 
 
 func _input(event: InputEvent) -> void:
-	# Sprawdź ownera
+	if multiplayer.get_unique_id() != owner_id: return
 	if event is InputEventMouseMotion:
 		var screen_size: Vector2 = get_viewport().get_visible_rect().size/2
 		target_vector = (event.position-screen_size).normalized()
@@ -62,21 +62,27 @@ func _input(event: InputEvent) -> void:
 			else:target_vector.x = snappedf(event.axis_value, 0.01)
 
 # RPC for server
+@rpc("any_peer", "call_local", "unreliable")
 func activate_rune(value: bool) -> void:
 	activation.emit(value)
 
+@rpc("any_peer", "call_local", "unreliable")
 func interact_rtc() -> void:
 	interact.emit()
 
+@rpc("any_peer", "call_local", "reliable")
 func carving(value: bool) -> void:
 	is_in_carving_state = value
 
+@rpc("any_peer", "call_local", "unreliable")
 func movement_input(value: Vector2) -> void:
 	movement_vector_change.emit(value)
-
+	
+@rpc("any_peer", "call_local", "unreliable")
 func update_targeting(value: Vector2) -> void:
-	target_vector_change.emit(target_vector)
+	target_vector_change.emit(value)
 
+@rpc("any_peer", "call_local", "unreliable_ordered")
 func carving_input(value: int) -> void:
 	if is_in_carving_state:
 		carved_symbol.emit(value)
