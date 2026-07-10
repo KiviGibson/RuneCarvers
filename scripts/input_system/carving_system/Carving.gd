@@ -1,5 +1,5 @@
 extends Resource
-class_name Carvings ## Resource Gameplay Specific generated
+class_name Carving ## GamePlay Specyfic Resource
 
 @export var pattern: Array[int]
 @export var rune: PackedScene

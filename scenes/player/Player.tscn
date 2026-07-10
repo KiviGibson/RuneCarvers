@@ -1,18 +1,18 @@
 [gd_scene format=3 uid="uid://4foimi5jglgk"]
 
 [ext_resource type="Script" uid="uid://bbqbp1p043by2" path="res://scripts/input_system/InputSystem.gd" id="1_524rm"]
-[ext_resource type="Script" uid="uid://dcb74rvqbwjiq" path="res://scripts/unit/Player.gd" id="1_tpg5x"]
-[ext_resource type="Script" uid="uid://bffwh1ds00jub" path="res://scripts/unit/damage_system/Stats.gd" id="2_npwbq"]
+[ext_resource type="Script" uid="uid://dcb74rvqbwjiq" path="res://scripts/unit_scripts/Player.gd" id="1_tpg5x"]
+[ext_resource type="Script" uid="uid://bffwh1ds00jub" path="res://scripts/unit_scripts/Stats.gd" id="2_npwbq"]
 [ext_resource type="Script" uid="uid://qpy2uevlwsjk" path="res://scripts/input_system/carving_system/CarvingSystem.gd" id="2_tpg5x"]
-[ext_resource type="Script" uid="uid://nrajgkybshxf" path="res://scripts/input_system/carving_system/Carvings.gd" id="3_c3xxp"]
+[ext_resource type="Script" uid="uid://nrajgkybshxf" path="res://scripts/input_system/carving_system/Carving.gd" id="3_c3xxp"]
 [ext_resource type="PackedScene" uid="uid://g8d1aj0ym3lb" path="res://scenes/carving_components/CarvingUI.tscn" id="4_npwbq"]
-[ext_resource type="Script" uid="uid://d1ggxehy2ph1q" path="res://scripts/unit/MovementControler.gd" id="6_c3xxp"]
-[ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/unit/damage_system/HurtBox.gd" id="8_v42im"]
+[ext_resource type="Script" uid="uid://cldergihocyui" path="res://scripts/inventory_system/Inventory.gd" id="6_7oing"]
+[ext_resource type="Script" uid="uid://d1ggxehy2ph1q" path="res://scripts/unit_scripts/MovementControler.gd" id="6_c3xxp"]
+[ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/damage_system/HurtBox.gd" id="8_v42im"]
 
 [sub_resource type="Resource" id="Resource_c3xxp"]
 script = ExtResource("2_npwbq")
 max_health = 30
-metadata/_custom_type_script = "uid://bffwh1ds00jub"
 
 [sub_resource type="Resource" id="Resource_7ddre"]
 script = ExtResource("3_c3xxp")
@@ -83,6 +83,10 @@ carvings = Array[ExtResource("3_c3xxp")]([SubResource("Resource_7ddre"), SubReso
 ui = [NodePath("../UI/Panel/MarginContainer/VBoxContainer/HBoxContainer"), NodePath("../UI/Panel/MarginContainer/VBoxContainer/HBoxContainer2"), NodePath("../UI/Panel/MarginContainer/VBoxContainer/HBoxContainer3"), NodePath("../UI/Panel/MarginContainer/VBoxContainer/HBoxContainer4")]
 metadata/_custom_type_script = "uid://qpy2uevlwsjk"
 
+[node name="Inventory" type="Node" parent="." unique_id=1641491913]
+script = ExtResource("6_7oing")
+metadata/_custom_type_script = "uid://cldergihocyui"
+
 [node name="UI" type="Control" parent="." unique_id=1427293323]
 layout_mode = 3
 anchors_preset = 15
@@ -151,7 +155,6 @@ transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("8_v42im")
-metadata/_custom_type_script = "uid://deqosc7jtvi1x"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Puppet/HurtBox" unique_id=1244874730]
 shape = SubResource("CapsuleShape3D_1j5yo")

@@ -3,7 +3,7 @@ class_name CarvingSystem
 
 signal successful_carving(rune: PackedScene) ## Po ukończeniu rycia wysyła sygnał dający scene z runą
 
-@export var carvings: Array[Carvings]
+@export var carvings: Array[Carving]
 @export var max_carvings: int = 4
 @export var ui: Array[CarvingUI]
 

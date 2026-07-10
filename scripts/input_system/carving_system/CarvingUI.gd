@@ -35,7 +35,7 @@ func reset() -> void:
 	for i in range(current_fragment):
 		fragments[i].reset()
 	current_fragment = 0
-	
+
 func update_status(progress: float) -> void:
 	var index := clampi(int(progress * 4), 0, 3)
 	if index != current_index:
