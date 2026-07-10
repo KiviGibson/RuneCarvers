@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://bk3wugnxnrdyw"]
 
 [ext_resource type="Script" uid="uid://cm0qmfmjp8c82" path="res://scripts/multiplayer_system/game_scene.gd" id="1_jpbhf"]
+[ext_resource type="Script" uid="uid://bdmlbgajj81a8" path="res://scripts/unit/damage_system/HitBox.gd" id="2_6y8rp"]
 [ext_resource type="Script" uid="uid://du3idwes8fp8o" path="res://scripts/multiplayer_system/spawners/PlayerSpawner.gd" id="2_cw6cr"]
+[ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/unit/damage_system/Damage.gd" id="3_700et"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_6yq8t"]
 
@@ -11,6 +13,13 @@ albedo_color = Color(0, 0.08627451, 0, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_6yq8t"]
 material = SubResource("StandardMaterial3D_1j5yo")
 size = Vector2(20, 20)
+
+[sub_resource type="Resource" id="Resource_v42im"]
+script = ExtResource("3_700et")
+metadata/_custom_type_script = "uid://uaugd35wcih8"
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1j5yo"]
+radius = 2.0
 
 [node name="Game" type="Node3D" unique_id=1160267840 node_paths=PackedStringArray("game_overlay", "player_spawner")]
 script = ExtResource("1_jpbhf")
@@ -24,6 +33,18 @@ shape = SubResource("WorldBoundaryShape3D_6yq8t")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticMap" unique_id=1904857005]
 mesh = SubResource("PlaneMesh_6yq8t")
+
+[node name="HitBox" type="Area3D" parent="StaticMap" unique_id=136355864]
+collision_layer = 0
+collision_mask = 12
+script = ExtResource("2_6y8rp")
+damage = SubResource("Resource_v42im")
+metadata/_custom_type_script = "uid://bdmlbgajj81a8"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticMap/HitBox" unique_id=310358931]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+shape = SubResource("CylinderShape3D_1j5yo")
+debug_color = Color(0.9865095, 0, 0.32766393, 0.41960785)
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=748622085 node_paths=PackedStringArray("game_overlay")]
 spawn_path = NodePath("../Players")

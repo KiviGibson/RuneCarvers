@@ -11,7 +11,7 @@ var current_cd: float = 0.0
 var on_cd: bool = false
 
 
-func next_symbol(symbol: int) -> bool: ## Dodaj symbol do kombinacji - Zwraca czy to poprawny symbol
+func next_symbol(symbol: int) -> bool: ## Dodaje symbol do kombinacji - Zwraca czy to poprawny symbol
 	if misspelled: return false
 	if current_symbol >= len(pattern):
 		misspelled = true
@@ -35,7 +35,7 @@ func get_rune() -> PackedScene: ## Zwraca działającą runę
 	on_cd = true
 	return rune
 
-func tick_cooldown(delta: float) -> bool:
+func tick_cooldown(delta: float) -> bool: ## Odlicza czas zwraca czy umiejętność zmieniła stan na aktywny
 	if on_cd:
 		current_cd -= delta
 		if current_cd <= 0:

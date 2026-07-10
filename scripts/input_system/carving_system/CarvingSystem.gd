@@ -9,7 +9,6 @@ signal successful_carving(rune: PackedScene) ## Po ukończeniu rycia wysyła syg
 
 func _ready() -> void:
 	if not multiplayer.is_server(): return
-	successful_carving.connect(success_test)
 	for i in range(max_carvings):
 		if carvings[i] == null: 
 			ui[i].visible = false
@@ -18,13 +17,11 @@ func _ready() -> void:
 		carvings[i] = carvings[i].duplicate(true)
 		ui[i].set_pattern(carvings[i].pattern)
 		
-func start_carving() -> void: ## Rozpocznij rycie/ wyczyść
+func start_carving() -> void: ## Rozpocznij rycie
 	if not multiplayer.is_server(): return
-	for c in carvings:
-		if c != null:
-			c.restart()
 
-func carve_symbol(symbol: int) -> void: ## Dodaj symbol do runy
+
+func carve_symbol(symbol: int) -> void: ## Dodaj symbol do run i uaktualnij UI
 	var i := -1
 	for carve in carvings:
 		i += 1
@@ -36,7 +33,7 @@ func carve_symbol(symbol: int) -> void: ## Dodaj symbol do runy
 		else: ui[i].reset()
 	chek_and_reset()
 	
-func _process(delta: float) -> void:
+func _process(delta: float) -> void: ## Update cd rycin
 	if not multiplayer.is_server(): return
 	var i := 0
 	for c in carvings:
@@ -48,7 +45,7 @@ func _process(delta: float) -> void:
 				ui[i].update_status(c.current_cd/c.cd)
 		i += 1
 
-func chek_and_reset() -> void:
+func chek_and_reset() -> void: # Sprawdza czy przynajmniej jedna rycina jest poprawna w innym przypadku resetuje wszystkie ryciny
 	for c in carvings:
 		if c == null: continue
 		if not c.misspelled: return
@@ -56,7 +53,7 @@ func chek_and_reset() -> void:
 		if c != null:
 			c.restart()
 
-func stop_carving() -> void: ## Ukończ rycie
+func stop_carving() -> void: ## Ukończ rycie. Wykonuje [sygnał successful_carving] przy pierwszej poprawnej rycinie oraz resetuje UI
 	if not multiplayer.is_server(): return
 	for carve in carvings:
 		if carve == null: continue
@@ -69,10 +66,7 @@ func stop_carving() -> void: ## Ukończ rycie
 	for u in ui:
 		u.reset()
 
-func carving_state_change(value: bool) -> void:
+func carving_state_change(value: bool) -> void: ## Funkcja zarządzająca [Input] zmianą stanu rycia
 	if not multiplayer.is_server(): return
 	if value: start_carving()
 	else: stop_carving()
-
-func success_test(_rune:PackedScene) -> void:
-	print("Done: " + get_parent().name)
