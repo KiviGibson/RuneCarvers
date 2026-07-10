@@ -6,10 +6,12 @@
 [ext_resource type="Script" uid="uid://qpy2uevlwsjk" path="res://scripts/input_system/carving_system/CarvingSystem.gd" id="2_tpg5x"]
 [ext_resource type="Script" uid="uid://nrajgkybshxf" path="res://scripts/input_system/carving_system/Carvings.gd" id="3_c3xxp"]
 [ext_resource type="PackedScene" uid="uid://g8d1aj0ym3lb" path="res://scenes/carving_components/CarvingUI.tscn" id="4_npwbq"]
-[ext_resource type="Script" uid="uid://d1ggxehy2ph1q" path="res://scripts/unit/movement_controler.gd" id="6_c3xxp"]
+[ext_resource type="Script" uid="uid://d1ggxehy2ph1q" path="res://scripts/unit/MovementControler.gd" id="6_c3xxp"]
+[ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/unit/damage_system/HurtBox.gd" id="8_v42im"]
 
 [sub_resource type="Resource" id="Resource_c3xxp"]
 script = ExtResource("2_npwbq")
+max_health = 30
 metadata/_custom_type_script = "uid://bffwh1ds00jub"
 
 [sub_resource type="Resource" id="Resource_7ddre"]
@@ -42,6 +44,8 @@ metadata/_custom_type_script = "uid://nrajgkybshxf"
 size = Vector3(0.1, 0.1, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6yq8t"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1j5yo"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mdl7e"]
 properties/0/path = NodePath("Puppet:scale")
@@ -125,6 +129,8 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Puppet" type="CharacterBody3D" parent="." unique_id=52327527 node_paths=PackedStringArray("visible_model")]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("6_c3xxp")
 visible_model = NodePath("Model")
 
@@ -141,6 +147,15 @@ shape = SubResource("CapsuleShape3D_6yq8t")
 [node name="Camera3D" type="Camera3D" parent="Puppet" unique_id=982673878]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 10, 10)
 
+[node name="HurtBox" type="Area3D" parent="Puppet" unique_id=1283098386]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("8_v42im")
+metadata/_custom_type_script = "uid://deqosc7jtvi1x"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Puppet/HurtBox" unique_id=1244874730]
+shape = SubResource("CapsuleShape3D_1j5yo")
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2085177374]
 replication_config = SubResource("SceneReplicationConfig_mdl7e")
 
@@ -148,3 +163,4 @@ replication_config = SubResource("SceneReplicationConfig_mdl7e")
 [connection signal="carving_change" from="InputSystem" to="CarvingSystem" method="carving_state_change"]
 [connection signal="movement_vector_change" from="InputSystem" to="Puppet" method="set_movement_vector"]
 [connection signal="target_vector_change" from="InputSystem" to="Puppet" method="set_rotation_vector"]
+[connection signal="got_hit" from="Puppet/HurtBox" to="." method="_on_getting_hit"]
