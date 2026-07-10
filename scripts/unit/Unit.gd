@@ -22,4 +22,6 @@ func _on_getting_hit(damage_value: int) -> void:
 	stats.current_health -= damage_value
 	print(stats.current_health)
 
-func set_damage_owner()
+func set_damage_owner(damage: Damage): 
+	damage.owner = self
+	
