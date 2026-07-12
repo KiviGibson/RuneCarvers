@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CarvingTool" format=3 uid="uid://b3dne78ao6irm"]
+
+[ext_resource type="Texture2D" uid="uid://c0lxw8sblywt7" path="res://kenney_cursor-pack/Vector/Basic/look_a.svg" id="1_35e52"]
+[ext_resource type="Script" uid="uid://dlgt6u7xity0g" path="res://scripts/inventory_system/CarvingTool.gd" id="1_s53j7"]
+
+[resource]
+script = ExtResource("1_s53j7")
+description = "Active: Create mine on ground that is possitivly charged and deal damage when oponent is near it."
+icon = ExtResource("1_35e52")
+pattern = Array[int]([1, 1, 1, 0])
+cooldown = 7.5
+metadata/_custom_type_script = "uid://dlgt6u7xity0g"

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CarvingTool" format=3 uid="uid://cky2p1wqetuwi"]
+
+[ext_resource type="Script" uid="uid://dlgt6u7xity0g" path="res://scripts/inventory_system/CarvingTool.gd" id="1_ex7qf"]
+[ext_resource type="Texture2D" uid="uid://mafmcha2v1ml" path="res://kenney_cursor-pack/Vector/Basic/cross_large.svg" id="1_t3wls"]
+
+[resource]
+script = ExtResource("1_ex7qf")
+description = "Active: Positivley charge and dash forward dealing damage."
+icon = ExtResource("1_t3wls")
+pattern = Array[int]([0, 0, 0])
+cooldown = 5.0
+metadata/_custom_type_script = "uid://dlgt6u7xity0g"

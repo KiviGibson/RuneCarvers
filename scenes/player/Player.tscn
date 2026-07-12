@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://g8d1aj0ym3lb" path="res://scenes/carving_components/CarvingUI.tscn" id="4_npwbq"]
 [ext_resource type="Script" uid="uid://cldergihocyui" path="res://scripts/inventory_system/Inventory.gd" id="6_7oing"]
 [ext_resource type="Script" uid="uid://d1ggxehy2ph1q" path="res://scripts/unit_scripts/MovementControler.gd" id="6_c3xxp"]
+[ext_resource type="Script" uid="uid://kr4aw5gxr0d7" path="res://scripts/inventory_system/Backpack.gd" id="7_7oing"]
 [ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/damage_system/HurtBox.gd" id="8_v42im"]
 
 [sub_resource type="Resource" id="Resource_c3xxp"]
@@ -37,6 +38,10 @@ script = ExtResource("3_c3xxp")
 pattern = Array[int]([2, 2, 0])
 cd = 20.0
 metadata/_custom_type_script = "uid://nrajgkybshxf"
+
+[sub_resource type="Resource" id="Resource_arn7h"]
+script = ExtResource("7_7oing")
+metadata/_custom_type_script = "uid://kr4aw5gxr0d7"
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_khinc"]
 
@@ -85,6 +90,7 @@ metadata/_custom_type_script = "uid://qpy2uevlwsjk"
 
 [node name="Inventory" type="Node" parent="." unique_id=1641491913]
 script = ExtResource("6_7oing")
+backpack = SubResource("Resource_arn7h")
 metadata/_custom_type_script = "uid://cldergihocyui"
 
 [node name="UI" type="Control" parent="." unique_id=1427293323]

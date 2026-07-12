@@ -1,0 +1,273 @@
+[gd_scene format=3 uid="uid://cgntp45di0bpn"]
+
+[ext_resource type="Texture2D" uid="uid://mqryi3m3smgp" path="res://kenney_cursor-pack/PNG/Basic/Double/progress_empty.png" id="1_jrn6r"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6yq8t"]
+font_size = 18
+font_color = Color(0.69803923, 0.3254902, 0.65882355, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1j5yo"]
+font_size = 8
+
+[node name="InventoryUi" type="Control" unique_id=1257844864]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=1567085997]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1700512152]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="TabContainer" type="TabContainer" parent="Panel/MarginContainer" unique_id=1832641264]
+layout_mode = 2
+current_tab = 0
+
+[node name="TabBar" type="TabBar" parent="Panel/MarginContainer/TabContainer" unique_id=1622955449]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/TabBar" unique_id=79806626]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer" unique_id=1148779136]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer" unique_id=488054609]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button" unique_id=232910530]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button/MarginContainer" unique_id=2068707031]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button/MarginContainer/HBoxContainer" unique_id=608959193]
+layout_mode = 2
+texture = ExtResource("1_jrn6r")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button/MarginContainer/HBoxContainer" unique_id=322902780]
+custom_minimum_size = Vector2(0, 59)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button/MarginContainer/HBoxContainer/VBoxContainer" unique_id=390209282]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1060595850]
+layout_mode = 2
+text = "Empty Slot"
+label_settings = SubResource("LabelSettings_6yq8t")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button/MarginContainer/HBoxContainer/VBoxContainer" unique_id=644531766]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextEdit" type="Label" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=676382980]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Defy death"
+label_settings = SubResource("LabelSettings_1j5yo")
+autowrap_mode = 1
+
+[node name="Button2" type="Button" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer" unique_id=1560030832]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button2" unique_id=1745159455]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button2/MarginContainer" unique_id=794947752]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button2/MarginContainer/HBoxContainer" unique_id=755414893]
+layout_mode = 2
+texture = ExtResource("1_jrn6r")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button2/MarginContainer/HBoxContainer" unique_id=1489607760]
+custom_minimum_size = Vector2(0, 59)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button2/MarginContainer/HBoxContainer/VBoxContainer" unique_id=2099582312]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button2/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=2127470784]
+layout_mode = 2
+text = "Empty Slot"
+label_settings = SubResource("LabelSettings_6yq8t")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button2/MarginContainer/HBoxContainer/VBoxContainer" unique_id=2116820845]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextEdit" type="Label" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button2/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=2102672353]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+autowrap_mode = 1
+
+[node name="Button3" type="Button" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer" unique_id=2035297570]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button3" unique_id=362314015]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button3/MarginContainer" unique_id=1339763868]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button3/MarginContainer/HBoxContainer" unique_id=512805616]
+layout_mode = 2
+texture = ExtResource("1_jrn6r")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button3/MarginContainer/HBoxContainer" unique_id=1335382018]
+custom_minimum_size = Vector2(0, 59)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button3/MarginContainer/HBoxContainer/VBoxContainer" unique_id=316303602]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button3/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1144000360]
+layout_mode = 2
+text = "Empty Slot"
+label_settings = SubResource("LabelSettings_6yq8t")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button3/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1682194759]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextEdit" type="Label" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button3/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=334995251]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+autowrap_mode = 1
+
+[node name="Button4" type="Button" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer" unique_id=949602833]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button4" unique_id=1630808704]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button4/MarginContainer" unique_id=1267880624]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button4/MarginContainer/HBoxContainer" unique_id=2111544911]
+layout_mode = 2
+texture = ExtResource("1_jrn6r")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button4/MarginContainer/HBoxContainer" unique_id=982500641]
+custom_minimum_size = Vector2(0, 59)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button4/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1133034670]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button4/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1688805640]
+layout_mode = 2
+text = "Empty Slot"
+label_settings = SubResource("LabelSettings_6yq8t")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button4/MarginContainer/HBoxContainer/VBoxContainer" unique_id=2097723337]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextEdit" type="Label" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer/VBoxContainer/Button4/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1604520677]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+autowrap_mode = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer/TabContainer/TabBar/HBoxContainer" unique_id=1971126295]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="TabBar2" type="TabBar" parent="Panel/MarginContainer/TabContainer" unique_id=1089534633]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer/TabContainer/TabBar2" unique_id=76937689]
+layout_mode = 0
+offset_right = 1136.0
+offset_bottom = 632.0
+size_flags_horizontal = 3

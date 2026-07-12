@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CarvingTool" format=3 uid="uid://bvy7guq001pin"]
+
+[ext_resource type="Texture2D" uid="uid://dxjsf1nvcurjj" path="res://kenney_cursor-pack/PNG/Basic/Double/target_round_a.png" id="1_vchxx"]
+[ext_resource type="Script" uid="uid://dlgt6u7xity0g" path="res://scripts/inventory_system/CarvingTool.gd" id="2_no2u7"]
+
+[resource]
+script = ExtResource("2_no2u7")
+description = "Passive: deal damage in area aroud unit dealing damage to near enemies and heal yourself. If oponent burns refresh burn timer and deal damage second time.
+Active: Erupt with positive energy dealing damage to oponents in aura range.
+On Resource depleated: Use Active"
+icon = ExtResource("1_vchxx")
+pattern = Array[int]([0, 1, 1, 0])
+cooldown = 10.0
+metadata/_custom_type_script = "uid://dlgt6u7xity0g"

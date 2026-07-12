@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CarvingTool" format=3 uid="uid://by5vbr70ap262"]
+
+[ext_resource type="Texture2D" uid="uid://hpq23j1ww0aa" path="res://kenney_cursor-pack/Vector/Basic/resize_a_diagonal_mirror.svg" id="1_g7p8a"]
+[ext_resource type="Script" uid="uid://dlgt6u7xity0g" path="res://scripts/inventory_system/CarvingTool.gd" id="2_njc07"]
+
+[resource]
+script = ExtResource("2_njc07")
+description = "Active: Change places with team mate. If enemy is beetwen you deal damage to it twice. Makes units invonurable for the duration of ability."
+icon = ExtResource("1_g7p8a")
+pattern = Array[int]([2, 2, 3, 3, 2])
+cooldown = 15.0
+metadata/_custom_type_script = "uid://dlgt6u7xity0g"

@@ -24,4 +24,3 @@ func _on_getting_hit(damage_value: int) -> void:
 
 func set_damage_owner(damage: Damage): 
 	damage.owner = self
-	
