@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://b0766kma0i2rc"]
+
+[ext_resource type="Script" uid="uid://d1ggxehy2ph1q" path="res://scripts/unit/MovementControler.gd" id="1_0pi4p"]
+[ext_resource type="Script" uid="uid://bga3yxy6ye61" path="res://scripts/unit/Enemy.gd" id="1_an772"]
+[ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/unit/damage_system/HurtBox.gd" id="2_374od"]
+[ext_resource type="Script" uid="uid://bffwh1ds00jub" path="res://scripts/unit/damage_system/Stats.gd" id="2_ga0ap"]
+
+[sub_resource type="Resource" id="Resource_0pi4p"]
+script = ExtResource("2_ga0ap")
+max_health = 1000
+metadata/_custom_type_script = "uid://bffwh1ds00jub"
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6yq8t"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1j5yo"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_an772"]
+height = 0.1
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6yq8t"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6yq8t"]
+height = 2.5
+radius = 0.6
+
+[node name="Golly" type="Node3D" unique_id=2142922162 node_paths=PackedStringArray("model")]
+script = ExtResource("1_an772")
+model = NodePath("MovementControler")
+stats = SubResource("Resource_0pi4p")
+
+[node name="MovementControler" type="CharacterBody3D" parent="." unique_id=1393867707]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_0pi4p")
+metadata/_custom_type_script = "uid://d1ggxehy2ph1q"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovementControler" unique_id=769591720]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+mesh = SubResource("CapsuleMesh_6yq8t")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MovementControler/MeshInstance3D" unique_id=756713773]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("CylinderMesh_1j5yo")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MovementControler/MeshInstance3D" unique_id=1964579903]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, 0)
+mesh = SubResource("CylinderMesh_an772")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovementControler" unique_id=1086193226]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_6yq8t")
+
+[node name="HurtBox" type="Area3D" parent="." unique_id=2124393521]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_374od")
+time_between_hits = 0.0
+metadata/_custom_type_script = "uid://deqosc7jtvi1x"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox" unique_id=36416377]
+shape = SubResource("CylinderShape3D_6yq8t")
+
+[connection signal="got_hit" from="HurtBox" to="." method="_on_getting_hit"]

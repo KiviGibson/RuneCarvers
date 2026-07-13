@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://xmwhn75bbej1"]
+
+[ext_resource type="Script" uid="uid://d16u0e2gt6kxj" path="res://scripts/carving_system/rune/Rune.gd" id="1_gruec"]
+[ext_resource type="Script" uid="uid://x544es0wcwfx" path="res://scripts/carving_system/rune/SpawnProjectile.gd" id="2_y8ukp"]
+[ext_resource type="PackedScene" uid="uid://ck31ixkduns3d" path="res://scenes/projectiles/positivly_charged_projectile/TestProjectile.tscn" id="3_k63c5"]
+
+[node name="TempRune" type="Node" unique_id=1347026746]
+script = ExtResource("1_gruec")
+ammo = 3
+metadata/_custom_type_script = "uid://d16u0e2gt6kxj"
+
+[node name="SpawnProjectile" type="Node" parent="." unique_id=1839972761]
+script = ExtResource("2_y8ukp")
+projectile_scene = ExtResource("3_k63c5")
+metadata/_custom_type_script = "uid://x544es0wcwfx"
+
+[connection signal="activation" from="." to="SpawnProjectile" method="spawn_projectile"]
+[connection signal="setup" from="." to="SpawnProjectile" method="setup"]

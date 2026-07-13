@@ -2,7 +2,7 @@
 extends Node3D
 class_name Unit
 
-@export var model: CharacterBody3D
+@export var model: MovementControler
 @export var stats: Stats
 
 @abstract func _on_health_change(curernt: int, max_value: int) -> void

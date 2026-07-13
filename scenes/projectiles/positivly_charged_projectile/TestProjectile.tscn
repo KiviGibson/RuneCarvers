@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://ck31ixkduns3d"]
+
+[ext_resource type="Script" uid="uid://be6dsn574j1uu" path="res://scripts/projectile/Projectile.gd" id="1_lujw1"]
+[ext_resource type="Script" uid="uid://bdmlbgajj81a8" path="res://scripts/unit/damage_system/HitBox.gd" id="2_3bdfv"]
+[ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/unit/damage_system/Damage.gd" id="3_qk10c"]
+[ext_resource type="Script" uid="uid://x544es0wcwfx" path="res://scripts/carving_system/rune/SpawnProjectile.gd" id="4_o8s1o"]
+[ext_resource type="PackedScene" uid="uid://b86x3wk7am671" path="res://scenes/projectiles/positivly_charged_projectile/positive_explosion.tscn" id="5_3bdfv"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6yq8t"]
+radius = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_6yq8t"]
+
+[sub_resource type="Resource" id="Resource_6yq8t"]
+script = ExtResource("3_qk10c")
+damage_type = 2
+metadata/_custom_type_script = "uid://uaugd35wcih8"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1j5yo"]
+radius = 0.6
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_dvorr"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
+[node name="ElectricProjectile" type="CharacterBody3D" unique_id=950622575]
+collision_layer = 0
+script = ExtResource("1_lujw1")
+gravity = 0.0
+bounciness = 0.0
+initial_velocity = 20.0
+metadata/_custom_type_script = "uid://be6dsn574j1uu"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=300549766]
+shape = SubResource("SphereShape3D_6yq8t")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=493389739]
+mesh = SubResource("SphereMesh_6yq8t")
+
+[node name="HitBox" type="Area3D" parent="." unique_id=1857059914]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("2_3bdfv")
+damage = SubResource("Resource_6yq8t")
+metadata/_custom_type_script = "uid://bdmlbgajj81a8"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox" unique_id=56647431]
+shape = SubResource("SphereShape3D_1j5yo")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=942198662]
+replication_config = SubResource("SceneReplicationConfig_dvorr")
+
+[node name="SpawnProjectile" type="Node" parent="." unique_id=1894126030]
+script = ExtResource("4_o8s1o")
+projectile_scene = ExtResource("5_3bdfv")
+metadata/_custom_type_script = "uid://x544es0wcwfx"
+
+[node name="Timer" type="Timer" parent="." unique_id=1890620844]
+wait_time = 0.6
+one_shot = true
+autostart = true
+
+[connection signal="change_ownership" from="." to="HitBox" method="_damage_ownership_exchange"]
+[connection signal="change_ownership" from="." to="SpawnProjectile" method="setup"]
+[connection signal="expire" from="." to="SpawnProjectile" method="spawn_projectile_at_position"]
+[connection signal="hit" from="HitBox" to="." method="_destroy"]
+[connection signal="timeout" from="Timer" to="." method="_destroy"]

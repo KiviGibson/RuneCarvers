@@ -3,10 +3,11 @@
 [ext_resource type="Script" uid="uid://bbqbp1p043by2" path="res://scripts/input_system/InputSystem.gd" id="1_524rm"]
 [ext_resource type="Script" uid="uid://dcb74rvqbwjiq" path="res://scripts/unit/Player.gd" id="1_tpg5x"]
 [ext_resource type="Script" uid="uid://bffwh1ds00jub" path="res://scripts/unit/damage_system/Stats.gd" id="2_npwbq"]
-[ext_resource type="Script" uid="uid://qpy2uevlwsjk" path="res://scripts/input_system/carving_system/CarvingSystem.gd" id="2_tpg5x"]
-[ext_resource type="Script" uid="uid://nrajgkybshxf" path="res://scripts/input_system/carving_system/Carvings.gd" id="3_c3xxp"]
-[ext_resource type="PackedScene" uid="uid://g8d1aj0ym3lb" path="res://scenes/carving_components/CarvingUI.tscn" id="4_npwbq"]
+[ext_resource type="Script" uid="uid://qpy2uevlwsjk" path="res://scripts/carving_system/CarvingSystem.gd" id="2_tpg5x"]
+[ext_resource type="Script" uid="uid://nrajgkybshxf" path="res://scripts/carving_system/Carvings.gd" id="3_c3xxp"]
+[ext_resource type="PackedScene" uid="uid://g8d1aj0ym3lb" path="res://scenes/carving_ui/CarvingUI.tscn" id="4_npwbq"]
 [ext_resource type="Script" uid="uid://d1ggxehy2ph1q" path="res://scripts/unit/MovementControler.gd" id="6_c3xxp"]
+[ext_resource type="PackedScene" uid="uid://xmwhn75bbej1" path="res://scenes/runes/TempRune.tscn" id="6_pn6s4"]
 [ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/unit/damage_system/HurtBox.gd" id="8_v42im"]
 
 [sub_resource type="Resource" id="Resource_c3xxp"]
@@ -16,7 +17,8 @@ metadata/_custom_type_script = "uid://bffwh1ds00jub"
 
 [sub_resource type="Resource" id="Resource_7ddre"]
 script = ExtResource("3_c3xxp")
-pattern = Array[int]([0, 1, 2, 3])
+pattern = Array[int]([0, 0, 0, 1])
+rune = ExtResource("6_pn6s4")
 cd = 5.0
 metadata/_custom_type_script = "uid://nrajgkybshxf"
 
@@ -156,11 +158,16 @@ metadata/_custom_type_script = "uid://deqosc7jtvi1x"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Puppet/HurtBox" unique_id=1244874730]
 shape = SubResource("CapsuleShape3D_1j5yo")
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Puppet" unique_id=1022747681]
+spawn_path = NodePath("..")
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2085177374]
 replication_config = SubResource("SceneReplicationConfig_mdl7e")
 
+[connection signal="activation" from="InputSystem" to="." method="use_rune"]
 [connection signal="carved_symbol" from="InputSystem" to="CarvingSystem" method="carve_symbol"]
 [connection signal="carving_change" from="InputSystem" to="CarvingSystem" method="carving_state_change"]
 [connection signal="movement_vector_change" from="InputSystem" to="Puppet" method="set_movement_vector"]
 [connection signal="target_vector_change" from="InputSystem" to="Puppet" method="set_rotation_vector"]
+[connection signal="successful_carving" from="CarvingSystem" to="." method="get_rune"]
 [connection signal="got_hit" from="Puppet/HurtBox" to="." method="_on_getting_hit"]

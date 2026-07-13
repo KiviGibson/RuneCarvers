@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Lobby="*uid://c4ihn42ynrw48"
+Projectiles="*uid://bjlkjipi24fx3"
 
 [display]
 
