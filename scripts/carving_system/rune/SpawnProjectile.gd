@@ -5,6 +5,7 @@ signal projectile_hit(collider: HurtBox)
 
 @export var projectile_scene: PackedScene
 var unit: Unit
+
 func setup(u: Unit) -> void:
 	unit = u
 	

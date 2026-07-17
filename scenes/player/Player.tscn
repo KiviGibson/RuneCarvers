@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://d1ggxehy2ph1q" path="res://scripts/unit/MovementControler.gd" id="6_c3xxp"]
 [ext_resource type="PackedScene" uid="uid://xmwhn75bbej1" path="res://scenes/runes/TempRune.tscn" id="6_pn6s4"]
 [ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/unit/damage_system/HurtBox.gd" id="8_v42im"]
+[ext_resource type="Script" uid="uid://bsmwhck7xocl0" path="res://scripts/multiplayer_system/spawners/effect_spawner.gd" id="10_7oing"]
 
 [sub_resource type="Resource" id="Resource_c3xxp"]
 script = ExtResource("2_npwbq")
@@ -158,11 +159,14 @@ metadata/_custom_type_script = "uid://deqosc7jtvi1x"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Puppet/HurtBox" unique_id=1244874730]
 shape = SubResource("CapsuleShape3D_1j5yo")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Puppet" unique_id=1022747681]
-spawn_path = NodePath("..")
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2085177374]
 replication_config = SubResource("SceneReplicationConfig_mdl7e")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1022747681 node_paths=PackedStringArray("host")]
+_spawnable_scenes = PackedStringArray("uid://dbh4fo4orvnbx")
+spawn_path = NodePath("../Puppet")
+script = ExtResource("10_7oing")
+host = NodePath("..")
 
 [connection signal="activation" from="InputSystem" to="." method="use_rune"]
 [connection signal="carved_symbol" from="InputSystem" to="CarvingSystem" method="carve_symbol"]
@@ -170,4 +174,5 @@ replication_config = SubResource("SceneReplicationConfig_mdl7e")
 [connection signal="movement_vector_change" from="InputSystem" to="Puppet" method="set_movement_vector"]
 [connection signal="target_vector_change" from="InputSystem" to="Puppet" method="set_rotation_vector"]
 [connection signal="successful_carving" from="CarvingSystem" to="." method="get_rune"]
+[connection signal="affected" from="Puppet/HurtBox" to="." method="add_effect"]
 [connection signal="got_hit" from="Puppet/HurtBox" to="." method="_on_getting_hit"]

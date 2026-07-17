@@ -1,24 +1,30 @@
-[gd_scene format=3 uid="uid://1eo48c00uajn"]
+[gd_scene format=3 uid="uid://r6fca3riibw5"]
 
-[ext_resource type="Script" uid="uid://b03r1bnamyrtj" path="res://effects/thunder/thunder.gd" id="1_2wdri"]
-[ext_resource type="Shader" uid="uid://bpuee5xeipf2m" path="res://effects/thunder/lightning_strike.gdshader" id="2_2wdri"]
-[ext_resource type="Texture2D" uid="uid://1qw4bgrtbqhx" path="res://effects/thunder/Grafika_bez_nazwy 2.png" id="3_qinqh"]
+[ext_resource type="Script" uid="uid://be6dsn574j1uu" path="res://scripts/projectile/Projectile.gd" id="1_muiy1"]
+[ext_resource type="Script" uid="uid://bdmlbgajj81a8" path="res://scripts/unit/damage_system/HitBox.gd" id="2_8cp0j"]
+[ext_resource type="Script" uid="uid://b03r1bnamyrtj" path="res://effects/thunder/thunder.gd" id="2_s0af1"]
+[ext_resource type="Shader" uid="uid://bpuee5xeipf2m" path="res://effects/thunder/lightning_strike.gdshader" id="3_vgnww"]
+[ext_resource type="Texture2D" uid="uid://1qw4bgrtbqhx" path="res://effects/thunder/Grafika_bez_nazwy 2.png" id="4_h7fpw"]
+[ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/unit/damage_system/Damage.gd" id="6_hu0rm"]
 
-[sub_resource type="Curve" id="Curve_0js23"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_6yq8t"]
+radius = 0.1
+
+[sub_resource type="Curve" id="Curve_q1jir"]
 _data = [Vector2(0, 0), 2.6692064, 0.0, 0, 0, Vector2(0.15173674, 0.14912277), 0.0, 0.0, 0, 0, Vector2(0.16270566, 1), 0.04798227, 0.04798227, 0, 0, Vector2(0.25228518, 1), 0.0, 0.0, 0, 0, Vector2(0.75137115, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 6
 
 [sub_resource type="CurveTexture" id="CurveTexture_rn1i6"]
-curve = SubResource("Curve_0js23")
+curve = SubResource("Curve_q1jir")
 
-[sub_resource type="Gradient" id="Gradient_2wdri"]
+[sub_resource type="Gradient" id="Gradient_1lag6"]
 offsets = PackedFloat32Array(0.13243762, 0.2, 0.3761996, 0.52975047, 1)
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.38170314, 0.38170326, 0.38170323, 0.7065275, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_2wdri"]
-gradient = SubResource("Gradient_2wdri")
+gradient = SubResource("Gradient_1lag6")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6yq8t"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pvui6"]
 particle_flag_rotate_y = true
 emission_shape_offset = Vector3(5, 0, 0)
 emission_shape = 6
@@ -38,25 +44,25 @@ turbulence_enabled = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wwlk7"]
 render_priority = 0
-shader = ExtResource("2_2wdri")
+shader = ExtResource("3_vgnww")
 shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/texture_albedo = ExtResource("3_qinqh")
+shader_parameter/texture_albedo = ExtResource("4_h7fpw")
 shader_parameter/uv1_scale = Vector3(1, -1, 0)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 
-[sub_resource type="QuadMesh" id="QuadMesh_pt04i"]
+[sub_resource type="QuadMesh" id="QuadMesh_lhcly"]
 material = SubResource("ShaderMaterial_wwlk7")
 size = Vector2(0.2, 1)
 center_offset = Vector3(0, 0.5, 0)
 
-[sub_resource type="Curve" id="Curve_e6qku"]
+[sub_resource type="Curve" id="Curve_fkall"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_2wdri"]
-curve = SubResource("Curve_e6qku")
+curve = SubResource("Curve_fkall")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3j1us"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rnxim"]
 lifetime_randomness = 1.0
 direction = Vector3(0, 1, 0)
 spread = 90.0
@@ -71,7 +77,7 @@ shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_color = Color(1.513, 0.584, 2.454, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_2wdri"]
+[sub_resource type="SphereMesh" id="SphereMesh_qkjd5"]
 material = SubResource("StandardMaterial3D_qinqh")
 radius = 0.02
 height = 0.2
@@ -116,6 +122,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitBox:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_qinqh"]
 resource_name = "thunder"
@@ -158,28 +176,40 @@ tracks/2/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitBox:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wwlk7"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f72rx"]
 _data = {
 &"RESET": SubResource("Animation_2wdri"),
 &"thunder": SubResource("Animation_qinqh")
 }
 
-[sub_resource type="Curve" id="Curve_qinqh"]
+[sub_resource type="Curve" id="Curve_o3lo0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_qinqh"]
-curve = SubResource("Curve_qinqh")
+curve = SubResource("Curve_o3lo0")
 
-[sub_resource type="Curve" id="Curve_2wdri"]
+[sub_resource type="Curve" id="Curve_twynx"]
 _data = [Vector2(0, 1), 0.0, -1.7162919, 0, 0, Vector2(1, 0.04494381), -1.8823861, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_3j1us"]
-curve = SubResource("Curve_2wdri")
+curve = SubResource("Curve_twynx")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1j5yo"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aon6i"]
 gravity = Vector3(0, 0, 0)
 scale_min = 2.0
 scale_max = 2.0
@@ -190,7 +220,6 @@ alpha_curve = SubResource("CurveTexture_qinqh")
 transparency = 1
 blend_mode = 4
 cull_mode = 2
-no_depth_test = true
 shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_color = Color(1.513, 0.584, 2.454, 1)
@@ -198,13 +227,31 @@ billboard_keep_scale = true
 distance_fade_min_distance = 0.5
 distance_fade_max_distance = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_6yq8t"]
+[sub_resource type="SphereMesh" id="SphereMesh_k1f88"]
 material = SubResource("StandardMaterial3D_heunu")
 
-[node name="Thunder" type="Node3D" unique_id=1452653351]
-script = ExtResource("1_2wdri")
+[sub_resource type="Resource" id="Resource_6yq8t"]
+script = ExtResource("6_hu0rm")
+damage_type = 2
+value = 10
+metadata/_custom_type_script = "uid://uaugd35wcih8"
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=678413693]
+[sub_resource type="SphereShape3D" id="SphereShape3D_1j5yo"]
+
+[node name="VioletThunder" type="CharacterBody3D" unique_id=1550874625]
+collision_layer = 0
+script = ExtResource("1_muiy1")
+gravity = 0.0
+bounciness = 0.0
+metadata/_custom_type_script = "uid://be6dsn574j1uu"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=230614821]
+shape = SubResource("SphereShape3D_6yq8t")
+
+[node name="Visuals" type="Node3D" parent="." unique_id=1380742328]
+script = ExtResource("2_s0af1")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Visuals" unique_id=1011008368]
 transform = Transform3D(-4.371138e-08, 1, 0, -0.9999998, -4.371139e-08, 0, 0, 0, 0.9999998, 0, 0, 0)
 emitting = false
 amount = 1
@@ -214,10 +261,10 @@ randomness = 1.0
 fixed_fps = 0
 transform_align = 4
 transform_align_axis = 1
-process_material = SubResource("ParticleProcessMaterial_6yq8t")
-draw_pass_1 = SubResource("QuadMesh_pt04i")
+process_material = SubResource("ParticleProcessMaterial_pvui6")
+draw_pass_1 = SubResource("QuadMesh_lhcly")
 
-[node name="GPUParticles3D3" type="GPUParticles3D" parent="." unique_id=1938914972]
+[node name="GPUParticles3D3" type="GPUParticles3D" parent="Visuals" unique_id=468867877]
 emitting = false
 amount = 32
 lifetime = 0.5
@@ -227,18 +274,35 @@ explosiveness = 1.0
 randomness = 1.0
 fixed_fps = 0
 transform_align = 2
-process_material = SubResource("ParticleProcessMaterial_3j1us")
-draw_pass_1 = SubResource("SphereMesh_2wdri")
+process_material = SubResource("ParticleProcessMaterial_rnxim")
+draw_pass_1 = SubResource("SphereMesh_qkjd5")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=415595000]
-libraries/ = SubResource("AnimationLibrary_wwlk7")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals" unique_id=1275980744]
+libraries/ = SubResource("AnimationLibrary_f72rx")
 autoplay = &"thunder"
 
-[node name="GPUParticles3D2" type="GPUParticles3D" parent="." unique_id=1879429562]
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="Visuals" unique_id=117730605]
 emitting = false
 amount = 1
 lifetime = 0.5
 one_shot = true
 fixed_fps = 0
-process_material = SubResource("ParticleProcessMaterial_1j5yo")
-draw_pass_1 = SubResource("SphereMesh_6yq8t")
+process_material = SubResource("ParticleProcessMaterial_aon6i")
+draw_pass_1 = SubResource("SphereMesh_k1f88")
+
+[node name="HitBox" type="Area3D" parent="Visuals" unique_id=2026513561]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("2_8cp0j")
+damage = SubResource("Resource_6yq8t")
+metadata/_custom_type_script = "uid://bdmlbgajj81a8"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/HitBox" unique_id=366096144]
+shape = SubResource("SphereShape3D_1j5yo")
+
+[node name="Timer" type="Timer" parent="." unique_id=964718492]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_destroy"]

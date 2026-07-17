@@ -5,6 +5,9 @@ class_name Unit
 @export var model: MovementControler
 @export var stats: Stats
 
+var effects: Dictionary[StringName, Effect]
+@export var effect_spawner: EffectSpawner
+
 @abstract func _on_health_change(curernt: int, max_value: int) -> void
 @abstract func _on_health_depleated() -> void
 
@@ -24,4 +27,22 @@ func _on_getting_hit(damage_value: int) -> void:
 
 func set_damage_owner(damage: Damage): 
 	damage.owner = self
-	
+
+func add_effect(effect: StringName, owner_unit: Unit) -> void:
+	if is_affected(effect):
+		reset_cd(effect)
+	else:
+		var tmp: Effect = effect_spawner.spawn({"effect": effect, "owner": owner_unit})
+		effects[effect] = tmp
+		tmp.effect_expired.connect(remove_effect)
+
+func remove_effect(effect: StringName) -> void:
+	if not is_affected(effect): return
+	effects[effect].queue_free()
+	effects.erase(effect)
+
+func is_affected(effect: StringName) -> bool:
+	return effect in effects.keys()
+
+func reset_cd(effect: StringName) -> void:
+	effects[effect].reset_cd()

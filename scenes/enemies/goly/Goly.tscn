@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bga3yxy6ye61" path="res://scripts/unit/Enemy.gd" id="1_an772"]
 [ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/unit/damage_system/HurtBox.gd" id="2_374od"]
 [ext_resource type="Script" uid="uid://bffwh1ds00jub" path="res://scripts/unit/damage_system/Stats.gd" id="2_ga0ap"]
+[ext_resource type="Script" uid="uid://bsmwhck7xocl0" path="res://scripts/multiplayer_system/spawners/effect_spawner.gd" id="5_ga0ap"]
 
 [sub_resource type="Resource" id="Resource_0pi4p"]
 script = ExtResource("2_ga0ap")
@@ -26,15 +27,17 @@ height = 0.1
 height = 2.5
 radius = 0.6
 
-[node name="Golly" type="Node3D" unique_id=2142922162 node_paths=PackedStringArray("model")]
+[node name="Golly" type="Node3D" unique_id=2142922162 node_paths=PackedStringArray("model", "effect_spawner")]
 script = ExtResource("1_an772")
 model = NodePath("MovementControler")
 stats = SubResource("Resource_0pi4p")
+effect_spawner = NodePath("EffectSpawner")
 
-[node name="MovementControler" type="CharacterBody3D" parent="." unique_id=1393867707]
+[node name="MovementControler" type="CharacterBody3D" parent="." unique_id=1393867707 node_paths=PackedStringArray("visible_model")]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_0pi4p")
+visible_model = NodePath("MeshInstance3D")
 metadata/_custom_type_script = "uid://d1ggxehy2ph1q"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MovementControler" unique_id=769591720]
@@ -64,4 +67,12 @@ metadata/_custom_type_script = "uid://deqosc7jtvi1x"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox" unique_id=36416377]
 shape = SubResource("CylinderShape3D_6yq8t")
 
+[node name="EffectSpawner" type="MultiplayerSpawner" parent="." unique_id=407433165 node_paths=PackedStringArray("host")]
+_spawnable_scenes = PackedStringArray("uid://dbh4fo4orvnbx")
+spawn_path = NodePath("..")
+script = ExtResource("5_ga0ap")
+host = NodePath("..")
+metadata/_custom_type_script = "uid://bsmwhck7xocl0"
+
+[connection signal="affected" from="HurtBox" to="." method="add_effect"]
 [connection signal="got_hit" from="HurtBox" to="." method="_on_getting_hit"]

@@ -49,6 +49,7 @@ collision_layer = 0
 collision_mask = 8
 script = ExtResource("2_3bdfv")
 damage = SubResource("Resource_6yq8t")
+effects = Array[StringName]([&"positively_charged", &"negatively_charged"])
 metadata/_custom_type_script = "uid://bdmlbgajj81a8"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox" unique_id=56647431]
