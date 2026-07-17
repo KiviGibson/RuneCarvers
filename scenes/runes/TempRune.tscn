@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d16u0e2gt6kxj" path="res://scripts/carving_system/rune/Rune.gd" id="1_gruec"]
 [ext_resource type="Script" uid="uid://x544es0wcwfx" path="res://scripts/carving_system/rune/SpawnProjectile.gd" id="2_y8ukp"]
-[ext_resource type="PackedScene" uid="uid://ck31ixkduns3d" path="res://scenes/projectiles/positivly_charged_projectile/TestProjectile.tscn" id="3_k63c5"]
+[ext_resource type="PackedScene" uid="uid://ck31ixkduns3d" path="res://scenes/projectiles/positivly_charged_projectile/electric_projectile.tscn" id="3_k63c5"]
 
 [node name="TempRune" type="Node" unique_id=1347026746]
 script = ExtResource("1_gruec")

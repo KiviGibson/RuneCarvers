@@ -37,8 +37,6 @@ func _destroy(_collider: HurtBox = null) -> void:
 	expire.emit(global_position)
 	dest_rpc.rpc()
 
-
 @rpc("authority", "call_local", "reliable")
 func dest_rpc() -> void:
 	self.queue_free()
-	

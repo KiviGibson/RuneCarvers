@@ -22,6 +22,9 @@ metadata/_custom_type_script = "uid://uaugd35wcih8"
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_1j5yo"]
 radius = 2.0
 
+[sub_resource type="Environment" id="Environment_6yq8t"]
+glow_enabled = true
+
 [node name="Game" type="Node3D" unique_id=1160267840 node_paths=PackedStringArray("game_overlay", "player_spawner")]
 script = ExtResource("1_jpbhf")
 game_overlay = NodePath("game_overlay/MarginContainer/HBoxContainer")
@@ -77,3 +80,6 @@ transform = Transform3D(0.546579, -0.60909915, 0.5746735, 0, 0.6862531, 0.727362
 
 [node name="Goly" parent="." unique_id=2142922162 instance=ExtResource("5_o347i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3455954, 0.05000042, -1.634531)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=677987250]
+environment = SubResource("Environment_6yq8t")
