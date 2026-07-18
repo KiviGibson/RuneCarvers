@@ -9,18 +9,19 @@ signal expire(position: Vector3)
 @export var bounces: int = 0
 @export var bounciness: float = 0.7
 @export var initial_velocity: float = 0
-
+@export var initial_y_velocity: float = 0.0
 var owning_unit: Unit: 
 	set(value):
 		change_ownership.emit(value)
 		owning_unit = value
 
-func _ready() -> void: pass
+func _ready() -> void:
+	velocity.y = initial_y_velocity
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if not multiplayer.is_server(): return
-	var tmp := -basis.z*initial_velocity
-	tmp.y -= gravity
+	var tmp := -basis.z*initial_velocity + velocity.y * Vector3(0,1,0)
+	tmp.y -= gravity*delta
 	if is_on_floor():
 		if bounces > 0:
 			if tmp.y < 0:
@@ -28,7 +29,7 @@ func _physics_process(_delta: float) -> void:
 				bounces -= 1
 				bounce.emit()
 		else:
-			expire.emit()
+			_destroy()
 	velocity = tmp
 	move_and_slide()
 

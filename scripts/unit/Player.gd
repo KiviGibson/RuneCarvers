@@ -5,8 +5,10 @@ class_name Player
 @export var carving_system: CarvingSystem
 @export var carving_ui: Control ## Reparents to game overlay node
 @export var camera: Camera3D
+
 var owner_id: int
 var current_rune: Rune
+
 func _ready() -> void:
 	enable_camera()
 	super._ready()

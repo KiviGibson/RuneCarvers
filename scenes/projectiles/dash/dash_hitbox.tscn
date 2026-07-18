@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://c1rufo7fso66"]
+
+[ext_resource type="Script" uid="uid://be6dsn574j1uu" path="res://scripts/projectile/Projectile.gd" id="1_qh5xx"]
+[ext_resource type="Script" uid="uid://bdmlbgajj81a8" path="res://scripts/unit/damage_system/HitBox.gd" id="2_18hhv"]
+[ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/unit/damage_system/Damage.gd" id="3_jlh5k"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6yq8t"]
+
+[sub_resource type="Resource" id="Resource_6yq8t"]
+script = ExtResource("3_jlh5k")
+damage_type = 2
+value = 3
+metadata/_custom_type_script = "uid://uaugd35wcih8"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1j5yo"]
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1j5yo"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(0, 5.912981, 5.912981, 0.13333334)
+
+[sub_resource type="SphereMesh" id="SphereMesh_6yq8t"]
+material = SubResource("StandardMaterial3D_1j5yo")
+radius = 1.0
+height = 2.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_18hhv"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[node name="DashHitbox" type="CharacterBody3D" unique_id=305892365]
+collision_layer = 0
+script = ExtResource("1_qh5xx")
+gravity = 0.0
+bounciness = 0.0
+metadata/_custom_type_script = "uid://be6dsn574j1uu"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=159023699]
+shape = SubResource("SphereShape3D_6yq8t")
+
+[node name="HitBox" type="Area3D" parent="." unique_id=1628084674]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("2_18hhv")
+damage = SubResource("Resource_6yq8t")
+effects = Array[StringName]([&"positively_charged"])
+metadata/_custom_type_script = "uid://bdmlbgajj81a8"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox" unique_id=1428205501]
+shape = SubResource("SphereShape3D_1j5yo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=516228407]
+mesh = SubResource("SphereMesh_6yq8t")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=606211530]
+replication_config = SubResource("SceneReplicationConfig_18hhv")

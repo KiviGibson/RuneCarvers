@@ -7,13 +7,15 @@ class_name Unit
 
 var effects: Dictionary[StringName, Effect]
 @export var effect_spawner: EffectSpawner
-
+@export var projectile_spawner: ProjectileSpawner
 @abstract func _on_health_change(curernt: int, max_value: int) -> void
 @abstract func _on_health_depleated() -> void
-
+var base_layer:= 2
+var base_mask := 3
 func _ready() -> void:
 	if not multiplayer.is_server(): return
 	setup_stats()
+	
 
 func setup_stats() -> void:
 	stats = stats.duplicate(true)
@@ -46,3 +48,15 @@ func is_affected(effect: StringName) -> bool:
 
 func reset_cd(effect: StringName) -> void:
 	effects[effect].reset_cd()
+
+func add_projectile(projectile: PackedScene) -> Projectile:
+	var tmp := projectile_spawner.spawn({"scene": projectile.resource_path, "position": Vector3(0,0,0)})
+	return tmp
+
+func disable_collision() -> void:
+	model.collision_mask = 0
+	model.collision_layer = 0
+
+func enable_collision() -> void:
+	model.collision_mask = base_mask
+	model.collision_layer = base_layer
