@@ -3,15 +3,22 @@ class_name MovementControler
 
 enum states{normal, running, focus, force}
 signal finish_force_movement()
-const walking_speed: float = 5
-const running_mult: float = 1.5
-const focus_mult: float = 0.5
-const force_mult: float = 8
+@export var walking_speed: float = 5
+@export var running_mult: float = 1.5
+@export var focus_mult: float = 0.5
+@export var force_mult: float = 8
+@export var visible_model: Node3D
 
 var player_added_velocity: Vector3
-@export var visible_model: Node3D
 var current_state: states = states.normal
 var distance: float = 0.0
+var gravity: float = 9.81
+
+func disable_gravity() -> void: gravity = 0.0
+func enable_gravity() -> void: gravity = 9.81
+
+func _ready() -> void:
+	finish_force_movement.connect(enable_gravity)
 
 func set_movement_vector(value: Vector2) -> void:
 	player_added_velocity = Vector3(value.x, 0, -value.y)
@@ -24,10 +31,11 @@ func set_rotation_vector(value: Vector2) -> void:
 
 func _physics_process(delta: float) -> void: ## Add gravity
 	if not multiplayer.is_server(): return
+	velocity.y -= gravity*delta
 	if current_state == states.force:
 		forced_movement(delta)
 		return
-	velocity = player_added_velocity* walking_speed
+	velocity = player_added_velocity * walking_speed + velocity * Vector3(0, 1, 0)
 	match current_state:
 		states.running: velocity *= running_mult
 		states.focus: velocity *= focus_mult
@@ -45,3 +53,8 @@ func dash(vec: Vector2) -> void:
 	set_rotation_vector(vec.normalized())
 	distance = sqrt(vec.x**2 + vec.y**2)
 	current_state = states.force
+	disable_gravity()
+
+func jump(vel: float) -> void:
+	velocity = velocity* Vector3(1, 0, 1) + vel* Vector3(0, 1, 0)
+	enable_gravity()

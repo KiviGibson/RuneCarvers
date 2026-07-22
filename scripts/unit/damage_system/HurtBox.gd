@@ -1,7 +1,7 @@
 extends Area3D
 class_name HurtBox
 
-signal got_hit(damage_value: int)
+signal got_hit(damage: Damage)
 signal affected(effect: StringName, owner_unit: Unit)
 signal start_invincible_frames()
 signal stop_invincible_frames()
@@ -12,7 +12,7 @@ var invincible: bool = false
 
 func _ready() -> void:
 	if not multiplayer.is_server(): return
-	got_hit.connect(func(_dmg: int): _set_invincibility_frames(time_between_hits))
+	got_hit.connect(func(_dmg: Damage): _set_invincibility_frames(time_between_hits))
 	stop_invincible_frames.connect(func(): print("Inv Stop"))
 	start_invincible_frames.connect(func(): print("Inv Start"))
 
@@ -20,7 +20,7 @@ func hit(damage: Damage, effects: Array[StringName]= []) -> void:
 	if not multiplayer.is_server(): return
 	if invincible: return
 	print(damage.value, " | ", damage.damage_type)
-	got_hit.emit(damage.value)
+	got_hit.emit(damage)
 	for effect in effects:
 		affected.emit(effect, damage.owner)
 		print("Affected by: " + effect)

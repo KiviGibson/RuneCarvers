@@ -13,7 +13,7 @@ class_name EffectSpawner
 
 func _ready() -> void:
 	spawn_function = spawn_effect
-	
+
 func spawn_effect(data: Dictionary) -> Effect:
 	var tmp: Effect = load(Effect.str_to_path[data["effect"]]).instantiate()
 	tmp.host = host

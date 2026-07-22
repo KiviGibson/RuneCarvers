@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dbh4fo4orvnbx"]
 
-[ext_resource type="Script" uid="uid://r0tp4n5w2xkh" path="res://scripts/unit/Effect.gd" id="1_nlw4f"]
+[ext_resource type="Script" uid="uid://r0tp4n5w2xkh" path="res://scripts/effects/Effect.gd" id="1_nlw4f"]
 [ext_resource type="PackedScene" uid="uid://rf7qgakau3is" path="res://effects/shock/ShockEffect.tscn" id="2_3jmlw"]
 
 [node name="PositivelyCharged" type="Node3D" unique_id=1430900142]

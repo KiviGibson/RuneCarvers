@@ -1,14 +1,12 @@
-extends Node
+extends CustomNode
 class_name AffectedBy
 
 signal is_affected()
 signal is_not_affected()
 
-var host: Unit
 @export var effect: StringName
 @export var remove_effect: bool
-func setup(h: Unit) -> void: 
-	host = h
+
 
 func check_is_affected(_n: StringName = "") -> void: 
 	if not host: return

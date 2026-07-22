@@ -6,6 +6,8 @@
 
 [node name="RuneWarp" type="Node" unique_id=932726171]
 script = ExtResource("1_vob22")
+type = 1
+charge_per_second = 0.5
 metadata/_custom_type_script = "uid://d16u0e2gt6kxj"
 
 [node name="SpawnProjectile" type="Node" parent="." unique_id=331565976]
@@ -13,5 +15,5 @@ script = ExtResource("2_0usib")
 projectile_scene = ExtResource("3_66ikh")
 metadata/_custom_type_script = "uid://x544es0wcwfx"
 
-[connection signal="activation" from="." to="SpawnProjectile" method="spawn_projectile"]
+[connection signal="charge_shot" from="." to="SpawnProjectile" method="charge_shot_spawn"]
 [connection signal="setup" from="." to="SpawnProjectile" method="setup"]

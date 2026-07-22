@@ -10,6 +10,7 @@ signal expire(position: Vector3)
 @export var bounciness: float = 0.7
 @export var initial_velocity: float = 0
 @export var initial_y_velocity: float = 0.0
+
 var owning_unit: Unit: 
 	set(value):
 		change_ownership.emit(value)

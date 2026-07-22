@@ -23,12 +23,18 @@ func setup_stats() -> void:
 	stats.health_changed.connect(_on_health_change)
 	stats.health_depleated.connect(_on_health_depleated)
 
-func _on_getting_hit(damage_value: int) -> void:
-	stats.current_health -= damage_value
+func _on_getting_hit(damage: Damage) -> void:
+	for key in effects.keys():
+		effects[key].trigger_onhurt(damage)
+	stats.current_health -= damage.value
 	print(stats.current_health)
 
 func set_damage_owner(damage: Damage): 
 	damage.owner = self
+	
+func add_passive(passive: StringName) -> void:
+	var tmp := effect_spawner.spawn({"effect": passive, "owner": self})
+	effects[passive] = tmp
 
 func add_effect(effect: StringName, owner_unit: Unit) -> void:
 	if is_affected(effect):

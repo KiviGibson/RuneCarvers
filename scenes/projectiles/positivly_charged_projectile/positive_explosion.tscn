@@ -130,7 +130,7 @@ collision_layer = 0
 collision_mask = 8
 script = ExtResource("2_7vhgx")
 damage = SubResource("Resource_g83n3")
-effects = Array[StringName]([&"positively_charged"])
+effects = Array[StringName]([&"positively_charged", &"burn"])
 metadata/_custom_type_script = "uid://bdmlbgajj81a8"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="HitBox" unique_id=1398345530]

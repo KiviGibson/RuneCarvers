@@ -6,7 +6,10 @@
 
 [node name="TempRune" type="Node" unique_id=1347026746]
 script = ExtResource("1_gruec")
-ammo = 3
+type = 2
+ammo = 10
+fuel_tick = 0.1
+activation_ticks = 2
 metadata/_custom_type_script = "uid://d16u0e2gt6kxj"
 
 [node name="SpawnProjectile" type="Node" parent="." unique_id=1839972761]

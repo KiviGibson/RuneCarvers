@@ -1,16 +1,8 @@
-extends Node
+extends CustomNode
 class_name SpawnProjectile
 
-signal projectile_hit(collider: HurtBox)
-
 @export var projectile_scene: PackedScene
-var unit: Unit
 
-@export var player_finish_signal: String
-
-func setup(u: Unit) -> void:
-	unit = u
-	
 func spawn_projectile(u: HurtBox = null) -> void:
 	var res: Projectile
 	if u:
@@ -21,16 +13,26 @@ func spawn_projectile(u: HurtBox = null) -> void:
 	else:
 		res = Projectiles.spawn({
 			"scene": projectile_scene.resource_path, 
-			"position": unit.model.global_position}
+			"position": host.model.global_position}
 			)
-		res.rotation = unit.model.visible_model.rotation
-	res.owning_unit = unit
+		res.rotation = host.model.visible_model.rotation
+	res.owning_unit = host
 
 
 func spawn_projectile_at_position(position: Vector3 = Vector3.ZERO) -> void:
 	var res := Projectiles.spawn({"scene": projectile_scene.resource_path, "position": position})
-	res.owning_unit = unit
+	res.owning_unit = host
 
 func spawn_projectile_on_unit() -> void:
-		var res := unit.add_projectile(projectile_scene)
-		unit.model.finish_force_movement.connect(res._destroy)
+		var res := host.add_projectile(projectile_scene)
+		host.model.finish_force_movement.connect(res._destroy)
+
+func charge_shot_spawn(val: float) -> void:
+	var res: Projectile = Projectiles.spawn({
+			"scene": projectile_scene.resource_path, 
+			"position": host.model.global_position}
+			)
+	res.rotation = host.model.visible_model.rotation
+	res.initial_y_velocity *= (2.0-val)
+	res.initial_velocity *= val
+	res.owning_unit = host
