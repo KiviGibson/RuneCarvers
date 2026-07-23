@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dbh4fo4orvnbx"]
+
+[ext_resource type="Script" uid="uid://r0tp4n5w2xkh" path="res://scripts/effects/Effect.gd" id="1_nlw4f"]
+[ext_resource type="PackedScene" uid="uid://rf7qgakau3is" path="res://effects/shock/ShockEffect.tscn" id="2_3jmlw"]
+
+[node name="PositivelyCharged" type="Node3D" unique_id=1430900142]
+script = ExtResource("1_nlw4f")
+duration = 5.0
+metadata/_custom_type_script = "uid://r0tp4n5w2xkh"
+
+[node name="Node3D" parent="." unique_id=123602805 instance=ExtResource("2_3jmlw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

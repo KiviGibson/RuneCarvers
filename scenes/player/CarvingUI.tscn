@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cnpbtcotrox6g"]
 
-[ext_resource type="PackedScene" uid="uid://g8d1aj0ym3lb" path="res://scenes/carving_components/CarvingUI.tscn" id="1_sbhwt"]
+[ext_resource type="PackedScene" uid="uid://g8d1aj0ym3lb" path="res://scenes/carving_ui/CarvingUI.tscn" id="1_sbhwt"]
 
 [node name="Control" type="Control" unique_id=1392475741]
 layout_mode = 3

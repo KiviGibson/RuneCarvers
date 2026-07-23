@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bdmlbgajj81a8" path="res://scripts/unit/damage_system/HitBox.gd" id="2_6y8rp"]
 [ext_resource type="Script" uid="uid://du3idwes8fp8o" path="res://scripts/multiplayer_system/spawners/PlayerSpawner.gd" id="2_cw6cr"]
 [ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/unit/damage_system/Damage.gd" id="3_700et"]
+[ext_resource type="PackedScene" uid="uid://b0766kma0i2rc" path="res://scenes/enemies/goly/Goly.tscn" id="5_o347i"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_6yq8t"]
 
@@ -20,6 +21,9 @@ metadata/_custom_type_script = "uid://uaugd35wcih8"
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_1j5yo"]
 radius = 2.0
+
+[sub_resource type="Environment" id="Environment_6yq8t"]
+glow_enabled = true
 
 [node name="Game" type="Node3D" unique_id=1160267840 node_paths=PackedStringArray("game_overlay", "player_spawner")]
 script = ExtResource("1_jpbhf")
@@ -73,3 +77,9 @@ alignment = 1
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=647554647]
 transform = Transform3D(0.546579, -0.60909915, 0.5746735, 0, 0.6862531, 0.7273629, -0.8374075, -0.39756128, 0.37509152, 0, 3.212193, 5.9742565)
+
+[node name="Goly" parent="." unique_id=2142922162 instance=ExtResource("5_o347i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3455954, 0.05000042, -1.634531)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=677987250]
+environment = SubResource("Environment_6yq8t")

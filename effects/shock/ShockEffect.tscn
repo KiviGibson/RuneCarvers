@@ -22,12 +22,6 @@ scale_min = 40.0
 scale_max = 70.0
 scale_curve = SubResource("CurveTexture_1t003")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lwee2"]
-albedo_color = Color(0.34901962, 0.5529412, 1, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_5yvxn"]
-material = SubResource("StandardMaterial3D_lwee2")
-
 [node name="Node3D" type="Node3D" unique_id=123602805]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1050879009]
@@ -38,12 +32,3 @@ fixed_fps = 0
 transform_align = 2
 process_material = SubResource("ParticleProcessMaterial_6yq8t")
 draw_pass_1 = ExtResource("1_lwee2")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=344352401]
-mesh = SubResource("CapsuleMesh_5yvxn")
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1368406825]
-transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 3.136953, 10, 2.487167)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1628366307]
-transform = Transform3D(0.8112211, 0.40132904, -0.42527074, 0, 0.72728246, 0.68633825, 0.58473945, -0.55677205, 0.5899869, 0, 19.734722, 0)

@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://d326cvvglkvbh"]
+
+[ext_resource type="Script" uid="uid://r0tp4n5w2xkh" path="res://scripts/effects/Effect.gd" id="1_b7s4h"]
+[ext_resource type="Script" uid="uid://djwnkymuen1k" path="res://scripts/effect_components/AffectedBy.gd" id="2_txs17"]
+[ext_resource type="Script" uid="uid://x544es0wcwfx" path="res://scripts/carving_system/rune/SpawnProjectile.gd" id="3_uu6vt"]
+[ext_resource type="PackedScene" uid="uid://r6fca3riibw5" path="res://scenes/projectiles/violet_thunder/violet_thunder.tscn" id="4_1ctvk"]
+
+[node name="NegativelyCharged" type="Node3D" unique_id=836132210]
+script = ExtResource("1_b7s4h")
+duration = 0.2
+metadata/_custom_type_script = "uid://r0tp4n5w2xkh"
+
+[node name="AffectedBy" type="Node" parent="." unique_id=1425281644]
+script = ExtResource("2_txs17")
+effect = &"positively_charged"
+remove_effect = true
+metadata/_custom_type_script = "uid://djwnkymuen1k"
+
+[node name="SpawnProjectile" type="Node" parent="." unique_id=1317785500]
+script = ExtResource("3_uu6vt")
+projectile_scene = ExtResource("4_1ctvk")
+metadata/_custom_type_script = "uid://x544es0wcwfx"
+
+[connection signal="effect_expired" from="." to="AffectedBy" method="check_is_affected"]
+[connection signal="setup" from="." to="AffectedBy" method="setup"]
+[connection signal="setup" from="." to="SpawnProjectile" method="setup"]
+[connection signal="is_affected" from="AffectedBy" to="SpawnProjectile" method="spawn_projectile"]
