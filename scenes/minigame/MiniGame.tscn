@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cebeh080tio1p"]
+
+[ext_resource type="Script" uid="uid://dfwsinj7nsi2u" path="res://scripts/interaction_system/CarvingInteractionZone.gd" id="1_pb5i6"]
+[ext_resource type="PackedScene" uid="uid://cvvqjqmh3d4nq" path="res://scenes/minigame/tank.tscn" id="2_66ly0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6yq8t"]
+
+[node name="MiniGame" type="Node3D" unique_id=583750615]
+
+[node name="CarvingInterationZone" type="Area3D" parent="." unique_id=1097446254]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_pb5i6")
+unit_limit = 1
+metadata/_custom_type_script = "uid://dfwsinj7nsi2u"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CarvingInterationZone" unique_id=181220733]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_6yq8t")
+
+[node name="Tank" parent="." unique_id=455929805 instance=ExtResource("2_66ly0")]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=729073806]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, 0)

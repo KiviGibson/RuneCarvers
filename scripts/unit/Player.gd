@@ -5,8 +5,11 @@ class_name Player
 @export var carving_system: CarvingSystem
 @export var carving_ui: Control ## Reparents to game overlay node
 @export var camera: Camera3D
-
-var owner_id: int
+@export var interact_system: InteractSystem
+var owner_id: int: 
+	set(value):
+		owner_id = value
+		interact_system.owner_id = owner_id
 var current_rune: Rune
 
 func _ready() -> void:

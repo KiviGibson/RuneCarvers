@@ -52,6 +52,7 @@ func push_to_activate(value: bool) -> void:
 func start_charge() -> void: 
 	charging = true
 	charged_value = 0.0
+	started_charging.emit()
 
 func stop_charge() -> void: 
 	if not charging: return

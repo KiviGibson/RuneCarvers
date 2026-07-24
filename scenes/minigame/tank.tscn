@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cvvqjqmh3d4nq"]
+
+[ext_resource type="Script" uid="uid://qfsj3wbjrj3" path="res://scripts/tank_minigame/Tank.gd" id="1_hnlmp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_6yq8t"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1j5yo"]
+
+[node name="Tank" type="CharacterBody3D" unique_id=455929805 node_paths=PackedStringArray("timer")]
+script = ExtResource("1_hnlmp")
+moves = Array[int]([0, 3, 0, 2, 0, 3, 0, 2])
+timer = NodePath("Timer")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1621513496]
+mesh = SubResource("BoxMesh_6yq8t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=191174184]
+shape = SubResource("BoxShape3D_1j5yo")
+
+[node name="Timer" type="Timer" parent="." unique_id=1354030483]
+process_callback = 0
+wait_time = 1.2
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="start_task"]

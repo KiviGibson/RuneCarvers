@@ -3,10 +3,10 @@ class_name CarvingUI
 
 const temp_rune_icon: CompressedTexture2D = preload("res://icon.svg")
 const clock_fill: Array[CompressedTexture2D] = [
-	preload("res://kenney_cursor-pack/Vector/Basic/progress_CW_25.svg"),
-	preload("res://kenney_cursor-pack/Vector/Basic/progress_CW_50.svg"),
-	preload("res://kenney_cursor-pack/Vector/Basic/progress_CW_75.svg"),
-	preload("res://kenney_cursor-pack/Vector/Basic/progress_full.svg"),
+	preload("res://assets/kenney_cursor-pack/Vector/Basic/progress_CW_25.svg"),
+	preload("res://assets/kenney_cursor-pack/Vector/Basic/progress_CW_50.svg"),
+	preload("res://assets/kenney_cursor-pack/Vector/Basic/progress_CW_75.svg"),
+	preload("res://assets/kenney_cursor-pack/Vector/Basic/progress_full.svg"),
 	temp_rune_icon
 ]
 @export var status_icon: TextureRect

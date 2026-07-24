@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://b56wk8jie472p" path="res://scenes/runes/rune_warp.tscn" id="8_180ig"]
 [ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/unit/damage_system/HurtBox.gd" id="8_v42im"]
 [ext_resource type="Script" uid="uid://bsmwhck7xocl0" path="res://scripts/multiplayer_system/spawners/effect_spawner.gd" id="10_7oing"]
+[ext_resource type="Script" uid="uid://5la47o2e7t8g" path="res://scripts/interaction_system/InteractSystem.gd" id="12_ov1oi"]
 [ext_resource type="Script" uid="uid://bcd84k42fkm1d" path="res://scripts/multiplayer_system/spawners/ProjectileSpawner.gd" id="13_20koh"]
 
 [sub_resource type="Resource" id="Resource_c3xxp"]
@@ -54,6 +55,8 @@ size = Vector3(0.1, 0.1, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1j5yo"]
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rn7t0"]
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mdl7e"]
 properties/0/path = NodePath("Puppet:scale")
 properties/0/spawn = true
@@ -71,12 +74,13 @@ properties/4/path = NodePath("Puppet:rotation")
 properties/4/spawn = true
 properties/4/replication_mode = 2
 
-[node name="Player" type="Node3D" unique_id=1666680966 node_paths=PackedStringArray("input_system", "carving_system", "carving_ui", "camera", "model", "effect_spawner", "projectile_spawner")]
+[node name="Player" type="Node3D" unique_id=1666680966 node_paths=PackedStringArray("input_system", "carving_system", "carving_ui", "camera", "interact_system", "model", "effect_spawner", "projectile_spawner")]
 script = ExtResource("1_tpg5x")
 input_system = NodePath("InputSystem")
 carving_system = NodePath("CarvingSystem")
 carving_ui = NodePath("UI")
 camera = NodePath("Puppet/Camera3D")
+interact_system = NodePath("Puppet/InteractSystem")
 model = NodePath("Puppet")
 stats = SubResource("Resource_c3xxp")
 effect_spawner = NodePath("Effect")
@@ -165,6 +169,17 @@ metadata/_custom_type_script = "uid://deqosc7jtvi1x"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Puppet/HurtBox" unique_id=1244874730]
 shape = SubResource("CapsuleShape3D_1j5yo")
 
+[node name="InteractSystem" type="Area3D" parent="Puppet" unique_id=1248380435 node_paths=PackedStringArray("input")]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("12_ov1oi")
+input = NodePath("../../InputSystem")
+metadata/_custom_type_script = "uid://5la47o2e7t8g"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Puppet/InteractSystem" unique_id=1370149598]
+shape = SubResource("CylinderShape3D_rn7t0")
+debug_color = Color(2.4546682e-06, 0.6507329, 0.093313, 0.41960785)
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2085177374]
 replication_config = SubResource("SceneReplicationConfig_mdl7e")
 
@@ -186,3 +201,5 @@ script = ExtResource("13_20koh")
 [connection signal="finish_force_movement" from="Puppet" to="." method="enable_collision"]
 [connection signal="affected" from="Puppet/HurtBox" to="." method="add_effect"]
 [connection signal="got_hit" from="Puppet/HurtBox" to="." method="_on_getting_hit"]
+[connection signal="carving_zone_entered" from="Puppet/InteractSystem" to="CarvingSystem" method="switch_carving" binds= [true]]
+[connection signal="carving_zone_exit" from="Puppet/InteractSystem" to="CarvingSystem" method="switch_carving" binds= [false]]
