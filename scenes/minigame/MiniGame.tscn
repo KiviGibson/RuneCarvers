@@ -1,13 +1,37 @@
 [gd_scene format=3 uid="uid://cebeh080tio1p"]
 
+[ext_resource type="Script" uid="uid://cib1d1h1lfxpx" path="res://scripts/tank_minigame/TankVsMinigame.gd" id="1_diy0u"]
 [ext_resource type="Script" uid="uid://dfwsinj7nsi2u" path="res://scripts/interaction_system/CarvingInteractionZone.gd" id="1_pb5i6"]
 [ext_resource type="PackedScene" uid="uid://cvvqjqmh3d4nq" path="res://scenes/minigame/tank.tscn" id="2_66ly0"]
+[ext_resource type="Texture2D" uid="uid://mqryi3m3smgp" path="res://assets/kenney_cursor-pack/PNG/Basic/Double/progress_empty.png" id="2_re4xa"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6yq8t"]
 
-[node name="MiniGame" type="Node3D" unique_id=583750615]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1j5yo"]
+albedo_texture = ExtResource("2_re4xa")
+uv1_scale = Vector3(4, 4, 4)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6yq8t"]
+material = SubResource("StandardMaterial3D_1j5yo")
+size = Vector2(4, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_heunu"]
+size = Vector3(0.1, 1, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_re4xa"]
+size = Vector3(0.1, 1, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1j5yo"]
+size = Vector3(0.1, 2, 2)
+
+[node name="MiniGame" type="Node3D" unique_id=583750615 node_paths=PackedStringArray("tanks", "input")]
+script = ExtResource("1_diy0u")
+tanks = [NodePath("MAP/Tank"), NodePath("MAP/Tank2")]
+input = [NodePath("CarvingInterationZone"), NodePath("CarvingInterationZone2")]
+pattern_length = 4
 
 [node name="CarvingInterationZone" type="Area3D" parent="." unique_id=1097446254]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("1_pb5i6")
@@ -18,7 +42,54 @@ metadata/_custom_type_script = "uid://dfwsinj7nsi2u"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_6yq8t")
 
-[node name="Tank" parent="." unique_id=455929805 instance=ExtResource("2_66ly0")]
+[node name="CarvingInterationZone2" type="Area3D" parent="." unique_id=1445403153]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_pb5i6")
+unit_limit = 1
+metadata/_custom_type_script = "uid://dfwsinj7nsi2u"
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=729073806]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CarvingInterationZone2" unique_id=2099565577]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_6yq8t")
+
+[node name="MAP" type="Node3D" parent="." unique_id=1723942933]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -3)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MAP" unique_id=1740800456]
+mesh = SubResource("PlaneMesh_6yq8t")
+
+[node name="Tank" parent="MAP" unique_id=455929805 instance=ExtResource("2_66ly0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1, -1.5)
+direction = 2
+
+[node name="Tank2" parent="MAP" unique_id=676636862 instance=ExtResource("2_66ly0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1, 1.5)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MAP" unique_id=1701302547]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 3)
+collision_layer = 33
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MAP/StaticBody3D" unique_id=697996690]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -3)
+shape = SubResource("BoxShape3D_heunu")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="MAP/StaticBody3D" unique_id=1659848164]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.5, -3)
+shape = SubResource("BoxShape3D_re4xa")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MAP/StaticBody3D/CollisionShape3D5" unique_id=543877222]
+mesh = SubResource("BoxMesh_1j5yo")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="MAP/StaticBody3D" unique_id=72176539]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, -3)
+shape = SubResource("BoxShape3D_heunu")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="MAP/StaticBody3D" unique_id=1123929138]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2, -0.5, -1)
+shape = SubResource("BoxShape3D_heunu")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="MAP/StaticBody3D" unique_id=1365461639]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2, -0.5, -5)
+shape = SubResource("BoxShape3D_heunu")

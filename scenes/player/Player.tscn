@@ -158,7 +158,9 @@ mesh = SubResource("BoxMesh_6yq8t")
 shape = SubResource("CapsuleShape3D_6yq8t")
 
 [node name="Camera3D" type="Camera3D" parent="Puppet" unique_id=982673878]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 10, 10)
+transform = Transform3D(1, 0, 0, 0, 0.49999994, 0.8660254, 0, -0.8660254, 0.49999994, 0, 10, 5)
+fov = 70.0
+size = 20.0
 
 [node name="HurtBox" type="Area3D" parent="Puppet" unique_id=1283098386]
 collision_layer = 4

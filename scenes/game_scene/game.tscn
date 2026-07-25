@@ -86,4 +86,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3455954, 0.05000042, -1.634
 environment = SubResource("Environment_6yq8t")
 
 [node name="MiniGame" parent="." unique_id=583750615 instance=ExtResource("6_7ulqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.72532)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -9.72532)

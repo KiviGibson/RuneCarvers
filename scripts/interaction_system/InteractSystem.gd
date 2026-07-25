@@ -33,11 +33,9 @@ func on_interactable_exit(interaction_zone: Area3D) -> void:
 func on_carving_zone_enter(interaction_zone: CarvingInterationZone) -> void:
 	input.carving_change.connect(interaction_zone.carving_change)
 	input.carved_symbol.connect(interaction_zone.symbol_carved)
-	print("Connected")
 	carving_zone_entered.emit()
 
 func on_carving_zone_exit(interaction_zone: CarvingInterationZone) -> void:
 	input.carving_change.disconnect(interaction_zone.carving_change)
 	input.carved_symbol.disconnect(interaction_zone.symbol_carved)
-	print("Disconnect")
 	carving_zone_exit.emit()

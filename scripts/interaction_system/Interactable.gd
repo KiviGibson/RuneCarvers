@@ -21,12 +21,10 @@ func disconnect_unit(id: int) -> void:
 	show_overlay.rpc_id(id, false)
 
 @rpc("authority", "call_local", "reliable")
-func show_overlay(val: bool) -> void:
-	print("Player Interaction: " + str(val))
+func show_overlay(_val: bool) -> void: pass
 
 func interaction_call() -> void: 
 	if not can_interact: return 
 	interaction_signal.emit()
 	can_interact = false
 	interaction_timer.start()
-	print("Interaction")

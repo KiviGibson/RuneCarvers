@@ -6,6 +6,7 @@ signal interaction_ended()
 var carving_state: bool = false
 
 func carving_change(val: bool) -> void:
+	print(val)
 	if val: interaction_signal.emit()
 	else: interaction_ended.emit()
 	carving_state = val
@@ -13,4 +14,3 @@ func carving_change(val: bool) -> void:
 func symbol_carved(symbol: int) -> void:
 	if carving_state == true:
 		carved_symbol.emit(symbol)
-		print("InteractionZone: " + str(symbol))
