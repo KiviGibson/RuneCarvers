@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://cvvqjqmh3d4nq"]
+
+[ext_resource type="Script" uid="uid://qfsj3wbjrj3" path="res://scripts/tank_minigame/Tank.gd" id="1_hnlmp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_66ly0"]
+albedo_color = Color(6.7383053e-06, 0.7004994, 0.9742089, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6yq8t"]
+material = SubResource("StandardMaterial3D_66ly0")
+size = Vector3(0.4, 0.6, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n4xfe"]
+albedo_color = Color(0, 0.7019608, 0.972549, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1j5yo"]
+material = SubResource("StandardMaterial3D_n4xfe")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kxtkx"]
+albedo_color = Color(0.11764706, 0.11764706, 0.11764706, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3j1us"]
+material = SubResource("StandardMaterial3D_kxtkx")
+size = Vector3(0.8, 0.4, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_diy0u"]
+albedo_color = Color(0.11858138, 0.11858138, 0.11858138, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_heunu"]
+material = SubResource("StandardMaterial3D_diy0u")
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.8
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jgdur"]
+height = 0.8
+radius = 0.4
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hnlmp"]
+properties/0/path = NodePath(".:rotation")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
+[node name="Tank" type="CharacterBody3D" unique_id=455929805 node_paths=PackedStringArray("timer", "forward_cast", "back_cast", "shoot_cast")]
+collision_layer = 33
+script = ExtResource("1_hnlmp")
+timer = NodePath("Timer")
+forward_cast = NodePath("Move")
+back_cast = NodePath("Move2")
+shoot_cast = NodePath("ShootCast")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1621513496]
+mesh = SubResource("BoxMesh_6yq8t")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1699915903]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.2, 0.2)
+mesh = SubResource("CylinderMesh_1j5yo")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1906466062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+mesh = SubResource("BoxMesh_3j1us")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1859988279]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -0.2, -0.2)
+mesh = SubResource("CylinderMesh_heunu")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1001966903]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -0.2, 0.2)
+mesh = SubResource("CylinderMesh_heunu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=191174184]
+shape = SubResource("CylinderShape3D_jgdur")
+
+[node name="Timer" type="Timer" parent="." unique_id=1354030483]
+process_callback = 0
+wait_time = 1.2
+one_shot = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1565335502]
+replication_config = SubResource("SceneReplicationConfig_hnlmp")
+
+[node name="Move" type="RayCast3D" parent="." unique_id=345939098]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.4)
+target_position = Vector3(0, 0, 0.5)
+
+[node name="Move2" type="RayCast3D" parent="." unique_id=502874069]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
+target_position = Vector3(0, 0, -0.5)
+
+[node name="ShootCast" type="RayCast3D" parent="." unique_id=665745436]
+target_position = Vector3(0, 0, 10)
+collision_mask = 32
+
+[connection signal="timeout" from="Timer" to="." method="start_task"]

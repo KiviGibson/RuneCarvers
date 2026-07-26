@@ -6,6 +6,7 @@ signal successful_carving(rune: PackedScene) ## Po ukończeniu rycia wysyła syg
 @export var carvings: Array[Carvings]
 @export var max_carvings: int = 4
 @export var ui: Array[CarvingUI]
+var enabled: bool
 
 func _ready() -> void:
 	if not multiplayer.is_server(): return
@@ -21,7 +22,10 @@ func start_carving() -> void: ## Rozpocznij rycie
 	if not multiplayer.is_server(): return
 
 
+func switch_carving(val: bool) -> void: enabled = val
+
 func carve_symbol(symbol: int) -> void: ## Dodaj symbol do run i uaktualnij UI
+	if enabled: return
 	var i := -1
 	for carve in carvings:
 		i += 1

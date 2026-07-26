@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://du3idwes8fp8o" path="res://scripts/multiplayer_system/spawners/PlayerSpawner.gd" id="2_cw6cr"]
 [ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/unit/damage_system/Damage.gd" id="3_700et"]
 [ext_resource type="PackedScene" uid="uid://b0766kma0i2rc" path="res://scenes/enemies/goly/Goly.tscn" id="5_o347i"]
+[ext_resource type="PackedScene" uid="uid://cebeh080tio1p" path="res://scenes/minigame/MiniGame.tscn" id="6_7ulqd"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_6yq8t"]
 
@@ -83,3 +84,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3455954, 0.05000042, -1.634
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=677987250]
 environment = SubResource("Environment_6yq8t")
+
+[node name="MiniGame" parent="." unique_id=583750615 instance=ExtResource("6_7ulqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -9.72532)

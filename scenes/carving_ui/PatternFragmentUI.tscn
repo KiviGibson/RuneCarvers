@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://78m72orxdb0f"]
 
-[ext_resource type="Texture2D" uid="uid://de5drf4q7op60" path="res://kenney_cursor-pack/Vector/Basic/arrow_e.svg" id="1_hnjvq"]
+[ext_resource type="Texture2D" uid="uid://de5drf4q7op60" path="res://assets/kenney_cursor-pack/Vector/Basic/arrow_e.svg" id="1_hnjvq"]
 [ext_resource type="Script" uid="uid://qywhrffkhg6" path="res://scripts/carving_system/PatternFragmentUI.gd" id="2_s2j88"]
 
 [sub_resource type="Animation" id="Animation_wir3w"]

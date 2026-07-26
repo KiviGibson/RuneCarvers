@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="RuneCarvers"
+config/tags=PackedStringArray("prototype")
 run/main_scene="uid://rf7qgakau3is"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
@@ -24,6 +25,16 @@ Projectiles="*uid://bjlkjipi24fx3"
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[file_customization]
+
+folder_colors={
+"res://assets/": "gray",
+"res://effects/": "pink",
+"res://resource/": "purple",
+"res://scenes/": "blue",
+"res://scripts/": "teal"
+}
 
 [input]
 
@@ -106,6 +117,7 @@ carve_right={
 3d_physics/layer_2="Unit Collsion"
 3d_physics/layer_3="Player Hurtbox"
 3d_physics/layer_4="Enemy Hurtbox"
+3d_physics/layer_5="InteractionSystem"
 
 [physics]
 
