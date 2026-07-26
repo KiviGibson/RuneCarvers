@@ -3,14 +3,12 @@
 [ext_resource type="Script" uid="uid://qfsj3wbjrj3" path="res://scripts/tank_minigame/Tank.gd" id="1_hnlmp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_66ly0"]
-albedo_color = Color(6.7383053e-06, 0.7004994, 0.9742089, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_6yq8t"]
 material = SubResource("StandardMaterial3D_66ly0")
 size = Vector3(0.4, 0.6, 0.4)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n4xfe"]
-albedo_color = Color(0, 0.7019608, 0.972549, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_1j5yo"]
 material = SubResource("StandardMaterial3D_n4xfe")
@@ -49,13 +47,14 @@ properties/2/path = NodePath(".:scale")
 properties/2/spawn = true
 properties/2/replication_mode = 2
 
-[node name="Tank" type="CharacterBody3D" unique_id=455929805 node_paths=PackedStringArray("timer", "forward_cast", "back_cast", "shoot_cast")]
+[node name="Tank" type="CharacterBody3D" unique_id=455929805 node_paths=PackedStringArray("timer", "forward_cast", "back_cast", "shoot_cast", "mesh_array")]
 collision_layer = 33
 script = ExtResource("1_hnlmp")
 timer = NodePath("Timer")
 forward_cast = NodePath("Move")
 back_cast = NodePath("Move2")
 shoot_cast = NodePath("ShootCast")
+mesh_array = [NodePath("MeshInstance3D"), NodePath("MeshInstance3D/MeshInstance3D")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1621513496]
 mesh = SubResource("BoxMesh_6yq8t")
@@ -81,7 +80,7 @@ shape = SubResource("CylinderShape3D_jgdur")
 
 [node name="Timer" type="Timer" parent="." unique_id=1354030483]
 process_callback = 0
-wait_time = 1.2
+wait_time = 1.0999999999999999
 one_shot = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1565335502]

@@ -20,7 +20,8 @@ signal tank_stopped(hit: bool)
 @export var back_cast: RayCast3D
 @export var shoot_cast: RayCast3D
 @export var direction: dir 
-
+@export var tank_color: Color
+@export var mesh_array: Array[MeshInstance3D] 
 var dest_rot: float
 var rot_delta: int = 0
 var current_rot: float
@@ -29,6 +30,9 @@ var starting_pos: Vector3
 var start_direction: dir
 
 func _ready() -> void:
+	for mesh in mesh_array:
+		mesh.mesh = mesh.mesh.duplicate(true)
+		mesh.mesh.material.albedo_color = tank_color
 	if not multiplayer.is_server(): return
 	starting_pos = global_position
 	start_direction = direction

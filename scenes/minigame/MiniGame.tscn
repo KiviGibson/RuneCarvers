@@ -5,7 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://cvvqjqmh3d4nq" path="res://scenes/minigame/tank.tscn" id="2_66ly0"]
 [ext_resource type="Texture2D" uid="uid://mqryi3m3smgp" path="res://assets/kenney_cursor-pack/PNG/Basic/Double/progress_empty.png" id="2_re4xa"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_6yq8t"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_diy0u"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kxtkx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1j5yo"]
 albedo_texture = ExtResource("2_re4xa")
@@ -43,7 +45,8 @@ metadata/_custom_type_script = "uid://dfwsinj7nsi2u"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CarvingInterationZone" unique_id=181220733]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("BoxShape3D_6yq8t")
+shape = SubResource("BoxShape3D_diy0u")
+debug_color = Color(0.99874693, 0, 0.1458736, 0.41960785)
 
 [node name="CarvingInterationZone2" type="Area3D" parent="." unique_id=1445403153]
 collision_layer = 16
@@ -54,7 +57,7 @@ metadata/_custom_type_script = "uid://dfwsinj7nsi2u"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CarvingInterationZone2" unique_id=2099565577]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("BoxShape3D_6yq8t")
+shape = SubResource("BoxShape3D_kxtkx")
 
 [node name="MAP" type="Node3D" parent="." unique_id=1723942933]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -3)
@@ -65,9 +68,11 @@ mesh = SubResource("PlaneMesh_6yq8t")
 [node name="Tank" parent="MAP" unique_id=455929805 instance=ExtResource("2_66ly0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1, -1.5)
 direction = 2
+tank_color = Color(0.90209657, 0.29010427, 0.26618722, 1)
 
 [node name="Tank2" parent="MAP" unique_id=676636862 instance=ExtResource("2_66ly0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1, 1.5)
+tank_color = Color(0.42864084, 0.62260056, 0.9352982, 1)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MAP" unique_id=1701302547]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 3)
