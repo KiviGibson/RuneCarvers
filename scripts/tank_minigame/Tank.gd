@@ -25,8 +25,13 @@ var dest_rot: float
 var rot_delta: int = 0
 var current_rot: float
 
+var starting_pos: Vector3
+var start_direction: dir
+
 func _ready() -> void:
 	if not multiplayer.is_server(): return
+	starting_pos = global_position
+	start_direction = direction
 	dest_rot = (PI/2)* direction - PI
 	current_rot = dest_rot
 
@@ -77,6 +82,8 @@ func _physics_process(delta: float) -> void:
 	global_position.x = move_toward(global_position.x, dest.x, delta)
 	global_position.z = move_toward(global_position.z, dest.z, delta)
 	complete_move_task()
+	for col in range(get_slide_collision_count()):
+		if get_slide_collision(col).get_collider() is Tank: destroy()
 	if is_on_floor():
 		velocity = Vector3.ZERO
 	else:
@@ -87,5 +94,9 @@ func start_next_task() -> void:
 	if not multiplayer.is_server(): return
 	start_task()
 
-## Jeżeli czołgi jadą przed siebie a są w dystansie jednej kratki explodują i jest remis
-## Lub odbijają się do ostatniego poprawnego ruchu do rozstrzygnięcia
+func destroy() -> void: # Reset to start position
+	direction = start_direction
+	dest_rot = (PI/2)* start_direction - PI
+	current_rot = dest_rot
+	global_position = starting_pos
+	dest = global_position

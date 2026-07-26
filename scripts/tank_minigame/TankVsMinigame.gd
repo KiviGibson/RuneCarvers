@@ -2,6 +2,7 @@ extends Node
 class_name TankVsMinigame
 @export var tanks: Array[Tank]
 @export var input: Array[CarvingInterationZone]
+
 @export var pattern_length: int
 var player_patterns: Array[Array] = [[], []]
 var locked_patterns: int = -1
@@ -12,6 +13,7 @@ var tanks_finshed_results: Dictionary[int, bool]
 
 
 func _ready() -> void:
+	if not multiplayer.is_server(): return
 	for i in range(len(input)):
 		input[i].carved_symbol.connect(func(val: int) -> void: on_input_recieved(val, i))
 		input[i].interaction_ended.connect(func() -> void: on_input_accept(i))
