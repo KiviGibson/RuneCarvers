@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bk3wugnxnrdyw"]
 
 [ext_resource type="Script" uid="uid://cm0qmfmjp8c82" path="res://scripts/multiplayer_system/game_scene.gd" id="1_jpbhf"]
-[ext_resource type="Script" uid="uid://bdmlbgajj81a8" path="res://scripts/unit/damage_system/HitBox.gd" id="2_6y8rp"]
+[ext_resource type="Script" uid="uid://bdmlbgajj81a8" path="res://scripts/damage_system/HitBox.gd" id="2_6y8rp"]
 [ext_resource type="Script" uid="uid://du3idwes8fp8o" path="res://scripts/multiplayer_system/spawners/PlayerSpawner.gd" id="2_cw6cr"]
-[ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/unit/damage_system/Damage.gd" id="3_700et"]
+[ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/damage_system/Damage.gd" id="3_700et"]
 [ext_resource type="PackedScene" uid="uid://b0766kma0i2rc" path="res://scenes/enemies/goly/Goly.tscn" id="5_o347i"]
 [ext_resource type="PackedScene" uid="uid://cebeh080tio1p" path="res://scenes/minigame/MiniGame.tscn" id="6_7ulqd"]
 

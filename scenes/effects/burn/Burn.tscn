@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cia21gmitmeip"]
 
-[ext_resource type="Script" uid="uid://r0tp4n5w2xkh" path="res://scripts/effects/Effect.gd" id="1_waso8"]
-[ext_resource type="Script" uid="uid://ctuio8xqpxg2j" path="res://scripts/effect_components/DamageUnit.gd" id="2_gkgl7"]
-[ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/unit/damage_system/Damage.gd" id="3_x5ekl"]
+[ext_resource type="Script" uid="uid://r0tp4n5w2xkh" path="res://scripts/effect_system/Effect.gd" id="1_waso8"]
+[ext_resource type="Script" uid="uid://ctuio8xqpxg2j" path="res://scripts/effect_system/effect_components/DamageUnit.gd" id="2_gkgl7"]
+[ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/damage_system/Damage.gd" id="3_x5ekl"]
 
 [sub_resource type="Resource" id="Resource_6yq8t"]
 script = ExtResource("3_x5ekl")

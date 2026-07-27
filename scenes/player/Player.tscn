@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bbqbp1p043by2" path="res://scripts/input_system/InputSystem.gd" id="1_524rm"]
 [ext_resource type="Script" uid="uid://dcb74rvqbwjiq" path="res://scripts/unit/Player.gd" id="1_tpg5x"]
-[ext_resource type="Script" uid="uid://bffwh1ds00jub" path="res://scripts/unit/damage_system/Stats.gd" id="2_npwbq"]
+[ext_resource type="Script" uid="uid://bffwh1ds00jub" path="res://scripts/unit/Stats.gd" id="2_npwbq"]
 [ext_resource type="Script" uid="uid://qpy2uevlwsjk" path="res://scripts/carving_system/CarvingSystem.gd" id="2_tpg5x"]
 [ext_resource type="Script" uid="uid://nrajgkybshxf" path="res://scripts/carving_system/Carvings.gd" id="3_c3xxp"]
 [ext_resource type="PackedScene" uid="uid://g8d1aj0ym3lb" path="res://scenes/carving_ui/CarvingUI.tscn" id="4_npwbq"]
@@ -10,7 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://xmwhn75bbej1" path="res://scenes/runes/TempRune.tscn" id="6_pn6s4"]
 [ext_resource type="PackedScene" uid="uid://cebt7oam1m3q2" path="res://scenes/runes/Dash.tscn" id="7_5stf6"]
 [ext_resource type="PackedScene" uid="uid://b56wk8jie472p" path="res://scenes/runes/rune_warp.tscn" id="8_180ig"]
-[ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/unit/damage_system/HurtBox.gd" id="8_v42im"]
+[ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/damage_system/HurtBox.gd" id="8_v42im"]
+[ext_resource type="PackedScene" uid="uid://du573uaja1p13" path="res://scenes/hp_bars/EnemyHpBar.tscn" id="9_rn7t0"]
 [ext_resource type="Script" uid="uid://bsmwhck7xocl0" path="res://scripts/multiplayer_system/spawners/effect_spawner.gd" id="10_7oing"]
 [ext_resource type="Script" uid="uid://5la47o2e7t8g" path="res://scripts/interaction_system/InteractSystem.gd" id="12_ov1oi"]
 [ext_resource type="Script" uid="uid://bcd84k42fkm1d" path="res://scripts/multiplayer_system/spawners/ProjectileSpawner.gd" id="13_20koh"]
@@ -74,13 +75,14 @@ properties/4/path = NodePath("Puppet:rotation")
 properties/4/spawn = true
 properties/4/replication_mode = 2
 
-[node name="Player" type="Node3D" unique_id=1666680966 node_paths=PackedStringArray("input_system", "carving_system", "carving_ui", "camera", "interact_system", "model", "effect_spawner", "projectile_spawner")]
+[node name="Player" type="Node3D" unique_id=1666680966 node_paths=PackedStringArray("input_system", "carving_system", "carving_ui", "camera", "interact_system", "hp_bar", "model", "effect_spawner", "projectile_spawner")]
 script = ExtResource("1_tpg5x")
 input_system = NodePath("InputSystem")
 carving_system = NodePath("CarvingSystem")
 carving_ui = NodePath("UI")
 camera = NodePath("Puppet/Camera3D")
 interact_system = NodePath("Puppet/InteractSystem")
+hp_bar = NodePath("UI/Panel/MarginContainer/VBoxContainer/HpBar")
 model = NodePath("Puppet")
 stats = SubResource("Resource_c3xxp")
 effect_spawner = NodePath("Effect")
@@ -128,6 +130,11 @@ theme_override_constants/margin_bottom = 8
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Panel/MarginContainer" unique_id=1451016778]
 layout_mode = 2
 alignment = 1
+
+[node name="HpBar" parent="UI/Panel/MarginContainer/VBoxContainer" unique_id=1495397635 instance=ExtResource("9_rn7t0")]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+hide_on_max = false
 
 [node name="HBoxContainer" parent="UI/Panel/MarginContainer/VBoxContainer" unique_id=1919036124 instance=ExtResource("4_npwbq")]
 layout_mode = 2

@@ -8,6 +8,7 @@ class_name Unit
 var effects: Dictionary[StringName, Effect]
 @export var effect_spawner: EffectSpawner
 @export var projectile_spawner: ProjectileSpawner
+
 @abstract func _on_health_change(curernt: int, max_value: int) -> void
 @abstract func _on_health_depleated() -> void
 var base_layer:= 2

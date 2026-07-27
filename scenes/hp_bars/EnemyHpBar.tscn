@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://du573uaja1p13"]
+
+[ext_resource type="Script" uid="uid://0kaqalru4gso" path="res://scripts/unit/hp_bar/hp_bar.gd" id="1_5qey5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1j5yo"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jgdur"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="Theme" id="Theme_6yq8t"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_1j5yo")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_jgdur")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5qey5"]
+bg_color = Color(0.078431375, 0.078431375, 0.078431375, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.039215688, 0.039215688, 0.039215688, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="HpBar" type="Control" unique_id=1495397635 node_paths=PackedStringArray("timer", "current_progress_bar", "gray_progress_bar")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -10.0
+offset_right = 60.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_6yq8t")
+script = ExtResource("1_5qey5")
+timer = NodePath("Timer")
+current_progress_bar = NodePath("Current")
+gray_progress_bar = NodePath("Gray")
+hide_on_max = true
+metadata/_custom_type_script = "uid://0kaqalru4gso"
+
+[node name="Gray" type="ProgressBar" parent="." unique_id=789480546]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_5qey5")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="Current" type="ProgressBar" parent="." unique_id=568364764]
+modulate = Color(1, 0.22960332, 0.17353848, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="." unique_id=655455828]
+wait_time = 0.2
+one_shot = true

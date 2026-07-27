@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://c1rufo7fso66"]
 
 [ext_resource type="Script" uid="uid://be6dsn574j1uu" path="res://scripts/projectile/Projectile.gd" id="1_qh5xx"]
-[ext_resource type="Script" uid="uid://bdmlbgajj81a8" path="res://scripts/unit/damage_system/HitBox.gd" id="2_18hhv"]
-[ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/unit/damage_system/Damage.gd" id="3_jlh5k"]
+[ext_resource type="Script" uid="uid://bdmlbgajj81a8" path="res://scripts/damage_system/HitBox.gd" id="2_18hhv"]
+[ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/damage_system/Damage.gd" id="3_jlh5k"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6yq8t"]
 

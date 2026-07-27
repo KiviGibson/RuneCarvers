@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cebt7oam1m3q2"]
 
 [ext_resource type="Script" uid="uid://d16u0e2gt6kxj" path="res://scripts/carving_system/rune/Rune.gd" id="1_q8dog"]
-[ext_resource type="Script" uid="uid://c2i230dqglhpo" path="res://scripts/effect_components/FroceMovement.gd" id="2_42cy7"]
+[ext_resource type="Script" uid="uid://c2i230dqglhpo" path="res://scripts/effect_system/effect_components/FroceMovement.gd" id="2_42cy7"]
 [ext_resource type="Script" uid="uid://x544es0wcwfx" path="res://scripts/carving_system/rune/SpawnProjectile.gd" id="3_yaybt"]
 [ext_resource type="PackedScene" uid="uid://c1rufo7fso66" path="res://scenes/projectiles/dash/dash_hitbox.tscn" id="4_bes0h"]
 

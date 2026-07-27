@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://p1mdskf4p36q"]
 
 [ext_resource type="Script" uid="uid://be6dsn574j1uu" path="res://scripts/projectile/Projectile.gd" id="1_2g5ow"]
-[ext_resource type="Script" uid="uid://dxnwk2kilm0yj" path="res://scripts/effect_components/Teleport.gd" id="2_h4jhm"]
+[ext_resource type="Script" uid="uid://dxnwk2kilm0yj" path="res://scripts/effect_system/effect_components/Teleport.gd" id="2_h4jhm"]
 [ext_resource type="Script" uid="uid://x544es0wcwfx" path="res://scripts/carving_system/rune/SpawnProjectile.gd" id="3_bqr60"]
 [ext_resource type="PackedScene" uid="uid://b86x3wk7am671" path="res://scenes/projectiles/positivly_charged_projectile/positive_explosion.tscn" id="4_qxr0w"]
 
