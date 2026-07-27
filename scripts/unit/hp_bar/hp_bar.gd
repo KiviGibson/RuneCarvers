@@ -33,5 +33,4 @@ func _process(delta: float) -> void:
 	if damage_delay_excited: 
 		gray_progress_bar.value = move_toward(gray_progress_bar.value, current_progress_bar.value, delta*2)
 	if current_progress_bar.value >= 0.99 and hide_on_max:
-		print(current_progress_bar.value)
 		modulate.a = move_toward(modulate.a, 0, delta*4)

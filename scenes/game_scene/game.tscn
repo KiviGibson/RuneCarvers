@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/damage_system/Damage.gd" id="3_700et"]
 [ext_resource type="PackedScene" uid="uid://b0766kma0i2rc" path="res://scenes/enemies/goly/Goly.tscn" id="5_o347i"]
 [ext_resource type="PackedScene" uid="uid://cebeh080tio1p" path="res://scenes/minigame/MiniGame.tscn" id="6_7ulqd"]
+[ext_resource type="PackedScene" uid="uid://dwc03idkesqx2" path="res://scenes/enemies/hole_mole/HoleMole.tscn" id="7_wedpv"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_6yq8t"]
 
@@ -37,6 +38,10 @@ player_spawner = NodePath("PlayerSpawner")
 shape = SubResource("WorldBoundaryShape3D_6yq8t")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticMap" unique_id=1904857005]
+mesh = SubResource("PlaneMesh_6yq8t")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticMap" unique_id=1050034999]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.238108, 0, 0)
 mesh = SubResource("PlaneMesh_6yq8t")
 
 [node name="HitBox" type="Area3D" parent="StaticMap" unique_id=136355864]
@@ -87,3 +92,6 @@ environment = SubResource("Environment_6yq8t")
 
 [node name="MiniGame" parent="." unique_id=583750615 instance=ExtResource("6_7ulqd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -9.72532)
+
+[node name="HoleMole" parent="." unique_id=11180120 instance=ExtResource("7_wedpv")]
+transform = Transform3D(-0.980858, 0, 0.19472435, 0, 1, 0, -0.19472435, 0, -0.980858, 25.947647, 0, -6.1518044)

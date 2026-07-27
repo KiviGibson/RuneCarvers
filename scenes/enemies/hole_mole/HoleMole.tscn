@@ -4,11 +4,12 @@
 [ext_resource type="Script" uid="uid://d1ggxehy2ph1q" path="res://scripts/unit/MovementControler.gd" id="2_mmcb8"]
 [ext_resource type="Script" uid="uid://bffwh1ds00jub" path="res://scripts/unit/Stats.gd" id="2_o2gk4"]
 [ext_resource type="PackedScene" uid="uid://du573uaja1p13" path="res://scenes/hp_bars/EnemyHpBar.tscn" id="2_sbdb8"]
+[ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/damage_system/HurtBox.gd" id="4_jlvog"]
 [ext_resource type="Script" uid="uid://bsmwhck7xocl0" path="res://scripts/multiplayer_system/spawners/effect_spawner.gd" id="4_kssax"]
 
 [sub_resource type="Resource" id="Resource_o2gk4"]
 script = ExtResource("2_o2gk4")
-max_health = 150
+max_health = 50
 metadata/_custom_type_script = "uid://bffwh1ds00jub"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mmcb8"]
@@ -85,6 +86,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_b00ur")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_6yq8t"]
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yuuq8"]
 albedo_color = Color(1, 0.65667903, 0.4478202, 1)
@@ -364,6 +366,10 @@ _data = {
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_6yq8t"]
 height = 1.0117188
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1j5yo"]
+height = 1.0068359
+radius = 0.75634766
+
 [node name="HoleMole" type="Node3D" unique_id=11180120 node_paths=PackedStringArray("hp_bar", "model", "effect_spawner")]
 script = ExtResource("1_4py6f")
 hp_bar = NodePath("SubViewport/HpBar")
@@ -373,7 +379,8 @@ effect_spawner = NodePath("EffectSpawner")
 metadata/_custom_type_script = "uid://bga3yxy6ye61"
 
 [node name="Mole" type="CharacterBody3D" parent="." unique_id=1306086280 node_paths=PackedStringArray("visible_model")]
-collision_layer = 0
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("2_mmcb8")
 walking_speed = 0.0
 running_mult = 0.0
@@ -393,6 +400,8 @@ mesh = SubResource("ArrayMesh_slomy")
 
 [node name="Sprite3D" type="Sprite3D" parent="Mole/Model/Mole" unique_id=1926641617]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5260339, 0)
+billboard = 1
+no_depth_test = true
 texture = SubResource("ViewportTexture_6yq8t")
 
 [node name="LHand" type="MeshInstance3D" parent="Mole/Model" unique_id=36864362]
@@ -411,6 +420,16 @@ libraries/ = SubResource("AnimationLibrary_s53pv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49414063, 0)
 shape = SubResource("CylinderShape3D_6yq8t")
 
+[node name="HurtBox" type="Area3D" parent="Mole" unique_id=604074164]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("4_jlvog")
+metadata/_custom_type_script = "uid://deqosc7jtvi1x"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mole/HurtBox" unique_id=173234015]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17235216, 0.49658203, 0)
+shape = SubResource("CylinderShape3D_1j5yo")
+
 [node name="EffectSpawner" type="MultiplayerSpawner" parent="." unique_id=1244541966 node_paths=PackedStringArray("host")]
 spawn_path = NodePath("../Mole/Model")
 script = ExtResource("4_kssax")
@@ -423,3 +442,6 @@ transparent_bg = true
 size = Vector2i(120, 20)
 
 [node name="HpBar" parent="SubViewport" unique_id=1495397635 instance=ExtResource("2_sbdb8")]
+
+[connection signal="affected" from="Mole/HurtBox" to="." method="add_effect"]
+[connection signal="got_hit" from="Mole/HurtBox" to="." method="_on_getting_hit"]
