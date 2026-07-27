@@ -1,6 +1,6 @@
 extends Unit
 class_name Player
-
+enum player_states{normal, locked, running, carving}
 @export var input_system: InputSystem
 @export var carving_system: CarvingSystem
 @export var carving_ui: Control ## Reparents to game overlay node

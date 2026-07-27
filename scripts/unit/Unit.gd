@@ -28,11 +28,10 @@ func _on_getting_hit(damage: Damage) -> void:
 	for key in effects.keys():
 		effects[key].trigger_onhurt(damage)
 	stats.current_health -= damage.value
-	print(stats.current_health)
 
 func set_damage_owner(damage: Damage): 
 	damage.owner = self
-	
+
 func add_passive(passive: StringName) -> void:
 	var tmp := effect_spawner.spawn({"effect": passive, "owner": self})
 	effects[passive] = tmp
