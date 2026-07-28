@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://du573uaja1p13" path="res://scenes/hp_bars/EnemyHpBar.tscn" id="2_sbdb8"]
 [ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/damage_system/HurtBox.gd" id="4_jlvog"]
 [ext_resource type="Script" uid="uid://bsmwhck7xocl0" path="res://scripts/multiplayer_system/spawners/effect_spawner.gd" id="4_kssax"]
+[ext_resource type="Script" uid="uid://dxnwk2kilm0yj" path="res://scripts/effect_system/effect_components/Teleport.gd" id="7_s53pv"]
+[ext_resource type="Script" uid="uid://doujisxhpem6q" path="res://scripts/unit/mole/MoleAI.gd" id="8_nyqnb"]
 
 [sub_resource type="Resource" id="Resource_o2gk4"]
 script = ExtResource("2_o2gk4")
@@ -87,6 +89,10 @@ shadow_mesh = SubResource("ArrayMesh_b00ur")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_6yq8t"]
 viewport_path = NodePath("SubViewport")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1j5yo"]
+height = 1.0068359
+radius = 0.75634766
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yuuq8"]
 albedo_color = Color(1, 0.65667903, 0.4478202, 1)
@@ -357,18 +363,203 @@ tracks/7/keys = {
 "values": [Vector3(0.49798986, -1.5023261, -0.52946424), Vector3(1.4171119, -1.1672838, -0.16296066), Vector3(1.4171119, -2.6136656, -0.16296083), Vector3(0.7888888, -3.8083084, -0.21816616), Vector3(0.19198622, -3.4941492, -0.27227136)]
 }
 
+[sub_resource type="Animation" id="Animation_s53pv"]
+resource_name = "idle"
+length = 0.8333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model/Mole:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1.5, 0.5, 2.0705302, 0.4506253, 2.0000005),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.12217305), Vector3(0, 0, 0), Vector3(0, 0, -0.12217305), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Model/Bazzoka:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335, 0.23333333, 0.43333334, 0.6, 0.8333),
+"transitions": PackedFloat32Array(1.5, 0.5, 1.5, 0.5, 1),
+"update": 0,
+"values": [Vector3(-0.68552643, 0.9306075, 0.065308765), Vector3(-0.8095579, 0.9306075, 0.065308765), Vector3(-0.68552643, 0.9306075, 0.065308765), Vector3(-0.534996, 0.9306075, 0.065308765), Vector3(-0.68552643, 0.9306075, 0.065308765)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Model/Bazzoka:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.033333335, 0.23333333, 0.43333334, 0.6333334, 0.8333334),
+"transitions": PackedFloat32Array(1.5, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.87279576, 0.42864737, -0.42980313), Vector3(-0.93380505, 0.18580058, -0.12166893), Vector3(-0.87279576, 0.42864737, -0.42980313), Vector3(-0.77267396, 0.6157389, -0.6840882), Vector3(-0.87279576, 0.42864737, -0.42980313)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Model/RHand:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.046138555, 0.26666668, 0.43, 0.6666667, 0.8333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.3712985, 0.32849425, -0.33865148), Vector3(-0.52683103, 0.38322282, -0.33865148), Vector3(-0.3712985, 0.32849425, -0.33865148), Vector3(-0.34083945, 0.32849425, -0.33865148), Vector3(-0.3712985, 0.32849425, -0.33865148)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Model/RHand:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.046138555, 0.26666668, 0.43, 0.6666667, 0.8333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.49798986, -1.5023261, -0.52946424), Vector3(0.78192973, -1.4859836, -0.50237375), Vector3(0.49798986, -1.5023261, -0.52946424), Vector3(0.20118238, -1.5094134, -0.54992855), Vector3(0.49798986, -1.5023261, -0.52946424)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Model/LHand:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2667, 0.43, 0.66752005, 0.8333),
+"transitions": PackedFloat32Array(1.4142138, 0.39229205, 2.0705302, 0.31864008, 1.0717739),
+"update": 0,
+"values": [Vector3(-0.6797338, 0.40656543, 0.022737473), Vector3(-0.76338106, 0.291826, 0.022737473), Vector3(-0.6797338, 0.40656543, 0.022737473), Vector3(-0.6279869, 0.4162802, 0.022737473), Vector3(-0.6797338, 0.40656543, 0.022737473)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Model/LHand:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.2667, 0.43, 0.66752005, 0.8333),
+"transitions": PackedFloat32Array(2.0705302, 0.24148409, 2.219139, 0.26794344, 1.8660663),
+"update": 0,
+"values": [Vector3(0.15151522, -0.049823303, 0.8311862), Vector3(0.15906738, -0.010898374, 1.0815676), Vector3(0.15151522, -0.049823303, 0.8311862), Vector3(0.123671554, -0.10088367, 0.46308517), Vector3(0.15151522, -0.049823303, 0.8311862)]
+}
+
+[sub_resource type="Animation" id="Animation_nyqnb"]
+resource_name = "shoot_strait"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model/Bazzoka:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.56666666, 0.85, 1),
+"transitions": PackedFloat32Array(1.4142138, 1, 0.1593207, 0.1593207, 1, 1),
+"update": 0,
+"values": [Vector3(-0.68552643, 0.9306075, 0.065308765), Vector3(-0.68598336, 1.8702757, -0.094185844), Vector3(-0.686, 0.674, -0.2), Vector3(-0.686, 0.894, -0.2), Vector3(-0.68552643, 0.9306056, 0.065294966), Vector3(-0.68552643, 0.9306075, 0.065308765)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Model/Bazzoka:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.56666666, 0.85, 1),
+"transitions": PackedFloat32Array(1.5157168, 0.12500031, 0.12500031, 1, 1),
+"update": 0,
+"values": [Vector3(-0.87279576, 0.42864737, -0.42980313), Vector3(-1.2929215, 1.3820686, -1.4682074), Vector3(-1.2929215, 1.3820686, -1.4682074), Vector3(-0.57152534, 0.32320058, -0.2722644), Vector3(-0.87279576, 0.42864737, -0.42980313)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Model/Mole:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.14, 0.3, 0.43333334, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.1, 0), Vector3(0, 0.2, 0), Vector3(0, -0.1, 0), Vector3(0, 0, 0), Vector3(0, 0.1, 0), Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Model/Mole:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 0.28717482, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0.2617994, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Model/LHand:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.3, 0.56, 0.85, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.6797338, 0.40656543, 0.022737473), Vector3(-0.6797338, 0.3021646, 0.022737473), Vector3(-0.6797338, 1.0094898, 0.022737473), Vector3(-0.6797338, 0.22462207, 0.022737473), Vector3(-0.6797338, 0.29220104, 0.022737473), Vector3(-0.6797338, 0.36757758, 0.07493189), Vector3(-0.6797338, 0.40656543, 0.022737473)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Model/LHand:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.3, 0.56, 0.85, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.15151522, -0.049823303, 0.8311862), Vector3(0.15151523, -0.049823307, 0.8311862), Vector3(0.15151523, -0.049823307, 0.8311862), Vector3(0.15314628, 0.0445189, 1.4343928), Vector3(0.15254046, 0.009477511, 1.2103447), Vector3(0.6571588, 0.0076003736, 1.2966682), Vector3(0.15151522, -0.049823303, 0.8311862)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Model/RHand:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.3, 0.6, 0.89, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 0.40612632, 1, 1),
+"update": 0,
+"values": [Vector3(-0.3712985, 0.32849425, -0.33865148), Vector3(-0.3712985, 0.21386486, -0.33865148), Vector3(-0.5311577, 0.80912405, -0.33865148), Vector3(-0.43738186, 0.13854414, -0.33865148), Vector3(-0.40906042, 0.49478012, -0.33865148), Vector3(-0.38168302, 0.53535366, -0.23125517), Vector3(-0.3712985, 0.32849425, -0.33865148)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Model/RHand:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.3, 0.6, 0.89, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 0.32987696, 1, 1),
+"update": 0,
+"values": [Vector3(0.49798986, -1.5023261, -0.52946424), Vector3(1.0758512, -1.4439104, -0.4504151), Vector3(0.6379885, -0.7003579, 0.8739212), Vector3(0.15621328, -0.6655431, 1.0772638), Vector3(0.302689, -1.0241644, 0.38866606), Vector3(0.4442821, -1.3708316, -0.27697834), Vector3(0.49798986, -1.5023261, -0.52946424)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s53pv"]
 _data = {
 &"RESET": SubResource("Animation_o2gk4"),
-&"hide": SubResource("Animation_jlvog")
+&"hide": SubResource("Animation_jlvog"),
+&"idle": SubResource("Animation_s53pv"),
+&"shoot_strait": SubResource("Animation_nyqnb")
 }
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_6yq8t"]
 height = 1.0117188
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_1j5yo"]
-height = 1.0068359
-radius = 0.75634766
 
 [node name="HoleMole" type="Node3D" unique_id=11180120 node_paths=PackedStringArray("hp_bar", "model", "effect_spawner")]
 script = ExtResource("1_4py6f")
@@ -392,7 +583,7 @@ metadata/_custom_type_script = "uid://d1ggxehy2ph1q"
 [node name="Model" type="Node3D" parent="Mole" unique_id=907162621]
 
 [node name="Bazzoka" type="MeshInstance3D" parent="Mole/Model" unique_id=1993820147]
-transform = Transform3D(1.5602524, 0.14557207, 0.4343808, -0.43547893, 0.9500338, 1.2458175, -0.14225274, -1.3116829, 0.95053643, -0.68552643, 0.9306075, 0.065308765)
+transform = Transform3D(1.5602517, 0.14557207, 0.43438065, -0.43547875, 0.95003384, 1.2458172, -0.14225267, -1.311683, 0.95053613, -0.68552643, 0.9306075, 0.065308765)
 mesh = SubResource("ArrayMesh_kssax")
 
 [node name="Mole" type="MeshInstance3D" parent="Mole/Model" unique_id=651860568]
@@ -401,34 +592,35 @@ mesh = SubResource("ArrayMesh_slomy")
 [node name="Sprite3D" type="Sprite3D" parent="Mole/Model/Mole" unique_id=1926641617]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5260339, 0)
 billboard = 1
-no_depth_test = true
 texture = SubResource("ViewportTexture_6yq8t")
 
-[node name="LHand" type="MeshInstance3D" parent="Mole/Model" unique_id=36864362]
-transform = Transform3D(0.4673274, -0.5200168, -0.034462485, 0.51118773, 0.4663948, -0.1056553, 0.10145096, 0.045369744, 0.6911217, -0.6797338, 0.40656543, 0.022737473)
-mesh = SubResource("ArrayMesh_7p36l")
-
-[node name="RHand" type="MeshInstance3D" parent="Mole/Model" unique_id=2013756935]
-transform = Transform3D(0.20981528, -0.2637158, -0.61354023, -0.31060913, 0.53077656, -0.3343624, 0.5911848, 0.372465, 0.04207499, -0.3712985, 0.32849425, -0.33865148)
-mesh = SubResource("ArrayMesh_mrhji")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Mole/Model" unique_id=1150815880]
-root_node = NodePath("../..")
-libraries/ = SubResource("AnimationLibrary_s53pv")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Mole" unique_id=1793118678]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49414063, 0)
-shape = SubResource("CylinderShape3D_6yq8t")
-
-[node name="HurtBox" type="Area3D" parent="Mole" unique_id=604074164]
+[node name="HurtBox" type="Area3D" parent="Mole/Model/Mole" unique_id=604074164]
+transform = Transform3D(0.9999871, 0.005075654, 0, -0.005075654, 0.9999871, 0, 0, 0, 1, 0, 0, 0)
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("4_jlvog")
 metadata/_custom_type_script = "uid://deqosc7jtvi1x"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Mole/HurtBox" unique_id=173234015]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mole/Model/Mole/HurtBox" unique_id=173234015]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17235216, 0.49658203, 0)
 shape = SubResource("CylinderShape3D_1j5yo")
+
+[node name="LHand" type="MeshInstance3D" parent="Mole/Model" unique_id=36864362]
+transform = Transform3D(0.46732736, -0.5200167, -0.03446248, 0.5111877, 0.46639472, -0.10565529, 0.10145095, 0.045369737, 0.69112164, -0.6797338, 0.40656543, 0.022737473)
+mesh = SubResource("ArrayMesh_7p36l")
+
+[node name="RHand" type="MeshInstance3D" parent="Mole/Model" unique_id=2013756935]
+transform = Transform3D(0.20981528, -0.2637158, -0.6135404, -0.31060913, 0.53077656, -0.33436248, 0.5911848, 0.372465, 0.042075004, -0.3712985, 0.32849425, -0.33865148)
+mesh = SubResource("ArrayMesh_mrhji")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Mole/Model" unique_id=1150815880]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_s53pv")
+autoplay = &"idle"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mole" unique_id=1793118678]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49414063, 0)
+shape = SubResource("CylinderShape3D_6yq8t")
 
 [node name="EffectSpawner" type="MultiplayerSpawner" parent="." unique_id=1244541966 node_paths=PackedStringArray("host")]
 spawn_path = NodePath("../Mole/Model")
@@ -437,11 +629,19 @@ host = NodePath("..")
 metadata/_custom_type_script = "uid://bsmwhck7xocl0"
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=654323707]
-disable_3d = true
 transparent_bg = true
 size = Vector2i(120, 20)
 
 [node name="HpBar" parent="SubViewport" unique_id=1495397635 instance=ExtResource("2_sbdb8")]
 
-[connection signal="affected" from="Mole/HurtBox" to="." method="add_effect"]
-[connection signal="got_hit" from="Mole/HurtBox" to="." method="_on_getting_hit"]
+[node name="Teleport" type="Node" parent="." unique_id=1478580548]
+script = ExtResource("7_s53pv")
+metadata/_custom_type_script = "uid://dxnwk2kilm0yj"
+
+[node name="MoleAI" type="Node3D" parent="." unique_id=1689298849 node_paths=PackedStringArray("animator")]
+script = ExtResource("8_nyqnb")
+animator = NodePath("../Mole/Model/AnimationPlayer")
+metadata/_custom_type_script = "uid://doujisxhpem6q"
+
+[connection signal="affected" from="Mole/Model/Mole/HurtBox" to="." method="add_effect"]
+[connection signal="got_hit" from="Mole/Model/Mole/HurtBox" to="." method="_on_getting_hit"]
