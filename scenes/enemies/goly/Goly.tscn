@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://d1ggxehy2ph1q" path="res://scripts/unit/MovementControler.gd" id="1_0pi4p"]
 [ext_resource type="Script" uid="uid://bga3yxy6ye61" path="res://scripts/unit/Enemy.gd" id="1_an772"]
-[ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/unit/damage_system/HurtBox.gd" id="2_374od"]
-[ext_resource type="Script" uid="uid://bffwh1ds00jub" path="res://scripts/unit/damage_system/Stats.gd" id="2_ga0ap"]
+[ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/damage_system/HurtBox.gd" id="2_374od"]
+[ext_resource type="Script" uid="uid://bffwh1ds00jub" path="res://scripts/unit/Stats.gd" id="2_ga0ap"]
 [ext_resource type="Script" uid="uid://bsmwhck7xocl0" path="res://scripts/multiplayer_system/spawners/effect_spawner.gd" id="5_ga0ap"]
+[ext_resource type="PackedScene" uid="uid://du573uaja1p13" path="res://scenes/hp_bars/EnemyHpBar.tscn" id="6_vsran"]
 
 [sub_resource type="Resource" id="Resource_0pi4p"]
 script = ExtResource("2_ga0ap")
@@ -27,8 +28,12 @@ height = 0.1
 height = 2.5
 radius = 0.6
 
-[node name="Golly" type="Node3D" unique_id=2142922162 node_paths=PackedStringArray("model", "effect_spawner")]
+[sub_resource type="ViewportTexture" id="ViewportTexture_jgdur"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[node name="Golly" type="Node3D" unique_id=2142922162 node_paths=PackedStringArray("hp_bar", "model", "effect_spawner")]
 script = ExtResource("1_an772")
+hp_bar = NodePath("Sprite3D/SubViewport/HpBar")
 model = NodePath("MovementControler")
 stats = SubResource("Resource_0pi4p")
 effect_spawner = NodePath("EffectSpawner")
@@ -73,6 +78,30 @@ spawn_path = NodePath("..")
 script = ExtResource("5_ga0ap")
 host = NodePath("..")
 metadata/_custom_type_script = "uid://bsmwhck7xocl0"
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1042287379]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7459378, 0)
+pixel_size = 0.008
+billboard = 1
+double_sided = false
+no_depth_test = true
+texture = SubResource("ViewportTexture_jgdur")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D" unique_id=617958533]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(120, 20)
+
+[node name="HpBar" parent="Sprite3D/SubViewport" unique_id=1495397635 instance=ExtResource("6_vsran")]
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 
 [connection signal="affected" from="HurtBox" to="." method="add_effect"]
 [connection signal="got_hit" from="HurtBox" to="." method="_on_getting_hit"]

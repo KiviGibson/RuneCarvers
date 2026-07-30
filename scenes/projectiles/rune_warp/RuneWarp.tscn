@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://p1mdskf4p36q"]
 
 [ext_resource type="Script" uid="uid://be6dsn574j1uu" path="res://scripts/projectile/Projectile.gd" id="1_2g5ow"]
-[ext_resource type="Script" uid="uid://dxnwk2kilm0yj" path="res://scripts/effect_components/Teleport.gd" id="2_h4jhm"]
+[ext_resource type="Script" uid="uid://dxnwk2kilm0yj" path="res://scripts/effect_system/effect_components/Teleport.gd" id="2_h4jhm"]
 [ext_resource type="Script" uid="uid://x544es0wcwfx" path="res://scripts/carving_system/rune/SpawnProjectile.gd" id="3_bqr60"]
 [ext_resource type="PackedScene" uid="uid://b86x3wk7am671" path="res://scenes/projectiles/positivly_charged_projectile/positive_explosion.tscn" id="4_qxr0w"]
 
@@ -24,8 +24,8 @@ properties/2/replication_mode = 2
 collision_layer = 0
 script = ExtResource("1_2g5ow")
 gravity = 19.62
-initial_velocity = 12.0
-initial_y_velocity = 12.0
+initial_velocity = 20.0
+initial_y_velocity = 9.81
 metadata/_custom_type_script = "uid://be6dsn574j1uu"
 
 [node name="Teleport" type="Node3D" parent="." unique_id=1954113293]

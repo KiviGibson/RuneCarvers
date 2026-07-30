@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://r6fca3riibw5"]
 
 [ext_resource type="Script" uid="uid://be6dsn574j1uu" path="res://scripts/projectile/Projectile.gd" id="1_muiy1"]
-[ext_resource type="Script" uid="uid://bdmlbgajj81a8" path="res://scripts/unit/damage_system/HitBox.gd" id="2_8cp0j"]
+[ext_resource type="Script" uid="uid://bdmlbgajj81a8" path="res://scripts/damage_system/HitBox.gd" id="2_8cp0j"]
 [ext_resource type="Script" uid="uid://b03r1bnamyrtj" path="res://effects/thunder/thunder.gd" id="2_s0af1"]
 [ext_resource type="Shader" uid="uid://bpuee5xeipf2m" path="res://effects/thunder/lightning_strike.gdshader" id="3_vgnww"]
 [ext_resource type="Texture2D" uid="uid://1qw4bgrtbqhx" path="res://effects/thunder/Grafika_bez_nazwy 2.png" id="4_h7fpw"]
-[ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/unit/damage_system/Damage.gd" id="6_hu0rm"]
+[ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/damage_system/Damage.gd" id="6_hu0rm"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6yq8t"]
 radius = 0.1

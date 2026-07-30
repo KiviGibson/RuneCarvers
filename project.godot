@@ -20,9 +20,13 @@ config/icon="res://icon.svg"
 
 Lobby="*uid://c4ihn42ynrw48"
 Projectiles="*uid://bjlkjipi24fx3"
+Players="*uid://2untbf8kxu6h"
+Enemies="*uid://dj4hst5il4rat"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
@@ -118,6 +122,8 @@ carve_right={
 3d_physics/layer_3="Player Hurtbox"
 3d_physics/layer_4="Enemy Hurtbox"
 3d_physics/layer_5="InteractionSystem"
+3d_physics/layer_6="Tanks Minigame"
+3d_physics/layer_7="HoleMole Holes"
 
 [physics]
 

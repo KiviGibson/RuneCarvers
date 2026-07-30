@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dj4hst5il4rat"]
+
+[ext_resource type="Script" uid="uid://cvjhd4ieoidfg" path="res://scripts/multiplayer_system/spawners/EnemySpawner.gd" id="1_yfgn0"]
+
+[node name="Enemies" type="MultiplayerSpawner" unique_id=261349607]
+spawn_path = NodePath("Node3D")
+script = ExtResource("1_yfgn0")
+metadata/_custom_type_script = "uid://cvjhd4ieoidfg"
+
+[node name="Node3D" type="Node3D" parent="." unique_id=98222599]

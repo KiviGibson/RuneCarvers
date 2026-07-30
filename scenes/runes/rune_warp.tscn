@@ -7,7 +7,7 @@
 [node name="RuneWarp" type="Node" unique_id=932726171]
 script = ExtResource("1_vob22")
 type = 1
-charge_per_second = 0.5
+charge_per_second = 1.0
 metadata/_custom_type_script = "uid://d16u0e2gt6kxj"
 
 [node name="SpawnProjectile" type="Node" parent="." unique_id=331565976]

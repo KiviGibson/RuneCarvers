@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cowi2a66lf2pn"]
+
+[ext_resource type="PackedScene" uid="uid://ck31ixkduns3d" path="res://scenes/projectiles/positivly_charged_projectile/electric_projectile.tscn" id="1_qs0qs"]
+[ext_resource type="PackedScene" uid="uid://jp0dxmpg58g6" path="res://scenes/projectiles/hole_mole_projectile/hole_mole_explosion.tscn" id="2_t8dea"]
+
+[node name="ElectricProjectile" unique_id=950622575 instance=ExtResource("1_qs0qs")]
+
+[node name="HitBox" parent="." index="2" unique_id=1857059914]
+collision_mask = 4
+
+[node name="SpawnProjectile" parent="." index="4" unique_id=1894126030]
+projectile_scene = ExtResource("2_t8dea")
+
+[node name="Timer" parent="." index="5" unique_id=1890620844]
+wait_time = 0.667
