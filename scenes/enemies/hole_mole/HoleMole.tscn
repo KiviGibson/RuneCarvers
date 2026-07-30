@@ -654,7 +654,7 @@ metadata/_custom_type_script = "uid://d1ggxehy2ph1q"
 [node name="Model" type="Node3D" parent="Mole" unique_id=907162621]
 
 [node name="Bazzoka" type="MeshInstance3D" parent="Mole/Model" unique_id=1993820147]
-transform = Transform3D(1.560251, 0.14557207, 0.4343806, -0.4354785, 0.95003384, 1.2458171, -0.1422526, -1.311683, 0.950536, -0.68552643, 0.9306075, 0.065308765)
+transform = Transform3D(1.5602509, 0.14557207, 0.4343806, -0.43547848, 0.95003384, 1.2458171, -0.1422526, -1.311683, 0.950536, -0.68552643, 0.9306075, 0.065308765)
 mesh = SubResource("ArrayMesh_kssax")
 
 [node name="Mole" type="MeshInstance3D" parent="Mole/Model" unique_id=651860568]

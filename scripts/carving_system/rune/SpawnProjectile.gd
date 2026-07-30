@@ -21,7 +21,7 @@ func spawn_projectile(u: HurtBox = null) -> void:
 
 func spawn_projectile_at_position(position: Vector3 = Vector3.ZERO) -> void:
 	var res := Projectiles.spawn({"scene": projectile_scene.resource_path, "position": position})
-	res.owning_unit = host
+	if host: res.owning_unit = host
 
 func spawn_projectile_on_unit() -> void:
 		var res := host.add_projectile(projectile_scene)

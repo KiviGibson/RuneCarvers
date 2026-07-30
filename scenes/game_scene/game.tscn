@@ -85,13 +85,13 @@ script = ExtResource("6_wedpv")
 metadata/_custom_type_script = "uid://lbrvarwcj32q"
 
 [node name="EnemySpawnPoint2" type="Node3D" parent="." unique_id=2026517891]
-transform = Transform3D(-0.99963933, 0, -0.026856141, 0, 1, 0, 0.026856141, 0, -0.99963933, 27.062674, 0.32818842, -2.4858332)
+transform = Transform3D(-0.99963933, 0, -0.026856141, 0, 1, 0, 0.026856141, 0, -0.99963933, 27.062674, 0, -2.4858332)
 script = ExtResource("6_wedpv")
 enemy = 1
 metadata/_custom_type_script = "uid://lbrvarwcj32q"
 
 [node name="EnemySpawnPoint3" type="Node3D" parent="." unique_id=113839726]
-transform = Transform3D(-0.6152266, 0, -0.7883503, 0, 1, 0, 0.7883503, 0, -0.6152266, 22.61931, 0.29993343, -2.9698668)
+transform = Transform3D(0.9943199, 0, -0.10643366, 0, 1, 0, 0.10643366, 0, 0.9943199, 22.61931, 0, -2.9698668)
 script = ExtResource("6_wedpv")
 enemy = 1
 metadata/_custom_type_script = "uid://lbrvarwcj32q"
