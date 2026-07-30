@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://bsmwhck7xocl0" path="res://scripts/multiplayer_system/spawners/effect_spawner.gd" id="4_kssax"]
 [ext_resource type="Script" uid="uid://dxnwk2kilm0yj" path="res://scripts/effect_system/effect_components/Teleport.gd" id="7_s53pv"]
 [ext_resource type="Script" uid="uid://doujisxhpem6q" path="res://scripts/unit/mole/MoleAI.gd" id="8_nyqnb"]
+[ext_resource type="Script" uid="uid://x544es0wcwfx" path="res://scripts/carving_system/rune/SpawnProjectile.gd" id="9_3k3n6"]
+[ext_resource type="PackedScene" uid="uid://cowi2a66lf2pn" path="res://scenes/projectiles/hole_mole_projectile/hole_mole_positive_shot.tscn" id="9_7pf3f"]
 
 [sub_resource type="Resource" id="Resource_o2gk4"]
 script = ExtResource("2_o2gk4")
@@ -261,6 +263,18 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0.49798986, -1.5023261, -0.52946424)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Model/identifier:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_jlvog"]
@@ -549,6 +563,32 @@ tracks/7/keys = {
 "update": 0,
 "values": [Vector3(0.49798986, -1.5023261, -0.52946424), Vector3(1.0758512, -1.4439104, -0.4504151), Vector3(0.6379885, -0.7003579, 0.8739212), Vector3(0.15621328, -0.6655431, 1.0772638), Vector3(0.302689, -1.0241644, 0.38866606), Vector3(0.4442821, -1.3708316, -0.27697834), Vector3(0.49798986, -1.5023261, -0.52946424)]
 }
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../MoleAI")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.55),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot"
+}]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Model/identifier:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.58, 0.8666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s53pv"]
 _data = {
@@ -558,8 +598,38 @@ _data = {
 &"shoot_strait": SubResource("Animation_nyqnb")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1j5yo"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_6yq8t"]
+material = SubResource("StandardMaterial3D_1j5yo")
+size = Vector2(0.01, 20)
+center_offset = Vector3(0, 0.2, -10)
+orientation = 1
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_6yq8t"]
 height = 1.0117188
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3m882"]
+radius = 15.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6yq8t"]
+radius = 20.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nyqnb"]
+properties/0/path = NodePath("Mole:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("Mole:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("Mole:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("Mole/Model:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 2
 
 [node name="HoleMole" type="Node3D" unique_id=11180120 node_paths=PackedStringArray("hp_bar", "model", "effect_spawner")]
 script = ExtResource("1_4py6f")
@@ -571,19 +641,20 @@ metadata/_custom_type_script = "uid://bga3yxy6ye61"
 
 [node name="Mole" type="CharacterBody3D" parent="." unique_id=1306086280 node_paths=PackedStringArray("visible_model")]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 0
 script = ExtResource("2_mmcb8")
 walking_speed = 0.0
 running_mult = 0.0
 focus_mult = 0.0
 force_mult = 0.0
 visible_model = NodePath("Model")
+gravity = 0.0
 metadata/_custom_type_script = "uid://d1ggxehy2ph1q"
 
 [node name="Model" type="Node3D" parent="Mole" unique_id=907162621]
 
 [node name="Bazzoka" type="MeshInstance3D" parent="Mole/Model" unique_id=1993820147]
-transform = Transform3D(1.5602517, 0.14557207, 0.43438065, -0.43547875, 0.95003384, 1.2458172, -0.14225267, -1.311683, 0.95053613, -0.68552643, 0.9306075, 0.065308765)
+transform = Transform3D(1.560251, 0.14557207, 0.4343806, -0.4354785, 0.95003384, 1.2458171, -0.1422526, -1.311683, 0.950536, -0.68552643, 0.9306075, 0.065308765)
 mesh = SubResource("ArrayMesh_kssax")
 
 [node name="Mole" type="MeshInstance3D" parent="Mole/Model" unique_id=651860568]
@@ -618,9 +689,27 @@ root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_s53pv")
 autoplay = &"idle"
 
+[node name="identifier" type="MeshInstance3D" parent="Mole/Model" unique_id=604238696]
+visible = false
+mesh = SubResource("QuadMesh_6yq8t")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Mole" unique_id=1793118678]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49414063, 0)
 shape = SubResource("CylinderShape3D_6yq8t")
+
+[node name="HoleFinder" type="Area3D" parent="Mole" unique_id=778901090]
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mole/HoleFinder" unique_id=1120698006]
+shape = SubResource("SphereShape3D_3m882")
+
+[node name="Vision" type="Area3D" parent="Mole" unique_id=1238767193]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mole/Vision" unique_id=275071730]
+shape = SubResource("SphereShape3D_6yq8t")
 
 [node name="EffectSpawner" type="MultiplayerSpawner" parent="." unique_id=1244541966 node_paths=PackedStringArray("host")]
 spawn_path = NodePath("../Mole/Model")
@@ -634,14 +723,33 @@ size = Vector2i(120, 20)
 
 [node name="HpBar" parent="SubViewport" unique_id=1495397635 instance=ExtResource("2_sbdb8")]
 
-[node name="Teleport" type="Node" parent="." unique_id=1478580548]
-script = ExtResource("7_s53pv")
-metadata/_custom_type_script = "uid://dxnwk2kilm0yj"
-
-[node name="MoleAI" type="Node3D" parent="." unique_id=1689298849 node_paths=PackedStringArray("animator")]
+[node name="MoleAI" type="Node3D" parent="." unique_id=1689298849 node_paths=PackedStringArray("animator", "hole_finder", "tp", "timer_borrow", "strait_projectile", "vision")]
 script = ExtResource("8_nyqnb")
 animator = NodePath("../Mole/Model/AnimationPlayer")
+hole_finder = NodePath("../Mole/HoleFinder")
+tp = NodePath("../Teleport")
+timer_borrow = NodePath("../Timer")
+strait_projectile = NodePath("../SpawnProjectile")
+vision = NodePath("../Mole/Vision")
 metadata/_custom_type_script = "uid://doujisxhpem6q"
 
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2008272030]
+replication_config = SubResource("SceneReplicationConfig_nyqnb")
+
+[node name="Timer" type="Timer" parent="." unique_id=95716719]
+one_shot = true
+
+[node name="SpawnProjectile" type="Node" parent="." unique_id=19676403]
+script = ExtResource("9_3k3n6")
+projectile_scene = ExtResource("9_7pf3f")
+metadata/_custom_type_script = "uid://x544es0wcwfx"
+
+[node name="Teleport" type="Node" parent="." unique_id=1478580548 node_paths=PackedStringArray("model")]
+script = ExtResource("7_s53pv")
+model = NodePath("../Mole")
+metadata/_custom_type_script = "uid://dxnwk2kilm0yj"
+
+[connection signal="setup" from="." to="SpawnProjectile" method="setup"]
 [connection signal="affected" from="Mole/Model/Mole/HurtBox" to="." method="add_effect"]
 [connection signal="got_hit" from="Mole/Model/Mole/HurtBox" to="." method="_on_getting_hit"]
+[connection signal="changed_rotation" from="MoleAI" to="Mole" method="set_rotation_vector"]

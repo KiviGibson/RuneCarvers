@@ -1,11 +1,29 @@
-[gd_scene format=3 uid="uid://bjlkjipi24fx3"]
+[gd_scene format=3 uid="uid://2untbf8kxu6h"]
 
-[ext_resource type="Script" uid="uid://bcd84k42fkm1d" path="res://scripts/multiplayer_system/spawners/ProjectileSpawner.gd" id="1_f2yc4"]
+[ext_resource type="Script" uid="uid://du3idwes8fp8o" path="res://scripts/multiplayer_system/spawners/PlayerSpawner.gd" id="1_wrbqs"]
 
-[node name="ProjectileSpawner" type="MultiplayerSpawner" unique_id=804595524]
-_spawnable_scenes = PackedStringArray("uid://ck31ixkduns3d")
-spawn_path = NodePath("Projectiles")
-script = ExtResource("1_f2yc4")
-metadata/_custom_type_script = "uid://bcd84k42fkm1d"
+[node name="Players" type="MultiplayerSpawner" unique_id=1328708963 node_paths=PackedStringArray("game_overlay")]
+spawn_path = NodePath("Players")
+spawn_limit = 2
+script = ExtResource("1_wrbqs")
+game_overlay = NodePath("game_overlay/MarginContainer/HBoxContainer")
+metadata/_custom_type_script = "uid://du3idwes8fp8o"
 
-[node name="Projectiles" type="Node3D" parent="." unique_id=111737128]
+[node name="Players" type="Node3D" parent="." unique_id=190038529]
+
+[node name="game_overlay" type="CanvasLayer" parent="." unique_id=455077471]
+
+[node name="MarginContainer" type="MarginContainer" parent="game_overlay" unique_id=726418603]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -218.0
+offset_bottom = 1.9991455
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="game_overlay/MarginContainer" unique_id=482959159]
+layout_mode = 2
+theme_override_constants/separation = 400
+alignment = 1

@@ -37,8 +37,4 @@ func _physics_process(delta: float) -> void:
 func _destroy(_collider: HurtBox = null) -> void:
 	if not multiplayer.is_server(): return
 	expire.emit(global_position)
-	dest_rpc.rpc()
-
-@rpc("authority", "call_local", "reliable")
-func dest_rpc() -> void:
 	self.queue_free()

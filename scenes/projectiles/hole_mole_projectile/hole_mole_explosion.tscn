@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://jp0dxmpg58g6"]
+
+[ext_resource type="PackedScene" uid="uid://b86x3wk7am671" path="res://scenes/projectiles/positivly_charged_projectile/positive_explosion.tscn" id="1_iw8vg"]
+
+[node name="PositiveExplosion" unique_id=762805626 instance=ExtResource("1_iw8vg")]
+
+[node name="HitBox" parent="." index="2" unique_id=76905336]
+collision_mask = 4

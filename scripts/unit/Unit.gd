@@ -13,6 +13,7 @@ var effects: Dictionary[StringName, Effect]
 @abstract func _on_health_depleated() -> void
 var base_layer:= 2
 var base_mask := 3
+
 func _ready() -> void:
 	if not multiplayer.is_server(): return
 	setup_stats()

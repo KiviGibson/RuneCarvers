@@ -1,6 +1,7 @@
 extends CharacterBody3D
 class_name MovementControler
 
+enum pupet_type{player, enemy}
 enum states{normal, running, focus, force}
 signal finish_force_movement()
 @export var walking_speed: float = 5
@@ -8,11 +9,11 @@ signal finish_force_movement()
 @export var focus_mult: float = 0.5
 @export var force_mult: float = 8
 @export var visible_model: Node3D
-
+@export var type: pupet_type = pupet_type.enemy
 var player_added_velocity: Vector3
 var current_state: states = states.normal
 var distance: float = 0.0
-var gravity: float = 9.81
+@export var gravity: float = 9.81
 
 func disable_gravity() -> void: gravity = 0.0
 func enable_gravity() -> void: gravity = 9.81

@@ -24,8 +24,8 @@ properties/2/replication_mode = 2
 collision_layer = 0
 script = ExtResource("1_2g5ow")
 gravity = 19.62
-initial_velocity = 12.0
-initial_y_velocity = 12.0
+initial_velocity = 20.0
+initial_y_velocity = 9.81
 metadata/_custom_type_script = "uid://be6dsn574j1uu"
 
 [node name="Teleport" type="Node3D" parent="." unique_id=1954113293]
