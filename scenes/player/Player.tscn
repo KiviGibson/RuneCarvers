@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cebt7oam1m3q2" path="res://scenes/runes/Dash.tscn" id="7_5stf6"]
 [ext_resource type="PackedScene" uid="uid://b56wk8jie472p" path="res://scenes/runes/rune_warp.tscn" id="8_180ig"]
 [ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/damage_system/HurtBox.gd" id="8_v42im"]
+[ext_resource type="PackedScene" uid="uid://bunhflg883gvb" path="res://scenes/runes/BoogieWoogie.tscn" id="9_8qjgm"]
 [ext_resource type="PackedScene" uid="uid://du573uaja1p13" path="res://scenes/hp_bars/EnemyHpBar.tscn" id="9_rn7t0"]
 [ext_resource type="Script" uid="uid://bsmwhck7xocl0" path="res://scripts/multiplayer_system/spawners/effect_spawner.gd" id="10_7oing"]
 [ext_resource type="Script" uid="uid://5la47o2e7t8g" path="res://scripts/interaction_system/InteractSystem.gd" id="12_ov1oi"]
@@ -44,7 +45,8 @@ metadata/_custom_type_script = "uid://nrajgkybshxf"
 [sub_resource type="Resource" id="Resource_55al8"]
 script = ExtResource("3_c3xxp")
 pattern = Array[int]([2, 2, 0])
-cd = 20.0
+rune = ExtResource("9_8qjgm")
+cd = 10.0
 metadata/_custom_type_script = "uid://nrajgkybshxf"
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_khinc"]

@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bunhflg883gvb"]
+
+[ext_resource type="Script" uid="uid://d16u0e2gt6kxj" path="res://scripts/carving_system/rune/Rune.gd" id="1_lsgfr"]
+[ext_resource type="Script" uid="uid://c2i230dqglhpo" path="res://scripts/effect_system/effect_components/FroceMovement.gd" id="2_bd3fj"]
+[ext_resource type="Script" uid="uid://bmjaas2g8xylp" path="res://scripts/carving_system/RemoteHost.gd" id="3_6ih3h"]
+[ext_resource type="Script" uid="uid://x544es0wcwfx" path="res://scripts/carving_system/rune/SpawnProjectile.gd" id="4_8n7xr"]
+[ext_resource type="PackedScene" uid="uid://c1rufo7fso66" path="res://scenes/projectiles/dash/dash_hitbox.tscn" id="5_ajl8g"]
+
+[node name="BoogieWoogie" type="Node" unique_id=1350716536]
+script = ExtResource("1_lsgfr")
+cd = 0.7
+ammo = 2
+metadata/_custom_type_script = "uid://d16u0e2gt6kxj"
+
+[node name="RemoteHost" type="Node" parent="." unique_id=1189742340]
+script = ExtResource("3_6ih3h")
+metadata/_custom_type_script = "uid://bmjaas2g8xylp"
+
+[node name="SpawnProjectile2" type="Node" parent="RemoteHost" unique_id=164942892]
+script = ExtResource("4_8n7xr")
+projectile_scene = ExtResource("5_ajl8g")
+metadata/_custom_type_script = "uid://x544es0wcwfx"
+
+[node name="ForceMovement2" type="Node" parent="RemoteHost" unique_id=971341293]
+script = ExtResource("2_bd3fj")
+type = 3
+metadata/_custom_type_script = "uid://c2i230dqglhpo"
+
+[node name="ForceMovement" type="Node" parent="." unique_id=1322940293]
+script = ExtResource("2_bd3fj")
+type = 3
+metadata/_custom_type_script = "uid://c2i230dqglhpo"
+
+[node name="SpawnProjectile" type="Node" parent="." unique_id=792923289]
+script = ExtResource("4_8n7xr")
+projectile_scene = ExtResource("5_ajl8g")
+metadata/_custom_type_script = "uid://x544es0wcwfx"
+
+[connection signal="activation" from="." to="ForceMovement" method="force_movement"]
+[connection signal="activation" from="." to="RemoteHost/ForceMovement2" method="force_movement"]
+[connection signal="activation" from="." to="SpawnProjectile" method="spawn_projectile_on_unit"]
+[connection signal="activation" from="." to="RemoteHost/SpawnProjectile2" method="spawn_projectile_on_unit"]
+[connection signal="setup" from="." to="ForceMovement" method="setup"]
+[connection signal="setup" from="." to="RemoteHost/ForceMovement2" method="set_target_unit"]
+[connection signal="setup" from="." to="RemoteHost" method="setup"]
+[connection signal="setup" from="." to="SpawnProjectile" method="setup"]
+[connection signal="remote_setup" from="RemoteHost" to="ForceMovement" method="set_target_unit"]
+[connection signal="remote_setup" from="RemoteHost" to="RemoteHost/ForceMovement2" method="setup"]
+[connection signal="remote_setup" from="RemoteHost" to="RemoteHost/SpawnProjectile2" method="setup"]

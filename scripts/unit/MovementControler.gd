@@ -49,10 +49,10 @@ func forced_movement(delta: float) -> void:
 		finish_force_movement.emit()
 	move_and_slide()
 
-func dash(vec: Vector2) -> void:
-	velocity = Vector3(vec.x, 0, vec.y).normalized()*walking_speed*force_mult
+func dash(vec: Vector2, y: float = 0) -> void:
+	velocity = Vector3(vec.x, y, vec.y).normalized()*walking_speed*force_mult
 	set_rotation_vector(vec.normalized())
-	distance = sqrt(vec.x**2 + vec.y**2)
+	distance = sqrt(vec.x**2 + vec.y**2 + y**2)
 	current_state = states.force
 	disable_gravity()
 
