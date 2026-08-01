@@ -2,16 +2,34 @@
 
 [ext_resource type="Script" uid="uid://du3idwes8fp8o" path="res://scripts/multiplayer_system/spawners/PlayerSpawner.gd" id="1_wrbqs"]
 
-[node name="Players" type="MultiplayerSpawner" unique_id=1328708963 node_paths=PackedStringArray("game_overlay")]
+[node name="Players" type="MultiplayerSpawner" unique_id=1328708963 node_paths=PackedStringArray("game_overlay", "POV")]
 spawn_path = NodePath("Players")
 spawn_limit = 2
 script = ExtResource("1_wrbqs")
 game_overlay = NodePath("game_overlay/MarginContainer/HBoxContainer")
+POV = [NodePath("game_overlay/HBoxContainer/SubViewportContainer"), NodePath("game_overlay/HBoxContainer/SubViewportContainer2")]
 metadata/_custom_type_script = "uid://du3idwes8fp8o"
 
 [node name="Players" type="Node3D" parent="." unique_id=190038529]
 
 [node name="game_overlay" type="CanvasLayer" parent="." unique_id=455077471]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="game_overlay" unique_id=285540807]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="game_overlay/HBoxContainer" unique_id=635758513]
+z_index = -1
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="game_overlay/HBoxContainer" unique_id=545426725]
+z_index = -1
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="game_overlay" unique_id=726418603]
 anchors_preset = 12

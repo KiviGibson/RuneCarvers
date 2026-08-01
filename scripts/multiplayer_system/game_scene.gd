@@ -1,8 +1,9 @@
 extends Node
-
+var lock: bool = false
+@export var list_of_view: Array[SubViewportContainer]
 func _ready() -> void:
 	Lobby.player_loaded.rpc_id(1)
-var lock: bool = false
+
 func start_game(client_id: int) -> void:
 	if lock: return 
 	lock = true

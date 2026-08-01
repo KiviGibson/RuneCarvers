@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://bsmwhck7xocl0" path="res://scripts/multiplayer_system/spawners/effect_spawner.gd" id="10_7oing"]
 [ext_resource type="Script" uid="uid://5la47o2e7t8g" path="res://scripts/interaction_system/InteractSystem.gd" id="12_ov1oi"]
 [ext_resource type="Script" uid="uid://bcd84k42fkm1d" path="res://scripts/multiplayer_system/spawners/ProjectileSpawner.gd" id="13_20koh"]
+[ext_resource type="Script" uid="uid://dfa3lc7gy2wsc" path="res://scripts/unit/player/CustomCamera.gd" id="15_ejd4k"]
 
 [sub_resource type="Resource" id="Resource_c3xxp"]
 script = ExtResource("2_npwbq")
@@ -77,14 +78,15 @@ properties/4/path = NodePath("Puppet:rotation")
 properties/4/spawn = true
 properties/4/replication_mode = 2
 
-[node name="Player" type="Node3D" unique_id=1666680966 node_paths=PackedStringArray("input_system", "carving_system", "carving_ui", "camera", "interact_system", "hp_bar", "model", "effect_spawner", "projectile_spawner")]
+[node name="Player" type="Node3D" unique_id=1666680966 node_paths=PackedStringArray("input_system", "carving_system", "carving_ui", "camera", "interact_system", "hp_bar", "view", "model", "effect_spawner", "projectile_spawner")]
 script = ExtResource("1_tpg5x")
 input_system = NodePath("InputSystem")
 carving_system = NodePath("CarvingSystem")
 carving_ui = NodePath("UI")
-camera = NodePath("Puppet/Camera3D")
+camera = NodePath("SubViewport/Camera3D")
 interact_system = NodePath("Puppet/InteractSystem")
 hp_bar = NodePath("UI/Panel/MarginContainer/VBoxContainer/HpBar")
+view = NodePath("SubViewport")
 model = NodePath("Puppet")
 stats = SubResource("Resource_c3xxp")
 effect_spawner = NodePath("Effect")
@@ -167,11 +169,6 @@ mesh = SubResource("BoxMesh_6yq8t")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Puppet" unique_id=1819267064]
 shape = SubResource("CapsuleShape3D_6yq8t")
 
-[node name="Camera3D" type="Camera3D" parent="Puppet" unique_id=982673878]
-transform = Transform3D(1, 0, 0, 0, 0.49999994, 0.8660254, 0, -0.8660254, 0.49999994, 0, 10, 5)
-fov = 70.0
-size = 20.0
-
 [node name="HurtBox" type="Area3D" parent="Puppet" unique_id=1283098386]
 collision_layer = 4
 collision_mask = 0
@@ -191,6 +188,16 @@ metadata/_custom_type_script = "uid://5la47o2e7t8g"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Puppet/InteractSystem" unique_id=1370149598]
 shape = SubResource("CylinderShape3D_rn7t0")
 debug_color = Color(2.4546682e-06, 0.6507329, 0.093313, 0.41960785)
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=965688071]
+size = Vector2i(960, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=982673878 node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 10, 5)
+fov = 70.0
+size = 20.0
+script = ExtResource("15_ejd4k")
+target = NodePath("../../Puppet")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2085177374]
 replication_config = SubResource("SceneReplicationConfig_mdl7e")

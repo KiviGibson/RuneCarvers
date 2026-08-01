@@ -7,6 +7,8 @@ enum player_states{normal, locked, running, carving}
 @export var camera: Camera3D
 @export var interact_system: InteractSystem
 @export var hp_bar: HpBar
+@export var view: SubViewport
+
 var owner_id: int: 
 	set(value):
 		owner_id = value
@@ -18,6 +20,7 @@ func _ready() -> void:
 	super._ready()
 
 func enable_camera() -> void:
+	return
 	if owner_id != multiplayer.get_unique_id():
 		model.remove_child(camera)
 		camera.free()

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cp7ijmex7tfma"]
+
+[ext_resource type="Script" uid="uid://bcx1qrbxijey2" path="res://scripts/interaction_system/Interactable/ChangePassives.gd" id="1_xhl8p"]
+[ext_resource type="Script" uid="uid://cll40f5jgk6d" path="res://scripts/interaction_system/Interactable.gd" id="2_lja28"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6yq8t"]
+radius = 1.0
+
+[node name="BuildChanger" type="Node3D" unique_id=1715483009]
+script = ExtResource("1_xhl8p")
+effect_list = Array[StringName]([&"positively_charged"])
+metadata/_custom_type_script = "uid://bcx1qrbxijey2"
+
+[node name="Interactable" type="Area3D" parent="." unique_id=999072596]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("2_lja28")
+metadata/_custom_type_script = "uid://cll40f5jgk6d"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=1278018818]
+shape = SubResource("CylinderShape3D_6yq8t")
+debug_color = Color(4.7168137e-06, 0.6444195, 0.28735608, 0.41960785)
+
+[connection signal="interaction_signal" from="Interactable" to="." method="set_player_gems"]

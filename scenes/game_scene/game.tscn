@@ -5,7 +5,10 @@
 [ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/damage_system/Damage.gd" id="3_700et"]
 [ext_resource type="PackedScene" uid="uid://cebeh080tio1p" path="res://scenes/minigame/MiniGame.tscn" id="6_7ulqd"]
 [ext_resource type="Script" uid="uid://lbrvarwcj32q" path="res://scripts/unit/EnemySpawnPoint.gd" id="6_wedpv"]
+[ext_resource type="Script" uid="uid://cll40f5jgk6d" path="res://scripts/interaction_system/Interactable.gd" id="7_fhy3a"]
 [ext_resource type="PackedScene" uid="uid://c2h57oqn7nm50" path="res://scenes/enemies/hole_mole/Hole.tscn" id="8_fhy3a"]
+[ext_resource type="Script" uid="uid://4t8tjrbndx2f" path="res://scripts/interaction_system/Interactable/SpawnEnemies.gd" id="8_oxnsv"]
+[ext_resource type="PackedScene" uid="uid://cp7ijmex7tfma" path="res://scenes/interactable/BuildChanger.tscn" id="9_oxnsv"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_6yq8t"]
 
@@ -26,8 +29,12 @@ radius = 2.0
 [sub_resource type="Environment" id="Environment_6yq8t"]
 glow_enabled = true
 
-[node name="Game" type="Node3D" unique_id=1160267840]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6yq8t"]
+radius = 2.0
+
+[node name="Game" type="Node3D" unique_id=1160267840 node_paths=PackedStringArray("list_of_view")]
 script = ExtResource("1_jpbhf")
+list_of_view = [null, null]
 
 [node name="StaticMap" type="StaticBody3D" parent="." unique_id=881072130]
 
@@ -84,14 +91,33 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.020444453, 0, -5.205411)
 script = ExtResource("6_wedpv")
 metadata/_custom_type_script = "uid://lbrvarwcj32q"
 
-[node name="EnemySpawnPoint2" type="Node3D" parent="." unique_id=2026517891]
-transform = Transform3D(-0.99963933, 0, -0.026856141, 0, 1, 0, 0.026856141, 0, -0.99963933, 27.062674, 0, -2.4858332)
-script = ExtResource("6_wedpv")
-enemy = 1
-metadata/_custom_type_script = "uid://lbrvarwcj32q"
+[node name="Spawner" type="Node3D" parent="." unique_id=278593098]
 
-[node name="EnemySpawnPoint3" type="Node3D" parent="." unique_id=113839726]
-transform = Transform3D(0.9943199, 0, -0.10643366, 0, 1, 0, 0.10643366, 0, 0.9943199, 22.61931, 0, -2.9698668)
-script = ExtResource("6_wedpv")
-enemy = 1
-metadata/_custom_type_script = "uid://lbrvarwcj32q"
+[node name="Interactable" type="Area3D" parent="Spawner" unique_id=727857076]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("7_fhy3a")
+unit_limit = 1
+metadata/_custom_type_script = "uid://cll40f5jgk6d"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spawner/Interactable" unique_id=1160749085]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 10)
+shape = SubResource("CylinderShape3D_6yq8t")
+debug_color = Color(0.7764651, 0.4405016, 1.92523e-07, 0.41960785)
+
+[node name="SpawnEnemies" type="Node" parent="Spawner" unique_id=2011077726 node_paths=PackedStringArray("Spawn_points")]
+script = ExtResource("8_oxnsv")
+Spawn_points = [NodePath("../Node3D"), NodePath("../Node3D2")]
+enemy_type = 1
+metadata/_custom_type_script = "uid://4t8tjrbndx2f"
+
+[node name="Node3D" type="Node3D" parent="Spawner" unique_id=1211356810]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, 0)
+
+[node name="Node3D2" type="Node3D" parent="Spawner" unique_id=798444976]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+
+[node name="BuildChanger" parent="." unique_id=1715483009 instance=ExtResource("9_oxnsv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.201591, 0, 0)
+
+[connection signal="interaction_signal" from="Spawner/Interactable" to="Spawner/SpawnEnemies" method="spawn"]
