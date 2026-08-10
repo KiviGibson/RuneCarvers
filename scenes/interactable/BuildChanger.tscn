@@ -8,7 +8,7 @@ radius = 1.0
 
 [node name="BuildChanger" type="Node3D" unique_id=1715483009]
 script = ExtResource("1_xhl8p")
-effect_list = Array[StringName]([&"positively_charged"])
+effect_list = Array[StringName]([&"wanderer_stone"])
 metadata/_custom_type_script = "uid://bcx1qrbxijey2"
 
 [node name="Interactable" type="Area3D" parent="." unique_id=999072596]

@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://di1uxdb71n708"]
+
+[ext_resource type="Script" uid="uid://be6dsn574j1uu" path="res://scripts/projectile/Projectile.gd" id="1_2qdjf"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6yq8t"]
+radius = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vbdod"]
+albedo_color = Color(2.454227, 0, 2.454227, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_6yq8t"]
+material = SubResource("StandardMaterial3D_vbdod")
+radius = 0.2
+height = 0.4
+
+[node name="Wisp" type="CharacterBody3D" unique_id=1719198821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("1_2qdjf")
+gravity = 0.0
+bounciness = 0.0
+metadata/_custom_type_script = "uid://be6dsn574j1uu"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=486724657]
+shape = SubResource("SphereShape3D_6yq8t")
+debug_color = Color(1, 1, 1, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1899980628]
+mesh = SubResource("SphereMesh_6yq8t")
+
+[node name="Timer" type="Timer" parent="." unique_id=671143750]
+wait_time = 15.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_destroy"]

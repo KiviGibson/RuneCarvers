@@ -9,5 +9,5 @@ func _ready() -> void:
 	default_rotation = rotation
 	base_offset = global_position
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if target: global_position = target.global_position+base_offset

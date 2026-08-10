@@ -30,8 +30,10 @@ func _on_getting_hit(damage: Damage) -> void:
 		effects[key].trigger_onhurt(damage)
 	stats.current_health -= damage.value
 
-func set_damage_owner(damage: Damage): 
-	damage.owner = self
+func set_damage_owner(hitbox: HitBox): 
+	hitbox.damage.owner = self
+	for key in effects.keys():
+		effects[key].trigger_onhit(hitbox)
 
 func add_passive(passive: StringName) -> void:
 	var tmp := effect_spawner.spawn({"effect": passive, "owner": self})
@@ -58,6 +60,7 @@ func reset_cd(effect: StringName) -> void:
 
 func add_projectile(projectile: PackedScene) -> Projectile:
 	var tmp := projectile_spawner.spawn({"scene": projectile.resource_path, "position": Vector3(0,0,0)})
+	tmp.owning_unit = self
 	return tmp
 
 func disable_collision() -> void:

@@ -22,7 +22,7 @@ func _ready() -> void:
 	if multiplayer.is_server(): 
 		timer_borrow.timeout.connect(func(): un_borrow.rpc())
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not multiplayer.is_server(): return
 	if can_rotate: 
 		if current_target == null: return
@@ -100,7 +100,7 @@ func get_best_hole() -> Hole:
 func set_target() -> void:
 	var same_target_weight: float = -2.0
 	var closer_enemy_weight: float = 0.4
-	var behind_the_wall_weight: float = 1.0
+	var _behind_the_wall_weight: float = 1.0
 	var last: float = 100.0
 	for unit in vision.get_overlapping_bodies():
 		if unit is not MovementControler or unit.type != MovementControler.pupet_type.player: continue

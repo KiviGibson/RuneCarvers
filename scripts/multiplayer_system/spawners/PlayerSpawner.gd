@@ -16,7 +16,7 @@ func spawn_player(id: int) -> Player:
 	tmp.input_system.owner_id = id
 	tmp.carving_ui.name += str(id)
 	tmp.carving_ui.reparent(game_overlay) # Robi warning ale jest git
-	tmp.view.reparent(POV[current_pov])
+	tmp.view.reparent(POV[current_pov]) # Robi warning ale jest git
 	current_pov += 1
 	_players[id] = tmp
 	return tmp

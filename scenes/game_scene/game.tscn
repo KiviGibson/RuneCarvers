@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://bk3wugnxnrdyw"]
 
 [ext_resource type="Script" uid="uid://cm0qmfmjp8c82" path="res://scripts/multiplayer_system/game_scene.gd" id="1_jpbhf"]
+[ext_resource type="Script" uid="uid://cr3j6vebgmcmd" path="res://scripts/carving_system/gem/WispField.gd" id="2_1qftq"]
 [ext_resource type="Script" uid="uid://bdmlbgajj81a8" path="res://scripts/damage_system/HitBox.gd" id="2_6y8rp"]
 [ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/damage_system/Damage.gd" id="3_700et"]
+[ext_resource type="Script" uid="uid://x544es0wcwfx" path="res://scripts/carving_system/rune/SpawnProjectile.gd" id="3_vvut4"]
+[ext_resource type="PackedScene" uid="uid://di1uxdb71n708" path="res://scenes/projectiles/wonderer_chime/Wisp.tscn" id="4_5prq0"]
 [ext_resource type="PackedScene" uid="uid://cebeh080tio1p" path="res://scenes/minigame/MiniGame.tscn" id="6_7ulqd"]
 [ext_resource type="Script" uid="uid://lbrvarwcj32q" path="res://scripts/unit/EnemySpawnPoint.gd" id="6_wedpv"]
 [ext_resource type="Script" uid="uid://cll40f5jgk6d" path="res://scripts/interaction_system/Interactable.gd" id="7_fhy3a"]
@@ -18,6 +21,9 @@ albedo_color = Color(0, 0.08627451, 0, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_6yq8t"]
 material = SubResource("StandardMaterial3D_1j5yo")
 size = Vector2(20, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4ybgr"]
+size = Vector3(10, 2, 10)
 
 [sub_resource type="Resource" id="Resource_v42im"]
 script = ExtResource("3_700et")
@@ -41,10 +47,40 @@ list_of_view = [null, null]
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticMap" unique_id=1340238656]
 shape = SubResource("WorldBoundaryShape3D_6yq8t")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticMap" unique_id=1904857005]
+[node name="Wisps" type="MeshInstance3D" parent="StaticMap" unique_id=2070779191]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.476215, 0, 0)
 mesh = SubResource("PlaneMesh_6yq8t")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticMap" unique_id=1050034999]
+[node name="WispField" type="Area3D" parent="StaticMap/Wisps" unique_id=1986680004 node_paths=PackedStringArray("timer", "wisp_spawner")]
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("2_1qftq")
+timer = NodePath("Settings/Timer")
+wisp_spawner = NodePath("Settings/SpawnProjectile")
+metadata/_custom_type_script = "uid://cr3j6vebgmcmd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticMap/Wisps/WispField" unique_id=391309099]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
+shape = SubResource("BoxShape3D_4ybgr")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticMap/Wisps/WispField" unique_id=2102133538]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
+shape = SubResource("BoxShape3D_4ybgr")
+
+[node name="Settings" type="Node3D" parent="StaticMap/Wisps/WispField" unique_id=972889074]
+
+[node name="SpawnProjectile" type="Node" parent="StaticMap/Wisps/WispField/Settings" unique_id=327132221]
+script = ExtResource("3_vvut4")
+projectile_scene = ExtResource("4_5prq0")
+metadata/_custom_type_script = "uid://x544es0wcwfx"
+
+[node name="Timer" type="Timer" parent="StaticMap/Wisps/WispField/Settings" unique_id=16435803]
+one_shot = true
+
+[node name="Main" type="MeshInstance3D" parent="StaticMap" unique_id=1904857005]
+mesh = SubResource("PlaneMesh_6yq8t")
+
+[node name="EnemyArena" type="MeshInstance3D" parent="StaticMap" unique_id=1050034999]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.238108, 0, 0)
 mesh = SubResource("PlaneMesh_6yq8t")
 
@@ -119,5 +155,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
 
 [node name="BuildChanger" parent="." unique_id=1715483009 instance=ExtResource("9_oxnsv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.201591, 0, 0)
+effect_list = Array[StringName]([&"wanderer_stone", &"negate_energy"])
+
+[node name="BuildChanger2" parent="." unique_id=556075953 instance=ExtResource("9_oxnsv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.201591, 0, 4)
+effect_list = Array[StringName]([&"warrior_stone"])
 
 [connection signal="interaction_signal" from="Spawner/Interactable" to="Spawner/SpawnEnemies" method="spawn"]

@@ -16,14 +16,7 @@ var owner_id: int:
 var current_rune: Rune
 
 func _ready() -> void:
-	enable_camera()
 	super._ready()
-
-func enable_camera() -> void:
-	return
-	if owner_id != multiplayer.get_unique_id():
-		model.remove_child(camera)
-		camera.free()
 
 func _on_health_change(curernt: int, absolute: int) -> void:
 	if not multiplayer.is_server(): return

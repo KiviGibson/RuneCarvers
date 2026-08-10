@@ -57,3 +57,5 @@ mesh = SubResource("SphereMesh_6yq8t")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=606211530]
 replication_config = SubResource("SceneReplicationConfig_18hhv")
+
+[connection signal="change_ownership" from="." to="HitBox" method="_damage_ownership_exchange"]

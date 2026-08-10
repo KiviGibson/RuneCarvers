@@ -129,6 +129,7 @@ pov_change={
 3d_physics/layer_5="InteractionSystem"
 3d_physics/layer_6="Tanks Minigame"
 3d_physics/layer_7="HoleMole Holes"
+3d_physics/layer_8="Wonderer Wisp"
 
 [physics]
 
