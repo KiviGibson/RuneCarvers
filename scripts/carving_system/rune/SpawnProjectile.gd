@@ -3,6 +3,7 @@ class_name SpawnProjectile
 
 @export var projectile_scene: PackedScene
 @export var reverse: bool = false
+
 func spawn_projectile(u: HurtBox = null) -> void:
 	var res: Projectile
 	if u:

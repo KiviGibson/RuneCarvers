@@ -7,7 +7,8 @@ const str_to_path: Dictionary[StringName, String] = {
 	&"burn": "uid://cia21gmitmeip",
 	&"wanderer_stone": "uid://c2nyp4qn0xbo",
 	&"negate_energy": "uid://cfryitthwel8i",
-	&"warrior_stone": "uid://bxnmn05cakwdi"
+	&"warrior_stone": "uid://bxnmn05cakwdi",
+	&"crafted_security": "uid://dj8jejqlvtkrm"
 }
 
 signal effect_expired(name: StringName)

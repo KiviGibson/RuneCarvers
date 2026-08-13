@@ -159,6 +159,6 @@ effect_list = Array[StringName]([&"wanderer_stone", &"negate_energy"])
 
 [node name="BuildChanger2" parent="." unique_id=556075953 instance=ExtResource("9_oxnsv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.201591, 0, 4)
-effect_list = Array[StringName]([&"warrior_stone"])
+effect_list = Array[StringName]([&"warrior_stone", &"crafted_security"])
 
 [connection signal="interaction_signal" from="Spawner/Interactable" to="Spawner/SpawnEnemies" method="spawn"]

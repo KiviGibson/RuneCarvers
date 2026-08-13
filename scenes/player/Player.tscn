@@ -78,7 +78,7 @@ properties/4/path = NodePath("Puppet:rotation")
 properties/4/spawn = true
 properties/4/replication_mode = 2
 
-[node name="Player" type="Node3D" unique_id=1666680966 node_paths=PackedStringArray("input_system", "carving_system", "carving_ui", "camera", "interact_system", "hp_bar", "view", "model", "effect_spawner", "projectile_spawner")]
+[node name="Player" type="Node3D" unique_id=1666680966 node_paths=PackedStringArray("input_system", "carving_system", "carving_ui", "camera", "interact_system", "hp_bar", "view", "model", "hurt_box", "effect_spawner", "projectile_spawner")]
 script = ExtResource("1_tpg5x")
 input_system = NodePath("InputSystem")
 carving_system = NodePath("CarvingSystem")
@@ -89,6 +89,7 @@ hp_bar = NodePath("UI/Panel/MarginContainer/VBoxContainer/HpBar")
 view = NodePath("SubViewport")
 model = NodePath("Puppet")
 stats = SubResource("Resource_c3xxp")
+hurt_box = NodePath("Puppet/HurtBox")
 effect_spawner = NodePath("Effect")
 projectile_spawner = NodePath("Projectile")
 

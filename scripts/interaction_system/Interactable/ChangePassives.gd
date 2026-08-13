@@ -4,7 +4,8 @@ class_name BuildChanger
 @export var effect_list: Array[StringName]
 
 func remove_all_effects(unit: Unit) -> void:
-	unit.effects.clear()
+	for key in unit.effects.keys():
+		unit.remove_effect(key)
 
 func give_effects(unit: Unit) -> void:
 	for effect_name in effect_list:

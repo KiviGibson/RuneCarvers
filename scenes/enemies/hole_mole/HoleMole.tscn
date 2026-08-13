@@ -631,11 +631,12 @@ properties/3/path = NodePath("Mole/Model:rotation")
 properties/3/spawn = true
 properties/3/replication_mode = 2
 
-[node name="HoleMole" type="Node3D" unique_id=11180120 node_paths=PackedStringArray("hp_bar", "model", "effect_spawner")]
+[node name="HoleMole" type="Node3D" unique_id=11180120 node_paths=PackedStringArray("hp_bar", "model", "hurt_box", "effect_spawner")]
 script = ExtResource("1_4py6f")
 hp_bar = NodePath("SubViewport/HpBar")
 model = NodePath("Mole")
 stats = SubResource("Resource_o2gk4")
+hurt_box = NodePath("Mole/Model/Mole/HurtBox")
 effect_spawner = NodePath("EffectSpawner")
 metadata/_custom_type_script = "uid://bga3yxy6ye61"
 

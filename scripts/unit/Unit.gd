@@ -4,7 +4,7 @@ class_name Unit
 
 @export var model: MovementControler
 @export var stats: Stats
-
+@export var hurt_box: HurtBox
 var effects: Dictionary[StringName, Effect]
 @export var effect_spawner: EffectSpawner
 @export var projectile_spawner: ProjectileSpawner
@@ -48,7 +48,9 @@ func add_effect(effect: StringName, owner_unit: Unit) -> void:
 		tmp.effect_expired.connect(remove_effect)
 
 func remove_effect(effect: StringName) -> void:
+	if not multiplayer.is_server(): return
 	if not is_affected(effect): return
+	print("Removed Effect: " + effect)
 	effects[effect].queue_free()
 	effects.erase(effect)
 

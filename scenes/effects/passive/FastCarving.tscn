@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cw31extt5clcl"]
+
+[ext_resource type="Script" uid="uid://r0tp4n5w2xkh" path="res://scripts/effect_system/Effect.gd" id="1_sbe0n"]
+[ext_resource type="Script" uid="uid://bdwlpxrom4rru" path="res://scripts/effect_system/effect_components/OnCarvingSuccess.gd" id="3_82hy2"]
+[ext_resource type="Script" uid="uid://da0ab30r5ebvh" path="res://scripts/effect_system/effect_components/RandomProjectileSpawn.gd" id="3_tq13x"]
+
+[node name="FastCarving" type="Node3D" unique_id=1485517866]
+script = ExtResource("1_sbe0n")
+metadata/_custom_type_script = "uid://r0tp4n5w2xkh"
+
+[node name="OnCarvingSuccess" type="Node" parent="." unique_id=1185887114]
+script = ExtResource("3_82hy2")
+metadata/_custom_type_script = "uid://bdwlpxrom4rru"
+
+[node name="RandomProjectileSpawn" type="Node" parent="." unique_id=833825924]
+script = ExtResource("3_tq13x")
+metadata/_custom_type_script = "uid://da0ab30r5ebvh"
+
+[connection signal="setup" from="." to="OnCarvingSuccess" method="setup"]
+[connection signal="setup" from="." to="RandomProjectileSpawn" method="setup"]
