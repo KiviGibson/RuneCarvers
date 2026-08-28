@@ -4,11 +4,17 @@
 [ext_resource type="Script" uid="uid://dcb74rvqbwjiq" path="res://scripts/unit/player/Player.gd" id="1_tpg5x"]
 [ext_resource type="Script" uid="uid://bffwh1ds00jub" path="res://scripts/unit/Stats.gd" id="2_npwbq"]
 [ext_resource type="Script" uid="uid://qpy2uevlwsjk" path="res://scripts/carving_system/CarvingSystem.gd" id="2_tpg5x"]
+[ext_resource type="Script" uid="uid://bsdhjg5t04i3q" path="res://scripts/interaction_system/Npc/JackSmith/Inventory.gd" id="3_8nn5r"]
 [ext_resource type="Script" uid="uid://nrajgkybshxf" path="res://scripts/carving_system/Carvings.gd" id="3_c3xxp"]
+[ext_resource type="Resource" uid="uid://dcg0ofar8rvj2" path="res://resource/Gems/WarriorStone.tres" id="4_kvwax"]
 [ext_resource type="PackedScene" uid="uid://g8d1aj0ym3lb" path="res://scenes/carving_ui/CarvingUI.tscn" id="4_npwbq"]
+[ext_resource type="Script" uid="uid://bnn8qhdyh10wi" path="res://scripts/unit/player/Gem.gd" id="5_x3qp0"]
+[ext_resource type="Resource" uid="uid://dwmy8snflaw55" path="res://resource/Gems/CraftedSecurity.tres" id="6_76i7i"]
 [ext_resource type="Script" uid="uid://d1ggxehy2ph1q" path="res://scripts/unit/MovementControler.gd" id="6_c3xxp"]
 [ext_resource type="PackedScene" uid="uid://xmwhn75bbej1" path="res://scenes/runes/TempRune.tscn" id="6_pn6s4"]
 [ext_resource type="PackedScene" uid="uid://cebt7oam1m3q2" path="res://scenes/runes/Dash.tscn" id="7_5stf6"]
+[ext_resource type="Resource" uid="uid://cne2c6e13jbv0" path="res://resource/Gems/WandererStone.tres" id="7_mndc6"]
+[ext_resource type="Resource" uid="uid://bcc6otugv7wku" path="res://resource/Gems/AlterPower.tres" id="8_1hh02"]
 [ext_resource type="PackedScene" uid="uid://b56wk8jie472p" path="res://scenes/runes/rune_warp.tscn" id="8_180ig"]
 [ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/damage_system/HurtBox.gd" id="8_v42im"]
 [ext_resource type="PackedScene" uid="uid://bunhflg883gvb" path="res://scenes/runes/BoogieWoogie.tscn" id="9_8qjgm"]
@@ -17,6 +23,8 @@
 [ext_resource type="Script" uid="uid://5la47o2e7t8g" path="res://scripts/interaction_system/InteractSystem.gd" id="12_ov1oi"]
 [ext_resource type="Script" uid="uid://bcd84k42fkm1d" path="res://scripts/multiplayer_system/spawners/ProjectileSpawner.gd" id="13_20koh"]
 [ext_resource type="Script" uid="uid://dfa3lc7gy2wsc" path="res://scripts/unit/player/CustomCamera.gd" id="15_ejd4k"]
+[ext_resource type="PackedScene" uid="uid://prw4kt1hlgg3" path="res://scenes/player/inventory/SearchMenu.tscn" id="21_5ttev"]
+[ext_resource type="Script" uid="uid://cunlm7qu3hrat" path="res://scripts/multiplayer_system/spawners/RuneSpawnere.gd" id="25_kvwax"]
 
 [sub_resource type="Resource" id="Resource_c3xxp"]
 script = ExtResource("2_npwbq")
@@ -78,7 +86,7 @@ properties/4/path = NodePath("Puppet:rotation")
 properties/4/spawn = true
 properties/4/replication_mode = 2
 
-[node name="Player" type="Node3D" unique_id=1666680966 node_paths=PackedStringArray("input_system", "carving_system", "carving_ui", "camera", "interact_system", "hp_bar", "view", "model", "hurt_box", "effect_spawner", "projectile_spawner")]
+[node name="Player" type="Node3D" unique_id=1666680966 node_paths=PackedStringArray("input_system", "carving_system", "carving_ui", "camera", "interact_system", "hp_bar", "view", "inventory", "rune_spawner", "model", "hurt_box", "effect_spawner", "projectile_spawner")]
 script = ExtResource("1_tpg5x")
 input_system = NodePath("InputSystem")
 carving_system = NodePath("CarvingSystem")
@@ -87,11 +95,22 @@ camera = NodePath("SubViewport/Camera3D")
 interact_system = NodePath("Puppet/InteractSystem")
 hp_bar = NodePath("UI/Panel/MarginContainer/VBoxContainer/HpBar")
 view = NodePath("SubViewport")
+inventory = NodePath("Inventory")
+rune_spawner = NodePath("Rune")
 model = NodePath("Puppet")
 stats = SubResource("Resource_c3xxp")
 hurt_box = NodePath("Puppet/HurtBox")
 effect_spawner = NodePath("Effect")
 projectile_spawner = NodePath("Projectile")
+
+[node name="Inventory" type="Node" parent="." unique_id=952128580 node_paths=PackedStringArray("search_menu", "inventory_ui")]
+script = ExtResource("3_8nn5r")
+main_gem = ExtResource("4_kvwax")
+sub_gems = Array[ExtResource("5_x3qp0")]([ExtResource("6_76i7i")])
+avilable_gems = Array[ExtResource("5_x3qp0")]([ExtResource("4_kvwax"), ExtResource("7_mndc6"), ExtResource("8_1hh02")])
+search_menu = NodePath("../InventoryUILayer/InventoryUI/SearchMenu")
+inventory_ui = NodePath("../InventoryUILayer/InventoryUI")
+metadata/_custom_type_script = "uid://bsdhjg5t04i3q"
 
 [node name="InputSystem" type="Node" parent="." unique_id=804145743]
 script = ExtResource("1_524rm")
@@ -200,6 +219,34 @@ size = 20.0
 script = ExtResource("15_ejd4k")
 target = NodePath("../../Puppet")
 
+[node name="InventoryUILayer" type="CanvasLayer" parent="." unique_id=1787672542]
+
+[node name="InventoryUI" type="Panel" parent="InventoryUILayer" unique_id=1963536372]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="InventoryUILayer/InventoryUI" unique_id=706321260]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="SearchMenu" parent="InventoryUILayer/InventoryUI" unique_id=1204333785 instance=ExtResource("21_5ttev")]
+visible = false
+layout_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InventoryUILayer/InventoryUI" unique_id=1383439592]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2085177374]
 replication_config = SubResource("SceneReplicationConfig_mdl7e")
 
@@ -212,9 +259,16 @@ host = NodePath("..")
 spawn_path = NodePath("../Puppet")
 script = ExtResource("13_20koh")
 
+[node name="Rune" type="MultiplayerSpawner" parent="." unique_id=1110589360 node_paths=PackedStringArray("host")]
+spawn_path = NodePath("../Puppet/Model")
+script = ExtResource("25_kvwax")
+host = NodePath("..")
+metadata/_custom_type_script = "uid://cunlm7qu3hrat"
+
 [connection signal="activation" from="InputSystem" to="." method="use_rune"]
 [connection signal="carved_symbol" from="InputSystem" to="CarvingSystem" method="carve_symbol"]
 [connection signal="carving_change" from="InputSystem" to="CarvingSystem" method="carving_state_change"]
+[connection signal="interact" from="InputSystem" to="Inventory" method="show"]
 [connection signal="movement_vector_change" from="InputSystem" to="Puppet" method="set_movement_vector"]
 [connection signal="target_vector_change" from="InputSystem" to="Puppet" method="set_rotation_vector"]
 [connection signal="successful_carving" from="CarvingSystem" to="." method="get_rune"]

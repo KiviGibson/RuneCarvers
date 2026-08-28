@@ -9,6 +9,7 @@ var current_pov: int = 0
 func _ready() -> void:
 	spawn_function = spawn_player
 
+
 func spawn_player(id: int) -> Player:
 	var tmp: Player = character_scene.instantiate()
 	tmp.owner_id = id

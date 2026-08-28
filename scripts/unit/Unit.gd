@@ -35,15 +35,15 @@ func set_damage_owner(hitbox: HitBox):
 	for key in effects.keys():
 		effects[key].trigger_onhit(hitbox)
 
-func add_passive(passive: StringName) -> void:
-	var tmp := effect_spawner.spawn({"effect": passive, "owner": self})
-	effects[passive] = tmp
+func add_passive(passive: String) -> void:
+	var tmp := effect_spawner.spawn({"type": "passive", "effect": passive, "owner": self})
+	effects[tmp.name] = tmp
 
 func add_effect(effect: StringName, owner_unit: Unit) -> void:
 	if is_affected(effect):
 		reset_cd(effect)
 	else:
-		var tmp: Effect = effect_spawner.spawn({"effect": effect, "owner": owner_unit})
+		var tmp: Effect = effect_spawner.spawn({"type": "status","effect": effect, "owner": owner_unit})
 		effects[effect] = tmp
 		tmp.effect_expired.connect(remove_effect)
 

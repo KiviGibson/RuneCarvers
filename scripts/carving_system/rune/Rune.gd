@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 class_name Rune
 
 @warning_ignore("unused_signal")

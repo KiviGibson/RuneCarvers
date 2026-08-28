@@ -15,6 +15,9 @@ func _ready() -> void:
 	player_connected.connect(player_joined)
 	multiplayer.connected_to_server.connect(_on_player_connected_ok)
 	multiplayer.peer_connected.connect(_player_connected)
+	var args:= Array(OS.get_cmdline_args())
+	if "--server" in args: create_game()
+	if "--client" in args: join_game()
 
 func create_game() -> void:
 	var peer := ENetMultiplayerPeer.new()

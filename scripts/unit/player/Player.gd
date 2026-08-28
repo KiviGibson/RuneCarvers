@@ -8,15 +8,18 @@ enum player_states{normal, locked, running, carving}
 @export var interact_system: InteractSystem
 @export var hp_bar: HpBar
 @export var view: SubViewport
-
+@export var inventory: Inventory
+@export var rune_spawner: RuneSpawner
 var owner_id: int: 
 	set(value):
 		owner_id = value
 		interact_system.owner_id = owner_id
+
 var current_rune: Rune
 
 func _ready() -> void:
 	super._ready()
+	inventory.host = self
 
 func _on_health_change(curernt: int, absolute: int) -> void:
 	if not multiplayer.is_server(): return
@@ -32,10 +35,7 @@ func remove_rune() -> void: ## Usuń starą runę
 
 func get_rune(rune: PackedScene) -> void: ## Ustaw nową runę
 	if current_rune: remove_rune()
-	var tmp : Rune = rune.instantiate()
-	add_child(tmp)
-	tmp.setup.emit(self)
-	tmp.empty.connect(remove_rune)
+	var tmp: Rune = rune_spawner.spawn({"rune": rune})
 	current_rune = tmp
 
 func use_rune(value: bool) -> void: ## Użyj runy

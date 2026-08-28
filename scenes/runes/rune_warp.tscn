@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://x544es0wcwfx" path="res://scripts/carving_system/rune/SpawnProjectile.gd" id="2_0usib"]
 [ext_resource type="PackedScene" uid="uid://p1mdskf4p36q" path="res://scenes/projectiles/rune_warp/RuneWarp.tscn" id="3_66ikh"]
 
-[node name="RuneWarp" type="Node" unique_id=932726171]
+[node name="RuneWarp" type="Node3D" unique_id=163527997]
 script = ExtResource("1_vob22")
 type = 1
 charge_per_second = 1.0

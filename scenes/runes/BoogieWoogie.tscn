@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://x544es0wcwfx" path="res://scripts/carving_system/rune/SpawnProjectile.gd" id="4_8n7xr"]
 [ext_resource type="PackedScene" uid="uid://c1rufo7fso66" path="res://scenes/projectiles/dash/dash_hitbox.tscn" id="5_ajl8g"]
 
-[node name="BoogieWoogie" type="Node" unique_id=1350716536]
+[node name="BoogieWoogie" type="Node3D" unique_id=802420366]
 script = ExtResource("1_lsgfr")
 cd = 0.7
 ammo = 2
@@ -36,14 +36,14 @@ script = ExtResource("4_8n7xr")
 projectile_scene = ExtResource("5_ajl8g")
 metadata/_custom_type_script = "uid://x544es0wcwfx"
 
-[connection signal="activation" from="." to="ForceMovement" method="force_movement"]
-[connection signal="activation" from="." to="RemoteHost/ForceMovement2" method="force_movement"]
-[connection signal="activation" from="." to="SpawnProjectile" method="spawn_projectile_on_unit"]
 [connection signal="activation" from="." to="RemoteHost/SpawnProjectile2" method="spawn_projectile_on_unit"]
-[connection signal="setup" from="." to="ForceMovement" method="setup"]
-[connection signal="setup" from="." to="RemoteHost/ForceMovement2" method="set_target_unit"]
+[connection signal="activation" from="." to="RemoteHost/ForceMovement2" method="force_movement"]
+[connection signal="activation" from="." to="ForceMovement" method="force_movement"]
+[connection signal="activation" from="." to="SpawnProjectile" method="spawn_projectile_on_unit"]
 [connection signal="setup" from="." to="RemoteHost" method="setup"]
+[connection signal="setup" from="." to="RemoteHost/ForceMovement2" method="set_target_unit"]
+[connection signal="setup" from="." to="ForceMovement" method="setup"]
 [connection signal="setup" from="." to="SpawnProjectile" method="setup"]
-[connection signal="remote_setup" from="RemoteHost" to="ForceMovement" method="set_target_unit"]
-[connection signal="remote_setup" from="RemoteHost" to="RemoteHost/ForceMovement2" method="setup"]
 [connection signal="remote_setup" from="RemoteHost" to="RemoteHost/SpawnProjectile2" method="setup"]
+[connection signal="remote_setup" from="RemoteHost" to="RemoteHost/ForceMovement2" method="setup"]
+[connection signal="remote_setup" from="RemoteHost" to="ForceMovement" method="set_target_unit"]

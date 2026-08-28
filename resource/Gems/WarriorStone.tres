@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Gem" format=3 uid="uid://dcg0ofar8rvj2"]
+
+[ext_resource type="Script" uid="uid://bnn8qhdyh10wi" path="res://scripts/unit/player/Gem.gd" id="1_aivre"]
+
+[resource]
+script = ExtResource("1_aivre")
+passive = "uid://bxnmn05cakwdi"
+description = "Gives Player Aura"
+metadata/_custom_type_script = "uid://bnn8qhdyh10wi"

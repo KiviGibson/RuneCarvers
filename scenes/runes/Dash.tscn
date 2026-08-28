@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://x544es0wcwfx" path="res://scripts/carving_system/rune/SpawnProjectile.gd" id="3_yaybt"]
 [ext_resource type="PackedScene" uid="uid://c1rufo7fso66" path="res://scenes/projectiles/dash/dash_hitbox.tscn" id="4_bes0h"]
 
-[node name="Dash" type="Node" unique_id=169792501]
+[node name="Dash" type="Node3D" unique_id=348229481]
 script = ExtResource("1_q8dog")
 ammo = 3
 metadata/_custom_type_script = "uid://d16u0e2gt6kxj"

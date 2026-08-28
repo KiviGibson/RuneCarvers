@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://cl1begxpr8e0f"]
+
+[ext_resource type="Shader" uid="uid://dytj1qodinn24" path="res://effects/areashader.gdshader" id="1_ysj4m"]
+
+[sub_resource type="Gradient" id="Gradient_yfbrb"]
+offsets = PackedFloat32Array(0.5976331, 1)
+colors = PackedColorArray(9.62615e-08, 0.9169109, 0.3252924, 1, 0.60361177, 1, 0.5730653, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yfbrb"]
+gradient = SubResource("Gradient_yfbrb")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ysj4m"]
+render_priority = 0
+shader = ExtResource("1_ysj4m")
+shader_parameter/albedo = Color(1.8247963, 1.8247963, 1.8247963, 1)
+shader_parameter/texture_albedo = SubResource("GradientTexture2D_yfbrb")
+shader_parameter/proximity_fade_distance = 0.499999988824
+shader_parameter/albedo_texture_size = Vector2i(1, 1)
+shader_parameter/point_size = 0.0
+shader_parameter/roughness = 0.0
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
+shader_parameter/specular = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6yq8t"]
+material = SubResource("ShaderMaterial_ysj4m")
+top_radius = 3.0
+bottom_radius = 3.0
+height = 3.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_1j5yo"]
+size = Vector3(10, 1, 10)
+
+[node name="Dist" type="Node3D" unique_id=1855690863]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1110769826]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.16919696, 0)
+mesh = SubResource("CylinderMesh_6yq8t")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=214062068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1690335, 0)
+mesh = SubResource("BoxMesh_1j5yo")

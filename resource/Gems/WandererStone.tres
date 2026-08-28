@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Gem" format=3 uid="uid://cne2c6e13jbv0"]
+
+[ext_resource type="Script" uid="uid://bnn8qhdyh10wi" path="res://scripts/unit/player/Gem.gd" id="1_0ra1v"]
+
+[resource]
+script = ExtResource("1_0ra1v")
+identity = 1
+passive = "uid://c2nyp4qn0xbo"
+description = "Around Battlefield wisps will apear. Collect them to ghater additional power!"
+metadata/_custom_type_script = "uid://bnn8qhdyh10wi"
