@@ -9,49 +9,79 @@
 [ext_resource type="Script" uid="uid://cll40f5jgk6d" path="res://scripts/interaction_system/Interactable.gd" id="7_fhy3a"]
 [ext_resource type="PackedScene" uid="uid://c2h57oqn7nm50" path="res://scenes/enemies/hole_mole/Hole.tscn" id="8_fhy3a"]
 [ext_resource type="Script" uid="uid://4t8tjrbndx2f" path="res://scripts/interaction_system/Interactable/SpawnEnemies.gd" id="8_oxnsv"]
-[ext_resource type="PackedScene" uid="uid://cp7ijmex7tfma" path="res://scenes/interactable/BuildChanger.tscn" id="9_oxnsv"]
+[ext_resource type="PackedScene" uid="uid://de7abuunrnk1j" path="res://scenes/npc/JackSmith.tscn" id="10_lnrhe"]
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_6yq8t"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lnrhe"]
+albedo_color = Color(4.512258e-07, 0.29928088, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1j5yo"]
-albedo_color = Color(0, 0.08627451, 0, 1)
+[sub_resource type="BoxMesh" id="BoxMesh_8vyll"]
+material = SubResource("StandardMaterial3D_lnrhe")
+size = Vector3(20, 10, 28)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_6yq8t"]
-material = SubResource("StandardMaterial3D_1j5yo")
-size = Vector2(20, 20)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tr8b4"]
+albedo_color = Color(0.4227649, 0.6750445, 0.32225123, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_4ybgr"]
+[sub_resource type="PrismMesh" id="PrismMesh_6yq8t"]
+material = SubResource("StandardMaterial3D_tr8b4")
+left_to_right = 1.0
+size = Vector3(10, 5, 10)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1j5yo"]
+points = PackedVector3Array(0, 0, 0, 10, 0, 0, 10, 5, 0, 10, 5, 10, 10, 0, 10, 0, 0, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1qftq"]
+size = Vector3(20, 10, 28)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1qftq"]
+albedo_color = Color(0.4227649, 0.6750445, 0.32225123, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_owcl8"]
+material = SubResource("StandardMaterial3D_1qftq")
+size = Vector3(20, 10, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tr8b4"]
 size = Vector3(20, 2, 20)
-
-[sub_resource type="Environment" id="Environment_6yq8t"]
-glow_enabled = true
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_6yq8t"]
 radius = 2.0
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_lnrhe"]
+size = Vector3(20, 10, 20)
+
+[sub_resource type="Environment" id="Environment_6yq8t"]
+glow_enabled = true
+
 [node name="Game" type="Node3D" unique_id=1160267840 node_paths=PackedStringArray("list_of_view")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15)
 script = ExtResource("1_jpbhf")
 list_of_view = [null, null]
 
 [node name="StaticMap" type="StaticBody3D" parent="." unique_id=881072130]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticMap" unique_id=1340238656]
-shape = SubResource("WorldBoundaryShape3D_6yq8t")
-
-[node name="Wisps" type="MeshInstance3D" parent="StaticMap" unique_id=2070779191]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.476215, 0, 0)
-mesh = SubResource("PlaneMesh_6yq8t")
-
 [node name="Main" type="MeshInstance3D" parent="StaticMap" unique_id=1904857005]
-mesh = SubResource("PlaneMesh_6yq8t")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 5)
+mesh = SubResource("BoxMesh_8vyll")
 
-[node name="EnemyArena" type="MeshInstance3D" parent="StaticMap" unique_id=1050034999]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.238108, 0, 0)
-mesh = SubResource("PlaneMesh_6yq8t")
+[node name="slope" type="MeshInstance3D" parent="StaticMap/Main" unique_id=1688942529]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 7.5, -9)
+mesh = SubResource("PrismMesh_6yq8t")
 
-[node name="WispField" type="Area3D" parent="StaticMap" unique_id=1986680004 node_paths=PackedStringArray("timer", "wisp_spawner")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.476215, 0, 0)
-visible = false
+[node name="StaticBody3D" type="StaticBody3D" parent="StaticMap/Main/slope" unique_id=138310189]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticMap/Main/slope/StaticBody3D" unique_id=195312888]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -5, -2.5, -5)
+shape = SubResource("ConvexPolygonShape3D_1j5yo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticMap" unique_id=1340238656]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 5)
+shape = SubResource("BoxShape3D_1qftq")
+
+[node name="EnemyArenaFight" type="MeshInstance3D" parent="StaticMap" unique_id=1050034999]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -9)
+mesh = SubResource("BoxMesh_owcl8")
+
+[node name="WispField" type="Area3D" parent="StaticMap/EnemyArenaFight" unique_id=1986680004 node_paths=PackedStringArray("timer", "wisp_spawner")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23810768, 5, 0)
 collision_layer = 128
 collision_mask = 128
 script = ExtResource("2_1qftq")
@@ -59,21 +89,66 @@ timer = NodePath("Settings/Timer")
 wisp_spawner = NodePath("Settings/SpawnProjectile")
 metadata/_custom_type_script = "uid://cr3j6vebgmcmd"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticMap/WispField" unique_id=391309099]
-shape = SubResource("BoxShape3D_4ybgr")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticMap/EnemyArenaFight/WispField" unique_id=391309099]
+shape = SubResource("BoxShape3D_tr8b4")
 debug_fill = false
 
-[node name="Settings" type="Node3D" parent="StaticMap/WispField" unique_id=972889074]
+[node name="Settings" type="Node3D" parent="StaticMap/EnemyArenaFight/WispField" unique_id=972889074]
 
-[node name="SpawnProjectile" type="Node" parent="StaticMap/WispField/Settings" unique_id=327132221]
+[node name="SpawnProjectile" type="Node" parent="StaticMap/EnemyArenaFight/WispField/Settings" unique_id=327132221]
 script = ExtResource("3_vvut4")
 projectile_scene = ExtResource("4_5prq0")
 metadata/_custom_type_script = "uid://x544es0wcwfx"
 
-[node name="Timer" type="Timer" parent="StaticMap/WispField/Settings" unique_id=16435803]
+[node name="Timer" type="Timer" parent="StaticMap/EnemyArenaFight/WispField/Settings" unique_id=16435803]
 one_shot = true
 
-[node name="Players" type="Node3D" parent="." unique_id=2135037073]
+[node name="Spawner" type="Node3D" parent="StaticMap/EnemyArenaFight" unique_id=278593098]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.238108, 0, 0)
+
+[node name="Interactable" type="Area3D" parent="StaticMap/EnemyArenaFight/Spawner" unique_id=727857076]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("7_fhy3a")
+unit_limit = 1
+metadata/_custom_type_script = "uid://cll40f5jgk6d"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticMap/EnemyArenaFight/Spawner/Interactable" unique_id=1160749085]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 6, 8)
+shape = SubResource("CylinderShape3D_6yq8t")
+debug_color = Color(0.7764651, 0.4405016, 1.92523e-07, 0.41960785)
+
+[node name="SpawnEnemies" type="Node" parent="StaticMap/EnemyArenaFight/Spawner" unique_id=2011077726 node_paths=PackedStringArray("Spawn_points")]
+script = ExtResource("8_oxnsv")
+Spawn_points = [NodePath("../Node3D"), NodePath("../Node3D2")]
+enemy_type = 1
+metadata/_custom_type_script = "uid://4t8tjrbndx2f"
+
+[node name="Node3D" type="Node3D" parent="StaticMap/EnemyArenaFight/Spawner" unique_id=1211356810]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, 0)
+
+[node name="Node3D2" type="Node3D" parent="StaticMap/EnemyArenaFight/Spawner" unique_id=798444976]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+
+[node name="Hole" parent="StaticMap/EnemyArenaFight" unique_id=344530017 instance=ExtResource("8_fhy3a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1490288, 5, 3.9346273)
+
+[node name="Hole2" parent="StaticMap/EnemyArenaFight" unique_id=2065032987 instance=ExtResource("8_fhy3a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9125595, 5, 2.2825196)
+
+[node name="Hole3" parent="StaticMap/EnemyArenaFight" unique_id=1512356431 instance=ExtResource("8_fhy3a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9994755, 5, -5.625391)
+
+[node name="Hole4" parent="StaticMap/EnemyArenaFight" unique_id=1318046203 instance=ExtResource("8_fhy3a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0383224, 5, -2.8863685)
+
+[node name="Hole5" parent="StaticMap/EnemyArenaFight" unique_id=911802793 instance=ExtResource("8_fhy3a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4515858, 5, -8.0106535)
+
+[node name="Iland" type="StaticBody3D" parent="StaticMap/EnemyArenaFight" unique_id=1367082743]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticMap/EnemyArenaFight/Iland" unique_id=348947426]
+shape = SubResource("BoxShape3D_lnrhe")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=647554647]
 transform = Transform3D(0.546579, -0.60909915, 0.5746735, 0, 0.6862531, 0.7273629, -0.8374075, -0.39756128, 0.37509152, 0, 3.212193, 5.9742565)
@@ -82,60 +157,14 @@ transform = Transform3D(0.546579, -0.60909915, 0.5746735, 0, 0.6862531, 0.727362
 environment = SubResource("Environment_6yq8t")
 
 [node name="MiniGame" parent="." unique_id=583750615 instance=ExtResource("6_7ulqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -9.72532)
-
-[node name="Hole" parent="." unique_id=344530017 instance=ExtResource("8_fhy3a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.089079, 0, 3.9346273)
-
-[node name="Hole2" parent="." unique_id=2065032987 instance=ExtResource("8_fhy3a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.150667, 0, 2.2825196)
-
-[node name="Hole3" parent="." unique_id=1512356431 instance=ExtResource("8_fhy3a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.237583, 0, -5.625391)
-
-[node name="Hole4" parent="." unique_id=1318046203 instance=ExtResource("8_fhy3a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.199785, 0, -2.8863685)
-
-[node name="Hole5" parent="." unique_id=911802793 instance=ExtResource("8_fhy3a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.786522, 0, -8.0106535)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, -3.7253199)
 
 [node name="EnemySpawnPoint" type="Node3D" parent="." unique_id=739512149]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.020444453, 0, -5.205411)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9795556, 0, 5.79459)
 script = ExtResource("6_wedpv")
 metadata/_custom_type_script = "uid://lbrvarwcj32q"
 
-[node name="Spawner" type="Node3D" parent="." unique_id=278593098]
+[node name="JackSmith" parent="." unique_id=1547147658 instance=ExtResource("10_lnrhe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.876064, 0, 7.1126995)
 
-[node name="Interactable" type="Area3D" parent="Spawner" unique_id=727857076]
-collision_layer = 16
-collision_mask = 0
-script = ExtResource("7_fhy3a")
-unit_limit = 1
-metadata/_custom_type_script = "uid://cll40f5jgk6d"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Spawner/Interactable" unique_id=1160749085]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 8)
-shape = SubResource("CylinderShape3D_6yq8t")
-debug_color = Color(0.7764651, 0.4405016, 1.92523e-07, 0.41960785)
-
-[node name="SpawnEnemies" type="Node" parent="Spawner" unique_id=2011077726 node_paths=PackedStringArray("Spawn_points")]
-script = ExtResource("8_oxnsv")
-Spawn_points = [NodePath("../Node3D"), NodePath("../Node3D2")]
-enemy_type = 1
-metadata/_custom_type_script = "uid://4t8tjrbndx2f"
-
-[node name="Node3D" type="Node3D" parent="Spawner" unique_id=1211356810]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, 0)
-
-[node name="Node3D2" type="Node3D" parent="Spawner" unique_id=798444976]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
-
-[node name="BuildChanger" parent="." unique_id=1715483009 instance=ExtResource("9_oxnsv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.201591, 0, 0)
-effect_list = Array[StringName]([&"uid://c2nyp4qn0xbo", &"uid://cfryitthwel8i"])
-
-[node name="BuildChanger2" parent="." unique_id=556075953 instance=ExtResource("9_oxnsv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.201591, 0, 4)
-effect_list = Array[StringName]([&"uid://bxnmn05cakwdi", &"uid://dj8jejqlvtkrm"])
-
-[connection signal="interaction_signal" from="Spawner/Interactable" to="Spawner/SpawnEnemies" method="spawn"]
+[connection signal="interaction_signal" from="StaticMap/EnemyArenaFight/Spawner/Interactable" to="StaticMap/EnemyArenaFight/Spawner/SpawnEnemies" method="spawn"]

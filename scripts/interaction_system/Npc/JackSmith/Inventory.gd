@@ -49,12 +49,9 @@ func remove_sub_gem(idx: int) -> void:
 	sub_gems[idx] = null
 
 ## UI
-func show() -> void:
-	swap_visibility.rpc()
-
 @rpc("authority", "call_local", "reliable")
-func swap_visibility() -> void:
-	inventory_ui.visible = !inventory_ui.visible
+func swap_visibility(value: bool) -> void:
+	inventory_ui.visible = value
 
 func on_gem_pressed(idx: int = -1) -> void:
 	swap_gem.rpc_id(1, idx)

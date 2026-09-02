@@ -58,6 +58,11 @@ rune = ExtResource("9_8qjgm")
 cd = 10.0
 metadata/_custom_type_script = "uid://nrajgkybshxf"
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_kvwax"]
+properties/0/path = NodePath(".:text")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_khinc"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_6yq8t"]
@@ -86,7 +91,7 @@ properties/4/path = NodePath("Puppet:rotation")
 properties/4/spawn = true
 properties/4/replication_mode = 2
 
-[node name="Player" type="Node3D" unique_id=1666680966 node_paths=PackedStringArray("input_system", "carving_system", "carving_ui", "camera", "interact_system", "hp_bar", "view", "inventory", "rune_spawner", "model", "hurt_box", "effect_spawner", "projectile_spawner")]
+[node name="Player" type="Node3D" unique_id=1666680966 node_paths=PackedStringArray("input_system", "carving_system", "carving_ui", "camera", "interact_system", "hp_bar", "view", "inventory", "rune_spawner", "counter_indicator", "model", "hurt_box", "effect_spawner", "projectile_spawner")]
 script = ExtResource("1_tpg5x")
 input_system = NodePath("InputSystem")
 carving_system = NodePath("CarvingSystem")
@@ -97,6 +102,7 @@ hp_bar = NodePath("UI/Panel/MarginContainer/VBoxContainer/HpBar")
 view = NodePath("SubViewport")
 inventory = NodePath("Inventory")
 rune_spawner = NodePath("Rune")
+counter_indicator = NodePath("UI/Panel/MarginContainer/VBoxContainer/Label")
 model = NodePath("Puppet")
 stats = SubResource("Resource_c3xxp")
 hurt_box = NodePath("Puppet/HurtBox")
@@ -154,6 +160,15 @@ theme_override_constants/margin_bottom = 8
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Panel/MarginContainer" unique_id=1451016778]
 layout_mode = 2
 alignment = 1
+
+[node name="Label" type="Label" parent="UI/Panel/MarginContainer/VBoxContainer" unique_id=273486427]
+layout_mode = 2
+text = "None"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="UI/Panel/MarginContainer/VBoxContainer/Label" unique_id=362320468]
+replication_config = SubResource("SceneReplicationConfig_kvwax")
 
 [node name="HpBar" parent="UI/Panel/MarginContainer/VBoxContainer" unique_id=1495397635 instance=ExtResource("9_rn7t0")]
 custom_minimum_size = Vector2(0, 20)

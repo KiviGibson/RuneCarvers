@@ -17,13 +17,21 @@ var base_mask := 3
 func _ready() -> void:
 	if not multiplayer.is_server(): return
 	setup_stats()
-	
+	if model: setup_movement()
 
 func setup_stats() -> void:
 	stats = stats.duplicate(true)
 	stats.current_health = stats.max_health
 	stats.health_changed.connect(_on_health_change)
 	stats.health_depleated.connect(_on_health_depleated)
+
+func setup_movement() -> void:
+	model.setup_movement(
+		stats.movement_speed, 
+		stats.running_multiplayer,
+		stats.focus_speed,
+		stats.stamina
+		)
 
 func _on_getting_hit(damage: Damage) -> void:
 	for key in effects.keys():

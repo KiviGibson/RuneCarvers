@@ -15,6 +15,8 @@ var current_hole: Hole
 var hiding: bool = false
 var shot: bool = false
 var can_rotate: bool = true
+var last_state: StringName
+var stunned: bool: set = on_stun
 
 func _ready() -> void:
 	if not multiplayer.is_server(): return
@@ -22,9 +24,16 @@ func _ready() -> void:
 	if multiplayer.is_server(): 
 		timer_borrow.timeout.connect(func(): un_borrow.rpc())
 
+func on_stun(value) -> void:
+	stunned = value
+	if value: 
+		animator.pause()
+	else:
+		animator.play()
+
 func _process(_delta: float) -> void:
 	if not multiplayer.is_server(): return
-	if can_rotate: 
+	if can_rotate and not stunned: 
 		if current_target == null: return
 		changed_rotation.emit(Vector2(
 			current_target.global_position.x - vision.global_position.x, 
@@ -75,6 +84,7 @@ func change_anim_spped(value: float) -> void:
 func animate(anim_name: StringName, back_ward: bool = false) -> void:
 	if back_ward: animator.play_backwards(anim_name)
 	else: animator.play(anim_name)
+
 func shoot() -> void:
 	if multiplayer.is_server():
 		strait_projectile.spawn_projectile()

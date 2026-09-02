@@ -3,7 +3,7 @@ class_name SpawnEnemies
 @export var Spawn_points: Array[Node3D]
 @export var enemy_type: EnemySpawner.enemy
 
-func spawn() -> void:
+func spawn(_id: int = 0) -> void:
 	for point in Spawn_points:
 		Enemies.spawn({
 			"enemy": enemy_type,

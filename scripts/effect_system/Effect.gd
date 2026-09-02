@@ -5,9 +5,15 @@ const str_to_path: Dictionary[StringName, String] = {
 	&"positively_charged": "uid://dbh4fo4orvnbx",
 	&"negatively_charged": "uid://d326cvvglkvbh",
 	&"burn": "uid://cia21gmitmeip",
+	&"fire_starter": "uid://dncupmnjuscno",
+	&"fired_up": "uid://difcoya6deoe4",
+	&"dazed": "uid://dkqnl2jcb08y8",
+	&"rocky_armor": "uid://lg3p3chp0b4q",
+	&"frostbite": "uid://oty8rbud34tw",
 }
 
 signal effect_expired(name: StringName)
+signal effect_reset()
 signal setup(host: Unit)
 
 var effect_name: StringName
@@ -34,6 +40,7 @@ func _process(delta: float) -> void:
 	if time_left <= 0.0: effect_expired.emit(effect_name)
 
 func reset_cd() -> void:
+	effect_reset.emit()
 	time_left = duration
 
 func trigger_onhit(hitbox: HitBox) -> void:

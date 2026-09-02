@@ -10,6 +10,7 @@ enum player_states{normal, locked, running, carving}
 @export var view: SubViewport
 @export var inventory: Inventory
 @export var rune_spawner: RuneSpawner
+@export var counter_indicator: Label
 var owner_id: int: 
 	set(value):
 		owner_id = value
@@ -41,3 +42,10 @@ func get_rune(rune: PackedScene) -> void: ## Ustaw nową runę
 func use_rune(value: bool) -> void: ## Użyj runy
 	if current_rune:
 		current_rune.activate(value)
+
+func _process(delta: float) -> void:
+	if not multiplayer.is_server(): return
+	if current_rune:
+		counter_indicator.text = str(current_rune.ammo)
+	else:
+		counter_indicator.text = "0"

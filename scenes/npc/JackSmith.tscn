@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://de7abuunrnk1j"]
+
+[ext_resource type="Script" uid="uid://bgsf42wkwerxy" path="res://scripts/interaction_system/Npc/JackSmith/JackSmith.gd" id="1_j8ni7"]
+[ext_resource type="Script" uid="uid://cll40f5jgk6d" path="res://scripts/interaction_system/Interactable.gd" id="2_2w1c4"]
+[ext_resource type="Shader" uid="uid://dytj1qodinn24" path="res://effects/areashader.gdshader" id="3_h1mg1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6yq8t"]
+radius = 2.0
+
+[sub_resource type="Gradient" id="Gradient_h1mg1"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h1mg1"]
+gradient = SubResource("Gradient_h1mg1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1j5yo"]
+render_priority = 0
+shader = ExtResource("3_h1mg1")
+shader_parameter/albedo = Color(1, 0.4436839, 0.37509546, 1)
+shader_parameter/texture_albedo = SubResource("GradientTexture1D_h1mg1")
+shader_parameter/proximity_fade_distance = 0.0999999977648
+shader_parameter/albedo_texture_size = Vector2i(0, 0)
+shader_parameter/point_size = 0.0
+shader_parameter/roughness = 0.0
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
+shader_parameter/specular = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(0, 0, 0)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(0, 0, 0)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6yq8t"]
+material = SubResource("ShaderMaterial_1j5yo")
+top_radius = 2.0
+bottom_radius = 2.0
+height = 0.5
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6yq8t"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6yq8t"]
+
+[node name="JackSmith" type="Node3D" unique_id=1547147658 node_paths=PackedStringArray("interaction_zone")]
+script = ExtResource("1_j8ni7")
+interaction_zone = NodePath("Interactable")
+metadata/_custom_type_script = "uid://bgsf42wkwerxy"
+
+[node name="Interactable" type="Area3D" parent="." unique_id=1784649957]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("2_2w1c4")
+metadata/_custom_type_script = "uid://cll40f5jgk6d"
+
+[node name="Collider" type="CollisionShape3D" parent="Interactable" unique_id=273333501]
+shape = SubResource("SphereShape3D_6yq8t")
+
+[node name="VisibleArea" type="MeshInstance3D" parent="." unique_id=2064156354]
+mesh = SubResource("CylinderMesh_6yq8t")
+
+[node name="NpcModel" type="MeshInstance3D" parent="." unique_id=1019030553]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_6yq8t")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NpcModel" unique_id=2088680082]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NpcModel/StaticBody3D" unique_id=1036976488]
+shape = SubResource("CapsuleShape3D_6yq8t")
+
+[connection signal="interaction_signal" from="Interactable" to="." method="open_inventory"]
+[connection signal="unit_out_of_range" from="Interactable" to="." method="close_inventory"]
