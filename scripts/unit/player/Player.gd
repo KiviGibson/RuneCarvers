@@ -43,7 +43,7 @@ func use_rune(value: bool) -> void: ## Użyj runy
 	if current_rune:
 		current_rune.activate(value)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not multiplayer.is_server(): return
 	if current_rune:
 		counter_indicator.text = str(current_rune.ammo)

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bnn8qhdyh10wi" path="res://scripts/unit/player/Gem.gd" id="1_0ra1v"]
 
 [resource]
+resource_name = "Wisping around"
 script = ExtResource("1_0ra1v")
 identity = 1
 passive = "uid://c2nyp4qn0xbo"

@@ -80,7 +80,7 @@ func normal_state(delta: float) -> void:
 			current_stamina = stamina
 			exhausted = false
 
-func focus_state(delta: float) -> void:
+func focus_state(_delta: float) -> void:
 	velocity *= focus_mult
 
 func force_state(delta: float) -> void:

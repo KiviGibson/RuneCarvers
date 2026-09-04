@@ -9,13 +9,15 @@ signal gem_removed()
 
 func set_gem_options(gems: Array[Gem]) -> void:
 	if not multiplayer.is_server(): return
+	for child in option_container.get_children():
+		child.free()
 	for gem in gems:
-		var tmp: GemOption = option_scene.instatiate()
-		tmp.selected.connect(func(g: Gem): gem_select.rpc_id(1, g)) # Makes that option is updated in server
-		option_container.add_child(tmp)
+		var tmp: GemOption = option_scene.instantiate()
 		tmp.gem = gem
+		option_container.add_child(tmp, true)
+		tmp.selected.connect(func(g: Gem): gem_select(g))
 
-@rpc("any_peer", "call_local", "reliable")
+
 func gem_select(gem: Gem) -> void:
 	if not multiplayer.is_server(): return
 	if gem == null: gem_removed.emit()

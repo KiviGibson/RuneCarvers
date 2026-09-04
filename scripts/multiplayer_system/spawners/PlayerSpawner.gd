@@ -16,8 +16,12 @@ func spawn_player(id: int) -> Player:
 	tmp.name = "Player" + str(id)
 	tmp.input_system.owner_id = id
 	tmp.carving_ui.name += str(id)
-	tmp.carving_ui.reparent(game_overlay) # Robi warning ale jest git
-	tmp.view.reparent(POV[current_pov]) # Robi warning ale jest git
+	tmp.carving_ui.owner = null
+	tmp.view.owner = null
+	tmp.inventory.inventory_ui.owner = null
+	tmp.carving_ui.reparent(game_overlay)
+	tmp.view.reparent(POV[current_pov])
+	tmp.inventory.inventory_ui.reparent(EscapeManager.canvas)
 	current_pov += 1
 	_players[id] = tmp
 	return tmp

@@ -6,9 +6,10 @@
 [sub_resource type="LabelSettings" id="LabelSettings_6yq8t"]
 font_size = 24
 
-[node name="EscapeUiManager" type="Node" unique_id=1277556604 node_paths=PackedStringArray("escape_menu")]
+[node name="EscapeUiManager" type="Node" unique_id=1277556604 node_paths=PackedStringArray("escape_menu", "canvas")]
 script = ExtResource("1_wvd3p")
 escape_menu = NodePath("CanvasLayer/EscapeMenu")
+canvas = NodePath("CanvasLayer")
 metadata/_custom_type_script = "uid://dcpfhpu3iprdh"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1131045174]

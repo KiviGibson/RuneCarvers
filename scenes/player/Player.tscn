@@ -111,13 +111,13 @@ hurt_box = NodePath("Puppet/HurtBox")
 effect_spawner = NodePath("Effect")
 projectile_spawner = NodePath("Projectile")
 
-[node name="Inventory" type="Node" parent="." unique_id=952128580 node_paths=PackedStringArray("search_menu", "inventory_ui")]
+[node name="Inventory" type="Node" parent="." unique_id=952128580 node_paths=PackedStringArray("gem_slots", "search_menu", "inventory_ui")]
 script = ExtResource("3_8nn5r")
 main_gem = ExtResource("4_kvwax")
-sub_gems = Array[ExtResource("5_x3qp0")]([ExtResource("6_76i7i")])
-avilable_gems = Array[ExtResource("5_x3qp0")]([ExtResource("4_kvwax"), ExtResource("7_mndc6"), ExtResource("8_1hh02")])
-search_menu = NodePath("../InventoryUILayer/InventoryUI/SearchMenu")
-inventory_ui = NodePath("../InventoryUILayer/InventoryUI")
+avilable_gems = Array[ExtResource("5_x3qp0")]([ExtResource("4_kvwax"), ExtResource("7_mndc6"), ExtResource("8_1hh02"), ExtResource("6_76i7i")])
+gem_slots = [NodePath("../InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption"), NodePath("../InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption2"), NodePath("../InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption3"), NodePath("../InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption4")]
+search_menu = NodePath("../InventoryUI/SearchMenu")
+inventory_ui = NodePath("../InventoryUI")
 metadata/_custom_type_script = "uid://bsdhjg5t04i3q"
 
 [node name="InputSystem" type="Node" parent="." unique_id=804145743]
@@ -130,7 +130,81 @@ carvings = Array[ExtResource("3_c3xxp")]([SubResource("Resource_7ddre"), SubReso
 ui = [NodePath("../UI/Panel/MarginContainer/VBoxContainer/HBoxContainer"), NodePath("../UI/Panel/MarginContainer/VBoxContainer/HBoxContainer2"), NodePath("../UI/Panel/MarginContainer/VBoxContainer/HBoxContainer3"), NodePath("../UI/Panel/MarginContainer/VBoxContainer/HBoxContainer4")]
 metadata/_custom_type_script = "uid://qpy2uevlwsjk"
 
+[node name="InventoryUI" type="Panel" parent="." unique_id=1963536372 node_paths=PackedStringArray("queue")]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("22_76i7i")
+queue = [NodePath("SearchMenu")]
+
+[node name="MarginContainer" type="MarginContainer" parent="InventoryUI" unique_id=172578870]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InventoryUI/MarginContainer" unique_id=541330595]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="InventoryUI/MarginContainer/VBoxContainer" unique_id=584342239]
+layout_mode = 2
+alignment = 1
+
+[node name="GemOption" parent="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1504063666 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
+layout_mode = 2
+tags = {
+0: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
+1: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Blue2"),
+2: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Red")
+}
+slot_num = -1
+sloted = true
+
+[node name="GemOption2" parent="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=153361322 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
+layout_mode = 2
+tags = {
+0: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
+1: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Blue2"),
+2: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Red")
+}
+sloted = true
+
+[node name="GemOption3" parent="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=901000007 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
+layout_mode = 2
+tags = {
+0: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
+1: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Blue2"),
+2: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Red")
+}
+slot_num = 1
+sloted = true
+
+[node name="GemOption4" parent="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1125143313 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
+layout_mode = 2
+tags = {
+0: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
+1: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Blue2"),
+2: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Red")
+}
+slot_num = 2
+sloted = true
+
+[node name="SearchMenu" parent="InventoryUI" unique_id=1204333785 instance=ExtResource("21_5ttev")]
+visible = false
+layout_mode = 1
+
 [node name="UI" type="Control" parent="." unique_id=1427293323]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -236,115 +310,6 @@ size = 20.0
 script = ExtResource("15_ejd4k")
 target = NodePath("../../Puppet")
 
-[node name="InventoryUILayer" type="CanvasLayer" parent="." unique_id=1787672542]
-
-[node name="InventoryUI" type="Panel" parent="InventoryUILayer" unique_id=1963536372 node_paths=PackedStringArray("queue")]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("22_76i7i")
-queue = [NodePath("SearchMenu")]
-
-[node name="Button" type="Button" parent="InventoryUILayer/InventoryUI" unique_id=706321260]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-
-[node name="SearchMenu" parent="InventoryUILayer/InventoryUI" unique_id=1204333785 instance=ExtResource("21_5ttev")]
-visible = false
-layout_mode = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="InventoryUILayer/InventoryUI" unique_id=172578870]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="VBoxContainer" type="VBoxContainer" parent="InventoryUILayer/InventoryUI/MarginContainer" unique_id=541330595]
-layout_mode = 2
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="InventoryUILayer/InventoryUI/MarginContainer/VBoxContainer" unique_id=1380579054]
-layout_mode = 2
-alignment = 1
-
-[node name="GemOption" parent="InventoryUILayer/InventoryUI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1504063666 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
-layout_mode = 2
-tags = {
-0: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
-1: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Blue2"),
-2: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Red")
-}
-
-[node name="GemOption2" parent="InventoryUILayer/InventoryUI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1171120922 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
-layout_mode = 2
-tags = {
-0: NodePath("../GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
-1: NodePath("../GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Blue2"),
-2: NodePath("../GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Red")
-}
-
-[node name="GemOption3" parent="InventoryUILayer/InventoryUI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=185458265 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
-layout_mode = 2
-tags = {
-0: NodePath("../GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
-1: NodePath("../GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Blue2"),
-2: NodePath("../GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Red")
-}
-
-[node name="GemOption4" parent="InventoryUILayer/InventoryUI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1596930205 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
-layout_mode = 2
-tags = {
-0: NodePath("../GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
-1: NodePath("../GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Blue2"),
-2: NodePath("../GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Red")
-}
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="InventoryUILayer/InventoryUI/MarginContainer/VBoxContainer" unique_id=584342239]
-layout_mode = 2
-alignment = 1
-
-[node name="GemOption5" parent="InventoryUILayer/InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=784594719 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
-layout_mode = 2
-tags = {
-0: NodePath("../../HBoxContainer/GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
-1: NodePath("../../HBoxContainer/GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Blue2"),
-2: NodePath("../../HBoxContainer/GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Red")
-}
-
-[node name="GemOption6" parent="InventoryUILayer/InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=45808024 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
-layout_mode = 2
-tags = {
-0: NodePath("../../HBoxContainer/GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
-1: NodePath("../../HBoxContainer/GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Blue2"),
-2: NodePath("../../HBoxContainer/GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Red")
-}
-
-[node name="GemOption7" parent="InventoryUILayer/InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=181124777 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
-layout_mode = 2
-tags = {
-0: NodePath("../../HBoxContainer/GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
-1: NodePath("../../HBoxContainer/GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Blue2"),
-2: NodePath("../../HBoxContainer/GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Red")
-}
-
-[node name="GemOption8" parent="InventoryUILayer/InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=2092680577 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
-layout_mode = 2
-tags = {
-0: NodePath("../../HBoxContainer/GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
-1: NodePath("../../HBoxContainer/GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Blue2"),
-2: NodePath("../../HBoxContainer/GemOption/Button/Panel/MarginContainer/VBoxContainer/Tags/Red")
-}
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2085177374]
 replication_config = SubResource("SceneReplicationConfig_mdl7e")
 
@@ -370,6 +335,11 @@ metadata/_custom_type_script = "uid://cunlm7qu3hrat"
 [connection signal="movement_vector_change" from="InputSystem" to="Puppet" method="set_movement_vector"]
 [connection signal="target_vector_change" from="InputSystem" to="Puppet" method="set_rotation_vector"]
 [connection signal="successful_carving" from="CarvingSystem" to="." method="get_rune"]
+[connection signal="on_button_press" from="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption" to="Inventory" method="on_gem_pressed"]
+[connection signal="on_button_press" from="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption2" to="Inventory" method="on_gem_pressed"]
+[connection signal="on_button_press" from="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption3" to="Inventory" method="on_gem_pressed"]
+[connection signal="on_button_press" from="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption4" to="Inventory" method="on_gem_pressed"]
+[connection signal="gem_selected" from="InventoryUI/SearchMenu" to="Inventory" method="set_gem"]
 [connection signal="finish_force_movement" from="Puppet" to="." method="enable_collision"]
 [connection signal="affected" from="Puppet/HurtBox" to="." method="add_effect"]
 [connection signal="got_hit" from="Puppet/HurtBox" to="." method="_on_getting_hit"]

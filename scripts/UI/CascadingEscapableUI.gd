@@ -7,5 +7,6 @@ func close() -> bool:
 		if element.visible:
 			element.visible = false
 			return false
+	closed.emit()
 	self.visible = false
 	return true

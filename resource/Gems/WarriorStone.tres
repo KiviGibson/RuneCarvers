@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bnn8qhdyh10wi" path="res://scripts/unit/player/Gem.gd" id="1_aivre"]
 
 [resource]
+resource_name = "Worrior aura"
 script = ExtResource("1_aivre")
 passive = "uid://bxnmn05cakwdi"
 description = "Gives Player Aura"
