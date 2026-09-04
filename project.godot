@@ -22,6 +22,7 @@ Lobby="*uid://c4ihn42ynrw48"
 Projectiles="*uid://bjlkjipi24fx3"
 Players="*uid://2untbf8kxu6h"
 Enemies="*uid://dj4hst5il4rat"
+EscapeManager="*uid://bd21pr6r2ojj7"
 
 [display]
 

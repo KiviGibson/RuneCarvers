@@ -52,6 +52,9 @@ func remove_sub_gem(idx: int) -> void:
 @rpc("authority", "call_local", "reliable")
 func swap_visibility(value: bool) -> void:
 	inventory_ui.visible = value
+	if value: EscapeManager.currently_cancellable_ui = inventory_ui
+	elif EscapeManager.currently_cancellable_ui == inventory_ui: 
+		EscapeManager.currently_cancellable_ui = null
 
 func on_gem_pressed(idx: int = -1) -> void:
 	swap_gem.rpc_id(1, idx)

@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bd21pr6r2ojj7"]
+
+[ext_resource type="Script" uid="uid://dcpfhpu3iprdh" path="res://scripts/UI/EscapeFunction.gd" id="1_wvd3p"]
+[ext_resource type="Script" uid="uid://dt4o56r7ndbl1" path="res://scripts/UI/BasicEscapableUI.gd" id="2_m4b6i"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6yq8t"]
+font_size = 24
+
+[node name="EscapeUiManager" type="Node" unique_id=1277556604 node_paths=PackedStringArray("escape_menu")]
+script = ExtResource("1_wvd3p")
+escape_menu = NodePath("CanvasLayer/EscapeMenu")
+metadata/_custom_type_script = "uid://dcpfhpu3iprdh"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1131045174]
+layer = 2
+
+[node name="EscapeMenu" type="Panel" parent="CanvasLayer" unique_id=1767992688]
+visible = false
+custom_minimum_size = Vector2(200, 200)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_m4b6i")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/EscapeMenu" unique_id=1467683062]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/EscapeMenu/MarginContainer" unique_id=649717992]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/EscapeMenu/MarginContainer/VBoxContainer" unique_id=1747648185]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Escape Menu"
+label_settings = SubResource("LabelSettings_6yq8t")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/EscapeMenu/MarginContainer/VBoxContainer" unique_id=577194551]
+layout_mode = 2
+text = "Leave Game"
+
+[node name="Button2" type="Button" parent="CanvasLayer/EscapeMenu/MarginContainer/VBoxContainer" unique_id=469995467]
+layout_mode = 2
+text = "Settings"
