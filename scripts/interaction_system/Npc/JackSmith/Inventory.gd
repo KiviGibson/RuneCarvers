@@ -10,7 +10,7 @@ class_name Inventory
 var currently_swapped: int = -1
 
 func _ready() -> void:
-	inventory_ui.closed.connect(apply_gems)
+	inventory_ui.closed.connect(set_player_gems)
 
 func get_gem_list(main: bool) -> Array[Gem]:
 	var res: Array[Gem] = []
@@ -55,9 +55,28 @@ func remove_sub_gem(idx: int) -> void:
 	sub_gems[idx] = null
 	gem_slots[idx+1].gem = null
 
-func apply_gems() -> void:
-	pass
+
+## Applying
+
+@rpc("any_peer", "call_local", "reliable")
+func remove_all_effects() -> void:
+	for key in host.effects.keys():
+		if not host.effects[key].temporary:
+			host.remove_effect(key)
+			
+@rpc("any_peer", "call_local", "reliable")
+func give_effects() -> void:
+	host.add_passive(main_gem.passive)
+	for gem in sub_gems:
+		if gem != null:
+			host.add_passive(gem.passive)
+
+func set_player_gems() -> void:
+	remove_all_effects.rpc_id(1)
+	give_effects.rpc_id(1)
+
 ## UI
+
 @rpc("authority", "call_local", "reliable")
 func swap_visibility(value: bool) -> void:
 	inventory_ui.visible = value
@@ -66,7 +85,6 @@ func swap_visibility(value: bool) -> void:
 		EscapeManager.currently_cancellable_ui = null
 
 func on_gem_pressed(idx: int = -1) -> void:
-	print("pressed")
 	swap_gem.rpc_id(1, idx)
 
 @rpc("any_peer", "call_local", "reliable")

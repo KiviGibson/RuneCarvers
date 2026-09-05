@@ -44,6 +44,7 @@ func set_damage_owner(hitbox: HitBox):
 		effects[key].trigger_onhit(hitbox)
 
 func add_passive(passive: String) -> void:
+	print(passive)
 	var tmp := effect_spawner.spawn({"type": "passive", "effect": passive, "owner": self})
 	effects[tmp.name] = tmp
 

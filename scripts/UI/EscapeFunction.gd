@@ -7,7 +7,6 @@ var currently_cancellable_ui: EscapableUI: set = set_cancelable_ui
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("escape"):
-		print("Close")
 		if currently_cancellable_ui == null:
 			currently_cancellable_ui = escape_menu
 			escape_menu.visible = true
