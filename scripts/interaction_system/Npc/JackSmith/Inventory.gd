@@ -69,6 +69,7 @@ func give_effects() -> void:
 	host.add_passive(main_gem.passive)
 	for gem in sub_gems:
 		if gem != null:
+			print(gem.resource_name)
 			host.add_passive(gem.passive)
 
 func set_player_gems() -> void:

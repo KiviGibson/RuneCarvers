@@ -8,11 +8,12 @@ class_name Unit
 var effects: Dictionary[StringName, Effect]
 @export var effect_spawner: EffectSpawner
 @export var projectile_spawner: ProjectileSpawner
+var base_layer:= 2
+var base_mask := 3
 
 @abstract func _on_health_change(curernt: int, max_value: int) -> void
 @abstract func _on_health_depleated() -> void
-var base_layer:= 2
-var base_mask := 3
+@abstract func stun() -> void
 
 func _ready() -> void:
 	if not multiplayer.is_server(): return
@@ -44,7 +45,6 @@ func set_damage_owner(hitbox: HitBox):
 		effects[key].trigger_onhit(hitbox)
 
 func add_passive(passive: String) -> void:
-	print(passive)
 	var tmp := effect_spawner.spawn({"type": "passive", "effect": passive, "owner": self})
 	effects[tmp.name] = tmp
 

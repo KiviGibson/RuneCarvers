@@ -17,17 +17,10 @@ metadata/_custom_type_script = "uid://uaugd35wcih8"
 [sub_resource type="SphereShape3D" id="SphereShape3D_1j5yo"]
 radius = 4.5
 
-[sub_resource type="Gradient" id="Gradient_vwr1v"]
-colors = PackedColorArray(0, 1, 0, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_vwr1v"]
-gradient = SubResource("Gradient_vwr1v")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r3cm2"]
 render_priority = 0
 shader = ExtResource("5_vwr1v")
-shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/texture_albedo = SubResource("GradientTexture2D_vwr1v")
+shader_parameter/albedo = Color(2.5870278e-07, 0.14821118, 0.0006366856, 1)
 shader_parameter/proximity_fade_distance = 0.0999999977648
 shader_parameter/albedo_texture_size = Vector2i(1, 1)
 shader_parameter/point_size = 0.0

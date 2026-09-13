@@ -8,6 +8,8 @@ signal interact()
 signal activation(value: bool)
 signal target_vector_change(value: Vector2)
 signal carving_change(state: bool)
+signal run_input()
+signal jump_input()
 # Dodanie sygnału esc_key
 
 var owner_id: int ## Coop requirement
@@ -49,6 +51,9 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("carve_down"): carving_input.rpc_id(1, 1)
 	if event.is_action_pressed("carve_left"): carving_input.rpc_id(1, 2)
 	if event.is_action_pressed("carve_right"): carving_input.rpc_id(1, 3)
+	
+	if event.is_action_pressed("run"): run.rpc_id(1)
+	if event.is_action("jump"): jump.rpc_id(1)
 
 	if event is InputEventMouseMotion:
 		var screen_size: Vector2 = get_viewport().get_visible_rect().size/2
@@ -102,3 +107,11 @@ func update_targeting(value: Vector2) -> void:
 func carving_input(value: int) -> void:
 	if is_in_carving_state:
 		carved_symbol.emit(value)
+
+@rpc("any_peer", "call_local", "unreliable")
+func run() -> void:
+	run_input.emit()
+
+@rpc("any_peer", "call_local", "unreliable")
+func jump() -> void:
+	jump_input.emit()

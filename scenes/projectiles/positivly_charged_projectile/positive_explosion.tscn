@@ -141,3 +141,5 @@ shape = SubResource("SphereShape3D_1j5yo")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=566129234]
 replication_config = SubResource("SceneReplicationConfig_v4jek")
+
+[connection signal="change_ownership" from="." to="HitBox" method="_damage_ownership_exchange"]

@@ -11,7 +11,7 @@ func add_effect(hitbox: HitBox) -> void:
 	hitbox.effects.append(add)
 
 func repleace_effect(hitbox: HitBox) -> void:
-	if remove in hitbox.effects: 
+	if remove in hitbox.effects:
 		remove_effect(hitbox)
 		add_effect(hitbox)
 

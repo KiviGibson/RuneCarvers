@@ -13,6 +13,7 @@ func spawn_effect(data: Dictionary) -> Effect:
 	if data["type"] == "status":
 		tmp = load(Effect.str_to_path[data["effect"]]).instantiate()
 		tmp.effect_name = data["effect"]
+		tmp.host = host
 	elif data["type"] == "passive":
 		tmp = load(data["effect"]).instantiate()
 		tmp.host = host

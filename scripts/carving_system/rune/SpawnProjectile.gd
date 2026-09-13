@@ -5,6 +5,7 @@ class_name SpawnProjectile
 @export var reverse: bool = false
 
 func spawn_projectile(u: HurtBox = null) -> void:
+	print("Spawning ", projectile_scene.resource_name)
 	var res: Projectile
 	if u:
 		res = Projectiles.spawn({

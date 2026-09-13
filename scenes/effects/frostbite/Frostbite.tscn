@@ -1,7 +1,145 @@
 [gd_scene format=3 uid="uid://oty8rbud34tw"]
 
 [ext_resource type="Script" uid="uid://r0tp4n5w2xkh" path="res://scripts/effect_system/Effect.gd" id="1_64j3m"]
+[ext_resource type="Script" uid="uid://h5mlxxqabnk2" path="res://scripts/effect_system/shader_script/FrostbiteVis.gd" id="3_v0pdv"]
+[ext_resource type="Script" uid="uid://ctuio8xqpxg2j" path="res://scripts/effect_system/effect_components/DamageUnit.gd" id="3_xso52"]
+[ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/damage_system/Damage.gd" id="4_0qrn6"]
+[ext_resource type="Script" uid="uid://cky53i1vc01s0" path="res://scripts/effect_system/effect_components/StackingComponent.gd" id="6_1cj6k"]
+
+[sub_resource type="Shader" id="Shader_7aaie"]
+resource_local_to_scene = true
+code = "// NOTE: Shader automatically converted from Godot Engine 4.7.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode unshaded, blend_mix, depth_draw_opaque, cull_disabled, diffuse_burley;
+
+uniform vec4 albedo_border : source_color;
+uniform vec4 albedo_accent : source_color;
+
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform ivec2 albedo_texture_size;
+uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+uniform float angle_value: hint_range(0.0, 3.0, 1.0);
+void vertex() {
+	UV = UV * uv1_scale.xy + uv1_offset.xy;
+
+	// Billboard Mode: Enabled
+	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
+			MAIN_CAM_INV_VIEW_MATRIX[0],
+			MAIN_CAM_INV_VIEW_MATRIX[1],
+			MAIN_CAM_INV_VIEW_MATRIX[2],
+			MODEL_MATRIX[3]);
+	MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+	float angle = ((atan(base_uv.x-0.5, base_uv.y-0.5)) / (2.0 * PI));
+	vec4 albedo_tex = texture(texture_albedo, base_uv);
+	ALPHA = clamp(albedo_tex.b * float(angle<= (angle_value/3.0)-0.5) + float(albedo_tex.r>0.3), 0.0, 1.0);
+	ALBEDO = albedo_border.rgb*float(ALPHA>=0.9) + albedo_accent.rgb*float(ALPHA<=0.9);
+}
+"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0qrn6"]
+load_path = "res://.godot/imported/FROSTBITE.png-b9add0b86c89f7702a44eee602538301.s3tc.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0qrn6"]
+render_priority = 0
+shader = SubResource("Shader_7aaie")
+shader_parameter/albedo_border = Color(1, 1, 1, 1)
+shader_parameter/albedo_accent = Color(0.07581452, 0.98199505, 0.9280531, 1)
+shader_parameter/texture_albedo = SubResource("CompressedTexture2D_0qrn6")
+shader_parameter/albedo_texture_size = Vector2i(0, 0)
+shader_parameter/point_size = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/angle_value = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_1j5yo"]
+resource_local_to_scene = true
+
+[sub_resource type="Animation" id="Animation_v0pdv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:mesh:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1cj6k"]
+resource_name = "new_animation"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:mesh:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(3.0314324, 0),
+"update": 0,
+"values": [Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2ryvt"]
+_data = {
+&"RESET": SubResource("Animation_v0pdv"),
+&"new_animation": SubResource("Animation_1cj6k")
+}
+
+[sub_resource type="Resource" id="Resource_6yq8t"]
+script = ExtResource("4_0qrn6")
+value = 5
+metadata/_custom_type_script = "uid://uaugd35wcih8"
 
 [node name="Frostbite" type="Node3D" unique_id=888944204]
 script = ExtResource("1_64j3m")
+duration = 10.0
 metadata/_custom_type_script = "uid://r0tp4n5w2xkh"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1336225239 node_paths=PackedStringArray("animator", "host")]
+transform = Transform3D(1.1452391, 0, 0, 0, 1.1452391, 0, 0, 0, 1.1452391, -1, 3, 0)
+material_override = SubResource("ShaderMaterial_0qrn6")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_1j5yo")
+script = ExtResource("3_v0pdv")
+animator = NodePath("AnimationPlayer")
+host = NodePath("..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MeshInstance3D" unique_id=476960665]
+root_node = NodePath("../..")
+root_motion_local = true
+libraries/ = SubResource("AnimationLibrary_2ryvt")
+
+[node name="DamageUnit" type="Node" parent="." unique_id=2144267509]
+script = ExtResource("3_xso52")
+damage = SubResource("Resource_6yq8t")
+metadata/_custom_type_script = "uid://ctuio8xqpxg2j"
+
+[node name="StackingComponent" type="Node" parent="." unique_id=1061684894]
+script = ExtResource("6_1cj6k")
+required_stacks = 3
+metadata/_custom_type_script = "uid://cky53i1vc01s0"
+
+[connection signal="effect_reset" from="." to="StackingComponent" method="stack"]
+[connection signal="setup" from="." to="DamageUnit" method="setup"]
+[connection signal="stacks_achived" from="StackingComponent" to="DamageUnit" method="on_tick"]
+[connection signal="stacks_achived" from="StackingComponent" to="." method="set_exhoust" binds= [true, 2.0]]
+[connection signal="stacks_earned" from="StackingComponent" to="MeshInstance3D" method="stack_erned"]

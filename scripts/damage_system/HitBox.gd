@@ -23,4 +23,3 @@ func tick() -> void:
 	for collider in get_overlapping_areas():
 		if collider is HurtBox:
 			collider.hit(damage, effects)
-	print("Tick")
