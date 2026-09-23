@@ -15,7 +15,6 @@ metadata/_custom_type_script = "uid://r0tp4n5w2xkh"
 
 [node name="BonusDamage" type="Node" parent="." unique_id=1081125161 node_paths=PackedStringArray("timer")]
 script = ExtResource("3_vbdod")
-stacks = 1
 reset = true
 timer = NodePath("../WipeStacks")
 metadata/_custom_type_script = "uid://bx7nq0mgasyxl"

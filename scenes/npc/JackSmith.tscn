@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bgsf42wkwerxy" path="res://scripts/interaction_system/Npc/JackSmith/JackSmith.gd" id="1_j8ni7"]
 [ext_resource type="Script" uid="uid://cll40f5jgk6d" path="res://scripts/interaction_system/Interactable.gd" id="2_2w1c4"]
-[ext_resource type="Shader" uid="uid://dytj1qodinn24" path="res://effects/areashader.gdshader" id="3_h1mg1"]
+[ext_resource type="Shader" uid="uid://dytj1qodinn24" path="res://shaders/general_look_shader/areashader.gdshader" id="3_h1mg1"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6yq8t"]
 radius = 2.0
@@ -21,10 +21,6 @@ shader_parameter/texture_albedo = SubResource("GradientTexture1D_h1mg1")
 shader_parameter/proximity_fade_distance = 0.0999999977648
 shader_parameter/albedo_texture_size = Vector2i(0, 0)
 shader_parameter/point_size = 0.0
-shader_parameter/roughness = 0.0
-shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
-shader_parameter/specular = 0.0
-shader_parameter/metallic = 0.0
 shader_parameter/uv1_scale = Vector3(0, 0, 0)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(0, 0, 0)

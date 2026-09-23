@@ -48,6 +48,8 @@ radius = 2.0
 [sub_resource type="BoxShape3D" id="BoxShape3D_lnrhe"]
 size = Vector3(20, 10, 20)
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_6yq8t"]
+
 [sub_resource type="Environment" id="Environment_6yq8t"]
 glow_enabled = true
 
@@ -149,6 +151,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4515858, 5, -8.0106535)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticMap/EnemyArenaFight/Iland" unique_id=348947426]
 shape = SubResource("BoxShape3D_lnrhe")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticMap" unique_id=1097250689]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+shape = SubResource("WorldBoundaryShape3D_6yq8t")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=647554647]
 transform = Transform3D(0.546579, -0.60909915, 0.5746735, 0, 0.6862531, 0.7273629, -0.8374075, -0.39756128, 0.37509152, 0, 3.212193, 5.9742565)

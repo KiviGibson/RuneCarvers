@@ -1,4 +1,4 @@
-extends Node3D
+extends EnemyAI
 class_name MoleAI
 
 signal changed_rotation(rot_vec: Vector2)
@@ -16,7 +16,7 @@ var hiding: bool = false
 var shot: bool = false
 var can_rotate: bool = true
 var last_state: StringName
-var stunned: bool: set = on_stun
+var stunned: bool = false
 
 func _ready() -> void:
 	if not multiplayer.is_server(): return
@@ -24,12 +24,13 @@ func _ready() -> void:
 	if multiplayer.is_server(): 
 		timer_borrow.timeout.connect(func(): un_borrow.rpc())
 
-func on_stun(value) -> void:
-	stunned = value
-	if value: 
-		animator.pause()
-	else:
-		animator.play()
+func on_stun() -> void:
+	stunned = true
+	animator.pause()
+
+func on_un_stun() -> void:
+	stunned = false
+	animator.play()
 
 func _process(_delta: float) -> void:
 	if not multiplayer.is_server(): return

@@ -37,7 +37,6 @@ func _process(delta: float) -> void:
 	if not multiplayer.is_server(): return
 	if not temporary: return
 	time_left -= delta
-	print(time_left)
 	if time_left <= 0.0: 
 		on_expire.emit()
 		effect_expired.emit(effect_name)
@@ -55,6 +54,6 @@ func trigger_onhurt(damage: Damage) -> void:
 	for h in on_hurt:
 		h.got_hit(damage)
 
-func set_exhoust(val: bool, exhausted_duration: float) -> void:
+func set_exhoust(val: bool, exhausted_duration: float = duration) -> void:
 	exhausted = val
 	time_left = exhausted_duration

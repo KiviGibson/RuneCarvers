@@ -4,7 +4,6 @@ class_name EffectSpawner
 
 @export var host: Unit
 
-
 func _ready() -> void:
 	spawn_function = spawn_effect
 
@@ -21,5 +20,5 @@ func spawn_effect(data: Dictionary) -> Effect:
 	if data["owner"] is Unit:
 		tmp.owner_unit = data["owner"]
 	elif data["owner"] is EncodedObjectAsID:
-		tmp.owner_unit = instance_from_id(data["owner"].object_id)
+		tmp.owner_unit = instance_from_id(data["owner"].object_id) as Unit
 	return tmp

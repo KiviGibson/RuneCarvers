@@ -1,6 +1,6 @@
 [gd_resource type="ArrayMesh" format=4 uid="uid://gi14vjaynfjt"]
 
-[ext_resource type="Shader" uid="uid://dwa0oonen2i60" path="res://assets/models/Circle.gdshader" id="1_klh77"]
+[ext_resource type="Shader" uid="uid://dwa0oonen2i60" path="res://shaders/sword/Circle.gdshader" id="1_klh77"]
 [ext_resource type="Texture2D" uid="uid://cmbg1lluim170" path="res://assets/models/Highlight.png" id="2_7h5x0"]
 [ext_resource type="Texture2D" uid="uid://5u8ouogb42rn" path="res://assets/models/Grafika_bez_nazwy.png" id="3_8buyu"]
 

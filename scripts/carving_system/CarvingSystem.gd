@@ -6,12 +6,12 @@ signal successful_carving(rune: PackedScene) ## Po ukończeniu rycia wysyła syg
 @export var carvings: Array[Carvings]
 @export var max_carvings: int = 4
 @export var ui: Array[CarvingUI]
-var enabled: bool
+var enabled: bool = false
 
 func _ready() -> void:
 	if not multiplayer.is_server(): return
 	for i in range(max_carvings):
-		if carvings[i] == null: 
+		if carvings[i] == null:
 			ui[i].visible = false
 			continue
 		ui[i].visible = true

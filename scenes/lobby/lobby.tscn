@@ -4,7 +4,6 @@
 
 [node name="Lobby" type="CanvasLayer" unique_id=1729109719 node_paths=PackedStringArray("text")]
 layer = 2
-visible = false
 script = ExtResource("1_1ig7j")
 text = NodePath("Panel/VBoxContainer/Label")
 

@@ -14,6 +14,7 @@ var base_mask := 3
 @abstract func _on_health_change(curernt: int, max_value: int) -> void
 @abstract func _on_health_depleated() -> void
 @abstract func stun() -> void
+@abstract func un_stun() -> void
 
 func _ready() -> void:
 	if not multiplayer.is_server(): return

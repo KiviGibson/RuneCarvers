@@ -69,21 +69,25 @@ func running_state(delta: float) -> void:
 	if abs(velocity)*Vector3(1,0,1) > Vector3.ZERO:
 		current_stamina = clampf(current_stamina-delta, 0, stamina)
 	else:
-		current_stamina = clampf(current_stamina+delta, 0, stamina)
+		gather_stamina(delta)
 	if current_stamina <= 0.0:
 		current_state = states.normal
 		exhausted = true
 
 
 func normal_state(delta: float) -> void:
+	gather_stamina(delta)
+
+func focus_state(delta: float) -> void:
+	velocity *= focus_mult*Vector3(1, 0, 1) + Vector3(0,1,0)
+	gather_stamina(delta)
+
+func gather_stamina(delta: float) -> void:
 	if current_stamina < stamina:
-		current_stamina = clampf(current_stamina+delta, 0, stamina)
+		current_stamina = clampf(current_stamina+2*delta, 0, stamina)
 		if exhausted and current_stamina >= stamina:
 			current_stamina = stamina
 			exhausted = false
-
-func focus_state(_delta: float) -> void:
-	velocity *= focus_mult*Vector3(1, 0, 1) + Vector3(0,1,0)
 
 func force_state(delta: float) -> void:
 	distance -= delta*force_mult*walking_speed
@@ -103,9 +107,6 @@ func jump(vel: float, force: bool = false) -> void:
 	if not force and not self.is_on_floor(): return
 	velocity = velocity* Vector3(1, 0, 1) + vel* Vector3(0, 1, 0)
 	enable_gravity()
-
-func change_state() -> void:
-	current_state = states.running
 
 func run() -> void:
 	if current_state == states.normal and not exhausted:

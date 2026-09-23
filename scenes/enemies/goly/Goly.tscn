@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://du573uaja1p13" path="res://scenes/hp_bars/EnemyHpBar.tscn" id="6_vsran"]
 [ext_resource type="Script" uid="uid://bdmlbgajj81a8" path="res://scripts/damage_system/HitBox.gd" id="7_5q05p"]
 [ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/damage_system/Damage.gd" id="8_jmg5g"]
+[ext_resource type="Shader" uid="uid://dytj1qodinn24" path="res://shaders/general_look_shader/areashader.gdshader" id="9_jmg5g"]
 
 [sub_resource type="Resource" id="Resource_0pi4p"]
 script = ExtResource("2_ga0ap")
@@ -39,7 +40,27 @@ value = 0
 metadata/_custom_type_script = "uid://uaugd35wcih8"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6yq8t"]
-radius = 3.2601428
+radius = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5q05p"]
+render_priority = 0
+shader = ExtResource("9_jmg5g")
+shader_parameter/albedo = Color(0, 0, 0, 1)
+shader_parameter/proximity_fade_distance = 0.1999999955296
+shader_parameter/albedo_texture_size = Vector2i(0, 0)
+shader_parameter/point_size = 0.0
+shader_parameter/uv1_scale = Vector3(0, 0, 0)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(0, 0, 0)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6yq8t"]
+material = SubResource("ShaderMaterial_5q05p")
+top_radius = 3.0
+bottom_radius = 3.0
+height = 4.0
+cap_top = false
+cap_bottom = false
 
 [node name="Golly" type="Node3D" unique_id=2142922162 node_paths=PackedStringArray("hp_bar", "model", "effect_spawner")]
 script = ExtResource("1_an772")
@@ -114,7 +135,6 @@ offset_right = 0.0
 offset_bottom = 0.0
 
 [node name="HitBox" type="Area3D" parent="." unique_id=62113295]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46601772, 0, 0)
 collision_layer = 0
 collision_mask = 12
 script = ExtResource("7_5q05p")
@@ -129,6 +149,9 @@ shape = SubResource("SphereShape3D_6yq8t")
 
 [node name="Timer" type="Timer" parent="HitBox" unique_id=1044334652]
 autostart = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="HitBox" unique_id=1752620464]
+mesh = SubResource("CylinderMesh_6yq8t")
 
 [connection signal="affected" from="HurtBox" to="." method="add_effect"]
 [connection signal="got_hit" from="HurtBox" to="." method="_on_getting_hit"]

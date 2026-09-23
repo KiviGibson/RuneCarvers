@@ -60,3 +60,13 @@ func start_combat() -> void:
 
 func leave_combat() -> void:
 	model.in_combat = false
+
+func stun() -> void:
+	model.current_state = model.states.stun
+	carving_system.stop_carving()
+	carving_system.switch_carving(true)
+
+func un_stun() -> void:
+	model.current_state = model.states.normal
+	carving_system.switch_carving(false)
+	print("Unstun")

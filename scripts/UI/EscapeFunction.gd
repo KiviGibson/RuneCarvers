@@ -8,11 +8,18 @@ var currently_cancellable_ui: EscapableUI: set = set_cancelable_ui
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("escape"):
 		if currently_cancellable_ui == null:
+			if event is not InputEventKey: return
 			currently_cancellable_ui = escape_menu
 			escape_menu.visible = true
 			return
 		if currently_cancellable_ui.close():
 			currently_cancellable_ui = null
+	if event.is_action_pressed("escape_menu"):
+		if currently_cancellable_ui == escape_menu:
+			currently_cancellable_ui = null
+		else:
+			currently_cancellable_ui = escape_menu
+			escape_menu.visible = true
 
 
 func set_cancelable_ui(value: EscapableUI) -> void:

@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://oty8rbud34tw"]
 
 [ext_resource type="Script" uid="uid://r0tp4n5w2xkh" path="res://scripts/effect_system/Effect.gd" id="1_64j3m"]
-[ext_resource type="Script" uid="uid://h5mlxxqabnk2" path="res://scripts/effect_system/shader_script/FrostbiteVis.gd" id="3_v0pdv"]
+[ext_resource type="Script" uid="uid://h5mlxxqabnk2" path="res://shaders/shader_script/FrostbiteVis.gd" id="3_v0pdv"]
 [ext_resource type="Script" uid="uid://ctuio8xqpxg2j" path="res://scripts/effect_system/effect_components/DamageUnit.gd" id="3_xso52"]
 [ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/damage_system/Damage.gd" id="4_0qrn6"]
 [ext_resource type="Script" uid="uid://cky53i1vc01s0" path="res://scripts/effect_system/effect_components/StackingComponent.gd" id="6_1cj6k"]
+[ext_resource type="Script" uid="uid://dlatgvkgoxeba" path="res://scripts/effect_system/effect_components/Stun.gd" id="6_v0pdv"]
 
 [sub_resource type="Shader" id="Shader_7aaie"]
 resource_local_to_scene = true
@@ -95,7 +96,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(3.0314324, 0),
 "update": 0,
-"values": [Vector2(1.2, 1.2), Vector2(1, 1)]
+"values": [Vector2(0.6, 0.6), Vector2(0.5, 0.5)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2ryvt"]
@@ -115,8 +116,9 @@ duration = 10.0
 metadata/_custom_type_script = "uid://r0tp4n5w2xkh"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1336225239 node_paths=PackedStringArray("animator", "host")]
-transform = Transform3D(1.1452391, 0, 0, 0, 1.1452391, 0, 0, 0, 1.1452391, -1, 3, 0)
+transform = Transform3D(1.1452391, 0, 0, 0, 1.1452391, 0, 0, 0, 1.1452391, -0.5, 2.3, 0)
 material_override = SubResource("ShaderMaterial_0qrn6")
+transparency = 0.1
 cast_shadow = 0
 mesh = SubResource("QuadMesh_1j5yo")
 script = ExtResource("3_v0pdv")
@@ -138,8 +140,16 @@ script = ExtResource("6_1cj6k")
 required_stacks = 3
 metadata/_custom_type_script = "uid://cky53i1vc01s0"
 
+[node name="Stun" type="Node" parent="." unique_id=1803522910]
+script = ExtResource("6_v0pdv")
+duration = 1.0
+metadata/_custom_type_script = "uid://dlatgvkgoxeba"
+
 [connection signal="effect_reset" from="." to="StackingComponent" method="stack"]
+[connection signal="on_expire" from="." to="Stun" method="un_stun"]
 [connection signal="setup" from="." to="DamageUnit" method="setup"]
+[connection signal="setup" from="." to="Stun" method="setup"]
 [connection signal="stacks_achived" from="StackingComponent" to="DamageUnit" method="on_tick"]
+[connection signal="stacks_achived" from="StackingComponent" to="Stun" method="stun"]
 [connection signal="stacks_achived" from="StackingComponent" to="." method="set_exhoust" binds= [true, 2.0]]
 [connection signal="stacks_earned" from="StackingComponent" to="MeshInstance3D" method="stack_erned"]
