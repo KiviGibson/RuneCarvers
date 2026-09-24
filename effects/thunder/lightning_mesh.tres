@@ -1,7 +1,7 @@
 [gd_resource type="ArrayMesh" format=4 uid="uid://b5h5pdfnxrl1d"]
 
 [ext_resource type="Texture2D" uid="uid://1qw4bgrtbqhx" path="res://effects/thunder/Grafika_bez_nazwy 2.png" id="1_mvd42"]
-[ext_resource type="Shader" uid="uid://bpuee5xeipf2m" path="res://effects/thunder/lightning_strike.gdshader" id="1_w3brp"]
+[ext_resource type="Shader" uid="uid://bpuee5xeipf2m" path="res://shaders/electrocute/lightning_strike.gdshader" id="1_w3brp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w3brp"]
 render_priority = 0

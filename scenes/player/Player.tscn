@@ -4,17 +4,29 @@
 [ext_resource type="Script" uid="uid://dcb74rvqbwjiq" path="res://scripts/unit/player/Player.gd" id="1_tpg5x"]
 [ext_resource type="Script" uid="uid://bffwh1ds00jub" path="res://scripts/unit/Stats.gd" id="2_npwbq"]
 [ext_resource type="Script" uid="uid://qpy2uevlwsjk" path="res://scripts/carving_system/CarvingSystem.gd" id="2_tpg5x"]
+[ext_resource type="Script" uid="uid://bsdhjg5t04i3q" path="res://scripts/interaction_system/Npc/JackSmith/Inventory.gd" id="3_8nn5r"]
 [ext_resource type="Script" uid="uid://nrajgkybshxf" path="res://scripts/carving_system/Carvings.gd" id="3_c3xxp"]
+[ext_resource type="Resource" uid="uid://dcg0ofar8rvj2" path="res://resource/Gems/WarriorStone.tres" id="4_kvwax"]
 [ext_resource type="PackedScene" uid="uid://g8d1aj0ym3lb" path="res://scenes/carving_ui/CarvingUI.tscn" id="4_npwbq"]
+[ext_resource type="Script" uid="uid://bnn8qhdyh10wi" path="res://scripts/unit/player/Gem.gd" id="5_x3qp0"]
+[ext_resource type="Resource" uid="uid://dwmy8snflaw55" path="res://resource/Gems/CraftedSecurity.tres" id="6_76i7i"]
 [ext_resource type="Script" uid="uid://d1ggxehy2ph1q" path="res://scripts/unit/MovementControler.gd" id="6_c3xxp"]
 [ext_resource type="PackedScene" uid="uid://xmwhn75bbej1" path="res://scenes/runes/TempRune.tscn" id="6_pn6s4"]
 [ext_resource type="PackedScene" uid="uid://cebt7oam1m3q2" path="res://scenes/runes/Dash.tscn" id="7_5stf6"]
-[ext_resource type="PackedScene" uid="uid://b56wk8jie472p" path="res://scenes/runes/rune_warp.tscn" id="8_180ig"]
+[ext_resource type="Resource" uid="uid://cne2c6e13jbv0" path="res://resource/Gems/WandererStone.tres" id="7_mndc6"]
+[ext_resource type="Resource" uid="uid://bcc6otugv7wku" path="res://resource/Gems/AlterPower.tres" id="8_1hh02"]
 [ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/damage_system/HurtBox.gd" id="8_v42im"]
+[ext_resource type="PackedScene" uid="uid://bunhflg883gvb" path="res://scenes/runes/BoogieWoogie.tscn" id="9_8qjgm"]
 [ext_resource type="PackedScene" uid="uid://du573uaja1p13" path="res://scenes/hp_bars/EnemyHpBar.tscn" id="9_rn7t0"]
 [ext_resource type="Script" uid="uid://bsmwhck7xocl0" path="res://scripts/multiplayer_system/spawners/effect_spawner.gd" id="10_7oing"]
 [ext_resource type="Script" uid="uid://5la47o2e7t8g" path="res://scripts/interaction_system/InteractSystem.gd" id="12_ov1oi"]
 [ext_resource type="Script" uid="uid://bcd84k42fkm1d" path="res://scripts/multiplayer_system/spawners/ProjectileSpawner.gd" id="13_20koh"]
+[ext_resource type="PackedScene" uid="uid://xfynh1gsbkpk" path="res://scenes/runes/StoneNuckels.tscn" id="14_76i7i"]
+[ext_resource type="Script" uid="uid://dfa3lc7gy2wsc" path="res://scripts/unit/player/CustomCamera.gd" id="15_ejd4k"]
+[ext_resource type="PackedScene" uid="uid://prw4kt1hlgg3" path="res://scenes/player/inventory/SearchMenu.tscn" id="21_5ttev"]
+[ext_resource type="Script" uid="uid://dmvtlen1ia2qs" path="res://scripts/UI/CascadingEscapableUI.gd" id="22_76i7i"]
+[ext_resource type="PackedScene" uid="uid://bkrq06x4vb00f" path="res://scenes/player/inventory/GemOption.tscn" id="23_x3qp0"]
+[ext_resource type="Script" uid="uid://cunlm7qu3hrat" path="res://scripts/multiplayer_system/spawners/RuneSpawnere.gd" id="25_kvwax"]
 
 [sub_resource type="Resource" id="Resource_c3xxp"]
 script = ExtResource("2_npwbq")
@@ -38,14 +50,23 @@ metadata/_custom_type_script = "uid://nrajgkybshxf"
 [sub_resource type="Resource" id="Resource_ghlvj"]
 script = ExtResource("3_c3xxp")
 pattern = Array[int]([0, 1, 0])
-rune = ExtResource("8_180ig")
+rune = ExtResource("14_76i7i")
 metadata/_custom_type_script = "uid://nrajgkybshxf"
 
 [sub_resource type="Resource" id="Resource_55al8"]
 script = ExtResource("3_c3xxp")
 pattern = Array[int]([2, 2, 0])
-cd = 20.0
+rune = ExtResource("9_8qjgm")
+cd = 10.0
 metadata/_custom_type_script = "uid://nrajgkybshxf"
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_kvwax"]
+properties/0/path = NodePath("Panel/MarginContainer/VBoxContainer/ProgressBar:value")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("Panel/MarginContainer/VBoxContainer/Label:text")
+properties/1/spawn = true
+properties/1/replication_mode = 2
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_khinc"]
 
@@ -75,18 +96,34 @@ properties/4/path = NodePath("Puppet:rotation")
 properties/4/spawn = true
 properties/4/replication_mode = 2
 
-[node name="Player" type="Node3D" unique_id=1666680966 node_paths=PackedStringArray("input_system", "carving_system", "carving_ui", "camera", "interact_system", "hp_bar", "model", "effect_spawner", "projectile_spawner")]
+[node name="Player" type="Node3D" unique_id=1666680966 node_paths=PackedStringArray("input_system", "carving_system", "carving_ui", "camera", "interact_system", "hp_bar", "view", "inventory", "rune_spawner", "counter_indicator", "stamina_bar", "combat_timer", "model", "hurt_box", "effect_spawner", "projectile_spawner")]
 script = ExtResource("1_tpg5x")
 input_system = NodePath("InputSystem")
 carving_system = NodePath("CarvingSystem")
 carving_ui = NodePath("UI")
-camera = NodePath("Puppet/Camera3D")
+camera = NodePath("SubViewport/Camera3D")
 interact_system = NodePath("Puppet/InteractSystem")
 hp_bar = NodePath("UI/Panel/MarginContainer/VBoxContainer/HpBar")
+view = NodePath("SubViewport")
+inventory = NodePath("Inventory")
+rune_spawner = NodePath("Rune")
+counter_indicator = NodePath("UI/Panel/MarginContainer/VBoxContainer/Label")
+stamina_bar = NodePath("UI/Panel/MarginContainer/VBoxContainer/ProgressBar")
+combat_timer = NodePath("CombatTimer")
 model = NodePath("Puppet")
 stats = SubResource("Resource_c3xxp")
+hurt_box = NodePath("Puppet/HurtBox")
 effect_spawner = NodePath("Effect")
 projectile_spawner = NodePath("Projectile")
+
+[node name="Inventory" type="Node" parent="." unique_id=952128580 node_paths=PackedStringArray("gem_slots", "search_menu", "inventory_ui")]
+script = ExtResource("3_8nn5r")
+main_gem = ExtResource("4_kvwax")
+avilable_gems = Array[ExtResource("5_x3qp0")]([ExtResource("4_kvwax"), ExtResource("7_mndc6"), ExtResource("8_1hh02"), ExtResource("6_76i7i")])
+gem_slots = [NodePath("../InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption"), NodePath("../InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption2"), NodePath("../InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption3"), NodePath("../InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption4")]
+search_menu = NodePath("../InventoryUI/SearchMenu")
+inventory_ui = NodePath("../InventoryUI")
+metadata/_custom_type_script = "uid://bsdhjg5t04i3q"
 
 [node name="InputSystem" type="Node" parent="." unique_id=804145743]
 script = ExtResource("1_524rm")
@@ -97,6 +134,79 @@ script = ExtResource("2_tpg5x")
 carvings = Array[ExtResource("3_c3xxp")]([SubResource("Resource_7ddre"), SubResource("Resource_5rxlc"), SubResource("Resource_ghlvj"), SubResource("Resource_55al8")])
 ui = [NodePath("../UI/Panel/MarginContainer/VBoxContainer/HBoxContainer"), NodePath("../UI/Panel/MarginContainer/VBoxContainer/HBoxContainer2"), NodePath("../UI/Panel/MarginContainer/VBoxContainer/HBoxContainer3"), NodePath("../UI/Panel/MarginContainer/VBoxContainer/HBoxContainer4")]
 metadata/_custom_type_script = "uid://qpy2uevlwsjk"
+
+[node name="InventoryUI" type="Panel" parent="." unique_id=1963536372 node_paths=PackedStringArray("queue")]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("22_76i7i")
+queue = [NodePath("SearchMenu")]
+
+[node name="MarginContainer" type="MarginContainer" parent="InventoryUI" unique_id=172578870]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InventoryUI/MarginContainer" unique_id=541330595]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="InventoryUI/MarginContainer/VBoxContainer" unique_id=584342239]
+layout_mode = 2
+alignment = 1
+
+[node name="GemOption" parent="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1504063666 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
+layout_mode = 2
+tags = {
+0: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
+1: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Blue2"),
+2: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Red")
+}
+slot_num = -1
+sloted = true
+
+[node name="GemOption2" parent="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=153361322 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
+layout_mode = 2
+tags = {
+0: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
+1: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Blue2"),
+2: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Red")
+}
+sloted = true
+
+[node name="GemOption3" parent="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=901000007 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
+layout_mode = 2
+tags = {
+0: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
+1: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Blue2"),
+2: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Red")
+}
+slot_num = 1
+sloted = true
+
+[node name="GemOption4" parent="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1125143313 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
+layout_mode = 2
+tags = {
+0: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
+1: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Blue2"),
+2: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Red")
+}
+slot_num = 2
+sloted = true
+
+[node name="SearchMenu" parent="InventoryUI" unique_id=1204333785 instance=ExtResource("21_5ttev")]
+visible = false
+layout_mode = 1
 
 [node name="UI" type="Control" parent="." unique_id=1427293323]
 layout_mode = 3
@@ -131,10 +241,22 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 alignment = 1
 
+[node name="Label" type="Label" parent="UI/Panel/MarginContainer/VBoxContainer" unique_id=273486427]
+layout_mode = 2
+text = "None"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="HpBar" parent="UI/Panel/MarginContainer/VBoxContainer" unique_id=1495397635 instance=ExtResource("9_rn7t0")]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 hide_on_max = false
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/Panel/MarginContainer/VBoxContainer" unique_id=1547249452]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+max_value = 1.0
+show_percentage = false
 
 [node name="HBoxContainer" parent="UI/Panel/MarginContainer/VBoxContainer" unique_id=1919036124 instance=ExtResource("4_npwbq")]
 layout_mode = 2
@@ -148,27 +270,26 @@ layout_mode = 2
 [node name="HBoxContainer4" parent="UI/Panel/MarginContainer/VBoxContainer" unique_id=892158073 instance=ExtResource("4_npwbq")]
 layout_mode = 2
 
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="UI" unique_id=362320468]
+replication_config = SubResource("SceneReplicationConfig_kvwax")
+
 [node name="Puppet" type="CharacterBody3D" parent="." unique_id=52327527 node_paths=PackedStringArray("visible_model")]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("6_c3xxp")
 visible_model = NodePath("Model")
 type = 0
+gravity = 19.62
 
 [node name="Model" type="MeshInstance3D" parent="Puppet" unique_id=1363839945]
 mesh = SubResource("CapsuleMesh_khinc")
 
 [node name="Direction" type="MeshInstance3D" parent="Puppet/Model" unique_id=60768259]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6960293, -0.10202789)
 mesh = SubResource("BoxMesh_6yq8t")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Puppet" unique_id=1819267064]
 shape = SubResource("CapsuleShape3D_6yq8t")
-
-[node name="Camera3D" type="Camera3D" parent="Puppet" unique_id=982673878]
-transform = Transform3D(1, 0, 0, 0, 0.49999994, 0.8660254, 0, -0.8660254, 0.49999994, 0, 10, 5)
-fov = 70.0
-size = 20.0
 
 [node name="HurtBox" type="Area3D" parent="Puppet" unique_id=1283098386]
 collision_layer = 4
@@ -190,6 +311,15 @@ metadata/_custom_type_script = "uid://5la47o2e7t8g"
 shape = SubResource("CylinderShape3D_rn7t0")
 debug_color = Color(2.4546682e-06, 0.6507329, 0.093313, 0.41960785)
 
+[node name="SubViewport" type="SubViewport" parent="." unique_id=965688071]
+size = Vector2i(960, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=982673878 node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 0.25881907, 0.9659258, 0, -0.9659258, 0.25881907, 0, 20, 6)
+size = 20.0
+script = ExtResource("15_ejd4k")
+target = NodePath("../../Puppet")
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2085177374]
 replication_config = SubResource("SceneReplicationConfig_mdl7e")
 
@@ -202,12 +332,30 @@ host = NodePath("..")
 spawn_path = NodePath("../Puppet")
 script = ExtResource("13_20koh")
 
+[node name="Rune" type="MultiplayerSpawner" parent="." unique_id=1110589360 node_paths=PackedStringArray("host")]
+spawn_path = NodePath("../Puppet/Model")
+script = ExtResource("25_kvwax")
+host = NodePath("..")
+metadata/_custom_type_script = "uid://cunlm7qu3hrat"
+
+[node name="CombatTimer" type="Timer" parent="." unique_id=77862872]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="activation" from="InputSystem" to="." method="use_rune"]
 [connection signal="carved_symbol" from="InputSystem" to="CarvingSystem" method="carve_symbol"]
 [connection signal="carving_change" from="InputSystem" to="CarvingSystem" method="carving_state_change"]
+[connection signal="interact" from="InputSystem" to="Inventory" method="show"]
+[connection signal="jump_input" from="InputSystem" to="Puppet" method="jump" binds= [7.0]]
 [connection signal="movement_vector_change" from="InputSystem" to="Puppet" method="set_movement_vector"]
+[connection signal="run_input" from="InputSystem" to="Puppet" method="run"]
 [connection signal="target_vector_change" from="InputSystem" to="Puppet" method="set_rotation_vector"]
 [connection signal="successful_carving" from="CarvingSystem" to="." method="get_rune"]
+[connection signal="on_button_press" from="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption" to="Inventory" method="on_gem_pressed"]
+[connection signal="on_button_press" from="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption2" to="Inventory" method="on_gem_pressed"]
+[connection signal="on_button_press" from="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption3" to="Inventory" method="on_gem_pressed"]
+[connection signal="on_button_press" from="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption4" to="Inventory" method="on_gem_pressed"]
+[connection signal="gem_selected" from="InventoryUI/SearchMenu" to="Inventory" method="set_gem"]
 [connection signal="finish_force_movement" from="Puppet" to="." method="enable_collision"]
 [connection signal="affected" from="Puppet/HurtBox" to="." method="add_effect"]
 [connection signal="got_hit" from="Puppet/HurtBox" to="." method="_on_getting_hit"]

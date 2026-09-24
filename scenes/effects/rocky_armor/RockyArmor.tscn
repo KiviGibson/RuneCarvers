@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://lg3p3chp0b4q"]
+
+[ext_resource type="Script" uid="uid://r0tp4n5w2xkh" path="res://scripts/effect_system/Effect.gd" id="1_7nd2x"]
+
+[node name="RockyArmor" type="Node3D" unique_id=939573462]
+script = ExtResource("1_7nd2x")
+metadata/_custom_type_script = "uid://r0tp4n5w2xkh"

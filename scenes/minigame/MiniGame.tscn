@@ -29,6 +29,9 @@ size = Vector3(0.1, 1, 2)
 [sub_resource type="BoxMesh" id="BoxMesh_1j5yo"]
 size = Vector3(0.1, 2, 2)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_6yq8t"]
+size = Vector3(5, 1, 5)
+
 [node name="MiniGame" type="Node3D" unique_id=583750615 node_paths=PackedStringArray("tanks", "input")]
 script = ExtResource("1_diy0u")
 tanks = [NodePath("MAP/Tank"), NodePath("MAP/Tank2")]
@@ -113,3 +116,7 @@ shape = SubResource("BoxShape3D_heunu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MAP/StaticBody3D/CollisionShape3D4" unique_id=1525550728]
 mesh = SubResource("BoxMesh_diy0u")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="MAP/StaticBody3D" unique_id=1532088884]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1, -3)
+shape = SubResource("BoxShape3D_6yq8t")

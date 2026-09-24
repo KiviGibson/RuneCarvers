@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 class_name Rune
 
 @warning_ignore("unused_signal")
@@ -6,6 +6,7 @@ signal setup(owning_unit: Unit)
 signal activation()
 
 signal started_charging()
+signal current_charge(power: float)
 signal charge_shot(power: float) # from 0.0 -> 1.0 When_charge_shot
 
 signal stop()
@@ -24,10 +25,12 @@ var current: float = 0.0
 @export var charge_per_second: float
 var charging: bool = false
 var charged_value: float
+var charged_value_floored: float
 
 @export_category("hold atack")
 @export var fuel_tick: float
 @export var activation_ticks: int
+
 var holding: bool
 var current_second: float
 var current_fuel_tick: int
@@ -47,9 +50,10 @@ func push_to_activate(value: bool) -> void:
 	current = cd
 	activation.emit()
 	if ammo <= 0:
-		empty.emit()
+		emptied()
 
 func start_charge() -> void: 
+	if current > 0.0: return
 	charging = true
 	charged_value = 0.0
 	started_charging.emit()
@@ -59,9 +63,10 @@ func stop_charge() -> void:
 	charging = false
 	current = cd
 	charge_shot.emit(charged_value)
+	charged_value_floored = 0.0
 	ammo -= 1
 	if ammo <= 0:
-		empty.emit()
+		emptied()
 
 func start_hold() -> void:
 	holding = true
@@ -73,7 +78,12 @@ func stop_hold() -> void:
 func _process(delta: float) -> void:
 	if not multiplayer.is_server(): return
 	current -= delta
-	if charging: charged_value = clamp(charged_value+delta*charge_per_second, 0.0, 1.0)
+	if charging: 
+		charged_value = clamp(charged_value+delta*charge_per_second, 0.0, 1.0)
+		var snap := snappedf(charged_value, 0.1)
+		if charged_value_floored < snap:
+			current_charge.emit(snap)
+			charged_value_floored = snap
 	if holding: 
 		current_second += delta
 		while current_second >= fuel_tick:
@@ -83,6 +93,7 @@ func _process(delta: float) -> void:
 			if current_fuel_tick == activation_ticks:
 				current_fuel_tick = 0
 				activation.emit()
-			if ammo < 0: empty.emit()
-			
-	
+			if ammo < 0: emptied()
+
+func emptied() -> void: 
+	empty.emit()

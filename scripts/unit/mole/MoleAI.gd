@@ -1,4 +1,4 @@
-extends Node3D
+extends EnemyAI
 class_name MoleAI
 
 signal changed_rotation(rot_vec: Vector2)
@@ -15,6 +15,8 @@ var current_hole: Hole
 var hiding: bool = false
 var shot: bool = false
 var can_rotate: bool = true
+var last_state: StringName
+var stunned: bool = false
 
 func _ready() -> void:
 	if not multiplayer.is_server(): return
@@ -22,9 +24,17 @@ func _ready() -> void:
 	if multiplayer.is_server(): 
 		timer_borrow.timeout.connect(func(): un_borrow.rpc())
 
-func _process(delta: float) -> void:
+func on_stun() -> void:
+	stunned = true
+	animator.pause()
+
+func on_un_stun() -> void:
+	stunned = false
+	animator.play()
+
+func _process(_delta: float) -> void:
 	if not multiplayer.is_server(): return
-	if can_rotate: 
+	if can_rotate and not stunned: 
 		if current_target == null: return
 		changed_rotation.emit(Vector2(
 			current_target.global_position.x - vision.global_position.x, 
@@ -75,6 +85,7 @@ func change_anim_spped(value: float) -> void:
 func animate(anim_name: StringName, back_ward: bool = false) -> void:
 	if back_ward: animator.play_backwards(anim_name)
 	else: animator.play(anim_name)
+
 func shoot() -> void:
 	if multiplayer.is_server():
 		strait_projectile.spawn_projectile()
@@ -100,7 +111,7 @@ func get_best_hole() -> Hole:
 func set_target() -> void:
 	var same_target_weight: float = -2.0
 	var closer_enemy_weight: float = 0.4
-	var behind_the_wall_weight: float = 1.0
+	var _behind_the_wall_weight: float = 1.0
 	var last: float = 100.0
 	for unit in vision.get_overlapping_bodies():
 		if unit is not MovementControler or unit.type != MovementControler.pupet_type.player: continue

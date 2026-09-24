@@ -2,17 +2,25 @@ extends CharacterBody3D
 class_name MovementControler
 
 enum pupet_type{player, enemy}
-enum states{normal, running, focus, force}
+enum states{normal, running, focus, force, stun}
+
 signal finish_force_movement()
-@export var walking_speed: float = 5
-@export var running_mult: float = 1.5
-@export var focus_mult: float = 0.5
-@export var force_mult: float = 8
+
+var in_combat: bool = false
+
+var walking_speed: float = 5
+var running_mult: float = 1.5
+var focus_mult: float = 0.5
+var force_mult: float = 9
 @export var visible_model: Node3D
 @export var type: pupet_type = pupet_type.enemy
+
 var player_added_velocity: Vector3
 var current_state: states = states.normal
 var distance: float = 0.0
+var stamina: float = 5.0
+var current_stamina: float = 0.0
+var exhausted: bool = false
 @export var gravity: float = 9.81
 
 func disable_gravity() -> void: gravity = 0.0
@@ -20,6 +28,13 @@ func enable_gravity() -> void: gravity = 9.81
 
 func _ready() -> void:
 	finish_force_movement.connect(enable_gravity)
+
+func setup_movement(ms: float, rm:float, fm: float, st: float) -> void:
+	walking_speed = ms
+	running_mult = rm
+	focus_mult = fm
+	stamina = st
+	current_stamina = st
 
 func set_movement_vector(value: Vector2) -> void:
 	player_added_velocity = Vector3(value.x, 0, -value.y)
@@ -33,29 +48,68 @@ func set_rotation_vector(value: Vector2) -> void:
 func _physics_process(delta: float) -> void: ## Add gravity
 	if not multiplayer.is_server(): return
 	velocity.y -= gravity*delta
-	if current_state == states.force:
-		forced_movement(delta)
-		return
-	velocity = player_added_velocity * walking_speed + velocity * Vector3(0, 1, 0)
 	match current_state:
-		states.running: velocity *= running_mult
-		states.focus: velocity *= focus_mult
+		states.stun:
+			velocity = velocity * Vector3(0, 1, 0)
+			return
+		states.force:
+			force_state(delta)
+			return
+		_:
+			velocity = player_added_velocity * walking_speed + velocity * Vector3(0, 1, 0)
+	match current_state:
+		states.running: running_state(delta)
+		states.focus: focus_state(delta)
+		states.normal: normal_state(delta)
 	move_and_slide()
 
-func forced_movement(delta: float) -> void:
+func running_state(delta: float) -> void:
+	velocity *= running_mult * Vector3(1, 0, 1) + Vector3(0, 1, 0)
+	print(velocity)
+	if abs(velocity)*Vector3(1,0,1) > Vector3.ZERO:
+		current_stamina = clampf(current_stamina-delta, 0, stamina)
+	else:
+		gather_stamina(delta)
+	if current_stamina <= 0.0:
+		current_state = states.normal
+		exhausted = true
+
+
+func normal_state(delta: float) -> void:
+	gather_stamina(delta)
+
+func focus_state(delta: float) -> void:
+	velocity *= focus_mult*Vector3(1, 0, 1) + Vector3(0,1,0)
+	gather_stamina(delta)
+
+func gather_stamina(delta: float) -> void:
+	if current_stamina < stamina:
+		current_stamina = clampf(current_stamina+2*delta, 0, stamina)
+		if exhausted and current_stamina >= stamina:
+			current_stamina = stamina
+			exhausted = false
+
+func force_state(delta: float) -> void:
 	distance -= delta*force_mult*walking_speed
 	if distance <= 0:
 		current_state = states.normal
 		finish_force_movement.emit()
 	move_and_slide()
 
-func dash(vec: Vector2) -> void:
-	velocity = Vector3(vec.x, 0, vec.y).normalized()*walking_speed*force_mult
+func dash(vec: Vector2, y: float = 0) -> void:
+	velocity = Vector3(vec.x, y, vec.y).normalized()*walking_speed*force_mult
 	set_rotation_vector(vec.normalized())
-	distance = sqrt(vec.x**2 + vec.y**2)
+	distance = sqrt(vec.x**2 + vec.y**2 + y**2)
 	current_state = states.force
 	disable_gravity()
 
-func jump(vel: float) -> void:
+func jump(vel: float, force: bool = false) -> void:
+	if not force and not self.is_on_floor(): return
 	velocity = velocity* Vector3(1, 0, 1) + vel* Vector3(0, 1, 0)
 	enable_gravity()
+
+func run() -> void:
+	if current_state == states.normal and not exhausted:
+		current_state = states.running
+	elif current_state == states.running:
+		current_state = states.normal

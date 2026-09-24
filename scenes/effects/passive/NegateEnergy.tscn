@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cfryitthwel8i"]
+
+[ext_resource type="Script" uid="uid://r0tp4n5w2xkh" path="res://scripts/effect_system/Effect.gd" id="1_50le0"]
+[ext_resource type="Script" uid="uid://bss8yyth1n8pk" path="res://scripts/effect_system/OnHit/AlterAtackEffect.gd" id="2_gjj6m"]
+
+[node name="NegateEnergy" type="Node3D" unique_id=2064350965 node_paths=PackedStringArray("on_hit")]
+script = ExtResource("1_50le0")
+temporary = false
+on_hit = [NodePath("AlterEffect")]
+metadata/_custom_type_script = "uid://r0tp4n5w2xkh"
+
+[node name="AlterEffect" type="Node" parent="." unique_id=1973252813]
+script = ExtResource("2_gjj6m")
+remove = &"positively_charged"
+add = &"negatively_charged"
+node_func = 2
+metadata/_custom_type_script = "uid://bss8yyth1n8pk"

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dkqnl2jcb08y8"]
+
+[ext_resource type="Script" uid="uid://r0tp4n5w2xkh" path="res://scripts/effect_system/Effect.gd" id="1_youy5"]
+
+[node name="Dazed" type="Node3D" unique_id=85682640]
+script = ExtResource("1_youy5")
+metadata/_custom_type_script = "uid://r0tp4n5w2xkh"

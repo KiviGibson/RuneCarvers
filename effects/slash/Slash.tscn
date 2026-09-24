@@ -1,0 +1,349 @@
+[gd_scene format=3 uid="uid://33ib11slb3g3"]
+
+[ext_resource type="Script" uid="uid://d16u0e2gt6kxj" path="res://scripts/carving_system/rune/Rune.gd" id="1_jhqx0"]
+[ext_resource type="ArrayMesh" uid="uid://cx5fk2kocm30t" path="res://assets/models/slash.tres" id="1_y06vl"]
+[ext_resource type="PackedScene" uid="uid://cmku3rxm15kdd" path="res://assets/models/sword.tscn" id="2_xq1ma"]
+[ext_resource type="Script" uid="uid://bdmlbgajj81a8" path="res://scripts/damage_system/HitBox.gd" id="3_xq1ma"]
+
+[sub_resource type="Animation" id="Animation_4om7u"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sword rotator/sword")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, -2.5492322)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sword rotator/sword:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 2.962756, -1.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles3D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sword rotator/sword:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 1.5707964)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sword rotator:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GPUParticles3D:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.7853982, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HitBox:monitoring")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_jhqx0"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sword rotator/sword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -1.5)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sword rotator/sword:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 2, 0.5, 0, -2, 0.5, 2, -0.5, 0, -2, -0.5, 0, 0),
+"times": PackedFloat32Array(0, 0.2596786, 0.5)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sword rotator/sword:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 3.1415927)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sword rotator:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xq1ma"]
+resource_name = "slash"
+length = 1.2
+step = 0.0
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sword rotator/sword")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0.70710677, 0.70710677)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sword rotator/sword")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 2, 0, 0)
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles3D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0001, 0.065081),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sword rotator:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4),
+"transitions": PackedFloat32Array(0.57249147, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.7853982, 0), Vector3(0, -3.9269907, 0), Vector3(0, -3.9269907, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GPUParticles3D:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.7853982, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HitBox:monitoring")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.00999999, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_5i6st"]
+resource_name = "slash_back"
+length = 1.2
+step = 0.0
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sword rotator/sword")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0.70710677, 0.70710677)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sword rotator/sword")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 2, 0, 0)
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles3D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0001, 0.18602058),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sword rotator:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4),
+"transitions": PackedFloat32Array(0.57249147, 1, 1),
+"update": 0,
+"values": [Vector3(0, -3.9269907, 0), Vector3(0, 0.7853982, 0), Vector3(0, 0.7853982, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GPUParticles3D:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.7853982, 3.1415927)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HitBox:monitoring")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jhqx0"]
+_data = {
+&"RESET": SubResource("Animation_4om7u"),
+&"idle": SubResource("Animation_jhqx0"),
+&"slash": SubResource("Animation_xq1ma"),
+&"slash_back": SubResource("Animation_5i6st")
+}
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6yq8t"]
+use_rotation_3d = true
+rotation_3d_min = Vector3(-90, 0, 0)
+rotation_3d_max = Vector3(-90, 0, 0)
+gravity = Vector3(0, 0, 0)
+scale_min = 200.0
+scale_max = 200.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_heunu"]
+radius = 2.0
+
+[node name="Slash" type="Node3D" unique_id=698495631]
+script = ExtResource("1_jhqx0")
+cd = 1.0
+ammo = 2
+metadata/_custom_type_script = "uid://d16u0e2gt6kxj"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=107390007]
+libraries/ = SubResource("AnimationLibrary_jhqx0")
+autoplay = &"slash_back"
+playback_default_blend_time = 0.2
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1729944306]
+transform = Transform3D(0.7071067, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, 0.7071067, 0, 0, 0)
+emitting = false
+amount = 1
+fixed_fps = 0
+process_material = SubResource("ParticleProcessMaterial_6yq8t")
+draw_pass_1 = ExtResource("1_y06vl")
+
+[node name="sword rotator" type="Node3D" parent="." unique_id=282669297]
+transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 0, 0, 0)
+
+[node name="sword" parent="sword rotator" unique_id=1205904980 instance=ExtResource("2_xq1ma")]
+transform = Transform3D(-4.371138e-08, -1, 0, 0.9999998, -4.371139e-08, 0, 0, 0, 0.9999998, 0, 2.962756, -1.5)
+
+[node name="HitBox" type="Area3D" parent="." unique_id=1803841804]
+collision_layer = 8
+collision_mask = 8
+monitoring = false
+script = ExtResource("3_xq1ma")
+metadata/_custom_type_script = "uid://bdmlbgajj81a8"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox" unique_id=1072314641]
+transform = Transform3D(-0.34013918, 0, 0.9403751, 0, 1, 0, -0.9403751, 0, -0.34013918, -2, 0, 0)
+shape = SubResource("SphereShape3D_heunu")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="HitBox" unique_id=323466614]
+transform = Transform3D(-0.34013918, 0, 0.9403751, 0, 1, 0, -0.9403751, 0, -0.34013918, -2, 0, 1)
+shape = SubResource("SphereShape3D_heunu")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="HitBox" unique_id=1736173384]
+transform = Transform3D(-0.34013918, 0, 0.9403751, 0, 1, 0, -0.9403751, 0, -0.34013918, 2, 0, 1)
+shape = SubResource("SphereShape3D_heunu")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="HitBox" unique_id=152172175]
+transform = Transform3D(-0.34013918, 0, 0.9403751, 0, 1, 0, -0.9403751, 0, -0.34013918, 0, 0, 2)
+shape = SubResource("SphereShape3D_heunu")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="HitBox" unique_id=708634023]
+transform = Transform3D(-0.34013918, 0, 0.9403751, 0, 1, 0, -0.9403751, 0, -0.34013918, 2, 0, 0)
+shape = SubResource("SphereShape3D_heunu")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="HitBox" unique_id=384555309]
+transform = Transform3D(-0.34013918, 0, 0.9403751, 0, 1, 0, -0.9403751, 0, -0.34013918, 2, 0, 0)
+shape = SubResource("SphereShape3D_heunu")

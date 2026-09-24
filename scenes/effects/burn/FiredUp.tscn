@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://difcoya6deoe4"]
+
+[ext_resource type="Script" uid="uid://r0tp4n5w2xkh" path="res://scripts/effect_system/Effect.gd" id="1_rwlr0"]
+[ext_resource type="Script" uid="uid://bx7nq0mgasyxl" path="res://scripts/effect_system/OnHit/BonusDamage.gd" id="2_4snkb"]
+
+[node name="FiredUp" type="Node3D" unique_id=609308731 node_paths=PackedStringArray("on_hit")]
+script = ExtResource("1_rwlr0")
+duration = 10.0
+on_hit = [NodePath("BonusDamage")]
+metadata/_custom_type_script = "uid://r0tp4n5w2xkh"
+
+[node name="BonusDamage" type="Node" parent="." unique_id=2097186716]
+script = ExtResource("2_4snkb")
+percent = 0.5
+metadata/_custom_type_script = "uid://bx7nq0mgasyxl"

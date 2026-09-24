@@ -5,9 +5,10 @@ signal hit(collider: HurtBox)
 
 @export var damage: Damage
 @export var effects: Array[StringName]
+@export var ticking: bool = false
 
 func _ready() -> void:
-	area_entered.connect(_on_hurtbox_collision)
+	if not ticking: area_entered.connect(_on_hurtbox_collision)
 
 func _on_hurtbox_collision(collider: HurtBox) -> void:
 	if not multiplayer.is_server(): return
@@ -16,4 +17,9 @@ func _on_hurtbox_collision(collider: HurtBox) -> void:
 
 func _damage_ownership_exchange(unit: Unit) -> void:
 	damage = damage.duplicate(true)
-	damage.owner = unit
+	unit.set_damage_owner(self)
+
+func tick() -> void:
+	for collider in get_overlapping_areas():
+		if collider is HurtBox:
+			collider.hit(damage, effects)
