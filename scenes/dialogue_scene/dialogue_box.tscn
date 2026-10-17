@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://fad5rqupmfvx"]
+
+[ext_resource type="Script" uid="uid://bnb0ueis36jw1" path="res://scripts/dialogue_system/dialogue_audio_generator.gd" id="1_k80c5"]
+[ext_resource type="Script" uid="uid://csktde0g4pghq" path="res://scripts/dialogue_system/dialogue_box.gd" id="1_ube5a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_sfsuv"]
+font_size = 50
+
+[node name="DialogueBox" type="Control" unique_id=1795811006]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ube5a")
+
+[node name="BlipPlayer" type="AudioStreamPlayer" parent="." unique_id=1269230288]
+script = ExtResource("1_k80c5")
+
+[node name="Panel" type="Panel" parent="." unique_id=217009233]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.012
+anchor_top = 0.53300005
+anchor_right = 0.98700005
+anchor_bottom = 0.9850001
+offset_left = 0.9599991
+offset_top = 0.35992432
+offset_right = 0.95996094
+offset_bottom = 0.19995117
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=175804346]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.013
+anchor_top = 0.049000002
+anchor_right = 0.98700005
+anchor_bottom = 0.96700007
+offset_left = -0.33600044
+offset_top = 0.087999344
+offset_right = 0.3359375
+offset_bottom = 0.10397339
+
+[node name="SpeakerLabel" type="Label" parent="Panel/VBoxContainer" unique_id=982750524]
+layout_mode = 2
+text = "Speaker"
+label_settings = SubResource("LabelSettings_sfsuv")
+
+[node name="DialogueText" type="RichTextLabel" parent="Panel/VBoxContainer" unique_id=1498264878]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="ChoicesContainer" type="VBoxContainer" parent="Panel/VBoxContainer" unique_id=1367901133]
+layout_mode = 2

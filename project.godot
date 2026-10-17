@@ -22,6 +22,7 @@ Lobby="*uid://c4ihn42ynrw48"
 Projectiles="*uid://bjlkjipi24fx3"
 Players="*uid://2untbf8kxu6h"
 Enemies="*uid://dj4hst5il4rat"
+DialogueManager="*uid://bex3ium6kslck"
 
 [display]
 
@@ -29,6 +30,10 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[dotnet]
+
+project/assembly_name="RuneCarvers"
 
 [file_customization]
 

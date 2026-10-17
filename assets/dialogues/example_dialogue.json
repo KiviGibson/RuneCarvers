@@ -1,0 +1,49 @@
+{
+  "start": {
+	"speaker": "Kowalski",
+	"text": "Cześć! Potrzebuję Twojej pomocy z czymś.",
+	"choices": [
+	  { "text": "Jasne, o co chodzi?", "next": "explain" },
+	  { "text": "Nie teraz, jestem zajęty.", "next": "busy" }
+	]
+  },
+  "explain": {
+	"speaker": "Kowalski",
+	"text": "Ktoś ukradł mi skrzynię z narzędziami. Widziałeś może kogoś podejrzanego w pobliżu magazynu?",
+	"choices": [
+	  {
+		"text": "Tak, widziałem kogoś w ciężkiej zbroi.",
+		"next": "clue",
+		"set": { "gave_clue": true }
+	  },
+	  { "text": "Nie, nic nie widziałem.", "next": "no_clue" }
+	]
+  },
+  "clue": {
+	"speaker": "Kowalski",
+	"text": "Naprawdę? To mi bardzo pomoże, dzięki!",
+	"signal": "quest_clue_given",
+	"next": "thanks"
+  },
+  "thanks": {
+	"speaker": "Kowalski",
+	"text": "Jak coś znajdziesz, wróć do mnie.",
+	"condition": "gave_clue == true",
+	"next": "end"
+  },
+  "no_clue": {
+	"speaker": "Kowalski",
+	"text": "Szkoda, może ktoś inny coś widział.",
+	"next": "end"
+  },
+  "busy": {
+	"speaker": "Kowalski",
+	"text": "Rozumiem, wpadnij innym razem.",
+	"next": "end"
+  },
+  "end": {
+	"speaker": "",
+	"text": "",
+	"end": true
+  }
+}
