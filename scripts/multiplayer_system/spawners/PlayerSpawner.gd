@@ -31,14 +31,9 @@ func get_player_ids() -> Array[int]: return _players.keys()
 
 @rpc("any_peer", "call_local", "reliable")
 func hide_unused_viewport() -> void:
-	if multiplayer.is_server(): 
-		POV[1].visible = !POV[1].visible
-		var tmp := POV[0].get_child(0) as SubViewport
-		tmp.size = Vector2(960*(1+int(!POV[1].visible)), 1080)
-	else: 
-		POV[0].visible = !POV[0].visible
-		var tmp := POV[1].get_child(0) as SubViewport
-		tmp.size = Vector2(960*(1+int(!POV[0].visible)), 1080)
+	if multiplayer.is_server(): POV[1].visible = !POV[1].visible
+	else: POV[0].visible = !POV[0].visible
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pov_change"):

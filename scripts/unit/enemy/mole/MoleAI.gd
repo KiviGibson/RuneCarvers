@@ -1,14 +1,15 @@
 extends EnemyAI
 class_name MoleAI
 
-signal changed_rotation(rot_vec: Vector2)
 
 @export var animator: AnimationPlayer
 @export var hole_finder: Area3D
 @export var tp: Teleport
 @export var timer_borrow: Timer
 @export var strait_projectile: SpawnProjectile
+@export var model: Node3D 
 @export var vision: Area3D
+
 var current_target: Node3D
 var current_hole: Hole
 
@@ -36,10 +37,11 @@ func _process(_delta: float) -> void:
 	if not multiplayer.is_server(): return
 	if can_rotate and not stunned: 
 		if current_target == null: return
-		changed_rotation.emit(Vector2(
-			current_target.global_position.x - vision.global_position.x, 
-			current_target.global_position.z-vision.global_position.z
-			).normalized())
+		model.look_at(Vector3(
+			current_target.global_position.x,
+			model.global_position.y,
+			current_target.global_position.z
+		))
 
 func _animation_finished(anim_name: StringName) -> void:
 	if not multiplayer.is_server(): return

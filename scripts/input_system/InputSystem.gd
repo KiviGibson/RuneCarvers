@@ -10,6 +10,7 @@ signal target_vector_change(value: Vector2)
 signal carving_change(state: bool)
 signal run_input()
 signal jump_input()
+signal switch_targeting()
 # Dodanie sygnału esc_key
 
 var owner_id: int ## Coop requirement
@@ -35,7 +36,7 @@ func _process(_delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if multiplayer.get_unique_id() != owner_id: return
-	if (event is InputEventJoypadButton or event is InputEventJoypadMotion) and multiplayer.is_server(): return 
+	# if (event is InputEventJoypadButton or event is InputEventJoypadMotion) and multiplayer.is_server(): return 
 	if event.is_action_pressed("carving"):
 		if hold_carving: carving.rpc_id(1, true)
 		else: carving.rpc_id(1, next_carving_state)
@@ -51,7 +52,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("carve_down"): carving_input.rpc_id(1, 1)
 	if event.is_action_pressed("carve_left"): carving_input.rpc_id(1, 2)
 	if event.is_action_pressed("carve_right"): carving_input.rpc_id(1, 3)
-	
+	if event.is_action_pressed("targeting"): change_targeting.rpc_id(1)
 	if event.is_action_pressed("run"): run.rpc_id(1)
 	if event.is_action("jump"): jump.rpc_id(1)
 
@@ -115,3 +116,7 @@ func run() -> void:
 @rpc("any_peer", "call_local", "unreliable")
 func jump() -> void:
 	jump_input.emit()
+
+@rpc("any_peer", "call_local", "unreliable")
+func change_targeting() -> void:
+	switch_targeting.emit()

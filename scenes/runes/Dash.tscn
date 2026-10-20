@@ -13,6 +13,7 @@ metadata/_custom_type_script = "uid://d16u0e2gt6kxj"
 [node name="Dash" type="Node" parent="." unique_id=1999242260]
 script = ExtResource("2_42cy7")
 distance = 5.0
+type = 3
 metadata/_custom_type_script = "uid://c2i230dqglhpo"
 
 [node name="SpawnProjectile" type="Node" parent="." unique_id=1940441744]

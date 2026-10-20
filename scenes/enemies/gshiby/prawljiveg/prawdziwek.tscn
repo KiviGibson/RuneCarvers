@@ -200,6 +200,7 @@ shadow_mesh = SubResource("ArrayMesh_d7pry")
 transform = Transform3D(1, 0, 0, 0, 0.98128396, -0.19256628, 0, 0.19256628, 0.98128396, 0, 0, 0)
 
 [node name="Skeleton3D" type="Skeleton3D" parent="prawljivek/Armature" unique_id=1178947951]
+show_rest_only = true
 bones/0/name = "body_2"
 bones/0/parent = -1
 bones/0/rest = Transform3D(-0.038196083, 1.1576854e-07, -0.99927, -0.07541356, 0.9971478, 0.0028827216, 0.99642044, 0.07546862, -0.03808714, 0, -0.8610296, -0.13077635)
@@ -271,7 +272,7 @@ skin = SubResource("Skin_qvym7")
 skeleton = NodePath("..")
 
 [node name="hat" type="MeshInstance3D" parent="prawljivek/Armature/Skeleton3D/body" unique_id=947090827]
-transform = Transform3D(0.9612085, 0.16147013, 0.2236193, -0.18687567, 0.9775424, 0.097409025, -0.20286861, -0.1354194, 0.9697968, -0.30536354, -0.10474746, 0)
+transform = Transform3D(0.69928116, 0.030768134, -0.0076875864, -0.029518666, 0.69349676, 0.09050337, 0.011594195, -0.09008626, 0.6940822, -0.040463567, 0.611106, 0.02418556)
 material_override = SubResource("StandardMaterial3D_htunm")
 mesh = SubResource("ArrayMesh_r2dyn")
 
@@ -281,6 +282,3 @@ mesh = SubResource("ArrayMesh_u2h72")
 [node name="iris" type="MeshInstance3D" parent="prawljivek/Armature/Skeleton3D/body/pulpits" unique_id=1447697179]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0054171104)
 mesh = SubResource("ArrayMesh_b46c2")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=267047551]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.89623713, 3.0959535, 1.9061657)

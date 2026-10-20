@@ -57,6 +57,8 @@ collision_layer = 0
 collision_mask = 8
 script = ExtResource("2_66uj8")
 damage = SubResource("Resource_6yq8t")
+displacement_vector = Vector3(0, 0, -1)
+distance = 1.0
 metadata/_custom_type_script = "uid://bdmlbgajj81a8"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox" unique_id=56647431]

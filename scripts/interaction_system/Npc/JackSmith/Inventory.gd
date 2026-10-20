@@ -69,7 +69,6 @@ func give_effects() -> void:
 	host.add_passive(main_gem.passive)
 	for gem in sub_gems:
 		if gem != null:
-			print(gem.resource_name)
 			host.add_passive(gem.passive)
 
 func set_player_gems() -> void:
@@ -81,7 +80,8 @@ func set_player_gems() -> void:
 @rpc("authority", "call_local", "reliable")
 func swap_visibility(value: bool) -> void:
 	inventory_ui.visible = value
-	if value: EscapeManager.currently_cancellable_ui = inventory_ui
+	if value: 
+		EscapeManager.currently_cancellable_ui = inventory_ui
 	elif EscapeManager.currently_cancellable_ui == inventory_ui: 
 		EscapeManager.currently_cancellable_ui = null
 

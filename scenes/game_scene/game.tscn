@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://c2h57oqn7nm50" path="res://scenes/enemies/hole_mole/Hole.tscn" id="8_fhy3a"]
 [ext_resource type="Script" uid="uid://4t8tjrbndx2f" path="res://scripts/interaction_system/Interactable/SpawnEnemies.gd" id="8_oxnsv"]
 [ext_resource type="PackedScene" uid="uid://de7abuunrnk1j" path="res://scenes/npc/JackSmith.tscn" id="10_lnrhe"]
+[ext_resource type="PackedScene" uid="uid://beq5rupfbv2ob" path="res://scenes/game_scene/demo/demo.tscn" id="11_tr8b4"]
+[ext_resource type="Texture2D" uid="uid://boyg2q5ri5ceb" path="res://assets/skybox-space.png" id="12_1qftq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lnrhe"]
 albedo_color = Color(4.512258e-07, 0.29928088, 0, 1)
@@ -50,8 +52,19 @@ size = Vector3(20, 10, 20)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_6yq8t"]
 
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1j5yo"]
+panorama = ExtResource("12_1qftq")
+energy_multiplier = 2.0
+
+[sub_resource type="Sky" id="Sky_6yq8t"]
+sky_material = SubResource("PanoramaSkyMaterial_1j5yo")
+process_mode = 1
+
 [sub_resource type="Environment" id="Environment_6yq8t"]
-glow_enabled = true
+background_mode = 2
+background_energy_multiplier = 1.67
+sky = SubResource("Sky_6yq8t")
+ambient_light_source = 3
 
 [node name="Game" type="Node3D" unique_id=1160267840 node_paths=PackedStringArray("list_of_view")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15)
@@ -158,9 +171,7 @@ shape = SubResource("WorldBoundaryShape3D_6yq8t")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=647554647]
 transform = Transform3D(0.546579, -0.60909915, 0.5746735, 0, 0.6862531, 0.7273629, -0.8374075, -0.39756128, 0.37509152, 0, 3.212193, 5.9742565)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=677987250]
-environment = SubResource("Environment_6yq8t")
+light_color = Color(0.94509804, 1, 1, 1)
 
 [node name="MiniGame" parent="." unique_id=583750615 instance=ExtResource("6_7ulqd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, -3.7253199)
@@ -172,5 +183,11 @@ metadata/_custom_type_script = "uid://lbrvarwcj32q"
 
 [node name="JackSmith" parent="." unique_id=1547147658 instance=ExtResource("10_lnrhe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.876064, 0, 7.1126995)
+
+[node name="Demo" parent="." unique_id=140328067 instance=ExtResource("11_tr8b4")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -15.995529, 0.0376606, -104.0004)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=13822374]
+environment = SubResource("Environment_6yq8t")
 
 [connection signal="interaction_signal" from="StaticMap/EnemyArenaFight/Spawner/Interactable" to="StaticMap/EnemyArenaFight/Spawner/SpawnEnemies" method="spawn"]

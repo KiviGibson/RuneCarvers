@@ -23,12 +23,12 @@ metadata/_custom_type_script = "uid://x544es0wcwfx"
 
 [node name="ForceMovement2" type="Node" parent="RemoteHost" unique_id=971341293]
 script = ExtResource("2_bd3fj")
-type = 3
+type = 1
 metadata/_custom_type_script = "uid://c2i230dqglhpo"
 
 [node name="ForceMovement" type="Node" parent="." unique_id=1322940293]
 script = ExtResource("2_bd3fj")
-type = 3
+type = 1
 metadata/_custom_type_script = "uid://c2i230dqglhpo"
 
 [node name="SpawnProjectile" type="Node" parent="." unique_id=792923289]

@@ -2,6 +2,7 @@ extends Node
 class_name ThrowingHands
 @export var animator: AnimationPlayer
 var base_damage: int
+@export var max_damage_after: float = 0.5
 @export var max_charge_damage: float = 10.0
 var current_hand: String = "right"
 @export var hitbox: HitBox
@@ -21,7 +22,9 @@ func charging() -> void:
 func atack(charge_value:float) -> void:
 	if not multiplayer.is_server(): return
 	rune.ammo += 1
-	hitbox.damage.value = base_damage + roundi(max_charge_damage*charge_value)
+	var val_excited : bool = max_damage_after <= charge_value
+	hitbox.applies_knockback = val_excited
+	hitbox.damage.value = base_damage + int(int(val_excited)*max_charge_damage)
 	play_animation.rpc(current_hand + "_atack")
 	change_hand()
 

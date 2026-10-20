@@ -6,6 +6,7 @@
 layer = 2
 script = ExtResource("1_1ig7j")
 text = NodePath("Panel/VBoxContainer/Label")
+debug_solo = true
 
 [node name="Panel" type="Panel" parent="." unique_id=1553658088]
 custom_minimum_size = Vector2(300, 200)

@@ -3,12 +3,14 @@ class_name EnemySpawner
 
 enum enemy{
 	Goly,
-	HoleMole
+	HoleMole,
+	Gshiby
 }
 
 var enemy_scene: Dictionary [enemy, PackedScene] = {
 	enemy.Goly: load(&"uid://b0766kma0i2rc"),
-	enemy.HoleMole: load(&"uid://dwc03idkesqx2")
+	enemy.HoleMole: load(&"uid://dwc03idkesqx2"),
+	enemy.Gshiby: load(&"uid://s3xiyw81sxad")
 }
 
 func _ready() -> void:

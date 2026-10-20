@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://g8d1aj0ym3lb" path="res://scenes/carving_ui/CarvingUI.tscn" id="4_npwbq"]
 [ext_resource type="Script" uid="uid://bnn8qhdyh10wi" path="res://scripts/unit/player/Gem.gd" id="5_x3qp0"]
 [ext_resource type="Resource" uid="uid://dwmy8snflaw55" path="res://resource/Gems/CraftedSecurity.tres" id="6_76i7i"]
-[ext_resource type="Script" uid="uid://d1ggxehy2ph1q" path="res://scripts/unit/MovementControler.gd" id="6_c3xxp"]
 [ext_resource type="PackedScene" uid="uid://xmwhn75bbej1" path="res://scenes/runes/TempRune.tscn" id="6_pn6s4"]
 [ext_resource type="PackedScene" uid="uid://cebt7oam1m3q2" path="res://scenes/runes/Dash.tscn" id="7_5stf6"]
 [ext_resource type="Resource" uid="uid://cne2c6e13jbv0" path="res://resource/Gems/WandererStone.tres" id="7_mndc6"]
@@ -24,9 +23,14 @@
 [ext_resource type="PackedScene" uid="uid://xfynh1gsbkpk" path="res://scenes/runes/StoneNuckels.tscn" id="14_76i7i"]
 [ext_resource type="Script" uid="uid://dfa3lc7gy2wsc" path="res://scripts/unit/player/CustomCamera.gd" id="15_ejd4k"]
 [ext_resource type="PackedScene" uid="uid://prw4kt1hlgg3" path="res://scenes/player/inventory/SearchMenu.tscn" id="21_5ttev"]
+[ext_resource type="Script" uid="uid://chl7884i16pjw" path="res://scripts/unit/PlayerMovement.gd" id="21_mndc6"]
 [ext_resource type="Script" uid="uid://dmvtlen1ia2qs" path="res://scripts/UI/CascadingEscapableUI.gd" id="22_76i7i"]
+[ext_resource type="Script" uid="uid://b8ifqwvwj4b1n" path="res://scripts/unit/player/PlayerTargeting.gd" id="22_mndc6"]
+[ext_resource type="Script" uid="uid://c2i230dqglhpo" path="res://scripts/effect_system/effect_components/FroceMovement.gd" id="23_1hh02"]
 [ext_resource type="PackedScene" uid="uid://bkrq06x4vb00f" path="res://scenes/player/inventory/GemOption.tscn" id="23_x3qp0"]
 [ext_resource type="Script" uid="uid://cunlm7qu3hrat" path="res://scripts/multiplayer_system/spawners/RuneSpawnere.gd" id="25_kvwax"]
+[ext_resource type="Script" uid="uid://dfwsinj7nsi2u" path="res://scripts/interaction_system/CarvingInteractionZone.gd" id="26_geaob"]
+[ext_resource type="PackedScene" uid="uid://ngon13g4yfjp" path="res://scenes/interactable/CodeHandler.tscn" id="27_qsmrd"]
 
 [sub_resource type="Resource" id="Resource_c3xxp"]
 script = ExtResource("2_npwbq")
@@ -71,13 +75,18 @@ properties/1/replication_mode = 2
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_khinc"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_6yq8t"]
-size = Vector3(0.1, 0.1, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6yq8t"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1j5yo"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_rn7t0"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6yq8t"]
+radius = 10.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6yq8t"]
+radius = 2.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mdl7e"]
 properties/0/path = NodePath("Puppet:scale")
@@ -96,7 +105,7 @@ properties/4/path = NodePath("Puppet:rotation")
 properties/4/spawn = true
 properties/4/replication_mode = 2
 
-[node name="Player" type="Node3D" unique_id=1666680966 node_paths=PackedStringArray("input_system", "carving_system", "carving_ui", "camera", "interact_system", "hp_bar", "view", "inventory", "rune_spawner", "counter_indicator", "stamina_bar", "combat_timer", "model", "hurt_box", "effect_spawner", "projectile_spawner")]
+[node name="Player" type="Node3D" unique_id=1666680966 node_paths=PackedStringArray("input_system", "carving_system", "carving_ui", "camera", "interact_system", "hp_bar", "view", "inventory", "rune_spawner", "counter_indicator", "stamina_bar", "combat_timer", "recovery_zone", "code_handler", "model", "hurt_box", "effect_spawner", "projectile_spawner")]
 script = ExtResource("1_tpg5x")
 input_system = NodePath("InputSystem")
 carving_system = NodePath("CarvingSystem")
@@ -110,6 +119,8 @@ rune_spawner = NodePath("Rune")
 counter_indicator = NodePath("UI/Panel/MarginContainer/VBoxContainer/Label")
 stamina_bar = NodePath("UI/Panel/MarginContainer/VBoxContainer/ProgressBar")
 combat_timer = NodePath("CombatTimer")
+recovery_zone = NodePath("Puppet/CarvingInterationZone")
+code_handler = NodePath("Puppet/CarvingInterationZone/CodeHandler")
 model = NodePath("Puppet")
 stats = SubResource("Resource_c3xxp")
 hurt_box = NodePath("Puppet/HurtBox")
@@ -273,19 +284,18 @@ layout_mode = 2
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="UI" unique_id=362320468]
 replication_config = SubResource("SceneReplicationConfig_kvwax")
 
-[node name="Puppet" type="CharacterBody3D" parent="." unique_id=52327527 node_paths=PackedStringArray("visible_model")]
+[node name="Puppet" type="CharacterBody3D" parent="." unique_id=1223298524 node_paths=PackedStringArray("visible_model")]
 collision_layer = 2
 collision_mask = 3
-script = ExtResource("6_c3xxp")
+script = ExtResource("21_mndc6")
 visible_model = NodePath("Model")
 type = 0
-gravity = 19.62
+metadata/_custom_type_script = "uid://chl7884i16pjw"
 
 [node name="Model" type="MeshInstance3D" parent="Puppet" unique_id=1363839945]
 mesh = SubResource("CapsuleMesh_khinc")
 
-[node name="Direction" type="MeshInstance3D" parent="Puppet/Model" unique_id=60768259]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6960293, -0.10202789)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Puppet/Model" unique_id=1396531574]
 mesh = SubResource("BoxMesh_6yq8t")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Puppet" unique_id=1819267064]
@@ -300,6 +310,14 @@ metadata/_custom_type_script = "uid://deqosc7jtvi1x"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Puppet/HurtBox" unique_id=1244874730]
 shape = SubResource("CapsuleShape3D_1j5yo")
 
+[node name="ForceMovement" type="Node" parent="Puppet/HurtBox" unique_id=118014109 node_paths=PackedStringArray("local_host")]
+script = ExtResource("23_1hh02")
+type = 2
+displacement_vector = Vector3(0, 0, 1)
+local_host = NodePath("../../..")
+use_local_host = true
+metadata/_custom_type_script = "uid://c2i230dqglhpo"
+
 [node name="InteractSystem" type="Area3D" parent="Puppet" unique_id=1248380435 node_paths=PackedStringArray("input")]
 collision_layer = 16
 collision_mask = 16
@@ -310,6 +328,43 @@ metadata/_custom_type_script = "uid://5la47o2e7t8g"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Puppet/InteractSystem" unique_id=1370149598]
 shape = SubResource("CylinderShape3D_rn7t0")
 debug_color = Color(2.4546682e-06, 0.6507329, 0.093313, 0.41960785)
+
+[node name="PlayerTargeting" type="Node3D" parent="Puppet" unique_id=1141351617 node_paths=PackedStringArray("targetting_area", "area_collider", "prio_ray", "mv_controller")]
+script = ExtResource("22_mndc6")
+targetting_area = NodePath("TargetingArea")
+area_collider = NodePath("TargetingArea/TargetingAreaCollider")
+prio_ray = NodePath("RayCast3D")
+mv_controller = NodePath("..")
+metadata/_custom_type_script = "uid://b8ifqwvwj4b1n"
+
+[node name="TargetingArea" type="Area3D" parent="Puppet/PlayerTargeting" unique_id=167524864]
+collision_layer = 0
+collision_mask = 8
+
+[node name="TargetingAreaCollider" type="CollisionShape3D" parent="Puppet/PlayerTargeting/TargetingArea" unique_id=786661662]
+shape = SubResource("CylinderShape3D_6yq8t")
+
+[node name="RayCast3D" type="RayCast3D" parent="Puppet/PlayerTargeting" unique_id=2134406478]
+target_position = Vector3(0, 0, -10)
+collision_mask = 8
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="CarvingInterationZone" type="Area3D" parent="Puppet" unique_id=974090567]
+visible = false
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("26_geaob")
+metadata/_custom_type_script = "uid://dfwsinj7nsi2u"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Puppet/CarvingInterationZone" unique_id=1528929789]
+shape = SubResource("SphereShape3D_6yq8t")
+
+[node name="CodeHandler" parent="Puppet/CarvingInterationZone" unique_id=1646119177 instance=ExtResource("27_qsmrd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+code_length = 5
+use_expected_signs = true
+expected_signs = Array[int]([1, 2, 0, 3, 1])
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=965688071]
 size = Vector2i(960, 1080)
@@ -346,10 +401,11 @@ one_shot = true
 [connection signal="carved_symbol" from="InputSystem" to="CarvingSystem" method="carve_symbol"]
 [connection signal="carving_change" from="InputSystem" to="CarvingSystem" method="carving_state_change"]
 [connection signal="interact" from="InputSystem" to="Inventory" method="show"]
-[connection signal="jump_input" from="InputSystem" to="Puppet" method="jump" binds= [7.0]]
+[connection signal="jump_input" from="InputSystem" to="Puppet" method="jump" binds= [4.905]]
 [connection signal="movement_vector_change" from="InputSystem" to="Puppet" method="set_movement_vector"]
 [connection signal="run_input" from="InputSystem" to="Puppet" method="run"]
-[connection signal="target_vector_change" from="InputSystem" to="Puppet" method="set_rotation_vector"]
+[connection signal="switch_targeting" from="InputSystem" to="Puppet/PlayerTargeting" method="switch_targeting"]
+[connection signal="target_vector_change" from="InputSystem" to="Puppet/PlayerTargeting" method="set_rotation_vector"]
 [connection signal="successful_carving" from="CarvingSystem" to="." method="get_rune"]
 [connection signal="on_button_press" from="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption" to="Inventory" method="on_gem_pressed"]
 [connection signal="on_button_press" from="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption2" to="Inventory" method="on_gem_pressed"]
@@ -361,3 +417,5 @@ one_shot = true
 [connection signal="got_hit" from="Puppet/HurtBox" to="." method="_on_getting_hit"]
 [connection signal="carving_zone_entered" from="Puppet/InteractSystem" to="CarvingSystem" method="switch_carving" binds= [true]]
 [connection signal="carving_zone_exit" from="Puppet/InteractSystem" to="CarvingSystem" method="switch_carving" binds= [false]]
+[connection signal="carved_symbol" from="Puppet/CarvingInterationZone" to="." method="recovery_sign"]
+[connection signal="interaction_ended" from="Puppet/CarvingInterationZone" to="." method="reset_recovery"]

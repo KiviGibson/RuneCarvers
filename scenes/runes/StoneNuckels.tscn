@@ -230,7 +230,7 @@ tracks/2/path = NodePath("Model/HitBox:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.29841948),
+"times": PackedFloat32Array(0.05, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -296,7 +296,7 @@ tracks/2/path = NodePath("Model/HitBox:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.29841948),
+"times": PackedFloat32Array(0.1, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -343,7 +343,7 @@ _data = {
 script = ExtResource("1_kq4ya")
 type = 1
 cd = 0.5
-ammo = 4
+ammo = 6
 charge_per_second = 0.5
 metadata/_custom_type_script = "uid://d16u0e2gt6kxj"
 
@@ -367,7 +367,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0
 curve = SubResource("Curve3D_7617m")
 
 [node name="PathFollowRight" type="PathFollow3D" parent="Model/za_hando/Path3D" unique_id=847985144]
-transform = Transform3D(-0.10018934, 0, 0.99482006, 0, 0.9998946, 0, -0.9948104, 0, -0.10019032, -0.09369754, 0, -0.8768322)
+transform = Transform3D(-0.10018932, 0, 0.9948195, 0, 0.9998946, 0, -0.99481016, 0, -0.10019026, -0.09369754, 0, -0.8768322)
 progress = 0.63503283
 
 [node name="right_fist" type="MeshInstance3D" parent="Model/za_hando/Path3D/PathFollowRight" unique_id=677197124]
@@ -395,6 +395,8 @@ collision_mask = 8
 monitoring = false
 script = ExtResource("3_2olt6")
 damage = SubResource("Resource_1j5yo")
+displacement_vector = Vector3(-1, 0, 0)
+distance = 5.0
 metadata/_custom_type_script = "uid://bdmlbgajj81a8"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/HitBox" unique_id=752970812]
