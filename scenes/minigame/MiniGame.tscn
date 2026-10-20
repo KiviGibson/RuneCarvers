@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dfwsinj7nsi2u" path="res://scripts/interaction_system/CarvingInteractionZone.gd" id="1_pb5i6"]
 [ext_resource type="PackedScene" uid="uid://cvvqjqmh3d4nq" path="res://scenes/minigame/tank.tscn" id="2_66ly0"]
 [ext_resource type="Texture2D" uid="uid://mqryi3m3smgp" path="res://assets/kenney_cursor-pack/PNG/Basic/Double/progress_empty.png" id="2_re4xa"]
+[ext_resource type="PackedScene" uid="uid://ngon13g4yfjp" path="res://scenes/interactable/CodeHandler.tscn" id="3_kxtkx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_diy0u"]
 
@@ -29,10 +30,14 @@ size = Vector3(0.1, 1, 2)
 [sub_resource type="BoxMesh" id="BoxMesh_1j5yo"]
 size = Vector3(0.1, 2, 2)
 
-[node name="MiniGame" type="Node3D" unique_id=583750615 node_paths=PackedStringArray("tanks", "input")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_6yq8t"]
+size = Vector3(5, 1, 5)
+
+[node name="MiniGame" type="Node3D" unique_id=583750615 node_paths=PackedStringArray("tanks", "input", "code_handlers")]
 script = ExtResource("1_diy0u")
 tanks = [NodePath("MAP/Tank"), NodePath("MAP/Tank2")]
 input = [NodePath("CarvingInterationZone"), NodePath("CarvingInterationZone2")]
+code_handlers = [NodePath("CarvingInterationZone/CodeHandler"), NodePath("CarvingInterationZone2/CodeHandler")]
 pattern_length = 4
 
 [node name="CarvingInterationZone" type="Area3D" parent="." unique_id=1097446254]
@@ -48,6 +53,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_diy0u")
 debug_color = Color(0.99874693, 0, 0.1458736, 0.41960785)
 
+[node name="CodeHandler" parent="CarvingInterationZone" unique_id=1646119177 instance=ExtResource("3_kxtkx")]
+hidden_code = true
+
 [node name="CarvingInterationZone2" type="Area3D" parent="." unique_id=1445403153]
 collision_layer = 16
 collision_mask = 16
@@ -58,6 +66,9 @@ metadata/_custom_type_script = "uid://dfwsinj7nsi2u"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CarvingInterationZone2" unique_id=2099565577]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_kxtkx")
+
+[node name="CodeHandler" parent="CarvingInterationZone2" unique_id=460507293 instance=ExtResource("3_kxtkx")]
+hidden_code = true
 
 [node name="MAP" type="Node3D" parent="." unique_id=1723942933]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -3)
@@ -113,3 +124,7 @@ shape = SubResource("BoxShape3D_heunu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MAP/StaticBody3D/CollisionShape3D4" unique_id=1525550728]
 mesh = SubResource("BoxMesh_diy0u")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="MAP/StaticBody3D" unique_id=1532088884]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1, -3)
+shape = SubResource("BoxShape3D_6yq8t")

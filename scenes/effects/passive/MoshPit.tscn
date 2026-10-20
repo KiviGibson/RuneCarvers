@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://bxnmn05cakwdi"]
+
+[ext_resource type="Script" uid="uid://r0tp4n5w2xkh" path="res://scripts/effect_system/Effect.gd" id="1_rhorl"]
+[ext_resource type="Script" uid="uid://bwo138wbdtdop" path="res://scripts/effect_system/effect_components/GetDamagedEnemy.gd" id="2_dnv1w"]
+[ext_resource type="Script" uid="uid://bdmlbgajj81a8" path="res://scripts/damage_system/HitBox.gd" id="3_r3cm2"]
+[ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/damage_system/Damage.gd" id="4_vwr1v"]
+[ext_resource type="Shader" uid="uid://dytj1qodinn24" path="res://shaders/general_look_shader/areashader.gdshader" id="5_vwr1v"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6yq8t"]
+radius = 5.0
+
+[sub_resource type="Resource" id="Resource_3j1us"]
+script = ExtResource("4_vwr1v")
+value = 3
+metadata/_custom_type_script = "uid://uaugd35wcih8"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1j5yo"]
+radius = 4.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r3cm2"]
+render_priority = 0
+shader = ExtResource("5_vwr1v")
+shader_parameter/albedo = Color(2.5870278e-07, 0.14821118, 0.0006366856, 1)
+shader_parameter/proximity_fade_distance = 0.0999999977648
+shader_parameter/albedo_texture_size = Vector2i(1, 1)
+shader_parameter/point_size = 0.0
+shader_parameter/uv1_scale = Vector3(0, 0, 0)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(0, 0, 0)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="SphereMesh" id="SphereMesh_6yq8t"]
+material = SubResource("ShaderMaterial_r3cm2")
+radius = 5.0
+height = 10.0
+
+[node name="MoshPit" type="Node3D" unique_id=244840292]
+script = ExtResource("1_rhorl")
+temporary = false
+metadata/_custom_type_script = "uid://r0tp4n5w2xkh"
+
+[node name="GetDamaged" type="Area3D" parent="." unique_id=1843775031 node_paths=PackedStringArray("timer")]
+collision_layer = 0
+collision_mask = 12
+script = ExtResource("2_dnv1w")
+atacks_per_activation = 2
+timer = NodePath("../HitBox/DecayTimer")
+metadata/_custom_type_script = "uid://bwo138wbdtdop"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GetDamaged" unique_id=1255032304]
+shape = SubResource("SphereShape3D_6yq8t")
+debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[node name="HitBox" type="Area3D" parent="." unique_id=1390772492]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("3_r3cm2")
+damage = SubResource("Resource_3j1us")
+ticking = true
+metadata/_custom_type_script = "uid://bdmlbgajj81a8"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox" unique_id=386768672]
+shape = SubResource("SphereShape3D_1j5yo")
+debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[node name="TickTimer" type="Timer" parent="HitBox" unique_id=960211907]
+
+[node name="DecayTimer" type="Timer" parent="HitBox" unique_id=770466746]
+wait_time = 6.0
+one_shot = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="HitBox" unique_id=1852791027]
+mesh = SubResource("SphereMesh_6yq8t")
+
+[connection signal="activation" from="GetDamaged" to="HitBox/TickTimer" method="start"]
+[connection signal="timeout" from="HitBox/TickTimer" to="HitBox" method="tick"]
+[connection signal="timeout" from="HitBox/DecayTimer" to="GetDamaged" method="reset_effect"]
+[connection signal="timeout" from="HitBox/DecayTimer" to="HitBox/TickTimer" method="stop"]

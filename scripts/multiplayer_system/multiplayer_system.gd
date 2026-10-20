@@ -10,11 +10,15 @@ const max_connected := 2
 var player_count := 0
 var client: int
 @export var text: Label
+@export var debug_solo: bool
 
 func _ready() -> void:
 	player_connected.connect(player_joined)
 	multiplayer.connected_to_server.connect(_on_player_connected_ok)
 	multiplayer.peer_connected.connect(_player_connected)
+	var args:= Array(OS.get_cmdline_args())
+	if "--server" in args: create_game()
+	if "--client" in args: join_game()
 
 func create_game() -> void:
 	var peer := ENetMultiplayerPeer.new()
@@ -23,6 +27,12 @@ func create_game() -> void:
 	multiplayer.multiplayer_peer = peer
 	player_connected.emit(1)
 	text.text = str(1)
+	if debug_solo:
+		player_connected.emit(100)
+		client = 100
+		player_joined(100)
+		player_loaded.rpc()
+		Players.hide_unused_viewport.rpc()
 
 func join_game() -> void:
 	var peer := ENetMultiplayerPeer.new()

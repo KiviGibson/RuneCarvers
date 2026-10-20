@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://bqy6siemc433l"]
+
+[ext_resource type="Script" uid="uid://lbrvarwcj32q" path="res://scripts/unit/EnemySpawnPoint.gd" id="1_2n4ee"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_6yq8t"]
+vertices = PackedVector3Array(-1.5, 0.5, -11.5, 0.25, 0.5, -12, 0.75, 0.5, -12.75, 2.5, 0.5, -16.75, 1.75, 0.5, -17.5, 4.25, 0.5, -12, 4.75, 0.5, -16.25, 0.25, 0.5, -21.75, -5.5, 0.5, -24, -12, 0.5, -17.5, -9, 0.5, -11.25, -9.75, 0.5, -22.25, -12, 0.5, -16.5, -10.25, 0.5, -12.25, -7.5, 0.5, -8.25, -1.75, 0.5, -9, -2.25, 0.5, -10.75, -2, 0.5, -23, 7.25, 0.5, -15.75, 5.5, 0.5, -11.25, 17.5, 0.5, 3, 25.75, 0.5, -0.75, 29, 0.5, -9.5, 16.5, 0.5, -21, 7, 0.5, -1.25, 6, 0.5, -6, 5.25, 0.5, -5.25, 5, 0.5, -8.5, 8.75, 0.5, -17.75, 29, 0.5, -8.5, 25.25, 0.5, -17.75, 17.5, 0.5, -21, 14, 0.5, 2, -5, 0.5, 0.5, -3.75, 0.5, 3.5, -3, 0.5, 4, 3.25, 0.5, -4, 4.75, 0.5, 0.5, 1.25, 0.5, -4.5, 0, 0.5, -5.75, -4.25, 0.5, -3, 0.5, 0.5, 5, 3.5, 0.5, 3.75)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4), PackedInt32Array(6, 5, 3), PackedInt32Array(3, 5, 2), PackedInt32Array(7, 4, 8), PackedInt32Array(8, 4, 0), PackedInt32Array(8, 0, 10), PackedInt32Array(8, 10, 9), PackedInt32Array(9, 11, 8), PackedInt32Array(12, 9, 13), PackedInt32Array(13, 9, 10), PackedInt32Array(14, 16, 15), PackedInt32Array(8, 17, 7), PackedInt32Array(16, 14, 0), PackedInt32Array(0, 14, 10), PackedInt32Array(5, 6, 19), PackedInt32Array(19, 6, 18), PackedInt32Array(21, 20, 22), PackedInt32Array(22, 20, 24), PackedInt32Array(22, 24, 19), PackedInt32Array(22, 19, 23), PackedInt32Array(24, 26, 25), PackedInt32Array(19, 25, 27), PackedInt32Array(18, 28, 19), PackedInt32Array(19, 28, 23), PackedInt32Array(22, 29, 21), PackedInt32Array(31, 30, 23), PackedInt32Array(23, 30, 22), PackedInt32Array(24, 25, 19), PackedInt32Array(20, 32, 24), PackedInt32Array(35, 34, 33), PackedInt32Array(36, 26, 24), PackedInt32Array(24, 37, 36), PackedInt32Array(36, 37, 38), PackedInt32Array(40, 39, 38), PackedInt32Array(37, 42, 41), PackedInt32Array(39, 40, 15), PackedInt32Array(15, 40, 14), PackedInt32Array(33, 40, 35), PackedInt32Array(35, 40, 41), PackedInt32Array(41, 40, 38), PackedInt32Array(41, 38, 37)]
+border_size = 1.0
+agent_radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1j5yo"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6yq8t"]
+material = SubResource("StandardMaterial3D_1j5yo")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6yq8t"]
+
+[node name="ThreeIslands" type="Node3D" unique_id=500567747]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1685825803]
+navigation_mesh = SubResource("NavigationMesh_6yq8t")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D" unique_id=227445928]
+autosmooth = true
+use_collision = true
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=996455978]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.5, 0)
+radius = 6.0
+height = 11.0
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=7293367]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -7.5, -9)
+radius = 13.0
+height = 15.0
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=536579280]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -3, -17)
+radius = 8.0
+height = 6.0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=164615592]
+transform = Transform3D(0.86602545, 0, 0.50000006, 0, 1, 0, -0.50000006, 0, 0.86602545, -4.1861057, -1, -7.9312506)
+size = Vector3(7, 2, 17)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=1305808254]
+transform = Transform3D(0.25881904, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, 0.25881904, 4.177353, -1, -14.245634)
+size = Vector3(6, 2, 7)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=2109004852]
+transform = Transform3D(-0.5, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, -0.5, 6.177353, -1, -3.245634)
+size = Vector3(6, 2, 7)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=511158626]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7683716e-07, 1, 2.3841858e-07)
+mesh = SubResource("CapsuleMesh_6yq8t")
+
+[node name="EnemySpawnPoint" type="Node3D" parent="." unique_id=1695062829]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1, -8)
+script = ExtResource("1_2n4ee")
+enemy = 2
+max_distance = 10.0
+enemy_count = 12
+metadata/_custom_type_script = "uid://lbrvarwcj32q"
+
+[node name="PointsOfIntrest" type="Node3D" parent="." unique_id=2140840894]
+
+[node name="PointOfIntrest" type="Area3D" parent="PointsOfIntrest" unique_id=1376239838]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.5, -15)
+collision_layer = 512
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PointsOfIntrest/PointOfIntrest" unique_id=421413274]
+shape = SubResource("SphereShape3D_6yq8t")
+
+[node name="PointOfIntrest2" type="Area3D" parent="PointsOfIntrest" unique_id=1285585089]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.5, -22)
+collision_layer = 512
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PointsOfIntrest/PointOfIntrest2" unique_id=456176530]
+shape = SubResource("SphereShape3D_6yq8t")
+
+[node name="PointOfIntrest3" type="Area3D" parent="PointsOfIntrest" unique_id=1857978586]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)
+collision_layer = 512
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PointsOfIntrest/PointOfIntrest3" unique_id=1206555589]
+shape = SubResource("SphereShape3D_6yq8t")
+
+[node name="PointOfIntrest4" type="Area3D" parent="PointsOfIntrest" unique_id=557190055]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.5, -3)
+collision_layer = 512
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PointsOfIntrest/PointOfIntrest4" unique_id=1315649979]
+shape = SubResource("SphereShape3D_6yq8t")
+
+[node name="PointOfIntrest5" type="Area3D" parent="PointsOfIntrest" unique_id=1629113017]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.481659, 0.5, -12.230331)
+collision_layer = 512
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PointsOfIntrest/PointOfIntrest5" unique_id=1628633066]
+shape = SubResource("SphereShape3D_6yq8t")
+
+[node name="PointOfIntrest6" type="Area3D" parent="PointsOfIntrest" unique_id=676642773]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6543026, 0.5, -8.034727)
+collision_layer = 512
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PointsOfIntrest/PointOfIntrest6" unique_id=1477508962]
+shape = SubResource("SphereShape3D_6yq8t")
+
+[node name="PointOfIntrest7" type="Area3D" parent="PointsOfIntrest" unique_id=955377091]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.932514, 0.5, -9.002944)
+collision_layer = 512
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PointsOfIntrest/PointOfIntrest7" unique_id=898881351]
+shape = SubResource("SphereShape3D_6yq8t")

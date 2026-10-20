@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dncupmnjuscno"]
+
+[ext_resource type="Script" uid="uid://r0tp4n5w2xkh" path="res://scripts/effect_system/Effect.gd" id="1_iwov6"]
+
+[node name="FireStarter" type="Node3D" unique_id=1820914156]
+script = ExtResource("1_iwov6")
+metadata/_custom_type_script = "uid://r0tp4n5w2xkh"

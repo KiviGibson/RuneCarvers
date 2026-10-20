@@ -9,9 +9,14 @@ signal is_not_affected()
 
 
 func check_is_affected(_n: StringName = "") -> void: 
+	print("Affect check")
 	if not host: return
+	print("Host exist")
 	if host.is_affected(effect): 
 		is_affected.emit()
+		print("Affected")
 		if remove_effect:
 			host.remove_effect(effect)
-	else: is_not_affected.emit()
+	else: 
+		print("Not affected")
+		is_not_affected.emit()

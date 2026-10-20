@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dj8jejqlvtkrm"]
+
+[ext_resource type="Script" uid="uid://r0tp4n5w2xkh" path="res://scripts/effect_system/Effect.gd" id="1_3fu15"]
+[ext_resource type="Script" uid="uid://bdwlpxrom4rru" path="res://scripts/effect_system/effect_components/OnCarvingSuccess.gd" id="2_0pr1j"]
+[ext_resource type="Script" uid="uid://l6tdhbi5lskx" path="res://scripts/effect_system/effect_components/GiveInvonurability.gd" id="3_kuf5d"]
+
+[node name="CraftedSecurity" type="Node3D" unique_id=789553587]
+script = ExtResource("1_3fu15")
+metadata/_custom_type_script = "uid://r0tp4n5w2xkh"
+
+[node name="OnCarvingSuccess" type="Node" parent="." unique_id=1875527575]
+script = ExtResource("2_0pr1j")
+metadata/_custom_type_script = "uid://bdwlpxrom4rru"
+
+[node name="GiveInvonurability" type="Node" parent="." unique_id=1230528304]
+script = ExtResource("3_kuf5d")
+time = 0.5
+metadata/_custom_type_script = "uid://l6tdhbi5lskx"
+
+[connection signal="setup" from="." to="OnCarvingSuccess" method="setup"]
+[connection signal="setup" from="." to="GiveInvonurability" method="setup"]
+[connection signal="carving_success" from="OnCarvingSuccess" to="GiveInvonurability" method="activate"]

@@ -1,88 +1,14 @@
 [gd_scene format=3 uid="uid://r6fca3riibw5"]
 
-[ext_resource type="Script" uid="uid://be6dsn574j1uu" path="res://scripts/projectile/Projectile.gd" id="1_muiy1"]
+[ext_resource type="Script" uid="uid://be6dsn574j1uu" path="res://scripts/projectile/PhisicsProjectile.gd" id="1_muiy1"]
 [ext_resource type="Script" uid="uid://bdmlbgajj81a8" path="res://scripts/damage_system/HitBox.gd" id="2_8cp0j"]
 [ext_resource type="Script" uid="uid://b03r1bnamyrtj" path="res://effects/thunder/thunder.gd" id="2_s0af1"]
-[ext_resource type="Shader" uid="uid://bpuee5xeipf2m" path="res://effects/thunder/lightning_strike.gdshader" id="3_vgnww"]
+[ext_resource type="Shader" uid="uid://bpuee5xeipf2m" path="res://shaders/electrocute/lightning_strike.gdshader" id="3_vgnww"]
 [ext_resource type="Texture2D" uid="uid://1qw4bgrtbqhx" path="res://effects/thunder/Grafika_bez_nazwy 2.png" id="4_h7fpw"]
 [ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/damage_system/Damage.gd" id="6_hu0rm"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6yq8t"]
 radius = 0.1
-
-[sub_resource type="Curve" id="Curve_q1jir"]
-_data = [Vector2(0, 0), 2.6692064, 0.0, 0, 0, Vector2(0.15173674, 0.14912277), 0.0, 0.0, 0, 0, Vector2(0.16270566, 1), 0.04798227, 0.04798227, 0, 0, Vector2(0.25228518, 1), 0.0, 0.0, 0, 0, Vector2(0.75137115, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 6
-
-[sub_resource type="CurveTexture" id="CurveTexture_rn1i6"]
-curve = SubResource("Curve_q1jir")
-
-[sub_resource type="Gradient" id="Gradient_1lag6"]
-offsets = PackedFloat32Array(0.13243762, 0.2, 0.3761996, 0.52975047, 1)
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.38170314, 0.38170326, 0.38170323, 0.7065275, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_2wdri"]
-gradient = SubResource("Gradient_1lag6")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pvui6"]
-particle_flag_rotate_y = true
-emission_shape_offset = Vector3(5, 0, 0)
-emission_shape = 6
-emission_ring_axis = Vector3(1, 0, 0)
-emission_ring_height = 10.0
-emission_ring_radius = 0.1
-emission_ring_inner_radius = 0.0
-emission_ring_cone_angle = 90.0
-gravity = Vector3(0, 0, 0)
-scale_min = 20.0
-scale_max = 30.0
-color = Color(1.5129308, 0.5842407, 2.454, 1)
-color_ramp = SubResource("GradientTexture1D_2wdri")
-alpha_curve = SubResource("CurveTexture_rn1i6")
-anim_offset_max = 1.0
-turbulence_enabled = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwlk7"]
-render_priority = 0
-shader = ExtResource("3_vgnww")
-shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/texture_albedo = ExtResource("4_h7fpw")
-shader_parameter/uv1_scale = Vector3(1, -1, 0)
-shader_parameter/uv1_offset = Vector3(0, 0, 0)
-
-[sub_resource type="QuadMesh" id="QuadMesh_lhcly"]
-material = SubResource("ShaderMaterial_wwlk7")
-size = Vector2(0.2, 1)
-center_offset = Vector3(0, 0.5, 0)
-
-[sub_resource type="Curve" id="Curve_fkall"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_2wdri"]
-curve = SubResource("Curve_fkall")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rnxim"]
-lifetime_randomness = 1.0
-direction = Vector3(0, 1, 0)
-spread = 90.0
-initial_velocity_min = 4.0
-initial_velocity_max = 6.0
-gravity = Vector3(0, 0, 0)
-alpha_curve = SubResource("CurveTexture_2wdri")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qinqh"]
-transparency = 1
-shading_mode = 0
-vertex_color_use_as_albedo = true
-albedo_color = Color(1.513, 0.584, 2.454, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_qkjd5"]
-material = SubResource("StandardMaterial3D_qinqh")
-radius = 0.02
-height = 0.2
-radial_segments = 24
-rings = 10
 
 [sub_resource type="Animation" id="Animation_2wdri"]
 length = 0.001
@@ -188,12 +114,100 @@ tracks/3/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.99),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [null],
+"method": &"_destroy"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f72rx"]
 _data = {
 &"RESET": SubResource("Animation_2wdri"),
 &"thunder": SubResource("Animation_qinqh")
 }
+
+[sub_resource type="Curve" id="Curve_q1jir"]
+_data = [Vector2(0, 0), 2.6692064, 0.0, 0, 0, Vector2(0.15173674, 0.14912277), 0.0, 0.0, 0, 0, Vector2(0.16270566, 1), 0.04798227, 0.04798227, 0, 0, Vector2(0.25228518, 1), 0.0, 0.0, 0, 0, Vector2(0.75137115, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveTexture" id="CurveTexture_rn1i6"]
+curve = SubResource("Curve_q1jir")
+
+[sub_resource type="Gradient" id="Gradient_1lag6"]
+offsets = PackedFloat32Array(0.13243762, 0.2, 0.3761996, 0.52975047, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.38170314, 0.38170326, 0.38170323, 0.7065275, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2wdri"]
+gradient = SubResource("Gradient_1lag6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pvui6"]
+particle_flag_rotate_y = true
+emission_shape_offset = Vector3(5, 0, 0)
+emission_shape = 6
+emission_ring_axis = Vector3(1, 0, 0)
+emission_ring_height = 10.0
+emission_ring_radius = 0.1
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+gravity = Vector3(0, 0, 0)
+scale_min = 20.0
+scale_max = 30.0
+color = Color(1.5129308, 0.5842407, 2.454, 1)
+color_ramp = SubResource("GradientTexture1D_2wdri")
+alpha_curve = SubResource("CurveTexture_rn1i6")
+anim_offset_max = 1.0
+turbulence_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwlk7"]
+render_priority = 0
+shader = ExtResource("3_vgnww")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("4_h7fpw")
+shader_parameter/uv1_scale = Vector3(1, -1, 0)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_lhcly"]
+material = SubResource("ShaderMaterial_wwlk7")
+size = Vector2(0.2, 1)
+center_offset = Vector3(0, 0.5, 0)
+
+[sub_resource type="Curve" id="Curve_fkall"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2wdri"]
+curve = SubResource("Curve_fkall")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rnxim"]
+lifetime_randomness = 1.0
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_min = 4.0
+initial_velocity_max = 6.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_2wdri")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qinqh"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1.513, 0.584, 2.454, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_qkjd5"]
+material = SubResource("StandardMaterial3D_qinqh")
+radius = 0.02
+height = 0.2
+radial_segments = 24
+rings = 10
 
 [sub_resource type="Curve" id="Curve_o3lo0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -240,6 +254,7 @@ metadata/_custom_type_script = "uid://uaugd35wcih8"
 
 [node name="VioletThunder" type="CharacterBody3D" unique_id=1550874625]
 collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_muiy1")
 gravity = 0.0
 bounciness = 0.0
@@ -249,7 +264,12 @@ metadata/_custom_type_script = "uid://be6dsn574j1uu"
 shape = SubResource("SphereShape3D_6yq8t")
 
 [node name="Visuals" type="Node3D" parent="." unique_id=1380742328]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 script = ExtResource("2_s0af1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals" unique_id=1275980744]
+libraries/ = SubResource("AnimationLibrary_f72rx")
+autoplay = &"thunder"
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Visuals" unique_id=1011008368]
 transform = Transform3D(-4.371138e-08, 1, 0, -0.9999998, -4.371139e-08, 0, 0, 0, 0.9999998, 0, 0, 0)
@@ -277,10 +297,6 @@ transform_align = 2
 process_material = SubResource("ParticleProcessMaterial_rnxim")
 draw_pass_1 = SubResource("SphereMesh_qkjd5")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals" unique_id=1275980744]
-libraries/ = SubResource("AnimationLibrary_f72rx")
-autoplay = &"thunder"
-
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="Visuals" unique_id=117730605]
 emitting = false
 amount = 1
@@ -291,6 +307,7 @@ process_material = SubResource("ParticleProcessMaterial_aon6i")
 draw_pass_1 = SubResource("SphereMesh_k1f88")
 
 [node name="HitBox" type="Area3D" parent="Visuals" unique_id=2026513561]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("2_8cp0j")
@@ -299,10 +316,3 @@ metadata/_custom_type_script = "uid://bdmlbgajj81a8"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/HitBox" unique_id=366096144]
 shape = SubResource("SphereShape3D_1j5yo")
-
-[node name="Timer" type="Timer" parent="." unique_id=964718492]
-wait_time = 3.0
-one_shot = true
-autostart = true
-
-[connection signal="timeout" from="Timer" to="." method="_destroy"]
