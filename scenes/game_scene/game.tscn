@@ -5,7 +5,9 @@
 [ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/damage_system/Damage.gd" id="3_700et"]
 [ext_resource type="PackedScene" uid="uid://cebeh080tio1p" path="res://scenes/minigame/MiniGame.tscn" id="6_7ulqd"]
 [ext_resource type="Script" uid="uid://lbrvarwcj32q" path="res://scripts/unit/EnemySpawnPoint.gd" id="6_wedpv"]
+[ext_resource type="PackedScene" uid="uid://bepmjrfr0ev7i" path="res://scenes/npcs/npc.tscn" id="7_fhy3a"]
 [ext_resource type="PackedScene" uid="uid://c2h57oqn7nm50" path="res://scenes/enemies/hole_mole/Hole.tscn" id="8_fhy3a"]
+[ext_resource type="Resource" uid="uid://cxxx8l014l3wb" path="res://assets/npcs/Rabbit/rabbit.tres" id="8_oxnsv"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_6yq8t"]
 
@@ -95,3 +97,7 @@ transform = Transform3D(0.9943199, 0, -0.10643366, 0, 1, 0, 0.10643366, 0, 0.994
 script = ExtResource("6_wedpv")
 enemy = 1
 metadata/_custom_type_script = "uid://lbrvarwcj32q"
+
+[node name="NPC" parent="." unique_id=844759562 instance=ExtResource("7_fhy3a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.591501, 2.0098884, -3.54459)
+npc_data = ExtResource("8_oxnsv")

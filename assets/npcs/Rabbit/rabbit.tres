@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="NPCData" format=3 uid="uid://cxxx8l014l3wb"]
+
+[ext_resource type="Script" uid="uid://ulmtrmrj4wfj" path="res://assets/npcs/npc_data.gd" id="1_xngtt"]
+[ext_resource type="PackedScene" uid="uid://kk2jok1pstgm" path="res://assets/npcs/Rabbit/rabbit.tscn" id="2_4sdfe"]
+
+[resource]
+script = ExtResource("1_xngtt")
+display_name = "Rabbit"
+visual_model = ExtResource("2_4sdfe")
+dialogue_path = "res://assets/dialogues/example_dialogue.json"
+metadata/_custom_type_script = "uid://ulmtrmrj4wfj"

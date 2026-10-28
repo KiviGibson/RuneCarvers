@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bepmjrfr0ev7i"]
+
+[ext_resource type="Script" uid="uid://cvomwuqj5hb74" path="res://scripts/npcs/npc.gd" id="1_m5fb5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m5fb5"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sfsuv"]
+radius = 0.50341797
+
+[node name="NPC" type="CharacterBody3D" unique_id=844759562]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_m5fb5")
+player_see_range = 10.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2076351003]
+shape = SubResource("CapsuleShape3D_m5fb5")
+
+[node name="Brain" type="Node" parent="." unique_id=148514017]
+
+[node name="Detector" type="Area3D" parent="." unique_id=394179895]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Detector" unique_id=2052027870]
+shape = SubResource("CylinderShape3D_sfsuv")
+
+[node name="Label" type="Label3D" parent="." unique_id=525319276]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+pixel_size = 0.01
+billboard = 1
+no_depth_test = true
+font_size = 48
+
+[node name="Model" type="Node3D" parent="." unique_id=556355860]

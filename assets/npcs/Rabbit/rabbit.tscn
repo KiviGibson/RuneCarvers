@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://kk2jok1pstgm"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_46vwt"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_aqqk6"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sfsuv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yrwov"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_qpn52"]
+material = SubResource("StandardMaterial3D_yrwov")
+
+[node name="Rabbit" type="Node3D" unique_id=266841192]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Body" type="MeshInstance3D" parent="." unique_id=902231919]
+mesh = SubResource("SphereMesh_46vwt")
+
+[node name="tail" type="MeshInstance3D" parent="Body" unique_id=737257467]
+transform = Transform3D(0.5823132, 0, 0, 0, 0.44652116, 0, 0, 0, 0.2995146, 0, 0, -0.5331114)
+mesh = SubResource("SphereMesh_46vwt")
+
+[node name="Head" type="MeshInstance3D" parent="." unique_id=719179200]
+transform = Transform3D(0.6533729, 0, 0, 0, 0.6273305, 0, 0, 0, 0.75022215, 0, 0.46301174, 0.17849565)
+mesh = SubResource("SphereMesh_aqqk6")
+
+[node name="Ear" type="MeshInstance3D" parent="Head" unique_id=1901592167]
+transform = Transform3D(0.44887766, 0, 0, 0, 0.46696937, 0.097943425, 0, -0.2195862, 0.20828542, 0.3200727, 0.7379055, -0.36611694)
+mesh = SubResource("CapsuleMesh_sfsuv")
+
+[node name="Ear2" type="MeshInstance3D" parent="Head" unique_id=924781803]
+transform = Transform3D(0.44887766, 0, 0, 0, 0.46696913, 0.09794342, 0, -0.21958625, 0.20828542, -0.28161258, 0.7379055, -0.36611694)
+mesh = SubResource("CapsuleMesh_sfsuv")
+
+[node name="eye" type="MeshInstance3D" parent="Head" unique_id=564927985]
+transform = Transform3D(0.13336816, 0, 0, 0, 0.312454, 0.014452498, 0, -0.03687861, 0.12244874, -0.2137196, 0.2401458, 0.41769275)
+mesh = SubResource("SphereMesh_qpn52")
+
+[node name="eye2" type="MeshInstance3D" parent="Head" unique_id=49485201]
+transform = Transform3D(0.13336816, 0, 0, 0, 0.312454, 0.014452498, 0, -0.0368786, 0.12244873, 0.22745177, 0.2401458, 0.41769275)
+mesh = SubResource("SphereMesh_qpn52")
