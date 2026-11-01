@@ -1,0 +1,33 @@
+{
+  "start": {
+	"speaker": "Rabbit",
+	"text": "Ktoś ukraadł mi białeczko ... Pomożesz mi ? ",
+	"choices": [
+	  { "text": "Znajdźmy tego złego człowieka ...", "next": "good_end" },
+	  { "text": "Nie pomogę", "next": "bad_end" }
+	]
+  },
+  "bad_end": {
+	"speaker": "Rabbit",
+	"text": "Nie fajnie kolego ...",
+	"choices": [
+	  {
+		"text": "ez ide dalej",
+		"next": "end",
+		"set": { "no_help": true }
+	  },
+	  { "text": "Nie, nic nie widziałem.", "next": "end" }
+	]
+  },
+  "good_end":{
+	"speaker": "Rabbit",
+	"text": "Dziękuje przyjacielu",
+	"signal": "find_bad_guy",
+	"next": "end"
+	},
+  "end": {
+	"speaker": "",
+	"text": "",
+	"end": true
+  }
+}

@@ -7,5 +7,5 @@
 script = ExtResource("1_xngtt")
 display_name = "Rabbit"
 visual_model = ExtResource("2_4sdfe")
-dialogue_path = "res://assets/dialogues/example_dialogue.json"
+dialogue_path = "res://assets/dialogues/Rabbit/rabbit_dialogue.json"
 metadata/_custom_type_script = "uid://ulmtrmrj4wfj"

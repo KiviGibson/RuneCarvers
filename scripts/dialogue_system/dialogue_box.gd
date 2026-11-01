@@ -22,7 +22,7 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("interaction"):
+	if event.is_action_pressed("interact"):
 		if choices_container.get_child_count() == 0:
 			DialogueManager.advance()
 

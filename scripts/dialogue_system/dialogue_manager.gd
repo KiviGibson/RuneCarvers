@@ -3,23 +3,34 @@ extends Node
 signal dialogue_started(path: String)
 signal line_changed(line: DialogueLine)
 signal dialogue_signal(signal_name: String)
-signal dialogue_ended(path:String)
+signal dialogue_ended()
+
+const DIALOGUE_BOX := preload("res://scenes/dialogue_scene/dialogue_box.tscn")
 
 var variables: Dictionary = {}
 var active: bool = false
 var _lines: Dictionary = {}
 var _current_id: String = ""
 
-func is_active() -> bool: return(active)
+func _ready() -> void:
+	var layer := CanvasLayer.new()
+	layer.layer = 10
+	add_child(layer)
+	var box := DIALOGUE_BOX.instantiate() as Control
+	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.add_child(box)
 
-func start_dialogue(npcName: String, start_id: String = "start") -> void:
-	active = true
-	var dial : String = "res://data/dialogues/"+npcName+".json"
-	_lines = _load_dialogue(dial)
-	if _lines.is_empty():
-		push_error("DialogueManager: nie udało się wczytać dialogu z %s" % npcName)
+func is_active() -> bool: return active
+
+func start_dialogue(dialogue_path: String, start_id: String = "start") -> void:
+	if active: return
+	var lines := _load_dialogue(dialogue_path)
+	if lines.is_empty():
+		push_error("DialogueManager: nie udało się wczytać dialogu z %s" % dialogue_path)
 		return
-	dialogue_started.emit(dial)
+	_lines = lines
+	active = true
+	dialogue_started.emit(dialogue_path)
 	_goto(start_id)
 
 func choose(choice_index: int) -> void:
@@ -33,7 +44,6 @@ func choose(choice_index: int) -> void:
 			variables[key] = to_set[key]
 	_goto(choice.get("next", ""))
 
-
 func advance() -> void:
 	var line: DialogueLine = _lines.get(_current_id)
 	if line == null:
@@ -41,10 +51,8 @@ func advance() -> void:
 	if line.choices.is_empty():
 		_goto(line.next_id)
 
-
 func get_current_line() -> DialogueLine:
 	return _lines.get(_current_id)
-
 
 func _load_dialogue(json_path: String) -> Dictionary:
 	var result: Dictionary = {}
@@ -76,7 +84,6 @@ func _load_dialogue(json_path: String) -> Dictionary:
 		line.is_end = entry.get("end", false)
 		result[id] = line
 	return result
-
 
 func _goto(id: String) -> void:
 	if id == "" or not _lines.has(id):
