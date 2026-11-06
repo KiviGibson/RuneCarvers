@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://de7abuunrnk1j" path="res://scenes/npc/JackSmith.tscn" id="10_lnrhe"]
 [ext_resource type="PackedScene" uid="uid://beq5rupfbv2ob" path="res://scenes/game_scene/demo/demo.tscn" id="11_tr8b4"]
 [ext_resource type="Texture2D" uid="uid://boyg2q5ri5ceb" path="res://assets/skybox-space.png" id="12_1qftq"]
+[ext_resource type="PackedScene" uid="uid://db8ia335p2ttd" path="res://scenes/interactable/blink_wall.tscn" id="13_vvut4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lnrhe"]
 albedo_color = Color(4.512258e-07, 0.29928088, 0, 1)
@@ -189,5 +190,8 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -15.
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=13822374]
 environment = SubResource("Environment_6yq8t")
+
+[node name="blink_wall" parent="." unique_id=635862627 instance=ExtResource("13_vvut4")]
+transform = Transform3D(0.45496237, 0.12190682, 0.8821267, -0.25881898, 0.9659257, -7.7134095e-09, -0.85206896, -0.2283112, 0.47101173, 16.35945, 9.696515, -10.283749)
 
 [connection signal="interaction_signal" from="StaticMap/EnemyArenaFight/Spawner/Interactable" to="StaticMap/EnemyArenaFight/Spawner/SpawnEnemies" method="spawn"]

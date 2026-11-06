@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://db8ia335p2ttd"]
+
+[ext_resource type="Shader" uid="uid://b3fo4ftu40c70" path="res://shaders/blink_wall/blink_wall.gdshader" id="1_jkrdc"]
+[ext_resource type="Script" uid="uid://cwwbrn0nfnc14" path="res://scripts/invisible_walls/blink_wall.gd" id="2_41h7f"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3gngh"]
+size = Vector3(0.01, 10, 10)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vvut4"]
+offset = Vector3(720, 0, 0)
+fractal_type = 2
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vvut4"]
+noise = SubResource("FastNoiseLite_vvut4")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5prq0"]
+render_priority = 0
+shader = ExtResource("1_jkrdc")
+shader_parameter/player1_pos = Vector3(0, 0, 0)
+shader_parameter/player2_pos = Vector3(0, 0, 0)
+shader_parameter/noise = SubResource("NoiseTexture2D_vvut4")
+shader_parameter/noise_y = 0.0
+shader_parameter/elevation = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
+size = Vector3(0.1, 10, 10)
+
+[node name="blink_wall" type="CSGMesh3D" unique_id=635862627]
+transform = Transform3D(0.4549624, 0.12190682, 0.88212675, -0.258819, 0.96592575, 0, -0.852069, -0.22831121, 0.47101176, 0, 0, 0)
+mesh = SubResource("BoxMesh_3gngh")
+material = SubResource("ShaderMaterial_5prq0")
+script = ExtResource("2_41h7f")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1557659223]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1608771016]
+transform = Transform3D(1, -1.4901161e-08, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_g4v7s")
