@@ -7,7 +7,7 @@ func _process(delta: float) -> void:
 	if not mat:
 		return
 	
-	mat.set_shader_parameter("elevation", position.y - (mesh.size.y/2.0)*cos(rotation.z))
+	mat.set_shader_parameter("elevation", global_position.y - (mesh.size.y/2.0)*cos(rotation.z))
 	
 	var player_id: Array[int] = Players.get_player_ids()
 	if len(player_id) == 2:

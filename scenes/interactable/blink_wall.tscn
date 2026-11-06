@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cwwbrn0nfnc14" path="res://scripts/invisible_walls/blink_wall.gd" id="2_41h7f"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3gngh"]
+resource_local_to_scene = true
 size = Vector3(0.01, 10, 10)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vvut4"]
@@ -16,6 +17,7 @@ noise = SubResource("FastNoiseLite_vvut4")
 seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5prq0"]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_jkrdc")
 shader_parameter/player1_pos = Vector3(0, 0, 0)

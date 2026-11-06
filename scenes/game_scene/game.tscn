@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://beq5rupfbv2ob" path="res://scenes/game_scene/demo/demo.tscn" id="11_tr8b4"]
 [ext_resource type="Texture2D" uid="uid://boyg2q5ri5ceb" path="res://assets/skybox-space.png" id="12_1qftq"]
 [ext_resource type="PackedScene" uid="uid://db8ia335p2ttd" path="res://scenes/interactable/blink_wall.tscn" id="13_vvut4"]
+[ext_resource type="Shader" uid="uid://b3fo4ftu40c70" path="res://shaders/blink_wall/blink_wall.gdshader" id="14_5prq0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lnrhe"]
 albedo_color = Color(4.512258e-07, 0.29928088, 0, 1)
@@ -66,6 +67,43 @@ background_mode = 2
 background_energy_multiplier = 1.67
 sky = SubResource("Sky_6yq8t")
 ambient_light_source = 3
+
+[sub_resource type="BoxMesh" id="BoxMesh_4ybgr"]
+resource_local_to_scene = true
+size = Vector3(0.01, 10, 10)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vvut4"]
+offset = Vector3(720, 0, 0)
+fractal_type = 2
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vvut4"]
+noise = SubResource("FastNoiseLite_vvut4")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lo7qv"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("14_5prq0")
+shader_parameter/player1_pos = Vector3(0, 0, 0)
+shader_parameter/player2_pos = Vector3(0, 0, 0)
+shader_parameter/noise = SubResource("NoiseTexture2D_vvut4")
+shader_parameter/noise_y = 0.0
+shader_parameter/elevation = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_xpges"]
+resource_local_to_scene = true
+size = Vector3(0.01, 10, 10)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iu41y"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("14_5prq0")
+shader_parameter/player1_pos = Vector3(0, 0, 0)
+shader_parameter/player2_pos = Vector3(0, 0, 0)
+shader_parameter/noise = SubResource("NoiseTexture2D_vvut4")
+shader_parameter/noise_y = 0.0
+shader_parameter/elevation = 0.0
 
 [node name="Game" type="Node3D" unique_id=1160267840 node_paths=PackedStringArray("list_of_view")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15)
@@ -192,6 +230,13 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -15.
 environment = SubResource("Environment_6yq8t")
 
 [node name="blink_wall" parent="." unique_id=635862627 instance=ExtResource("13_vvut4")]
-transform = Transform3D(0.45496237, 0.12190682, 0.8821267, -0.25881898, 0.9659257, -7.7134095e-09, -0.85206896, -0.2283112, 0.47101173, 16.35945, 9.696515, -10.283749)
+transform = Transform3D(0.4549624, 0.12190682, 0.88212675, -0.258819, 0.96592575, 0, -0.852069, -0.22831121, 0.47101176, 0.0047187805, 4.830924, 13.130064)
+mesh = SubResource("BoxMesh_4ybgr")
+material = SubResource("ShaderMaterial_lo7qv")
+
+[node name="blink_wall2" parent="." unique_id=1642145592 instance=ExtResource("13_vvut4")]
+transform = Transform3D(0.4549624, 0.12190682, 0.88212675, -0.258819, 0.96592575, 0, -0.852069, -0.22831121, 0.47101176, 13.279974, 9.830923, -6.8496723)
+mesh = SubResource("BoxMesh_xpges")
+material = SubResource("ShaderMaterial_iu41y")
 
 [connection signal="interaction_signal" from="StaticMap/EnemyArenaFight/Spawner/Interactable" to="StaticMap/EnemyArenaFight/Spawner/SpawnEnemies" method="spawn"]
