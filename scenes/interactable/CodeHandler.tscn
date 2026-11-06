@@ -5,6 +5,11 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_kxtkx"]
 viewport_path = NodePath("Sprite3D/SubViewport")
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_020ky"]
+properties/0/path = NodePath("Sprite3D/SubViewport/Panel/RichTextLabel:text")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
 [node name="CodeHandler" type="Node3D" unique_id=1646119177 node_paths=PackedStringArray("display", "sub_view")]
 script = ExtResource("1_020ky")
 code_length = 4
@@ -42,3 +47,6 @@ grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
 fit_content = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=369779263]
+replication_config = SubResource("SceneReplicationConfig_020ky")

@@ -7,7 +7,7 @@ _data = {
 }
 point_count = 2
 
-[node name="BridgeHilt" type="Node3D" unique_id=297093659]
+[node name="BridgeOfImpaledGiant" type="Node3D" unique_id=297093659]
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1515534613]
 use_collision = true

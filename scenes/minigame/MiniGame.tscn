@@ -5,10 +5,47 @@
 [ext_resource type="PackedScene" uid="uid://cvvqjqmh3d4nq" path="res://scenes/minigame/tank.tscn" id="2_66ly0"]
 [ext_resource type="Texture2D" uid="uid://mqryi3m3smgp" path="res://assets/kenney_cursor-pack/PNG/Basic/Double/progress_empty.png" id="2_re4xa"]
 [ext_resource type="PackedScene" uid="uid://ngon13g4yfjp" path="res://scenes/interactable/CodeHandler.tscn" id="3_kxtkx"]
+[ext_resource type="Shader" uid="uid://dytj1qodinn24" path="res://shaders/general_look_shader/areashader.gdshader" id="4_n4xfe"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_diy0u"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ukxov"]
+render_priority = 0
+shader = ExtResource("4_n4xfe")
+shader_parameter/albedo = Color(0.88677835, 0.18001038, 0.21482015, 1)
+shader_parameter/proximity_fade_distance = 0.499999988824
+shader_parameter/albedo_texture_size = Vector2i(1, 1)
+shader_parameter/uv1_scale = Vector3(0, 0, 0)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3yocn"]
+material = SubResource("ShaderMaterial_ukxov")
+size = Vector3(2, 7.863, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kxtkx"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="Gradient" id="Gradient_4n8eg"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.74558026, 0.7455802, 0.7455802, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ketl7"]
+gradient = SubResource("Gradient_4n8eg")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1j5yo"]
+render_priority = 0
+shader = ExtResource("4_n4xfe")
+shader_parameter/albedo = Color(0, 0.5035605, 0.88697225, 1)
+shader_parameter/texture_albedo = SubResource("GradientTexture1D_ketl7")
+shader_parameter/proximity_fade_distance = 0.499999988824
+shader_parameter/albedo_texture_size = Vector2i(1, 1)
+shader_parameter/uv1_scale = Vector3(0, 0, 0)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6yq8t"]
+material = SubResource("ShaderMaterial_1j5yo")
+size = Vector3(2, 7.863, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1j5yo"]
 albedo_texture = ExtResource("2_re4xa")
@@ -41,7 +78,7 @@ code_handlers = [NodePath("CarvingInterationZone/CodeHandler"), NodePath("Carvin
 pattern_length = 4
 
 [node name="CarvingInterationZone" type="Area3D" parent="." unique_id=1097446254]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, -4, 0, 1)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("1_pb5i6")
@@ -56,7 +93,11 @@ debug_color = Color(0.99874693, 0, 0.1458736, 0.41960785)
 [node name="CodeHandler" parent="CarvingInterationZone" unique_id=1646119177 instance=ExtResource("3_kxtkx")]
 hidden_code = true
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CarvingInterationZone" unique_id=1924686982]
+mesh = SubResource("BoxMesh_3yocn")
+
 [node name="CarvingInterationZone2" type="Area3D" parent="." unique_id=1445403153]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, 0, 0, 1)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("1_pb5i6")
@@ -69,6 +110,9 @@ shape = SubResource("BoxShape3D_kxtkx")
 
 [node name="CodeHandler" parent="CarvingInterationZone2" unique_id=460507293 instance=ExtResource("3_kxtkx")]
 hidden_code = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CarvingInterationZone2" unique_id=1095539806]
+mesh = SubResource("BoxMesh_6yq8t")
 
 [node name="MAP" type="Node3D" parent="." unique_id=1723942933]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -3)

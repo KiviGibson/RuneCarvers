@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dthfarj5mox45"]
+
+[ext_resource type="Script" uid="uid://ctgwin5w1saof" path="res://scripts/startup_sequence/StartSeqence.gd" id="1_87vm1"]
+[ext_resource type="PackedScene" uid="uid://indis25bjojn" path="res://scenes/start_menu/PressToProceed.tscn" id="1_htub6"]
+
+[node name="GameStartSequence" type="Control" unique_id=25333854 node_paths=PackedStringArray("press_to_proceed", "menu", "settings", "queue")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_87vm1")
+press_to_proceed = NodePath("PressToProceed")
+menu = NodePath("Menu")
+settings = NodePath("Options")
+skip_menu = true
+queue = [NodePath("Options"), NodePath("Menu")]
+
+[node name="PressToProceed" parent="." unique_id=1481843545 instance=ExtResource("1_htub6")]
+layout_mode = 1
+
+[node name="Menu" type="Panel" parent="." unique_id=375260543]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "menus"
+
+[node name="Options" type="Panel" parent="." unique_id=394546477]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "sextings"
+
+[connection signal="device_selected" from="PressToProceed" to="." method="show_menu"]

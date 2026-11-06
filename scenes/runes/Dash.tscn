@@ -22,6 +22,6 @@ projectile_scene = ExtResource("4_bes0h")
 metadata/_custom_type_script = "uid://x544es0wcwfx"
 
 [connection signal="activation" from="." to="Dash" method="force_movement"]
-[connection signal="activation" from="." to="SpawnProjectile" method="spawn_projectile_on_unit"]
+[connection signal="activation" from="." to="SpawnProjectile" method="spawn_projectile"]
 [connection signal="setup" from="." to="Dash" method="setup"]
 [connection signal="setup" from="." to="SpawnProjectile" method="setup"]

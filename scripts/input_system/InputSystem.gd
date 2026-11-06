@@ -17,6 +17,7 @@ var owner_id: int ## Coop requirement
 var hold_carving: bool = true ## Accessability feature (switch/hold)
 var next_carving_state: bool = true ## for (switch) accessability feature
 var dead_zone: float = 0.05
+
 # Targeting
 var target_vector: Vector2
 var x: float
@@ -33,10 +34,10 @@ func _process(_delta: float) -> void:
 	movement_input.rpc_id(1, Vector2(x, y))
 	update_targeting.rpc_id(1, target_vector.normalized())
 
-
 func _input(event: InputEvent) -> void:
 	if multiplayer.get_unique_id() != owner_id: return
-	# if (event is InputEventJoypadButton or event is InputEventJoypadMotion) and multiplayer.is_server(): return 
+	if not Options.good_input_device(event.device): return
+	EscapeManager.input(event) # Escapable menu
 	if event.is_action_pressed("carving"):
 		if hold_carving: carving.rpc_id(1, true)
 		else: carving.rpc_id(1, next_carving_state)
@@ -54,7 +55,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("carve_right"): carving_input.rpc_id(1, 3)
 	if event.is_action_pressed("targeting"): change_targeting.rpc_id(1)
 	if event.is_action_pressed("run"): run.rpc_id(1)
-	if event.is_action("jump"): jump.rpc_id(1)
+	if event.is_action("jump"): if not is_in_carving_state: jump.rpc_id(1)
 
 	if event is InputEventMouseMotion:
 		var screen_size: Vector2 = get_viewport().get_visible_rect().size/2

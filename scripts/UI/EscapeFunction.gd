@@ -5,7 +5,7 @@ var currently_cancellable_ui: EscapableUI: set = set_cancelable_ui
 @export var escape_menu: EscapableUI
 @export var canvas: CanvasLayer
 
-func _input(event: InputEvent) -> void:
+func input(event: InputEvent) -> void: #Wywoływane w PlayerInput
 	if event.is_action_pressed("escape"):
 		if currently_cancellable_ui == null:
 			if event is not InputEventKey: return

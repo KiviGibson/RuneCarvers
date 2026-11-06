@@ -103,7 +103,7 @@ properties/3/spawn = true
 properties/3/replication_mode = 1
 properties/4/path = NodePath("Puppet:rotation")
 properties/4/spawn = true
-properties/4/replication_mode = 2
+properties/4/replication_mode = 1
 
 [node name="Player" type="Node3D" unique_id=1666680966 node_paths=PackedStringArray("input_system", "carving_system", "carving_ui", "camera", "interact_system", "hp_bar", "view", "inventory", "rune_spawner", "counter_indicator", "stamina_bar", "combat_timer", "recovery_zone", "code_handler", "model", "hurt_box", "effect_spawner", "projectile_spawner")]
 script = ExtResource("1_tpg5x")

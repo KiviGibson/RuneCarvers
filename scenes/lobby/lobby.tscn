@@ -9,14 +9,8 @@ text = NodePath("Panel/VBoxContainer/Label")
 debug_solo = true
 
 [node name="Panel" type="Panel" parent="." unique_id=1553658088]
-custom_minimum_size = Vector2(300, 200)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1620.0
-offset_bottom = -880.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 150.0
+offset_bottom = 40.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=2086457084]
 layout_mode = 1
@@ -28,16 +22,7 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer" unique_id=842581386]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Not Connected"
-
-[node name="Button" type="Button" parent="Panel/VBoxContainer" unique_id=1974247401]
-layout_mode = 2
-text = "Create"
-
-[node name="Button2" type="Button" parent="Panel/VBoxContainer" unique_id=677124612]
-layout_mode = 2
-text = "Join
-"
-
-[connection signal="pressed" from="Panel/VBoxContainer/Button" to="." method="create_game"]
-[connection signal="pressed" from="Panel/VBoxContainer/Button2" to="." method="join_game"]
+horizontal_alignment = 1
+vertical_alignment = 1

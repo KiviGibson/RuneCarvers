@@ -67,7 +67,7 @@ func add_projectile(projectile: PackedScene) -> Projectile:
 	return tmp
 
 func disable_collision() -> void:
-	model.collision_mask = 0
+	model.collision_mask = 1
 	model.collision_layer = 0
 
 func enable_collision() -> void:
