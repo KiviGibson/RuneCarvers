@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://8uuirnol00wq"]
+
+[ext_resource type="Script" uid="uid://d24afv616dcuo" path="res://scripts/minigame_tower_defense/minigame_tower_defense.gd" id="1_31l6h"]
+[ext_resource type="Script" uid="uid://dfwsinj7nsi2u" path="res://scripts/interaction_system/CarvingInteractionZone.gd" id="2_40eq4"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rj6sg"]
+size = Vector2(10, 10)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_43yng"]
+size = Vector2(1, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ggmcg"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0urdh"]
+size = Vector2(3, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_31l6h"]
+size = Vector2(1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_40eq4"]
+size = Vector2(3, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mu0k4"]
+size = Vector2(1, 4)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nb2mt"]
+size = Vector2(1, 3)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1eviy"]
+size = Vector2(3, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bvfsj"]
+size = Vector2(3, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yq3c2"]
+size = Vector2(1, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_3kxpd"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -2.5, 0, -5.5, 0, 0, 0, 0, 0, 0, -2.5, 0, -0.5, 0, 0, 0, 0, 0, 0, 0.5, 0, -0.5, 0, 0, 0, 0, 0, 0, 0.5, 0, -2.5, 0, 0, 0, 0, 0, 0, 3.5, 0, -2.5, 0, 0, 0, 0, 0, 0, 3.5, 0, -0.5, 0, 0, 0, 0, 0, 0, 3.5, 0, 0.5, 0, 0, 0, 0, 0, 0, 2.5, 0, 0.5, 0, 0, 0, 0, 0, 0, 2.5, 0, 2.5, 0, 0, 0, 0, 0, 0, -0.5, 0, 2.5, 0, 0, 0, 0, 0, 0, -0.5, 0, 3.5, 0, 0, 0, 0, 0, 0, -2.5, 0, 3.5, 0, 0, 0, 0, 0, 0, -2.5, 0, 5.5),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 13
+
+[node name="MinigameTowerDefense" type="Node3D" unique_id=131528245]
+script = ExtResource("1_31l6h")
+
+[node name="MoveInteraction" type="Area3D" parent="." unique_id=1686789910]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 7)
+script = ExtResource("2_40eq4")
+metadata/_custom_type_script = "uid://dfwsinj7nsi2u"
+
+[node name="PlaceInteraction" type="Area3D" parent="." unique_id=2057791607]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 7)
+script = ExtResource("2_40eq4")
+metadata/_custom_type_script = "uid://dfwsinj7nsi2u"
+
+[node name="Terrain" type="Node3D" parent="." unique_id=1871862982]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain" unique_id=1439710432]
+mesh = SubResource("PlaneMesh_rj6sg")
+
+[node name="Paths" type="Node3D" parent="Terrain/MeshInstance3D" unique_id=2093385631]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/MeshInstance3D/Paths" unique_id=1666082263]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.15, -2.5)
+mesh = SubResource("PlaneMesh_43yng")
+surface_material_override/0 = SubResource("StandardMaterial3D_ggmcg")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Terrain/MeshInstance3D/Paths" unique_id=1846425485]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.15, -0.5)
+mesh = SubResource("PlaneMesh_0urdh")
+surface_material_override/0 = SubResource("StandardMaterial3D_ggmcg")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Terrain/MeshInstance3D/Paths" unique_id=2125602289]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.15, -1.5)
+mesh = SubResource("PlaneMesh_31l6h")
+surface_material_override/0 = SubResource("StandardMaterial3D_ggmcg")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Terrain/MeshInstance3D/Paths" unique_id=980256029]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.15, -2.5)
+mesh = SubResource("PlaneMesh_40eq4")
+surface_material_override/0 = SubResource("StandardMaterial3D_ggmcg")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Terrain/MeshInstance3D/Paths" unique_id=1836100634]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0.15, -1)
+mesh = SubResource("PlaneMesh_mu0k4")
+surface_material_override/0 = SubResource("StandardMaterial3D_ggmcg")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Terrain/MeshInstance3D/Paths" unique_id=2060155409]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.15, 1.5)
+mesh = SubResource("PlaneMesh_nb2mt")
+surface_material_override/0 = SubResource("StandardMaterial3D_ggmcg")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Terrain/MeshInstance3D/Paths" unique_id=628095409]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.15, 2.5)
+mesh = SubResource("PlaneMesh_1eviy")
+surface_material_override/0 = SubResource("StandardMaterial3D_ggmcg")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Terrain/MeshInstance3D/Paths" unique_id=1833472581]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.15, 3.5)
+mesh = SubResource("PlaneMesh_bvfsj")
+surface_material_override/0 = SubResource("StandardMaterial3D_ggmcg")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Terrain/MeshInstance3D/Paths" unique_id=1400966322]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.15, 4.5)
+mesh = SubResource("PlaneMesh_yq3c2")
+surface_material_override/0 = SubResource("StandardMaterial3D_ggmcg")
+
+[node name="Path3D" type="Path3D" parent="Terrain" unique_id=789940559]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+curve = SubResource("Curve3D_3kxpd")

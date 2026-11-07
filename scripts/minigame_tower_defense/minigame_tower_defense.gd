@@ -1,0 +1,2 @@
+class_name MinigameTowerDef
+extends Node3D
