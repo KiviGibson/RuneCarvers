@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://prw4kt1hlgg3"]
 
 [ext_resource type="Script" uid="uid://do27ofp6rsl8c" path="res://scripts/interaction_system/Npc/JackSmith/SearchMenu.gd" id="1_4hny1"]
-[ext_resource type="PackedScene" uid="uid://bkrq06x4vb00f" path="res://scenes/player/inventory/GemOption.tscn" id="2_4r3vd"]
+[ext_resource type="PackedScene" uid="uid://bkrq06x4vb00f" path="res://scenes/player/inventory/gem_collection/GemOption.tscn" id="2_4r3vd"]
 
 [node name="SearchMenu" type="Control" unique_id=1204333785 node_paths=PackedStringArray("option_container")]
 layout_mode = 3

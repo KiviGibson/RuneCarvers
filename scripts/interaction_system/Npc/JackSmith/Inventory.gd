@@ -1,12 +1,21 @@
 extends CustomNode
 class_name Inventory
 
+
+@export var inventory_ui: EscapableUI
+
+@export_group("Gems")
 @export var main_gem: Gem # on -1
 @export var sub_gems: Array[Gem] = [null, null, null]# from 0 to 2
 @export var avilable_gems: Array[Gem] # list of avilebility
 @export var gem_slots: Array[GemOption]
 @export var search_menu: SearchMenu
-@export var inventory_ui: EscapableUI
+
+@export_group("Tools")
+var shop_keeper_tools: Array[Tool]
+@export var equiped_tools: Array[Tool]
+@export var backpack_tools: Array[Tool]
+
 var currently_swapped: int = -1
 
 func _ready() -> void:

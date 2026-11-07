@@ -22,12 +22,13 @@
 [ext_resource type="Script" uid="uid://bcd84k42fkm1d" path="res://scripts/multiplayer_system/spawners/ProjectileSpawner.gd" id="13_20koh"]
 [ext_resource type="PackedScene" uid="uid://xfynh1gsbkpk" path="res://scenes/runes/StoneNuckels.tscn" id="14_76i7i"]
 [ext_resource type="Script" uid="uid://dfa3lc7gy2wsc" path="res://scripts/unit/player/CustomCamera.gd" id="15_ejd4k"]
-[ext_resource type="PackedScene" uid="uid://prw4kt1hlgg3" path="res://scenes/player/inventory/SearchMenu.tscn" id="21_5ttev"]
+[ext_resource type="PackedScene" uid="uid://bbqyr2immokb5" path="res://scenes/player/inventory/tool_trader/ToolTrade.tscn" id="18_qsmrd"]
+[ext_resource type="PackedScene" uid="uid://prw4kt1hlgg3" path="res://scenes/player/inventory/gem_collection/SearchMenu.tscn" id="21_5ttev"]
 [ext_resource type="Script" uid="uid://chl7884i16pjw" path="res://scripts/unit/PlayerMovement.gd" id="21_mndc6"]
 [ext_resource type="Script" uid="uid://dmvtlen1ia2qs" path="res://scripts/UI/CascadingEscapableUI.gd" id="22_76i7i"]
 [ext_resource type="Script" uid="uid://b8ifqwvwj4b1n" path="res://scripts/unit/player/PlayerTargeting.gd" id="22_mndc6"]
 [ext_resource type="Script" uid="uid://c2i230dqglhpo" path="res://scripts/effect_system/effect_components/FroceMovement.gd" id="23_1hh02"]
-[ext_resource type="PackedScene" uid="uid://bkrq06x4vb00f" path="res://scenes/player/inventory/GemOption.tscn" id="23_x3qp0"]
+[ext_resource type="PackedScene" uid="uid://bkrq06x4vb00f" path="res://scenes/player/inventory/gem_collection/GemOption.tscn" id="23_x3qp0"]
 [ext_resource type="Script" uid="uid://cunlm7qu3hrat" path="res://scripts/multiplayer_system/spawners/RuneSpawnere.gd" id="25_kvwax"]
 [ext_resource type="Script" uid="uid://dfwsinj7nsi2u" path="res://scripts/interaction_system/CarvingInteractionZone.gd" id="26_geaob"]
 [ext_resource type="PackedScene" uid="uid://ngon13g4yfjp" path="res://scenes/interactable/CodeHandler.tscn" id="27_qsmrd"]
@@ -63,6 +64,18 @@ pattern = Array[int]([2, 2, 0])
 rune = ExtResource("9_8qjgm")
 cd = 10.0
 metadata/_custom_type_script = "uid://nrajgkybshxf"
+
+[sub_resource type="Gradient" id="Gradient_jtlb7"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6yq8t"]
+gradient = SubResource("Gradient_jtlb7")
+
+[sub_resource type="Gradient" id="Gradient_ye1dr"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jtlb7"]
+gradient = SubResource("Gradient_ye1dr")
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_kvwax"]
 properties/0/path = NodePath("Panel/MarginContainer/VBoxContainer/ProgressBar:value")
@@ -127,13 +140,13 @@ hurt_box = NodePath("Puppet/HurtBox")
 effect_spawner = NodePath("Effect")
 projectile_spawner = NodePath("Projectile")
 
-[node name="Inventory" type="Node" parent="." unique_id=952128580 node_paths=PackedStringArray("gem_slots", "search_menu", "inventory_ui")]
+[node name="Inventory" type="Node" parent="." unique_id=952128580 node_paths=PackedStringArray("inventory_ui", "gem_slots", "search_menu")]
 script = ExtResource("3_8nn5r")
+inventory_ui = NodePath("../InventoryUI")
 main_gem = ExtResource("4_kvwax")
 avilable_gems = Array[ExtResource("5_x3qp0")]([ExtResource("4_kvwax"), ExtResource("7_mndc6"), ExtResource("8_1hh02"), ExtResource("6_76i7i")])
-gem_slots = [NodePath("../InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption"), NodePath("../InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption2"), NodePath("../InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption3"), NodePath("../InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption4")]
+gem_slots = [NodePath("../InventoryUI/Planel/Gems/HBoxContainer2/GemOption"), NodePath("../InventoryUI/Planel/Gems/HBoxContainer2/GemOption2"), NodePath("../InventoryUI/Planel/Gems/HBoxContainer2/GemOption3"), NodePath("../InventoryUI/Planel/Gems/HBoxContainer2/GemOption4")]
 search_menu = NodePath("../InventoryUI/SearchMenu")
-inventory_ui = NodePath("../InventoryUI")
 metadata/_custom_type_script = "uid://bsdhjg5t04i3q"
 
 [node name="InputSystem" type="Node" parent="." unique_id=804145743]
@@ -147,7 +160,6 @@ ui = [NodePath("../UI/Panel/MarginContainer/VBoxContainer/HBoxContainer"), NodeP
 metadata/_custom_type_script = "uid://qpy2uevlwsjk"
 
 [node name="InventoryUI" type="Panel" parent="." unique_id=1963536372 node_paths=PackedStringArray("queue")]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -156,7 +168,7 @@ grow_vertical = 2
 script = ExtResource("22_76i7i")
 queue = [NodePath("SearchMenu")]
 
-[node name="MarginContainer" type="MarginContainer" parent="InventoryUI" unique_id=172578870]
+[node name="Planel" type="MarginContainer" parent="InventoryUI" unique_id=172578870]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -168,15 +180,16 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="InventoryUI/MarginContainer" unique_id=541330595]
+[node name="Gems" type="VBoxContainer" parent="InventoryUI/Planel" unique_id=541330595]
+visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="InventoryUI/MarginContainer/VBoxContainer" unique_id=584342239]
+[node name="HBoxContainer2" type="HBoxContainer" parent="InventoryUI/Planel/Gems" unique_id=584342239]
 layout_mode = 2
 alignment = 1
 
-[node name="GemOption" parent="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1504063666 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
+[node name="GemOption" parent="InventoryUI/Planel/Gems/HBoxContainer2" unique_id=1504063666 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
 layout_mode = 2
 tags = {
 0: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
@@ -186,7 +199,7 @@ tags = {
 slot_num = -1
 sloted = true
 
-[node name="GemOption2" parent="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=153361322 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
+[node name="GemOption2" parent="InventoryUI/Planel/Gems/HBoxContainer2" unique_id=153361322 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
 layout_mode = 2
 tags = {
 0: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
@@ -195,7 +208,7 @@ tags = {
 }
 sloted = true
 
-[node name="GemOption3" parent="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=901000007 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
+[node name="GemOption3" parent="InventoryUI/Planel/Gems/HBoxContainer2" unique_id=901000007 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
 layout_mode = 2
 tags = {
 0: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
@@ -205,7 +218,7 @@ tags = {
 slot_num = 1
 sloted = true
 
-[node name="GemOption4" parent="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1125143313 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
+[node name="GemOption4" parent="InventoryUI/Planel/Gems/HBoxContainer2" unique_id=1125143313 node_paths=PackedStringArray("tags") instance=ExtResource("23_x3qp0")]
 layout_mode = 2
 tags = {
 0: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
@@ -215,11 +228,97 @@ tags = {
 slot_num = 2
 sloted = true
 
+[node name="Tools" type="VBoxContainer" parent="InventoryUI/Planel" unique_id=1399458099]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Shop" type="VBoxContainer" parent="InventoryUI/Planel/Tools" unique_id=1908992602]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="InventoryUI/Planel/Tools/Shop" unique_id=11526109]
+layout_mode = 2
+text = "Shop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InventoryUI/Planel/Tools/Shop" unique_id=25399414]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="ToolTrade" parent="InventoryUI/Planel/Tools/Shop/HBoxContainer" unique_id=974168136 instance=ExtResource("18_qsmrd")]
+layout_mode = 2
+
+[node name="ToolTrade2" parent="InventoryUI/Planel/Tools/Shop/HBoxContainer" unique_id=461205193 instance=ExtResource("18_qsmrd")]
+layout_mode = 2
+
+[node name="ToolTrade3" parent="InventoryUI/Planel/Tools/Shop/HBoxContainer" unique_id=1143660956 instance=ExtResource("18_qsmrd")]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="InventoryUI/Planel/Tools" unique_id=1180195768]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_6yq8t")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InventoryUI/Planel/Tools" unique_id=2044349715]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Eq" type="VBoxContainer" parent="InventoryUI/Planel/Tools/HBoxContainer" unique_id=858868746]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="InventoryUI/Planel/Tools/HBoxContainer/Eq" unique_id=266363524]
+layout_mode = 2
+text = "Equipment"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InventoryUI/Planel/Tools/HBoxContainer/Eq" unique_id=620963707]
+layout_mode = 2
+
+[node name="ToolTrade" parent="InventoryUI/Planel/Tools/HBoxContainer/Eq/HBoxContainer" unique_id=173382671 instance=ExtResource("18_qsmrd")]
+layout_mode = 2
+
+[node name="ToolTrade2" parent="InventoryUI/Planel/Tools/HBoxContainer/Eq/HBoxContainer" unique_id=743899270 instance=ExtResource("18_qsmrd")]
+layout_mode = 2
+
+[node name="ToolTrade3" parent="InventoryUI/Planel/Tools/HBoxContainer/Eq/HBoxContainer" unique_id=1646482439 instance=ExtResource("18_qsmrd")]
+layout_mode = 2
+
+[node name="ToolTrade4" parent="InventoryUI/Planel/Tools/HBoxContainer/Eq/HBoxContainer" unique_id=2004076386 instance=ExtResource("18_qsmrd")]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="InventoryUI/Planel/Tools/HBoxContainer" unique_id=1396660681]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+texture = SubResource("GradientTexture1D_jtlb7")
+region_rect = Rect2(607, 0, 445, 2360)
+
+[node name="Backpack" type="VBoxContainer" parent="InventoryUI/Planel/Tools/HBoxContainer" unique_id=1949872279]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="InventoryUI/Planel/Tools/HBoxContainer/Backpack" unique_id=2086096363]
+layout_mode = 2
+text = "Backpack"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InventoryUI/Planel/Tools/HBoxContainer/Backpack" unique_id=1686562969]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ToolTrade4" parent="InventoryUI/Planel/Tools/HBoxContainer/Backpack/HBoxContainer" unique_id=2026993336 instance=ExtResource("18_qsmrd")]
+layout_mode = 2
+
+[node name="ToolTrade5" parent="InventoryUI/Planel/Tools/HBoxContainer/Backpack/HBoxContainer" unique_id=135488419 instance=ExtResource("18_qsmrd")]
+layout_mode = 2
+
 [node name="SearchMenu" parent="InventoryUI" unique_id=1204333785 instance=ExtResource("21_5ttev")]
 visible = false
 layout_mode = 1
 
 [node name="UI" type="Control" parent="." unique_id=1427293323]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -378,10 +477,9 @@ target = NodePath("../../Puppet")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2085177374]
 replication_config = SubResource("SceneReplicationConfig_mdl7e")
 
-[node name="Effect" type="MultiplayerSpawner" parent="." unique_id=1022747681 node_paths=PackedStringArray("host")]
+[node name="Effect" type="MultiplayerSpawner" parent="." unique_id=1022747681]
 spawn_path = NodePath("../Puppet")
 script = ExtResource("10_7oing")
-host = NodePath("..")
 
 [node name="Projectile" type="MultiplayerSpawner" parent="." unique_id=1664283319]
 spawn_path = NodePath("../Puppet")
@@ -407,10 +505,10 @@ one_shot = true
 [connection signal="switch_targeting" from="InputSystem" to="Puppet/PlayerTargeting" method="switch_targeting"]
 [connection signal="target_vector_change" from="InputSystem" to="Puppet/PlayerTargeting" method="set_rotation_vector"]
 [connection signal="successful_carving" from="CarvingSystem" to="." method="get_rune"]
-[connection signal="on_button_press" from="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption" to="Inventory" method="on_gem_pressed"]
-[connection signal="on_button_press" from="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption2" to="Inventory" method="on_gem_pressed"]
-[connection signal="on_button_press" from="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption3" to="Inventory" method="on_gem_pressed"]
-[connection signal="on_button_press" from="InventoryUI/MarginContainer/VBoxContainer/HBoxContainer2/GemOption4" to="Inventory" method="on_gem_pressed"]
+[connection signal="on_button_press" from="InventoryUI/Planel/Gems/HBoxContainer2/GemOption" to="Inventory" method="on_gem_pressed"]
+[connection signal="on_button_press" from="InventoryUI/Planel/Gems/HBoxContainer2/GemOption2" to="Inventory" method="on_gem_pressed"]
+[connection signal="on_button_press" from="InventoryUI/Planel/Gems/HBoxContainer2/GemOption3" to="Inventory" method="on_gem_pressed"]
+[connection signal="on_button_press" from="InventoryUI/Planel/Gems/HBoxContainer2/GemOption4" to="Inventory" method="on_gem_pressed"]
 [connection signal="gem_selected" from="InventoryUI/SearchMenu" to="Inventory" method="set_gem"]
 [connection signal="finish_force_movement" from="Puppet" to="." method="enable_collision"]
 [connection signal="affected" from="Puppet/HurtBox" to="." method="add_effect"]
