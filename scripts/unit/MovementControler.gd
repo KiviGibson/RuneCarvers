@@ -33,6 +33,7 @@ func force_state(delta: float) -> void:
 	move_and_slide()
 
 func _physics_process(delta: float) -> void:
+	velocity.y -= gravity*delta
 	if current_state == states.normal: move_and_slide()
 	if current_state == states.force: force_state(delta)
 	if current_state == states.stun: 
@@ -44,3 +45,8 @@ func dash(vec: Vector2, y: float = 0) -> void:
 	distance = sqrt(vec.x**2 + vec.y**2 + y**2)
 	current_state = states.force
 	disable_gravity()
+
+func jump(vel: float, force: bool = false) -> void:
+	if not force and not self.is_on_floor(): return
+	velocity = velocity* Vector3(1, 0, 1) + vel* Vector3(0, 1, 0)
+	enable_gravity()

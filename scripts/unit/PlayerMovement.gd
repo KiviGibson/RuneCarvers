@@ -18,11 +18,6 @@ func dash(vec: Vector2, y: float = 0) -> void:
 	current_state = states.force
 	disable_gravity()
 
-func jump(vel: float, force: bool = false) -> void:
-	if not force and not self.is_on_floor(): return
-	velocity = velocity* Vector3(1, 0, 1) + vel* Vector3(0, 1, 0)
-	enable_gravity()
-
 func set_movement_vector(value: Vector2) -> void:
 	player_added_velocity = Vector3(value.x, 0, -value.y)
 
