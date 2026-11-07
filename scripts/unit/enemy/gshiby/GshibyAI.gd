@@ -1,5 +1,5 @@
 extends EnemyAI
-class_name GshibyAI
+class_name GshibyAI #🐟
 
 enum State {
 	SCOUTING,
@@ -18,6 +18,7 @@ func on_un_stun() -> void: pass
 @export var scout_timer: Timer
 @export var chase_timer: Timer
 var state := GshibyAI.State.SCOUTING
+## Unit has reached navigation target destination
 var on_target: bool = true
 
 func _ready() -> void:
@@ -27,17 +28,23 @@ func _ready() -> void:
 
 func find_scouting_point() -> void:
 	if state != State.SCOUTING: return 
+	
 	var current_point: Area3D = scouting_range.get_overlapping_areas().pick_random()
 	if current_point == null: return
+	
 	nav.target_position = current_point.global_position + Vector3(randf(), 0, randf())*2.0
 	on_target = false
 
 
 func _physics_process(_delta: float) -> void:
 	if on_target: return
-	var t: Vector3 = movement.global_position.direction_to(nav.get_next_path_position())*Vector3(1, 0, 1)
-	nav.velocity = t * movement.walking_speed
-	movement.visible_model.look_at(movement.velocity*Vector3(1,0,1) + movement.visible_model.global_position*Vector3(0,1,0))
+	
+	var dir: Vector3 = movement.global_position.direction_to( \
+			nav.get_next_path_position()) * Vector3(1, 0, 1)
+	nav.velocity = dir * movement.walking_speed
+	if movement.velocity != Vector3.ZERO:
+		movement.visible_model.look_at( \
+			(movement.visible_model.global_position - movement.velocity*Vector3(1,0,1)))
 
 func _process(_delta: float) -> void:
 	match state:
