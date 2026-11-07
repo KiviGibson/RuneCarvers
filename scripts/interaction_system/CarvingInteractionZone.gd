@@ -3,10 +3,11 @@ class_name CarvingInterationZone
 
 signal carved_symbol(symbol: int)
 signal interaction_ended()
+@export var code_handler : CodeHandler
 var carving_state: bool = false
 
 func carving_change(val: bool) -> void:
-	print(val)
+	print_debug("carving : ", val)
 	if val: interaction_signal.emit()
 	else: interaction_ended.emit()
 	carving_state = val

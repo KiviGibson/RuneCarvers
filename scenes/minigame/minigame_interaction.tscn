@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://c1n02grjwmvuw"]
+
+[ext_resource type="Script" uid="uid://dfwsinj7nsi2u" path="res://scripts/interaction_system/CarvingInteractionZone.gd" id="1_3m1gl"]
+[ext_resource type="PackedScene" uid="uid://ngon13g4yfjp" path="res://scenes/interactable/CodeHandler.tscn" id="2_2c351"]
+[ext_resource type="Shader" uid="uid://dytj1qodinn24" path="res://shaders/general_look_shader/areashader.gdshader" id="3_3ichx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_diy0u"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ukxov"]
+render_priority = 0
+shader = ExtResource("3_3ichx")
+shader_parameter/albedo = Color(0.88677835, 0.18001038, 0.21482015, 1)
+shader_parameter/proximity_fade_distance = 0.499999988824
+shader_parameter/albedo_texture_size = Vector2i(1, 1)
+shader_parameter/uv1_scale = Vector3(0, 0, 0)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3yocn"]
+material = SubResource("ShaderMaterial_ukxov")
+size = Vector3(2, 7.863, 2)
+
+[node name="CarvingInterationZone" type="Area3D" unique_id=1392771033 node_paths=PackedStringArray("code_handler")]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_3m1gl")
+code_handler = NodePath("CodeHandler")
+unit_limit = 1
+metadata/_custom_type_script = "uid://dfwsinj7nsi2u"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=578593025]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_diy0u")
+debug_color = Color(0.99874693, 0, 0.1458736, 0.41960785)
+
+[node name="CodeHandler" parent="." unique_id=1646119177 instance=ExtResource("2_2c351")]
+hidden_code = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=25516216]
+mesh = SubResource("BoxMesh_3yocn")

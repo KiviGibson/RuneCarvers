@@ -2,7 +2,7 @@ extends Node
 class_name TankVsMinigame
 @export var tanks: Array[Tank]
 @export var input: Array[CarvingInterationZone]
-@export var code_handlers: Array[CodeHandler]
+#@export var code_handlers: Array[CodeHandler]
 @export var pattern_length: int
 var player_patterns: Array[Array] = [[], []]
 var locked_patterns: int = -1
@@ -18,21 +18,21 @@ func _ready() -> void:
 		input[i].carved_symbol.connect(func(val: int) -> void: on_input_recieved(val, i))
 		input[i].interaction_ended.connect(func() -> void: on_input_accept(i))
 		tanks[i].tank_stopped.connect(func(val: int) -> void: checkout_tank(val, i))
-		code_handlers[i].setup()
+		input[i].code_handler.setup()
 
 func on_input_recieved(val: int, index: int) -> void:
 	if locked_patterns == index or round_started: return
 	if len(player_patterns[index]) == pattern_length: 
 		player_patterns[index] = []
-		code_handlers[index].reset()
-	code_handlers[index].add_sign(val)
+		input[index].code_handler.reset()
+	input[index].code_handler.add_sign(val)
 	player_patterns[index].append(val)
 
 func on_input_accept(index: int) -> void:
 	if locked_patterns == index or round_started: return
 	if not patterns_correct(index): 
 		player_patterns[index] = []
-		code_handlers[index].reset()
+		input[index].code_handler.reset()
 		return
 	print("Accepted pattern: " + str(index))
 	for i in player_patterns[index]:
@@ -55,7 +55,7 @@ func checkout_tank(val: bool, index: int) -> void:
 	if len(tanks_finshed_results) == 2:
 		print("Round finish")
 		print_winners()
-		for c in code_handlers: c.reset()
+		for c in input: c.code_handler.reset()
 		tanks_finshed_results = {}
 		round_started = false
 
