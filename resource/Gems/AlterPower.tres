@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Gem" format=3 uid="uid://bcc6otugv7wku"]
+
+[ext_resource type="Script" uid="uid://bnn8qhdyh10wi" path="res://scripts/unit/player/Gem.gd" id="1_hnm4e"]
+
+[resource]
+resource_name = "Positive to negative"
+script = ExtResource("1_hnm4e")
+gem_type = 2
+passive = "uid://cfryitthwel8i"
+description = "Positive energy is repleaced by negative enegry. 
+[font s=14]If unit that is positively charged gets negative charged status effect it will get damaged by lightning.[/font]"
+metadata/_custom_type_script = "uid://bnn8qhdyh10wi"

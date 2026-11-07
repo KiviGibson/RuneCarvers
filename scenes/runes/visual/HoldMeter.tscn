@@ -1,0 +1,217 @@
+[gd_scene format=3 uid="uid://hseufg6dt0ui"]
+
+[ext_resource type="Script" uid="uid://g1k7j0y0gqxr" path="res://scripts/UI/HoldMeter.gd" id="1_s41w3"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6yq8t"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s41w3"]
+bg_color = Color(0.078431375, 0.078431375, 0.078431375, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fxu45"]
+bg_color = Color(1, 1, 0.6, 1)
+border_width_top = 4
+border_width_bottom = 4
+border_color = Color(0.078431375, 0.078431375, 0.078431375, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Gradient" id="Gradient_s41w3"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6yq8t"]
+gradient = SubResource("Gradient_s41w3")
+width = 1
+
+[sub_resource type="Animation" id="Animation_fxu45"]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8yh6t"]
+resource_name = "new_animation"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1.353256, 1.353256, 1.353256, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0m102"]
+_data = {
+&"RESET": SubResource("Animation_fxu45"),
+&"new_animation": SubResource("Animation_8yh6t")
+}
+
+[node name="HoldMeter" type="Node3D" unique_id=67012185 node_paths=PackedStringArray("progress_bar", "bar_container", "list")]
+script = ExtResource("1_s41w3")
+progress_bar = NodePath("SubViewport/ProgressBar")
+bar_container = NodePath("SubViewport/ProgressBar/HBoxContainer")
+list = [NodePath("SubViewport/ProgressBar/HBoxContainer/TextureRect/AnimationPlayer"), NodePath("SubViewport/ProgressBar/HBoxContainer/TextureRect2/AnimationPlayer"), NodePath("SubViewport/ProgressBar/HBoxContainer/TextureRect3/AnimationPlayer"), NodePath("SubViewport/ProgressBar/HBoxContainer/TextureRect4/AnimationPlayer"), NodePath("SubViewport/ProgressBar/HBoxContainer/TextureRect5/AnimationPlayer"), NodePath("SubViewport/ProgressBar/HBoxContainer/TextureRect6/AnimationPlayer"), NodePath("SubViewport/ProgressBar/HBoxContainer/TextureRect7/AnimationPlayer"), NodePath("SubViewport/ProgressBar/HBoxContainer/TextureRect8/AnimationPlayer"), NodePath("SubViewport/ProgressBar/HBoxContainer/TextureRect9/AnimationPlayer"), NodePath("SubViewport/ProgressBar/HBoxContainer/TextureRect10/AnimationPlayer"), NodePath("SubViewport/ProgressBar/HBoxContainer/TextureRect11/AnimationPlayer")]
+metadata/_custom_type_script = "uid://g1k7j0y0gqxr"
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1077520068]
+billboard = 1
+double_sided = false
+no_depth_test = true
+texture = SubResource("ViewportTexture_6yq8t")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=255688410]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(200, 36)
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport" unique_id=1376459600]
+modulate = Color(1, 1, 1, 0.78431374)
+clip_children = 2
+custom_minimum_size = Vector2(160, 20)
+offset_right = 200.0
+offset_bottom = 36.0
+theme_override_styles/background = SubResource("StyleBoxFlat_s41w3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fxu45")
+show_percentage = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/ProgressBar" unique_id=738314945]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="SubViewport/ProgressBar/HBoxContainer" unique_id=1124752255]
+modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+texture = SubResource("GradientTexture1D_6yq8t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/ProgressBar/HBoxContainer/TextureRect" unique_id=409281884]
+libraries/ = SubResource("AnimationLibrary_0m102")
+autoplay = &"RESET"
+
+[node name="TextureRect2" type="TextureRect" parent="SubViewport/ProgressBar/HBoxContainer" unique_id=189042894]
+modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+texture = SubResource("GradientTexture1D_6yq8t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/ProgressBar/HBoxContainer/TextureRect2" unique_id=1378376428]
+libraries/ = SubResource("AnimationLibrary_0m102")
+
+[node name="TextureRect3" type="TextureRect" parent="SubViewport/ProgressBar/HBoxContainer" unique_id=1291069639]
+modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+texture = SubResource("GradientTexture1D_6yq8t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/ProgressBar/HBoxContainer/TextureRect3" unique_id=541408666]
+libraries/ = SubResource("AnimationLibrary_0m102")
+
+[node name="TextureRect4" type="TextureRect" parent="SubViewport/ProgressBar/HBoxContainer" unique_id=550679727]
+modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+texture = SubResource("GradientTexture1D_6yq8t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/ProgressBar/HBoxContainer/TextureRect4" unique_id=1978946767]
+libraries/ = SubResource("AnimationLibrary_0m102")
+
+[node name="TextureRect5" type="TextureRect" parent="SubViewport/ProgressBar/HBoxContainer" unique_id=451655682]
+modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+texture = SubResource("GradientTexture1D_6yq8t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/ProgressBar/HBoxContainer/TextureRect5" unique_id=363611794]
+libraries/ = SubResource("AnimationLibrary_0m102")
+
+[node name="TextureRect6" type="TextureRect" parent="SubViewport/ProgressBar/HBoxContainer" unique_id=679166579]
+modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+texture = SubResource("GradientTexture1D_6yq8t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/ProgressBar/HBoxContainer/TextureRect6" unique_id=2026911526]
+libraries/ = SubResource("AnimationLibrary_0m102")
+
+[node name="TextureRect7" type="TextureRect" parent="SubViewport/ProgressBar/HBoxContainer" unique_id=2065104807]
+modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+texture = SubResource("GradientTexture1D_6yq8t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/ProgressBar/HBoxContainer/TextureRect7" unique_id=1246055176]
+libraries/ = SubResource("AnimationLibrary_0m102")
+
+[node name="TextureRect8" type="TextureRect" parent="SubViewport/ProgressBar/HBoxContainer" unique_id=1314880823]
+modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+texture = SubResource("GradientTexture1D_6yq8t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/ProgressBar/HBoxContainer/TextureRect8" unique_id=1597127553]
+libraries/ = SubResource("AnimationLibrary_0m102")
+
+[node name="TextureRect9" type="TextureRect" parent="SubViewport/ProgressBar/HBoxContainer" unique_id=1156295145]
+modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+texture = SubResource("GradientTexture1D_6yq8t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/ProgressBar/HBoxContainer/TextureRect9" unique_id=1766488960]
+libraries/ = SubResource("AnimationLibrary_0m102")
+
+[node name="TextureRect10" type="TextureRect" parent="SubViewport/ProgressBar/HBoxContainer" unique_id=1110057216]
+modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+texture = SubResource("GradientTexture1D_6yq8t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/ProgressBar/HBoxContainer/TextureRect10" unique_id=1595816705]
+libraries/ = SubResource("AnimationLibrary_0m102")
+
+[node name="TextureRect11" type="TextureRect" parent="SubViewport/ProgressBar/HBoxContainer" unique_id=99858793]
+modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = SubResource("GradientTexture1D_6yq8t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/ProgressBar/HBoxContainer/TextureRect11" unique_id=1218870489]
+libraries/ = SubResource("AnimationLibrary_0m102")

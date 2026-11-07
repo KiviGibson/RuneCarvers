@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://jp0dxmpg58g6" path="res://scenes/projectiles/hole_mole_projectile/hole_mole_explosion.tscn" id="2_t8dea"]
 
 [node name="ElectricProjectile" unique_id=950622575 instance=ExtResource("1_qs0qs")]
+bounces = 2
 
 [node name="HitBox" parent="." index="2" unique_id=1857059914]
 collision_mask = 4

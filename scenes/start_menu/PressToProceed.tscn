@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://indis25bjojn"]
+
+[ext_resource type="Script" uid="uid://m08v2rr7hqxe" path="res://scripts/startup_sequence/GetUserInputDeivce.gd" id="1_8gqd3"]
+
+[sub_resource type="Gradient" id="Gradient_w5vse"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0, 0, 0.08627451, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qread"]
+gradient = SubResource("Gradient_w5vse")
+
+[sub_resource type="LabelSettings" id="LabelSettings_6yq8t"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_1ig7j"]
+font_size = 128
+
+[sub_resource type="Animation" id="Animation_w5vse"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8gqd3"]
+resource_name = "blinking"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.15686275)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qread"]
+_data = {
+&"RESET": SubResource("Animation_w5vse"),
+&"blinking": SubResource("Animation_8gqd3")
+}
+
+[node name="PressToProceed" type="Control" unique_id=1481843545]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8gqd3")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=938821985]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_qread")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="." unique_id=1146062843]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -456.5
+offset_top = -100.0
+offset_right = 456.5
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Press ANY Button to continue"
+label_settings = SubResource("LabelSettings_6yq8t")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="." unique_id=815946068]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "RUNE CARVERS"
+label_settings = SubResource("LabelSettings_1ig7j")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1177333570]
+libraries/ = SubResource("AnimationLibrary_qread")
+autoplay = &"blinking"

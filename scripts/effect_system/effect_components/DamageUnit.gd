@@ -7,7 +7,7 @@ signal deal_damage(damage)
 
 func setup(h: Unit) -> void:
 	super.setup(h)
-	deal_damage.connect(host._on_getting_hit)
+	if h: deal_damage.connect(h._on_getting_hit)
 
 func on_tick() -> void:
 	deal_damage.emit(damage)

@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://beq5rupfbv2ob"]
+
+[ext_resource type="PackedScene" uid="uid://cfao2e5sv7lt1" path="res://scenes/game_scene/demo/explore/SimplePath.tscn" id="1_iekaj"]
+[ext_resource type="PackedScene" uid="uid://dpb0ed1w1tfdx" path="res://scenes/game_scene/demo/explore/bridge_hilt.tscn" id="2_1x5wu"]
+[ext_resource type="PackedScene" uid="uid://bqy6siemc433l" path="res://scenes/game_scene/demo/combat/SmallThreeIsland.tscn" id="3_fywdj"]
+[ext_resource type="PackedScene" uid="uid://cqe1w8qo18nlh" path="res://scenes/game_scene/demo/explore/UnderBridge connection.tscn" id="4_tbrej"]
+
+[node name="Demo" type="Node3D" unique_id=140328067]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1761326851]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1388671532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75, -3, 0.5)
+size = Vector3(156, 7, 10)
+
+[node name="SimplePath" parent="." unique_id=63581532 instance=ExtResource("1_iekaj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.374, -0.5, -7.5)
+
+[node name="BridgeHilt" parent="." unique_id=297093659 instance=ExtResource("2_1x5wu")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -68, -3, -32)
+
+[node name="ThreeIslands" parent="." unique_id=500567747 instance=ExtResource("3_fywdj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -129, 0, -11)
+
+[node name="UnderBridgeConnection" parent="." unique_id=1832688758 instance=ExtResource("4_tbrej")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -168.82976, 0, 3.5008621)

@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://prw4kt1hlgg3"]
+
+[ext_resource type="Script" uid="uid://do27ofp6rsl8c" path="res://scripts/interaction_system/Npc/JackSmith/SearchMenu.gd" id="1_4hny1"]
+[ext_resource type="PackedScene" uid="uid://bkrq06x4vb00f" path="res://scenes/player/inventory/GemOption.tscn" id="2_4r3vd"]
+
+[node name="SearchMenu" type="Control" unique_id=1204333785 node_paths=PackedStringArray("option_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4hny1")
+option_container = NodePath("MarginContainer/Panel/MarginContainer/ScrollContainer/GridContainer")
+option_scene = ExtResource("2_4r3vd")
+metadata/_custom_type_script = "uid://do27ofp6rsl8c"
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1077060458]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -626.0
+offset_top = -400.0
+offset_right = 626.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="MarginContainer" unique_id=1814364158]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel" unique_id=2001260786]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Panel/MarginContainer" unique_id=1317023542]
+layout_mode = 2
+scroll_hint_mode = 2
+tile_scroll_hint = true
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/ScrollContainer" unique_id=1017030340]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 4
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1716840011]
+_spawnable_scenes = PackedStringArray("uid://bkrq06x4vb00f")
+spawn_path = NodePath("../MarginContainer/Panel/MarginContainer/ScrollContainer/GridContainer")

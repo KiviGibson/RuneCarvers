@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://c2nyp4qn0xbo"]
+
+[ext_resource type="Script" uid="uid://r0tp4n5w2xkh" path="res://scripts/effect_system/Effect.gd" id="1_v7h78"]
+[ext_resource type="Script" uid="uid://bx7nq0mgasyxl" path="res://scripts/effect_system/OnHit/BonusDamage.gd" id="3_vbdod"]
+[ext_resource type="Script" uid="uid://deny7bhmvc016" path="res://scripts/effect_system/effect_components/Collector.gd" id="4_os84r"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2ujuf"]
+radius = 0.75
+
+[node name="WondererStone" type="Node3D" unique_id=992461022 node_paths=PackedStringArray("on_hit")]
+script = ExtResource("1_v7h78")
+temporary = false
+on_hit = [NodePath("BonusDamage")]
+metadata/_custom_type_script = "uid://r0tp4n5w2xkh"
+
+[node name="BonusDamage" type="Node" parent="." unique_id=1081125161 node_paths=PackedStringArray("timer")]
+script = ExtResource("3_vbdod")
+reset = true
+timer = NodePath("../WipeStacks")
+metadata/_custom_type_script = "uid://bx7nq0mgasyxl"
+
+[node name="WipeStacks" type="Timer" parent="." unique_id=1520933216]
+wait_time = 0.3
+one_shot = true
+
+[node name="Collector" type="Area3D" parent="." unique_id=947070891]
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("4_os84r")
+metadata/_custom_type_script = "uid://deny7bhmvc016"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collector" unique_id=721216226]
+shape = SubResource("CapsuleShape3D_2ujuf")
+
+[connection signal="setup" from="." to="Collector" method="setup"]
+[connection signal="timeout" from="WipeStacks" to="BonusDamage" method="wipe_stacks"]
+[connection signal="collected" from="Collector" to="BonusDamage" method="gain_stack"]

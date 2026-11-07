@@ -1,0 +1,186 @@
+[gd_scene format=3 uid="uid://bkrq06x4vb00f"]
+
+[ext_resource type="Script" uid="uid://frlt28lw5003" path="res://scripts/interaction_system/Npc/JackSmith/GemOption.gd" id="1_h8pf7"]
+[ext_resource type="Texture2D" uid="uid://ddgs6y20giaql" path="res://icon.svg" id="2_dvkyi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dvkyi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6yq8t"]
+line_spacing = 0.0
+font_size = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1j5yo"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_dvkyi"]
+properties/0/path = NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Red:visible")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Green2:visible")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Blue2:visible")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("Button/Panel/MarginContainer/VBoxContainer/Label:text")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath("Button/Panel/MarginContainer/VBoxContainer/RichTextLabel:text")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+
+[node name="GemOption" type="Control" unique_id=1504063666 node_paths=PackedStringArray("tags", "name_label", "desc_label")]
+custom_minimum_size = Vector2(300, 400)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h8pf7")
+tags = {
+0: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Green2"),
+1: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Blue2"),
+2: NodePath("Button/Panel/MarginContainer/VBoxContainer/Tags/Red")
+}
+name_label = NodePath("Button/Panel/MarginContainer/VBoxContainer/Label")
+desc_label = NodePath("Button/Panel/MarginContainer/VBoxContainer/RichTextLabel")
+metadata/_custom_type_script = "uid://frlt28lw5003"
+
+[node name="Button" type="Button" parent="." unique_id=1422962590]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -200.0
+offset_right = 150.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+
+[node name="Panel" type="Panel" parent="Button" unique_id=408474826]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_dvkyi")
+
+[node name="MarginContainer" type="MarginContainer" parent="Button/Panel" unique_id=1509162277]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Button/Panel/MarginContainer" unique_id=588021432]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Button/Panel/MarginContainer/VBoxContainer" unique_id=256961729]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+texture = ExtResource("2_dvkyi")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Button/Panel/MarginContainer/VBoxContainer" unique_id=1853495130]
+layout_mode = 2
+text = "Empty Slot"
+label_settings = SubResource("LabelSettings_6yq8t")
+horizontal_alignment = 1
+
+[node name="Tags" type="HBoxContainer" parent="Button/Panel/MarginContainer/VBoxContainer" unique_id=2077634535]
+layout_mode = 2
+alignment = 1
+
+[node name="Red" type="Panel" parent="Button/Panel/MarginContainer/VBoxContainer/Tags" unique_id=1517991022]
+visible = false
+self_modulate = Color(1, 0.3372549, 0.27058825, 1)
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_1j5yo")
+
+[node name="Red" type="Label" parent="Button/Panel/MarginContainer/VBoxContainer/Tags/Red" unique_id=2007720899]
+modulate = Color(0.1254902, 0.1254902, 0.1254902, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Writer"
+horizontal_alignment = 1
+
+[node name="Green2" type="Panel" parent="Button/Panel/MarginContainer/VBoxContainer/Tags" unique_id=161855126]
+visible = false
+self_modulate = Color(0.4, 0.85882354, 0.40784314, 1)
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_1j5yo")
+
+[node name="Green" type="Label" parent="Button/Panel/MarginContainer/VBoxContainer/Tags/Green2" unique_id=129189944]
+modulate = Color(0.1254902, 0.1254902, 0.1254902, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Warrior"
+horizontal_alignment = 1
+
+[node name="Blue2" type="Panel" parent="Button/Panel/MarginContainer/VBoxContainer/Tags" unique_id=1281880251]
+visible = false
+self_modulate = Color(0.57254905, 0.7137255, 1, 1)
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_1j5yo")
+
+[node name="Blue" type="Label" parent="Button/Panel/MarginContainer/VBoxContainer/Tags/Blue2" unique_id=1786557227]
+modulate = Color(0.1254902, 0.1254902, 0.1254902, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Wanderer"
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Button/Panel/MarginContainer/VBoxContainer" unique_id=1888559454]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+bbcode_enabled = true
+text = "[center]Here can be placed gem thats amplify your power by giving you passive benefits."
+fit_content = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=603584712]
+replication_config = SubResource("SceneReplicationConfig_dvkyi")
+
+[connection signal="pressed" from="Button" to="." method="button_pressed"]

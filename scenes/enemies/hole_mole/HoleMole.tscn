@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/damage_system/HurtBox.gd" id="4_jlvog"]
 [ext_resource type="Script" uid="uid://bsmwhck7xocl0" path="res://scripts/multiplayer_system/spawners/effect_spawner.gd" id="4_kssax"]
 [ext_resource type="Script" uid="uid://dxnwk2kilm0yj" path="res://scripts/effect_system/effect_components/Teleport.gd" id="7_s53pv"]
-[ext_resource type="Script" uid="uid://doujisxhpem6q" path="res://scripts/unit/mole/MoleAI.gd" id="8_nyqnb"]
+[ext_resource type="Script" uid="uid://doujisxhpem6q" path="res://scripts/unit/enemy/mole/MoleAI.gd" id="8_nyqnb"]
 [ext_resource type="Script" uid="uid://x544es0wcwfx" path="res://scripts/carving_system/rune/SpawnProjectile.gd" id="9_3k3n6"]
 [ext_resource type="PackedScene" uid="uid://cowi2a66lf2pn" path="res://scenes/projectiles/hole_mole_projectile/hole_mole_positive_shot.tscn" id="9_7pf3f"]
 
@@ -631,11 +631,13 @@ properties/3/path = NodePath("Mole/Model:rotation")
 properties/3/spawn = true
 properties/3/replication_mode = 2
 
-[node name="HoleMole" type="Node3D" unique_id=11180120 node_paths=PackedStringArray("hp_bar", "model", "effect_spawner")]
+[node name="HoleMole" type="Node3D" unique_id=11180120 node_paths=PackedStringArray("hp_bar", "ai", "model", "hurt_box", "effect_spawner")]
 script = ExtResource("1_4py6f")
 hp_bar = NodePath("SubViewport/HpBar")
+ai = NodePath("MoleAI")
 model = NodePath("Mole")
 stats = SubResource("Resource_o2gk4")
+hurt_box = NodePath("Mole/Model/Mole/HurtBox")
 effect_spawner = NodePath("EffectSpawner")
 metadata/_custom_type_script = "uid://bga3yxy6ye61"
 
@@ -643,10 +645,6 @@ metadata/_custom_type_script = "uid://bga3yxy6ye61"
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("2_mmcb8")
-walking_speed = 0.0
-running_mult = 0.0
-focus_mult = 0.0
-force_mult = 0.0
 visible_model = NodePath("Model")
 gravity = 0.0
 metadata/_custom_type_script = "uid://d1ggxehy2ph1q"
@@ -723,13 +721,14 @@ size = Vector2i(120, 20)
 
 [node name="HpBar" parent="SubViewport" unique_id=1495397635 instance=ExtResource("2_sbdb8")]
 
-[node name="MoleAI" type="Node3D" parent="." unique_id=1689298849 node_paths=PackedStringArray("animator", "hole_finder", "tp", "timer_borrow", "strait_projectile", "vision")]
+[node name="MoleAI" type="Node3D" parent="." unique_id=1689298849 node_paths=PackedStringArray("animator", "hole_finder", "tp", "timer_borrow", "strait_projectile", "model", "vision")]
 script = ExtResource("8_nyqnb")
 animator = NodePath("../Mole/Model/AnimationPlayer")
 hole_finder = NodePath("../Mole/HoleFinder")
 tp = NodePath("../Teleport")
 timer_borrow = NodePath("../Timer")
 strait_projectile = NodePath("../SpawnProjectile")
+model = NodePath("../Mole/Model")
 vision = NodePath("../Mole/Vision")
 metadata/_custom_type_script = "uid://doujisxhpem6q"
 
@@ -752,4 +751,3 @@ metadata/_custom_type_script = "uid://dxnwk2kilm0yj"
 [connection signal="setup" from="." to="SpawnProjectile" method="setup"]
 [connection signal="affected" from="Mole/Model/Mole/HurtBox" to="." method="add_effect"]
 [connection signal="got_hit" from="Mole/Model/Mole/HurtBox" to="." method="_on_getting_hit"]
-[connection signal="changed_rotation" from="MoleAI" to="Mole" method="set_rotation_vector"]

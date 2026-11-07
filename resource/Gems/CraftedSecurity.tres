@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Gem" format=3 uid="uid://dwmy8snflaw55"]
+
+[ext_resource type="Script" uid="uid://bnn8qhdyh10wi" path="res://scripts/unit/player/Gem.gd" id="1_1k33n"]
+
+[resource]
+resource_name = "Crafted security"
+script = ExtResource("1_1k33n")
+identity = 1
+gem_type = 2
+passive = "uid://dj8jejqlvtkrm"
+description = "Makes player invonurable for brief moment after successfull carving"
+metadata/_custom_type_script = "uid://bnn8qhdyh10wi"

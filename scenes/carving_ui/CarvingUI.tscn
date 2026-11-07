@@ -72,6 +72,7 @@ _data = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" unique_id=1919036124 node_paths=PackedStringArray("status_icon", "carving_node", "name_code", "animator", "spawner")]
+anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 17.0
 grow_horizontal = 2

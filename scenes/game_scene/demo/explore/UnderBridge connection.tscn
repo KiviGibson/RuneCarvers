@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://cqe1w8qo18nlh"]
+
+[sub_resource type="Curve3D" id="Curve3D_6yq8t"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, -20, -2, 0, 0, 0, 0, 20, -2, 0, -20, 2, 0, -40, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6yq8t"]
+
+[node name="UnderBridgeConnection" type="Node3D" unique_id=1832688758]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=116985438]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=329973603]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -5, -8)
+size = Vector3(16, 11, 16)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=2027965388]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.987106, -3.5, -11.167295)
+size = Vector3(6, 32, 6)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=487913149]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.512894, 1, -12.167295)
+size = Vector3(9, 35, 10)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1121247373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.512894, 0.5, 7.8327045)
+size = Vector3(9, 22, 10)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D" unique_id=976964444]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.512894, -2.5, -0.16729546)
+size = Vector3(9, 16, 10)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=196315493]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4, -4, 4.5)
+size = Vector3(9, 9, 28)
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CSGCombiner3D" unique_id=818039525]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.5, 0)
+polygon = PackedVector2Array(0, 0, 0, 5, 1, 5, 1, 4, 3, 4, 3, 3, 5, 3, 5, 2, 7, 2, 7, 1, 9, 1, 9, 0, 13, 0, 13, -9, 0, -9)
+depth = 5.0
+
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="CSGCombiner3D" unique_id=70492864]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5.5, -4)
+polygon = PackedVector2Array(-4, 0, -4, -1, 1, -1, 1, 0)
+mode = 2
+path_node = NodePath("Path3D")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+
+[node name="Path3D" type="Path3D" parent="CSGCombiner3D/CSGPolygon3D2" unique_id=1762799257]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+curve = SubResource("Curve3D_6yq8t")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1749872422]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("CapsuleMesh_6yq8t")
