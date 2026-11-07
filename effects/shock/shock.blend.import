@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://5oaom5e8bdi3"
-path="res://.godot/imported/shock.blend-5b93c16a39b02f75a54df139e0ecf6f1.scn"
+valid=false
 
 [deps]
 
 source_file="res://effects/shock/shock.blend"
-dest_files=["res://.godot/imported/shock.blend-5b93c16a39b02f75a54df139e0ecf6f1.scn"]
 
 [params]
 

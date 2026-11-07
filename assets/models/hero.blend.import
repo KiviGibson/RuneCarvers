@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://c4yy8yhk2bkx0"
-path="res://.godot/imported/hero.blend-808e5e784d75c742ee1997011d63b381.scn"
+valid=false
 
 [deps]
 
 source_file="res://assets/models/hero.blend"
-dest_files=["res://.godot/imported/hero.blend-808e5e784d75c742ee1997011d63b381.scn"]
 
 [params]
 

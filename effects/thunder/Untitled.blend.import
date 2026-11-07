@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cmo8s3mclhheo"
-path="res://.godot/imported/Untitled.blend-48ea11afe6632a9720fbf79c73d02375.scn"
+valid=false
 
 [deps]
 
 source_file="res://effects/thunder/Untitled.blend"
-dest_files=["res://.godot/imported/Untitled.blend-48ea11afe6632a9720fbf79c73d02375.scn"]
 
 [params]
 

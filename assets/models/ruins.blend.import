@@ -3,12 +3,12 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cmg6pdo5xbxsh"
+uid="uid://eux2yk2g1p22"
 valid=false
 
 [deps]
 
-source_file="res://blender/rocks.blend"
+source_file="res://assets/models/ruins.blend"
 
 [params]
 

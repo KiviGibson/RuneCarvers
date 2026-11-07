@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cw0hk2w46fvxk"
-path="res://.godot/imported/za_hando.blend-7d0302e915efb2f1980a9fac4da39b4b.scn"
+valid=false
 
 [deps]
 
 source_file="res://assets/za_hando/za_hando.blend"
-dest_files=["res://.godot/imported/za_hando.blend-7d0302e915efb2f1980a9fac4da39b4b.scn"]
 
 [params]
 
