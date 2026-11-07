@@ -14,6 +14,15 @@
 [ext_resource type="Texture2D" uid="uid://boyg2q5ri5ceb" path="res://assets/skybox-space.png" id="12_1qftq"]
 [ext_resource type="PackedScene" uid="uid://db8ia335p2ttd" path="res://scenes/interactable/blink_wall.tscn" id="13_vvut4"]
 [ext_resource type="Shader" uid="uid://b3fo4ftu40c70" path="res://shaders/blink_wall/blink_wall.gdshader" id="14_5prq0"]
+[ext_resource type="PackedScene" uid="uid://dskrnlpxhkx7c" path="res://assets/models/rocks/BloodRock1.glb" id="15_4ybgr"]
+[ext_resource type="PackedScene" uid="uid://r051itqkbow5" path="res://assets/models/rocks/GrassyRock4.glb" id="16_iu41y"]
+[ext_resource type="PackedScene" uid="uid://dqtqtyp3crh6b" path="res://assets/models/rocks/PaleRock1.glb" id="17_7ke7p"]
+[ext_resource type="PackedScene" uid="uid://byqaa6el0byvr" path="res://assets/models/rocks/RainbowRock1.glb" id="18_h5e52"]
+[ext_resource type="PackedScene" uid="uid://1plsrvwowumx" path="res://assets/models/boxes/2b1Box.glb" id="19_d37l8"]
+[ext_resource type="PackedScene" uid="uid://dplsxmn2p6noh" path="res://assets/models/boxes/CubeBox.glb" id="20_a30n7"]
+[ext_resource type="PackedScene" uid="uid://d0r0m2ge560fj" path="res://assets/models/boxes/LongBox.glb" id="21_mckcf"]
+[ext_resource type="PackedScene" uid="uid://dl8drbeiri82e" path="res://assets/models/boxes/TheBigBox.glb" id="22_4iqd2"]
+[ext_resource type="PackedScene" uid="uid://kfiouenrmqkj" path="res://assets/models/boxes/TriangleBox.glb" id="23_yj357"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lnrhe"]
 albedo_color = Color(4.512258e-07, 0.29928088, 0, 1)
@@ -238,5 +247,32 @@ material = SubResource("ShaderMaterial_lo7qv")
 transform = Transform3D(0.4549624, 0.12190682, 0.88212675, -0.258819, 0.96592575, 0, -0.852069, -0.22831121, 0.47101176, 13.279974, 9.830923, -6.8496723)
 mesh = SubResource("BoxMesh_xpges")
 material = SubResource("ShaderMaterial_iu41y")
+
+[node name="BloodRock12" parent="." unique_id=1189602901 instance=ExtResource("15_4ybgr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3716364, 1.6652703, 3.11876)
+
+[node name="GrassyRock42" parent="." unique_id=253011691 instance=ExtResource("16_iu41y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2685567, 1.6564128, 6.7372475)
+
+[node name="PaleRock12" parent="." unique_id=137372006 instance=ExtResource("17_7ke7p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5431256, 1.6652713, 4.7952766)
+
+[node name="RainbowRock12" parent="." unique_id=609761208 instance=ExtResource("18_h5e52")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.705832, 1.6652713, 7.657344)
+
+[node name="2b1Box2" parent="." unique_id=1155380552 instance=ExtResource("19_d37l8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.30313, 0.5376606, 13.210693)
+
+[node name="CubeBox2" parent="." unique_id=225175955 instance=ExtResource("20_a30n7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.293898, 0.5376606, 6.7375946)
+
+[node name="LongBox2" parent="." unique_id=313394673 instance=ExtResource("21_mckcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.135702, 0.5376601, 17.993546)
+
+[node name="TheBigBox2" parent="." unique_id=47871771 instance=ExtResource("22_4iqd2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.647738, 0.5376606, -3.6701355)
+
+[node name="TriangleBox2" parent="." unique_id=1546476596 instance=ExtResource("23_yj357")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.33204, 0.5376602, 14.342041)
 
 [connection signal="interaction_signal" from="StaticMap/EnemyArenaFight/Spawner/Interactable" to="StaticMap/EnemyArenaFight/Spawner/SpawnEnemies" method="spawn"]
