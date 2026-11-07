@@ -4,9 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://du573uaja1p13" path="res://scenes/hp_bars/EnemyHpBar.tscn" id="2_tusaj"]
 [ext_resource type="Script" uid="uid://bffwh1ds00jub" path="res://scripts/unit/Stats.gd" id="2_yeb1p"]
 [ext_resource type="Script" uid="uid://d1ggxehy2ph1q" path="res://scripts/unit/MovementControler.gd" id="3_6fimq"]
-[ext_resource type="Script" uid="uid://bdmlbgajj81a8" path="res://scripts/damage_system/HitBox.gd" id="4_6lkod"]
 [ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/damage_system/HurtBox.gd" id="4_d30o3"]
-[ext_resource type="Script" uid="uid://uaugd35wcih8" path="res://scripts/damage_system/Damage.gd" id="5_5o142"]
 [ext_resource type="Script" uid="uid://bsmwhck7xocl0" path="res://scripts/multiplayer_system/spawners/effect_spawner.gd" id="5_i5y7b"]
 [ext_resource type="Script" uid="uid://c2i230dqglhpo" path="res://scripts/effect_system/effect_components/FroceMovement.gd" id="5_opxko"]
 [ext_resource type="Script" uid="uid://d1x2w6kw3mbhy" path="res://scripts/unit/enemy/gshiby/GshibyAI.gd" id="6_yeb1p"]
@@ -20,14 +18,6 @@ metadata/_custom_type_script = "uid://bffwh1ds00jub"
 [sub_resource type="SphereMesh" id="SphereMesh_6yq8t"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6yq8t"]
-
-[sub_resource type="Resource" id="Resource_rj6sg"]
-script = ExtResource("5_5o142")
-value = 6
-metadata/_custom_type_script = "uid://uaugd35wcih8"
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_rj6sg"]
-size = Vector3(1.3, 1.6, 1.3)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_1j5yo"]
 
@@ -70,18 +60,6 @@ mesh = SubResource("SphereMesh_6yq8t")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MovementControler" unique_id=65986666]
 shape = SubResource("SphereShape3D_6yq8t")
-
-[node name="HitBox" type="Area3D" parent="MovementControler" unique_id=46198459]
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("4_6lkod")
-damage = SubResource("Resource_rj6sg")
-metadata/_custom_type_script = "uid://bdmlbgajj81a8"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MovementControler/HitBox" unique_id=618089910]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31103516, 0)
-shape = SubResource("BoxShape3D_rj6sg")
-disabled = true
 
 [node name="HurtBox" type="Area3D" parent="MovementControler" unique_id=610667394 node_paths=PackedStringArray("force_movement")]
 collision_layer = 8
@@ -147,7 +125,7 @@ script = ExtResource("5_i5y7b")
 host = NodePath("..")
 metadata/_custom_type_script = "uid://bsmwhck7xocl0"
 
-[node name="GshibyAI" type="Node3D" parent="." unique_id=1760778541 node_paths=PackedStringArray("movement", "nav", "sense_range", "scouting_range", "scout_timer", "chase_timer", "hitbox_collision")]
+[node name="GshibyAI" type="Node3D" parent="." unique_id=1760778541 node_paths=PackedStringArray("movement", "nav", "sense_range", "scouting_range", "scout_timer", "chase_timer")]
 script = ExtResource("6_yeb1p")
 movement = NodePath("../MovementControler")
 nav = NodePath("../MovementControler/NavigationAgent3D")
@@ -155,7 +133,6 @@ sense_range = NodePath("../MovementControler/SeneseRange")
 scouting_range = NodePath("../MovementControler/ScoutRange")
 scout_timer = NodePath("ScoutTimer")
 chase_timer = NodePath("ChaseTimer")
-hitbox_collision = NodePath("../MovementControler/HitBox/CollisionShape3D")
 metadata/_custom_type_script = "uid://d1x2w6kw3mbhy"
 
 [node name="ScoutTimer" type="Timer" parent="GshibyAI" unique_id=2003083612]
