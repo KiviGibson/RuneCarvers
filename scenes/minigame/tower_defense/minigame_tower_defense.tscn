@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://8uuirnol00wq"]
 
 [ext_resource type="Script" uid="uid://d24afv616dcuo" path="res://scripts/minigame_tower_defense/minigame_tower_defense.gd" id="1_31l6h"]
-[ext_resource type="Script" uid="uid://dfwsinj7nsi2u" path="res://scripts/interaction_system/CarvingInteractionZone.gd" id="2_40eq4"]
+[ext_resource type="PackedScene" uid="uid://c1n02grjwmvuw" path="res://scenes/minigame/minigame_interaction.tscn" id="2_gadep"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_rj6sg"]
 size = Vector2(10, 10)
@@ -45,15 +45,9 @@ point_count = 13
 [node name="MinigameTowerDefense" type="Node3D" unique_id=131528245]
 script = ExtResource("1_31l6h")
 
-[node name="MoveInteraction" type="Area3D" parent="." unique_id=1686789910]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 7)
-script = ExtResource("2_40eq4")
-metadata/_custom_type_script = "uid://dfwsinj7nsi2u"
+[node name="CarvingInterationZone" parent="." unique_id=1392771033 instance=ExtResource("2_gadep")]
 
-[node name="PlaceInteraction" type="Area3D" parent="." unique_id=2057791607]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 7)
-script = ExtResource("2_40eq4")
-metadata/_custom_type_script = "uid://dfwsinj7nsi2u"
+[node name="CarvingInterationZone2" parent="." unique_id=704692516 instance=ExtResource("2_gadep")]
 
 [node name="Terrain" type="Node3D" parent="." unique_id=1871862982]
 
