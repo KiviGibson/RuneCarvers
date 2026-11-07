@@ -1,7 +1,12 @@
 extends EnemyAI
 class_name GshibyAI
 
-enum grzib_state{scouting, intrested, chaseing, atacking}
+enum State {
+	SCOUTING,
+	INTERESTED,
+	CHASING, 
+	ATTACKING,
+}
 func on_stun() -> void: pass
 func on_un_stun() -> void: pass
 
@@ -12,7 +17,7 @@ func on_un_stun() -> void: pass
 @export var target_oponent: Unit = null
 @export var scout_timer: Timer
 @export var chase_timer: Timer
-var state: grzib_state = grzib_state.scouting
+var state := GshibyAI.State.SCOUTING
 var on_target: bool = true
 
 func _ready() -> void:
@@ -21,7 +26,7 @@ func _ready() -> void:
 	sense_range.body_entered.connect(on_player_noticed)
 
 func find_scouting_point() -> void:
-	if state != grzib_state.scouting: return 
+	if state != State.SCOUTING: return 
 	var current_point: Area3D = scouting_range.get_overlapping_areas().pick_random()
 	if current_point == null: return
 	nav.target_position = current_point.global_position + Vector3(randf(), 0, randf())*2.0
@@ -36,8 +41,8 @@ func _physics_process(_delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	match state:
-		grzib_state.scouting: scout()
-		grzib_state.chaseing: chase()
+		State.SCOUTING: scout()
+		State.CHASING: chase()
 
 func scout() -> void:
 	if nav.is_navigation_finished():
@@ -52,7 +57,7 @@ func chase() -> void:
 			nav.target_position = target_oponent.model.global_position
 			scout_timer.start(1.2)
 		elif scout_timer.is_stopped():
-			state = grzib_state.scouting
+			state = State.SCOUTING
 		else: nav.target_position = movement.global_position
 		chase_timer.start()
 func atack() -> void: pass
@@ -64,4 +69,4 @@ func avoident_movemnt(safe_velocity: Vector3) -> void:
 func on_player_noticed(collider: CharacterBody3D) -> void:
 	if collider is MovementControler and collider.type == MovementControler.pupet_type.player:
 		target_oponent = collider.owner
-		state = grzib_state.chaseing
+		state = State.CHASING
