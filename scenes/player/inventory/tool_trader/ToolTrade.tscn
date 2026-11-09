@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://bbqyr2immokb5"]
 
 [ext_resource type="Texture2D" uid="uid://ddgs6y20giaql" path="res://icon.svg" id="1_05s56"]
+[ext_resource type="Script" uid="uid://bm5u177fehk5l" path="res://scripts/interaction_system/Npc/JackSmith/ToolTrade/ToolTrade.gd" id="1_lfiiq"]
 
-[node name="ToolTrade" type="Button" unique_id=974168136]
+[node name="Node2D" type="Node2D" unique_id=49502101]
+script = ExtResource("1_lfiiq")
+
+[node name="Button" type="Button" parent="." unique_id=498933050]
 custom_minimum_size = Vector2(300, 375)
 anchors_preset = 8
 anchor_left = 0.5
@@ -11,12 +15,12 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -150.0
 offset_top = -187.5
-offset_right = 50.0
-offset_bottom = 87.5
+offset_right = 150.0
+offset_bottom = 187.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=485438545]
+[node name="MarginContainer" type="MarginContainer" parent="Button" unique_id=1961269441]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,27 +32,27 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1143918105]
+[node name="VBoxContainer" type="VBoxContainer" parent="Button/MarginContainer" unique_id=283696876]
 layout_mode = 2
 
-[node name="CardName" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1828234751]
+[node name="CardName" type="Label" parent="Button/MarginContainer/VBoxContainer" unique_id=1023156920]
 layout_mode = 2
 text = "Card Name"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=1887649145]
+[node name="TextureRect" type="TextureRect" parent="Button/MarginContainer/VBoxContainer" unique_id=1724653000]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("1_05s56")
 stretch_mode = 5
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=1990058352]
+[node name="RichTextLabel" type="RichTextLabel" parent="Button/MarginContainer/VBoxContainer" unique_id=701526151]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 bbcode_enabled = true
 text = "[center][img]/mnt/debianDisko/projects/RuneCarvers/assets/kenney_cursor-pack/PNG/Basic/Default/arrow_n.png[/img][img]/mnt/debianDisko/projects/RuneCarvers/assets/kenney_cursor-pack/PNG/Basic/Default/arrow_n.png[/img][img]/mnt/debianDisko/projects/RuneCarvers/assets/kenney_cursor-pack/PNG/Basic/Default/arrow_n.png[/img][img]/mnt/debianDisko/projects/RuneCarvers/assets/kenney_cursor-pack/PNG/Basic/Default/arrow_n.png[/img]"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=1231188612]
+[node name="RichTextLabel2" type="RichTextLabel" parent="Button/MarginContainer/VBoxContainer" unique_id=378896942]
 custom_minimum_size = Vector2(0, 60.495)
 layout_mode = 2
 bbcode_enabled = true

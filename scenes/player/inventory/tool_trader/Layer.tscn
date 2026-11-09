@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bok7id8cck65t"]
+
+[ext_resource type="PackedScene" uid="uid://0mkp3oucj3eg" path="res://scenes/player/inventory/tool_trader/TradingScene.tscn" id="1_ive13"]
+
+[node name="Layer" type="CanvasLayer" unique_id=42009993]
+
+[node name="TradingScene" parent="." unique_id=1107854438 instance=ExtResource("1_ive13")]
+position = Vector2(960, 540)

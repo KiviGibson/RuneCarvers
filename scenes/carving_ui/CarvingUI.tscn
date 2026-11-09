@@ -111,6 +111,7 @@ expand_mode = 1
 layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer" unique_id=1230945496]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6

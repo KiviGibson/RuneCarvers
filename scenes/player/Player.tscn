@@ -352,6 +352,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="UI/Panel/MarginContainer/VBoxContainer" unique_id=273486427]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 text = "None"
 horizontal_alignment = 1
@@ -494,6 +495,8 @@ metadata/_custom_type_script = "uid://cunlm7qu3hrat"
 [node name="CombatTimer" type="Timer" parent="." unique_id=77862872]
 wait_time = 5.0
 one_shot = true
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1077310002]
 
 [connection signal="activation" from="InputSystem" to="." method="use_rune"]
 [connection signal="carved_symbol" from="InputSystem" to="CarvingSystem" method="carve_symbol"]

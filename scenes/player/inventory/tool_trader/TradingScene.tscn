@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://0mkp3oucj3eg"]
+
+[ext_resource type="Script" uid="uid://drhtd4b738l26" path="res://scripts/interaction_system/Npc/JackSmith/ToolTrade/Trader.gd" id="1_i22rn"]
+[ext_resource type="Script" uid="uid://bt23ncs2pjifc" path="res://scripts/carving_system/rune/Tool.gd" id="2_2gyun"]
+
+[sub_resource type="Resource" id="Resource_i22rn"]
+resource_name = "Temp"
+script = ExtResource("2_2gyun")
+pattern = Array[int]([1, 3, 0, 2])
+cd = 3.0
+desc = "Temporary card for testing"
+metadata/_custom_type_script = "uid://bt23ncs2pjifc"
+
+[sub_resource type="Resource" id="Resource_6qntf"]
+resource_name = "Temp"
+script = ExtResource("2_2gyun")
+pattern = Array[int]([1, 3, 0, 2])
+cd = 3.0
+desc = "Temporary card for testing"
+metadata/_custom_type_script = "uid://bt23ncs2pjifc"
+
+[sub_resource type="Resource" id="Resource_xgy52"]
+resource_name = "Temp"
+script = ExtResource("2_2gyun")
+pattern = Array[int]([1, 3, 0, 2])
+cd = 3.0
+desc = "Temporary card for testing"
+metadata/_custom_type_script = "uid://bt23ncs2pjifc"
+
+[sub_resource type="Resource" id="Resource_04mvf"]
+resource_name = "player tool"
+script = ExtResource("2_2gyun")
+pattern = Array[int]([0, 1])
+cd = 2.0
+desc = "adfhsdafbasfhnadfbadr"
+metadata/_custom_type_script = "uid://bt23ncs2pjifc"
+
+[sub_resource type="Curve2D" id="Curve2D_6yq8t"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -790, -270, 0, 0, 0, 0, 790, -270)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_2gyun"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -790, 270, 0, 0, 0, 0, 790, 270)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_6qntf"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, -400, 0, 270, 0, 400, 0, 0, -632, -270)
+}
+point_count = 2
+
+[node name="TradingScene" type="Node2D" unique_id=1107854438 node_paths=PackedStringArray("shop_slots", "player_slots")]
+script = ExtResource("1_i22rn")
+shop_tools = Array[ExtResource("2_2gyun")]([SubResource("Resource_i22rn"), SubResource("Resource_6qntf"), SubResource("Resource_xgy52")])
+player_eq = Array[ExtResource("2_2gyun")]([SubResource("Resource_04mvf"), SubResource("Resource_04mvf"), null, null, null, SubResource("Resource_04mvf")])
+shop_slots = [NodePath("ShopKeeperSlots/PathFollow2D"), NodePath("ShopKeeperSlots/PathFollow2D2"), NodePath("ShopKeeperSlots/PathFollow2D3"), NodePath("ShopKeeperSlots/PathFollow2D4"), NodePath("ShopKeeperSlots/PathFollow2D5")]
+player_slots = [NodePath("PlayerSlots/PathFollow2D"), NodePath("PlayerSlots/PathFollow2D2"), NodePath("PlayerSlots/PathFollow2D3"), NodePath("PlayerSlots/PathFollow2D4"), NodePath("PlayerSlots/PathFollow2D5"), NodePath("PlayerSlots/PathFollow2D6")]
+card_scene = "uid://bbqyr2immokb5"
+
+[node name="ShopKeeperSlots" type="Path2D" parent="." unique_id=1474099082]
+curve = SubResource("Curve2D_6yq8t")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="ShopKeeperSlots" unique_id=532691783]
+position = Vector2(-632.0021, -270)
+progress = 157.99998
+
+[node name="PathFollow2D2" type="PathFollow2D" parent="ShopKeeperSlots" unique_id=1544190447]
+position = Vector2(-316.0001, -270)
+progress = 473.99997
+
+[node name="PathFollow2D3" type="PathFollow2D" parent="ShopKeeperSlots" unique_id=138628369]
+position = Vector2(-6.103616e-05, -270)
+progress = 789.99994
+
+[node name="PathFollow2D4" type="PathFollow2D" parent="ShopKeeperSlots" unique_id=2129352734]
+position = Vector2(316.00018, -270)
+progress = 1105.9999
+
+[node name="PathFollow2D5" type="PathFollow2D" parent="ShopKeeperSlots" unique_id=1638646162]
+position = Vector2(632.0022, -270)
+progress = 1421.9999
+
+[node name="PlayerSlots" type="Path2D" parent="." unique_id=1537123949]
+curve = SubResource("Curve2D_2gyun")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="PlayerSlots" unique_id=283459745]
+position = Vector2(-790, 270)
+
+[node name="PathFollow2D2" type="PathFollow2D" parent="PlayerSlots" unique_id=236409239]
+position = Vector2(-474.00015, 270)
+progress = 315.99997
+
+[node name="PathFollow2D3" type="PathFollow2D" parent="PlayerSlots" unique_id=1812388614]
+position = Vector2(-158.00052, 270)
+progress = 631.99994
+
+[node name="PathFollow2D4" type="PathFollow2D" parent="PlayerSlots" unique_id=1540878847]
+position = Vector2(158.00055, 270)
+progress = 947.99994
+
+[node name="PathFollow2D5" type="PathFollow2D" parent="PlayerSlots" unique_id=1780647846]
+position = Vector2(474.00027, 270)
+progress = 1263.9999
+
+[node name="PathFollow2D6" type="PathFollow2D" parent="PlayerSlots" unique_id=1055358269]
+position = Vector2(790, 270)
+progress = 1579.9999
+
+[node name="TradeLane" type="Path2D" parent="." unique_id=736166014]
+curve = SubResource("Curve2D_6qntf")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="TradeLane" unique_id=1417984292]
+position = Vector2(0, 270)
+rotation = -1.5707964
+
+[node name="PathFollow2D2" type="PathFollow2D" parent="TradeLane" unique_id=292978903]
+position = Vector2(-631.99994, -269.99997)
+rotation = -1.5707964
+progress = 922.70416
+loop = false

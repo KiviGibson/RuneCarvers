@@ -10,13 +10,13 @@ class_name Inventory
 @export var avilable_gems: Array[Gem] # list of avilebility
 @export var gem_slots: Array[GemOption]
 @export var search_menu: SearchMenu
+var currently_swapped: int = -1
+
 
 @export_group("Tools")
-var shop_keeper_tools: Array[Tool]
 @export var equiped_tools: Array[Tool]
 @export var backpack_tools: Array[Tool]
 
-var currently_swapped: int = -1
 
 func _ready() -> void:
 	inventory_ui.closed.connect(set_player_gems)
@@ -107,3 +107,7 @@ func swap_gem(idx: int = -1) -> void:
 @rpc("authority", "call_local", "reliable")
 func show_search_options(value: bool) -> void:
 	search_menu.visible = value
+
+func start_trade() -> void: pass
+
+func finish_trade() -> void: pass
