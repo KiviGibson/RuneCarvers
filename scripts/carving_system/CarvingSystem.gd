@@ -17,6 +17,7 @@ func _ready() -> void:
 		ui[i].visible = true
 		carvings[i] = carvings[i].duplicate(true)
 		ui[i].set_pattern(carvings[i].pattern)
+		ui[i].name_code.text = carvings[i].resource_name
 
 func start_carving() -> void: ## Rozpocznij rycie
 	if not multiplayer.is_server(): return

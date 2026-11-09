@@ -38,6 +38,7 @@ max_health = 30
 metadata/_custom_type_script = "uid://bffwh1ds00jub"
 
 [sub_resource type="Resource" id="Resource_7ddre"]
+resource_name = "Lightning Barage"
 script = ExtResource("3_c3xxp")
 pattern = Array[int]([0, 0, 0, 1])
 rune = ExtResource("6_pn6s4")
@@ -45,6 +46,7 @@ cd = 5.0
 metadata/_custom_type_script = "uid://nrajgkybshxf"
 
 [sub_resource type="Resource" id="Resource_5rxlc"]
+resource_name = "Lightning Dash"
 script = ExtResource("3_c3xxp")
 pattern = Array[int]([0, 0, 0])
 rune = ExtResource("7_5stf6")
@@ -52,12 +54,14 @@ cd = 3.0
 metadata/_custom_type_script = "uid://nrajgkybshxf"
 
 [sub_resource type="Resource" id="Resource_ghlvj"]
+resource_name = "Stone Knuckels"
 script = ExtResource("3_c3xxp")
 pattern = Array[int]([0, 1, 0])
 rune = ExtResource("14_76i7i")
 metadata/_custom_type_script = "uid://nrajgkybshxf"
 
 [sub_resource type="Resource" id="Resource_55al8"]
+resource_name = "Boogie Woogie"
 script = ExtResource("3_c3xxp")
 pattern = Array[int]([2, 2, 0])
 rune = ExtResource("9_8qjgm")
