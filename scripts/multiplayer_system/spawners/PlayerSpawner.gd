@@ -3,9 +3,11 @@ class_name PlayerSapwner
 
 const character_scene: PackedScene = preload("res://scenes/player/Player.tscn")
 @export var game_overlay: Control
+@export var game_GUI: Control
 var _players: Dictionary[int, Player]
 var current_pov: int = 0
 @export var POV: Array[SubViewportContainer]
+
 func _ready() -> void:
 	spawn_function = spawn_player
 
@@ -38,3 +40,6 @@ func hide_unused_viewport() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pov_change"):
 		hide_unused_viewport.rpc()
+
+func show_gui() -> void:
+	game_GUI.visible = true

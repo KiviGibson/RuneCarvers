@@ -3,8 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://ddgs6y20giaql" path="res://icon.svg" id="1_05s56"]
 [ext_resource type="Script" uid="uid://bm5u177fehk5l" path="res://scripts/interaction_system/Npc/JackSmith/ToolTrade/ToolTrade.gd" id="1_lfiiq"]
 
-[node name="Node2D" type="Node2D" unique_id=49502101]
+[node name="Node2D" type="Node2D" unique_id=49502101 node_paths=PackedStringArray("button", "label")]
 script = ExtResource("1_lfiiq")
+button = NodePath("Button")
+label = NodePath("Button/MarginContainer/VBoxContainer/CardName")
 
 [node name="Button" type="Button" parent="." unique_id=498933050]
 custom_minimum_size = Vector2(300, 375)

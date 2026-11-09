@@ -39,12 +39,14 @@ func create_game(ignore_solo: bool = false) -> void:
 		player_joined(100)
 		player_loaded.rpc()
 		Players.hide_unused_viewport.rpc()
+	Players.show_gui()
 
 func join_game() -> void:
 	var peer := ENetMultiplayerPeer.new()
 	var error := peer.create_client(ip, port)
 	if error: return
 	multiplayer.multiplayer_peer = peer
+	Players.show_gui()
 
 func _on_player_connected_ok() -> void:
 	text.text = str(multiplayer.get_unique_id())

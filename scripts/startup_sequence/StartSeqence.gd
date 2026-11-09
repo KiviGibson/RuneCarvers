@@ -7,7 +7,8 @@ extends CascadingEscapableUI
 func show_menu() -> void: 
 	print("== M3NU ==")
 	menu.visible = true
-	if skip_menu: Lobby.create_game()
+	if skip_menu: 
+		Lobby.create_game()
 
 func show_options() -> void:
 	print("== SEXTINGS ==")

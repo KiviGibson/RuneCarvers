@@ -5,4 +5,3 @@
 [node name="Layer" type="CanvasLayer" unique_id=42009993]
 
 [node name="TradingScene" parent="." unique_id=1107854438 instance=ExtResource("1_ive13")]
-position = Vector2(960, 540)

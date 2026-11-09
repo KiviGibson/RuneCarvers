@@ -3,11 +3,12 @@
 [ext_resource type="Script" uid="uid://du3idwes8fp8o" path="res://scripts/multiplayer_system/spawners/PlayerSpawner.gd" id="1_wrbqs"]
 [ext_resource type="Texture2D" uid="uid://dtaxe2ioycl8e" path="res://assets/Grafiki 2D/Book.png" id="2_knbpe"]
 
-[node name="Players" type="MultiplayerSpawner" unique_id=1328708963 node_paths=PackedStringArray("game_overlay", "POV")]
+[node name="Players" type="MultiplayerSpawner" unique_id=1328708963 node_paths=PackedStringArray("game_overlay", "game_GUI", "POV")]
 spawn_path = NodePath("Players")
 spawn_limit = 2
 script = ExtResource("1_wrbqs")
 game_overlay = NodePath("game_overlay/MarginContainer/HBoxContainer")
+game_GUI = NodePath("game_overlay/MarginContainer")
 POV = [NodePath("game_overlay/HBoxContainer/SubViewportContainer"), NodePath("game_overlay/HBoxContainer/SubViewportContainer2")]
 metadata/_custom_type_script = "uid://du3idwes8fp8o"
 
@@ -36,6 +37,7 @@ size_flags_horizontal = 3
 stretch = true
 
 [node name="MarginContainer" type="MarginContainer" parent="game_overlay" unique_id=726418603]
+visible = false
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0

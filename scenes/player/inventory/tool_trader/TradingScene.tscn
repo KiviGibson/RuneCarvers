@@ -49,17 +49,126 @@ point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_6qntf"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, -400, 0, 270, 0, 400, 0, 0, -632, -270)
+"points": PackedVector2Array(0, 0, 0, -200, 200, 0, 0, 200, 0, 0, -400, 0)
 }
 point_count = 2
 
-[node name="TradingScene" type="Node2D" unique_id=1107854438 node_paths=PackedStringArray("shop_slots", "player_slots")]
+[sub_resource type="Animation" id="Animation_2gyun"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("First:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Second:progress_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_6qntf"]
+resource_name = "reset"
+length = 0.001
+step = 0.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("First:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Second:progress_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_xgy52"]
+resource_name = "swap"
+length = 0.3
+step = 0.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("First:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0.1, 0, 1, -0.1, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Second:progress_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, 0, 0, 0.1, 0, 0, -0.1, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"back_to_me"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qqq1u"]
+_data = {
+&"RESET": SubResource("Animation_2gyun"),
+&"reset": SubResource("Animation_6qntf"),
+&"swap": SubResource("Animation_xgy52")
+}
+
+[node name="TradingScene" type="Node2D" unique_id=1107854438 node_paths=PackedStringArray("shop_slots", "player_slots", "first_point", "second_point", "path", "animator")]
+position = Vector2(960, 540)
 script = ExtResource("1_i22rn")
 shop_tools = Array[ExtResource("2_2gyun")]([SubResource("Resource_i22rn"), SubResource("Resource_6qntf"), SubResource("Resource_xgy52")])
 player_eq = Array[ExtResource("2_2gyun")]([SubResource("Resource_04mvf"), SubResource("Resource_04mvf"), null, null, null, SubResource("Resource_04mvf")])
 shop_slots = [NodePath("ShopKeeperSlots/PathFollow2D"), NodePath("ShopKeeperSlots/PathFollow2D2"), NodePath("ShopKeeperSlots/PathFollow2D3"), NodePath("ShopKeeperSlots/PathFollow2D4"), NodePath("ShopKeeperSlots/PathFollow2D5")]
 player_slots = [NodePath("PlayerSlots/PathFollow2D"), NodePath("PlayerSlots/PathFollow2D2"), NodePath("PlayerSlots/PathFollow2D3"), NodePath("PlayerSlots/PathFollow2D4"), NodePath("PlayerSlots/PathFollow2D5"), NodePath("PlayerSlots/PathFollow2D6")]
 card_scene = "uid://bbqyr2immokb5"
+first_point = NodePath("TradeLane/First")
+second_point = NodePath("TradeLane/Second")
+path = NodePath("TradeLane")
+animator = NodePath("TradeLane/AnimationPlayer")
 
 [node name="ShopKeeperSlots" type="Path2D" parent="." unique_id=1474099082]
 curve = SubResource("Curve2D_6yq8t")
@@ -113,12 +222,18 @@ progress = 1579.9999
 [node name="TradeLane" type="Path2D" parent="." unique_id=736166014]
 curve = SubResource("Curve2D_6qntf")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="TradeLane" unique_id=1417984292]
-position = Vector2(0, 270)
+[node name="First" type="PathFollow2D" parent="TradeLane" unique_id=1417984292]
+position = Vector2(200, 0)
 rotation = -1.5707964
-
-[node name="PathFollow2D2" type="PathFollow2D" parent="TradeLane" unique_id=292978903]
-position = Vector2(-631.99994, -269.99997)
-rotation = -1.5707964
-progress = 922.70416
+rotates = false
 loop = false
+
+[node name="Second" type="PathFollow2D" parent="TradeLane" unique_id=292978903]
+position = Vector2(-399.99997, 0)
+rotation = -1.5707964
+progress = 684.27094
+rotates = false
+loop = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TradeLane" unique_id=1734072]
+libraries/ = SubResource("AnimationLibrary_qqq1u")
