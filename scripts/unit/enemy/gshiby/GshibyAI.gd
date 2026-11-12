@@ -10,16 +10,22 @@ enum State {
 func on_stun() -> void: pass
 func on_un_stun() -> void: pass
 
+@export_category("References")
 @export var movement: MovementControler
 @export var nav: NavigationAgent3D
 @export var sense_range: Area3D
 @export var scouting_range: Area3D
 @export var target_oponent: Unit = null
 
+@export_category("Parameters")
+@export var distance_to_attack: float = 5.
+@export var jump_force: float = 100.0
+
 var state := GshibyAI.State.SCOUTING :
 	set = _set_state
 ## Unit has reached navigation target destination
 var on_target: bool = true
+
 
 @export_category("Timers")
 @export var scouting_cooldown: float = 2.0
@@ -41,19 +47,24 @@ func _set_state(new_state: State) -> void:
 	_enter_state(state)
 
 func _enter_state(_state: State) -> void:
-	print(self, " : ", State.keys()[_state])
+	print("@", Engine.get_process_frames(), " | ", self, " : ", State.keys()[_state])
 	match _state:
 		State.SCOUTING:
 			find_scouting_point()
 			_scout_timer = 0.0
 		State.CHASING:
 			_chase_timer = 0.0
+		State.ATTACKING:
+			movement.enable_gravity()
+			movement.jump(jump_force)
+			await get_tree().create_timer(3.0).timeout
 
 func _exit_state(_state: State) -> void:
 	match _state:
 		pass
 
 func _process_state(_state: State, delta: float) -> void:
+	print(movement.velocity)
 	match state:
 		State.SCOUTING:
 			scout(delta)
@@ -67,7 +78,6 @@ func find_scouting_point() -> void:
 	var possible_targets: Array[Area3D] = scouting_range.get_overlapping_areas()
 	
 	if possible_targets.is_empty():
-		push_warning("cannot find scouting point. wandering")
 		current_point = movement.global_position + Vector3(randf(), 0, randf())*20.0
 	else:
 		current_point = possible_targets.pick_random().global_position
@@ -83,11 +93,10 @@ func _physics_process(_delta: float) -> void:
 	do_nav_movement()
 
 func do_nav_movement() -> void:
-	#if on_target: return
-	
-	## TODO Nie kalkuluje sie predkosc Y
+	## TODO Nie kalkuluje sie predkosc Y ??
 	var dir: Vector3 = movement.global_position.direction_to( \
-			nav.get_next_path_position()) * Vector3(1, 0, 1)
+			nav.get_next_path_position()) * Vector3(1, 0, 1) \
+			+ movement.velocity.y * Vector3.UP
 	nav.velocity = dir * movement.walking_speed
 	
 	var grounded_vel := movement.velocity*Vector3(1,0,1)
@@ -107,13 +116,17 @@ func scout(delta: float) -> void:
 	if on_target and _scout_timer <= 0.:
 		find_scouting_point()
 
-func chase(delta: float) -> void: 	
+func chase(delta: float) -> void:
 	_chase_timer -= delta
 	# Update every 0.3 s
+	if nav.distance_to_target() < distance_to_attack:
+		state = State.ATTACKING
+		return
+	
 	if _chase_timer <= 0.0:
-		on_target = false
+		#on_target = false
 		nav.target_position = target_oponent.model.global_position
-		## Target reachable
+		## Target reachable -> reset end chase timer
 		if target_oponent.model in sense_range.get_overlapping_bodies() and nav.is_target_reachable():
 			_end_chase_timer = end_chasing_time
 		elif _end_chase_timer <= 0.0:
@@ -122,7 +135,8 @@ func chase(delta: float) -> void:
 		
 		_chase_timer = chasing_cooldown
 
-func atack() -> void: pass
+func atack() -> void:
+	pass
 
 func avoident_movemnt(safe_velocity: Vector3) -> void:
 	if movement.current_state == MovementControler.states.normal:

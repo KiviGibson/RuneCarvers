@@ -68,7 +68,7 @@ background_energy_multiplier = 1.67
 sky = SubResource("Sky_6yq8t")
 ambient_light_source = 3
 
-[sub_resource type="BoxMesh" id="BoxMesh_4ybgr"]
+[sub_resource type="BoxMesh" id="BoxMesh_5prq0"]
 resource_local_to_scene = true
 size = Vector3(0.01, 10, 10)
 
@@ -81,7 +81,7 @@ domain_warp_enabled = true
 noise = SubResource("FastNoiseLite_vvut4")
 seamless = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lo7qv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ybgr"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("14_5prq0")
@@ -91,11 +91,11 @@ shader_parameter/noise = SubResource("NoiseTexture2D_vvut4")
 shader_parameter/noise_y = 0.0
 shader_parameter/elevation = 0.0
 
-[sub_resource type="BoxMesh" id="BoxMesh_xpges"]
+[sub_resource type="BoxMesh" id="BoxMesh_lo7qv"]
 resource_local_to_scene = true
 size = Vector3(0.01, 10, 10)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_iu41y"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xpges"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("14_5prq0")
@@ -231,12 +231,12 @@ environment = SubResource("Environment_6yq8t")
 
 [node name="blink_wall" parent="." unique_id=635862627 instance=ExtResource("13_vvut4")]
 transform = Transform3D(0.4549624, 0.12190682, 0.88212675, -0.258819, 0.96592575, 0, -0.852069, -0.22831121, 0.47101176, 0.0047187805, 4.830924, 13.130064)
-mesh = SubResource("BoxMesh_4ybgr")
-material = SubResource("ShaderMaterial_lo7qv")
+mesh = SubResource("BoxMesh_5prq0")
+material = SubResource("ShaderMaterial_4ybgr")
 
 [node name="blink_wall2" parent="." unique_id=1642145592 instance=ExtResource("13_vvut4")]
 transform = Transform3D(0.4549624, 0.12190682, 0.88212675, -0.258819, 0.96592575, 0, -0.852069, -0.22831121, 0.47101176, 13.279974, 9.830923, -6.8496723)
-mesh = SubResource("BoxMesh_xpges")
-material = SubResource("ShaderMaterial_iu41y")
+mesh = SubResource("BoxMesh_lo7qv")
+material = SubResource("ShaderMaterial_xpges")
 
 [connection signal="interaction_signal" from="StaticMap/EnemyArenaFight/Spawner/Interactable" to="StaticMap/EnemyArenaFight/Spawner/SpawnEnemies" method="spawn"]

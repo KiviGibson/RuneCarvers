@@ -16,13 +16,15 @@ var current_state: states = states.normal
 var distance: float = 0.0
 
 @export var default_gravity: float = 9.81
-@onready var gravity := default_gravity
+var gravity: float
 
 func disable_gravity() -> void: gravity = 0.0
 func enable_gravity() -> void: gravity = default_gravity
 
 func _ready() -> void:
 	finish_force_movement.connect(enable_gravity)
+	
+	gravity = default_gravity
 
 func force_state(delta: float) -> void:
 	distance -= delta*force_mult*walking_speed
@@ -34,6 +36,9 @@ func force_state(delta: float) -> void:
 	move_and_slide()
 
 func _physics_process(delta: float) -> void:
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+	
 	match current_state:
 		states.normal:
 			move_and_slide()

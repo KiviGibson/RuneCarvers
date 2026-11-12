@@ -61,7 +61,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1, -8)
 script = ExtResource("1_2n4ee")
 enemy = 2
 max_distance = 10.0
-enemy_count = 12
 metadata/_custom_type_script = "uid://lbrvarwcj32q"
 
 [node name="PointsOfIntrest" type="Node3D" parent="." unique_id=2140840894]

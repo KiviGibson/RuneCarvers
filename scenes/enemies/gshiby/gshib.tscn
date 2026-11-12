@@ -53,6 +53,9 @@ path_desired_distance = 2.0
 target_desired_distance = 2.0
 avoidance_enabled = true
 max_neighbors = 20
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0, 1, 0, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MovementControler" unique_id=1741373366]
 visible = false
