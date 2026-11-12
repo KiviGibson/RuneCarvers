@@ -15,10 +15,11 @@ signal finish_force_movement()
 var current_state: states = states.normal
 var distance: float = 0.0
 
-@export var gravity: float = 9.81
+@export var default_gravity: float = 9.81
+@onready var gravity := default_gravity
 
 func disable_gravity() -> void: gravity = 0.0
-func enable_gravity() -> void: gravity = 9.81
+func enable_gravity() -> void: gravity = default_gravity
 
 func _ready() -> void:
 	finish_force_movement.connect(enable_gravity)
@@ -33,14 +34,22 @@ func force_state(delta: float) -> void:
 	move_and_slide()
 
 func _physics_process(delta: float) -> void:
-	if current_state == states.normal: move_and_slide()
-	if current_state == states.force: force_state(delta)
-	if current_state == states.stun: 
-		velocity *= Vector3(0, 1, 0)
-		move_and_slide()
+	match current_state:
+		states.normal:
+			move_and_slide()
+		states.force:
+			force_state(delta)
+		states.stun: 
+			velocity *= Vector3(0, 1, 0)
+			move_and_slide()
 
 func dash(vec: Vector2, y: float = 0) -> void:
 	velocity = Vector3(vec.x, y, vec.y).normalized()*walking_speed*force_mult
 	distance = sqrt(vec.x**2 + vec.y**2 + y**2)
 	current_state = states.force
 	disable_gravity()
+
+func jump(vel: float, no_floor_check: bool = false) -> void:
+	if not (is_on_floor() or no_floor_check): return
+	velocity.y = vel
+	enable_gravity()

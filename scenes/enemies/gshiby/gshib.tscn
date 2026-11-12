@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bga3yxy6ye61" path="res://scripts/unit/Enemy.gd" id="1_y2704"]
 [ext_resource type="PackedScene" uid="uid://du573uaja1p13" path="res://scenes/hp_bars/EnemyHpBar.tscn" id="2_tusaj"]
 [ext_resource type="Script" uid="uid://bffwh1ds00jub" path="res://scripts/unit/Stats.gd" id="2_yeb1p"]
-[ext_resource type="Script" uid="uid://chl7884i16pjw" path="res://scripts/unit/PlayerMovement.gd" id="3_2o68d"]
+[ext_resource type="Script" uid="uid://d1ggxehy2ph1q" path="res://scripts/unit/MovementControler.gd" id="3_2o68d"]
 [ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/damage_system/HurtBox.gd" id="4_d30o3"]
 [ext_resource type="Script" uid="uid://bsmwhck7xocl0" path="res://scripts/multiplayer_system/spawners/effect_spawner.gd" id="5_i5y7b"]
 [ext_resource type="Script" uid="uid://c2i230dqglhpo" path="res://scripts/effect_system/effect_components/FroceMovement.gd" id="5_opxko"]
@@ -125,14 +125,12 @@ script = ExtResource("5_i5y7b")
 host = NodePath("..")
 metadata/_custom_type_script = "uid://bsmwhck7xocl0"
 
-[node name="GshibyAI" type="Node3D" parent="." unique_id=1760778541 node_paths=PackedStringArray("movement", "nav", "sense_range", "scouting_range", "scout_timer", "chase_timer")]
+[node name="GshibyAI" type="Node3D" parent="." unique_id=1760778541 node_paths=PackedStringArray("movement", "nav", "sense_range", "scouting_range")]
 script = ExtResource("6_yeb1p")
 movement = NodePath("../MovementControler")
 nav = NodePath("../MovementControler/NavigationAgent3D")
 sense_range = NodePath("../MovementControler/SeneseRange")
 scouting_range = NodePath("../MovementControler/ScoutRange")
-scout_timer = NodePath("ScoutTimer")
-chase_timer = NodePath("ChaseTimer")
 metadata/_custom_type_script = "uid://d1x2w6kw3mbhy"
 
 [node name="ScoutTimer" type="Timer" parent="GshibyAI" unique_id=2003083612]
