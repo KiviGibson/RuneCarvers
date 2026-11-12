@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bga3yxy6ye61" path="res://scripts/unit/Enemy.gd" id="1_y2704"]
 [ext_resource type="PackedScene" uid="uid://du573uaja1p13" path="res://scenes/hp_bars/EnemyHpBar.tscn" id="2_tusaj"]
 [ext_resource type="Script" uid="uid://bffwh1ds00jub" path="res://scripts/unit/Stats.gd" id="2_yeb1p"]
-[ext_resource type="Script" uid="uid://d1ggxehy2ph1q" path="res://scripts/unit/MovementControler.gd" id="3_6fimq"]
+[ext_resource type="Script" uid="uid://chl7884i16pjw" path="res://scripts/unit/PlayerMovement.gd" id="3_2o68d"]
 [ext_resource type="Script" uid="uid://deqosc7jtvi1x" path="res://scripts/damage_system/HurtBox.gd" id="4_d30o3"]
 [ext_resource type="Script" uid="uid://bsmwhck7xocl0" path="res://scripts/multiplayer_system/spawners/effect_spawner.gd" id="5_i5y7b"]
 [ext_resource type="Script" uid="uid://c2i230dqglhpo" path="res://scripts/effect_system/effect_components/FroceMovement.gd" id="5_opxko"]
@@ -40,13 +40,13 @@ hurt_box = NodePath("MovementControler/HurtBox")
 effect_spawner = NodePath("EffectSpawner")
 metadata/_custom_type_script = "uid://bga3yxy6ye61"
 
-[node name="MovementControler" type="CharacterBody3D" parent="." unique_id=429148066 node_paths=PackedStringArray("visible_model")]
+[node name="MovementControler" type="CharacterBody3D" parent="." unique_id=1153273086 node_paths=PackedStringArray("visible_model")]
 collision_layer = 0
 collision_mask = 3
-script = ExtResource("3_6fimq")
+script = ExtResource("3_2o68d")
 walking_speed = 3.0
 visible_model = NodePath("Prawdziwek")
-metadata/_custom_type_script = "uid://d1ggxehy2ph1q"
+metadata/_custom_type_script = "uid://chl7884i16pjw"
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="MovementControler" unique_id=1981386685]
 path_desired_distance = 2.0
@@ -138,6 +138,7 @@ metadata/_custom_type_script = "uid://d1x2w6kw3mbhy"
 [node name="ScoutTimer" type="Timer" parent="GshibyAI" unique_id=2003083612]
 wait_time = 2.0
 one_shot = true
+autostart = true
 
 [node name="ChaseTimer" type="Timer" parent="GshibyAI" unique_id=1980499398]
 wait_time = 0.33

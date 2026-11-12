@@ -17,7 +17,8 @@ func on_un_stun() -> void: pass
 @export var target_oponent: Unit = null
 @export var scout_timer: Timer
 @export var chase_timer: Timer
-var state := GshibyAI.State.SCOUTING
+var state := GshibyAI.State.SCOUTING :
+	set = _set_state
 ## Unit has reached navigation target destination
 var on_target: bool = true
 
@@ -25,6 +26,28 @@ func _ready() -> void:
 	scout_timer.timeout.connect(find_scouting_point)
 	nav.velocity_computed.connect(avoident_movemnt)
 	sense_range.body_entered.connect(on_player_noticed)
+
+#region FSM
+func _set_state(new_state: State) -> void:
+	_exit_state(state)
+	state = new_state
+	_enter_state(state)
+
+func _enter_state(_state: State) -> void:
+	match _state:
+		pass
+
+func _exit_state(_state: State) -> void:
+	match _state:
+		pass
+
+func _process_state(_state: State, _delta: float) -> void:
+	match state:
+		State.SCOUTING:
+			scout()
+		State.CHASING:
+			chase()
+#endregion FSM
 
 func find_scouting_point() -> void:
 	if state != State.SCOUTING: return 
@@ -37,19 +60,20 @@ func find_scouting_point() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if on_target: return
+	#if on_target: return
 	
+	## TODO Nie kalkuluje sie predkosc Y
 	var dir: Vector3 = movement.global_position.direction_to( \
 			nav.get_next_path_position()) * Vector3(1, 0, 1)
 	nav.velocity = dir * movement.walking_speed
-	if movement.velocity != Vector3.ZERO:
+	
+	var grounded_vel := movement.velocity*Vector3(1,0,1)
+	if not grounded_vel.is_zero_approx():
 		movement.visible_model.look_at( \
-			(movement.visible_model.global_position - movement.velocity*Vector3(1,0,1)))
+			(movement.global_position - grounded_vel))
 
 func _process(_delta: float) -> void:
-	match state:
-		State.SCOUTING: scout()
-		State.CHASING: chase()
+	_process_state(state, _delta)
 
 func scout() -> void:
 	if nav.is_navigation_finished():
@@ -73,7 +97,7 @@ func avoident_movemnt(safe_velocity: Vector3) -> void:
 	if movement.current_state == MovementControler.states.normal:
 		movement.velocity = safe_velocity
 
-func on_player_noticed(collider: CharacterBody3D) -> void:
+func on_player_noticed(collider: Node3D) -> void:
 	if collider is MovementControler and collider.type == MovementControler.pupet_type.player:
 		target_oponent = collider.owner
 		state = State.CHASING
