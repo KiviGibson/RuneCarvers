@@ -18,8 +18,8 @@ func on_un_stun() -> void: pass
 @export var target_oponent: Unit = null
 
 @export_category("Parameters")
-@export var distance_to_attack: float = 5.
-@export var jump_force: float = 100.0
+@export var distance_to_attack: float = 10.
+@export var jump_force: float = 5.0
 
 var state := GshibyAI.State.SCOUTING :
 	set = _set_state
@@ -64,7 +64,6 @@ func _exit_state(_state: State) -> void:
 		pass
 
 func _process_state(_state: State, delta: float) -> void:
-	print(movement.velocity)
 	match state:
 		State.SCOUTING:
 			scout(delta)
@@ -95,10 +94,10 @@ func _physics_process(_delta: float) -> void:
 func do_nav_movement() -> void:
 	## TODO Nie kalkuluje sie predkosc Y ??
 	var dir: Vector3 = movement.global_position.direction_to( \
-			nav.get_next_path_position()) * Vector3(1, 0, 1) \
-			+ movement.velocity.y * Vector3.UP
+			nav.get_next_path_position()) * Vector3(1, 0, 1)
 	nav.velocity = dir * movement.walking_speed
-	
+
+func update_model_rotation() -> void:
 	var grounded_vel := movement.velocity*Vector3(1,0,1)
 	if not is_zero_approx(grounded_vel.length_squared()):
 		movement.visible_model.look_at( \
@@ -140,7 +139,9 @@ func atack() -> void:
 
 func avoident_movemnt(safe_velocity: Vector3) -> void:
 	if movement.current_state == MovementControler.states.normal:
-		movement.velocity = safe_velocity
+		movement.velocity.x = safe_velocity.x
+		movement.velocity.z = safe_velocity.z
+	update_model_rotation()
 
 func on_player_noticed(collider: Node3D) -> void:
 	if collider is MovementControler and collider.type == MovementControler.pupet_type.player:
