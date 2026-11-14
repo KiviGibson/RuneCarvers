@@ -54,6 +54,7 @@ func _enter_state(_state: State) -> void:
 			find_scouting_point()
 			_scout_timer = 0.0
 		State.CHASING:
+			sense_range.set_deferred(&"monitoring", true)
 			_chase_timer = 0.0
 			_end_chase_timer = end_chasing_time
 		State.ATTACKING:
@@ -64,6 +65,8 @@ func _enter_state(_state: State) -> void:
 func _exit_state(_state: State) -> void:
 	match _state:
 		State.SCOUTING:
+			sense_range.set_deferred(&"monitoring", false)
+		State.CHASING:
 			sense_range.set_deferred(&"monitoring", false)
 
 func _process_state(_state: State, delta: float) -> void:
@@ -124,7 +127,8 @@ func scout(delta: float) -> void:
 func chase(delta: float) -> void:
 	_chase_timer -= delta
 	# Update every 0.3 s
-	print(_chase_timer)
+	print("_chase_timer : ", _chase_timer)
+	print("_end_chase_timer : ", _end_chase_timer)
 	if nav.distance_to_target() < distance_to_attack:
 		state = State.ATTACKING
 		return
@@ -135,11 +139,13 @@ func chase(delta: float) -> void:
 		## Target reachable -> reset end chase timer
 		if target_oponent.model in sense_range.get_overlapping_bodies() and nav.is_target_reachable():
 			_end_chase_timer = end_chasing_time
-		elif _end_chase_timer <= 0.0:
+		else:
+			_end_chase_timer -= chasing_cooldown ## update co chasing_cooldown
+		if _end_chase_timer <= 0.0:
 			state = State.SCOUTING
 			return
 		
-		_chase_timer = chasing_cooldown
+		_chase_timer += chasing_cooldown
 
 func atack() -> void:
 	pass
