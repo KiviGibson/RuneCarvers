@@ -18,7 +18,7 @@ func on_un_stun() -> void: pass
 @export var target_oponent: Unit = null
 
 @export_category("Parameters")
-@export var distance_to_attack: float = 10.
+@export var distance_to_attack: float = 4.
 @export var jump_force: float = 5.0
 
 var state := GshibyAI.State.SCOUTING :
@@ -50,18 +50,21 @@ func _enter_state(_state: State) -> void:
 	print("@", Engine.get_process_frames(), " | ", self, " : ", State.keys()[_state])
 	match _state:
 		State.SCOUTING:
+			sense_range.set_deferred(&"monitoring", true)
 			find_scouting_point()
 			_scout_timer = 0.0
 		State.CHASING:
 			_chase_timer = 0.0
+			_end_chase_timer = end_chasing_time
 		State.ATTACKING:
 			movement.enable_gravity()
 			movement.jump(jump_force)
-			await get_tree().create_timer(3.0).timeout
+			await get_tree().create_timer(0.5).timeout
 
 func _exit_state(_state: State) -> void:
 	match _state:
-		pass
+		State.SCOUTING:
+			sense_range.set_deferred(&"monitoring", false)
 
 func _process_state(_state: State, delta: float) -> void:
 	match state:
@@ -69,6 +72,10 @@ func _process_state(_state: State, delta: float) -> void:
 			scout(delta)
 		State.CHASING:
 			chase(delta)
+		State.ATTACKING:
+			if movement.is_on_floor():
+				state = State.SCOUTING
+				return
 #endregion FSM
 
 ## Finds possible points to wander to and set navigation target if found
@@ -104,7 +111,6 @@ func update_model_rotation() -> void:
 			(movement.global_position - grounded_vel))
 
 func scout(delta: float) -> void:
-	
 	_scout_timer -= delta
 	
 	if nav.is_navigation_finished():
@@ -118,6 +124,7 @@ func scout(delta: float) -> void:
 func chase(delta: float) -> void:
 	_chase_timer -= delta
 	# Update every 0.3 s
+	print(_chase_timer)
 	if nav.distance_to_target() < distance_to_attack:
 		state = State.ATTACKING
 		return
@@ -145,5 +152,6 @@ func avoident_movemnt(safe_velocity: Vector3) -> void:
 
 func on_player_noticed(collider: Node3D) -> void:
 	if collider is MovementControler and collider.type == MovementControler.pupet_type.player:
+		print("noticed playa")
 		target_oponent = collider.owner
 		state = State.CHASING
