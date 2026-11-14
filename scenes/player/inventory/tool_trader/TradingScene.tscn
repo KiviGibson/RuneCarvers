@@ -49,7 +49,7 @@ point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_6qntf"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, -200, 200, 0, 0, 200, 0, 0, -400, 0)
+"points": PackedVector2Array(0, 0, 0, -200, 159, 271, 0, 200, 0, 0, -630, -271)
 }
 point_count = 2
 
@@ -223,15 +223,15 @@ progress = 1579.9999
 curve = SubResource("Curve2D_6qntf")
 
 [node name="First" type="PathFollow2D" parent="TradeLane" unique_id=1417984292]
-position = Vector2(200, 0)
+position = Vector2(159, 271)
 rotation = -1.5707964
 rotates = false
 loop = false
 
 [node name="Second" type="PathFollow2D" parent="TradeLane" unique_id=292978903]
-position = Vector2(-399.99997, 0)
+position = Vector2(-630.00006, -271.00003)
 rotation = -1.5707964
-progress = 684.27094
+progress = 991.7575
 rotates = false
 loop = false
 

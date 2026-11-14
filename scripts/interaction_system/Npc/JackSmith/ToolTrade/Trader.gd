@@ -20,7 +20,7 @@ var currently_selected: Dictionary = {}
 @export var path: Path2D
 @export var animator: AnimationPlayer
 
-var height: float = 270
+
 var handle_distance: float = 100
 
 func setup() -> void:
@@ -107,14 +107,14 @@ func set_plyer_tools(player_eq:Array[Tool], player_backpack: Array[Tool]) -> voi
 func set_trader_tools(trader_tools: Array[Tool]) -> void: shop_tools = trader_tools
 	
 
-func get_player_tools() -> Array[Tool]:
+func get_player_tools() -> Array[Tool]: # [t, t, t, t], [b, b]
 	var res: Array[Tool]
 	for trade in player_cards:
 		if trade == null: res.append(null)
 		else: res.append(trade.tool)
 	return res
 	
-func get_trader_tools() -> Array[Tool]: 
+func get_trader_tools() -> Array[Tool]: # [t, t, t]
 	var res: Array[Tool]
 	for trade in shop_cards:
 		if trade == null: continue
