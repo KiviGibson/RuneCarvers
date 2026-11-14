@@ -1,0 +1,1 @@
+Stat ysstem zawiera dane o zdrowiu jak i prędkości danego Unitu.  Zawarty jest w klasie unit a używa resource. W przypadku gry to aktualnie zbędny balast.
