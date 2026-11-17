@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Tool" format=3 uid="uid://brni56r2a4w0"]
+
+[ext_resource type="Script" uid="uid://bt23ncs2pjifc" path="res://scripts/carving_system/rune/Tool.gd" id="1_j8pkj"]
+
+[resource]
+resource_name = "Thunder Dash"
+script = ExtResource("1_j8pkj")
+rune_scene = "uid://cebt7oam1m3q2"
+icon_path = "uid://dsca6qww4h4xd"
+pattern = Array[int]([1, 1, 0, 0])
+cd = 8.0
+desc = "Dash creating static field that damages enemies.
+"
+metadata/_custom_type_script = "uid://bt23ncs2pjifc"

@@ -27,10 +27,15 @@ var owner_id: int:
 		interact_system.owner_id = owner_id
 
 var current_rune: Rune
+
 func _ready() -> void:
 	super._ready()
 	inventory.host = self
+	# Code handler for player rescue action (When down)
 	code_handler.setup()
+	# Carving System set-up with inventory tools  
+	carving_system.swap_tools(inventory.equiped_tools)
+	carving_system.display_carvings()
 
 func _on_health_change(curernt: int, absolute: int) -> void:
 	if not multiplayer.is_server(): return

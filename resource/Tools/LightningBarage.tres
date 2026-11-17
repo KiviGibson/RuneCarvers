@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Tool" format=3 uid="uid://bclib1nrdnakt"]
+
+[ext_resource type="Script" uid="uid://bt23ncs2pjifc" path="res://scripts/carving_system/rune/Tool.gd" id="1_dqfh8"]
+
+[resource]
+resource_name = "Lightning Barrage"
+script = ExtResource("1_dqfh8")
+rune_scene = "uid://xmwhn75bbej1"
+icon_path = "uid://blcle5yr0x00p"
+pattern = Array[int]([0, 0, 1, 2, 2])
+cd = 20.0
+desc = "Basic lightning carving."
+metadata/_custom_type_script = "uid://bt23ncs2pjifc"

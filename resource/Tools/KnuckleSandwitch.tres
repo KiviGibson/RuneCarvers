@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Tool" format=3 uid="uid://cno82rehu7rc3"]
+
+[ext_resource type="Script" uid="uid://bt23ncs2pjifc" path="res://scripts/carving_system/rune/Tool.gd" id="1_lhhey"]
+
+[resource]
+resource_name = "Knuckle sandwitch"
+script = ExtResource("1_lhhey")
+rune_scene = "uid://xfynh1gsbkpk"
+icon_path = "uid://du7y66vrbvrix"
+pattern = Array[int]([3, 3, 2, 2])
+cd = 12.0
+desc = "Charge attack that deals great damage after 50% treshold and knocks emeny."
+metadata/_custom_type_script = "uid://bt23ncs2pjifc"

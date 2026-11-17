@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Tool" format=3 uid="uid://4sfqulu5smu5"]
+
+[ext_resource type="Script" uid="uid://bt23ncs2pjifc" path="res://scripts/carving_system/rune/Tool.gd" id="1_lfkvm"]
+
+[resource]
+resource_local_to_scene = true
+resource_name = "Magnetic swap"
+script = ExtResource("1_lfkvm")
+rune_scene = "uid://bunhflg883gvb"
+icon_path = "uid://bsbshxff85k4e"
+pattern = Array[int]([0, 0, 3, 3])
+cd = 20.0
+desc = "Switcharoo."
+metadata/_custom_type_script = "uid://bt23ncs2pjifc"

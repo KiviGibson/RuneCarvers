@@ -1,14 +1,16 @@
 extends Node
 class_name CarvingUI
 
-const temp_rune_icon: CompressedTexture2D = preload("res://icon.svg")
 const clock_fill: Array[CompressedTexture2D] = [
 	preload("res://assets/kenney_cursor-pack/Vector/Basic/progress_CW_25.svg"),
 	preload("res://assets/kenney_cursor-pack/Vector/Basic/progress_CW_50.svg"),
 	preload("res://assets/kenney_cursor-pack/Vector/Basic/progress_CW_75.svg"),
-	preload("res://assets/kenney_cursor-pack/Vector/Basic/progress_full.svg"),
-	temp_rune_icon
+	preload("res://assets/kenney_cursor-pack/Vector/Basic/progress_full.svg")
 ]
+var rune_icon: CompressedTexture2D: 
+	set(value):
+		status_icon.texture = value
+		rune_icon = value
 @export var status_icon: TextureRect
 @export var carving_node: Control
 @export var name_code: Label 
@@ -49,4 +51,5 @@ func able_to_use() -> void:
 func sync_clock(index: int) -> void:
 	animator.stop()
 	animator.play("timer_update")
-	status_icon.texture = clock_fill[index]
+	if index < 4: status_icon.texture = clock_fill[index]
+	else: status_icon.texture = rune_icon
