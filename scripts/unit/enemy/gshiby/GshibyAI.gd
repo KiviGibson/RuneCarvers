@@ -18,8 +18,8 @@ func on_un_stun() -> void: pass
 @export var target_oponent: Unit = null
 
 @export_category("Parameters")
-@export var distance_to_attack: float = 4.
-@export var jump_force: float = 5.0
+@export var distance_to_attack: float = 5.
+@export var jump_velocity: float = 5.0
 
 var state := GshibyAI.State.SCOUTING :
 	set = _set_state
@@ -59,8 +59,14 @@ func _enter_state(_state: State) -> void:
 			_end_chase_timer = end_chasing_time
 		State.ATTACKING:
 			movement.enable_gravity()
-			movement.jump(jump_force)
-			await get_tree().create_timer(0.5).timeout
+			movement.jump(jump_velocity)
+			
+			var to_target := Vector3(1,0,1)*(nav.target_position - movement.global_position)
+			var speed: float = 2.0 * jump_velocity / (to_target.length() * movement.default_gravity)
+			movement.velocity.x = to_target.x * speed
+			movement.velocity.z = to_target.z * speed
+			
+			await get_tree().create_timer(0.3).timeout ## safety net żeby nie dotykło podłogi
 
 func _exit_state(_state: State) -> void:
 	match _state:
