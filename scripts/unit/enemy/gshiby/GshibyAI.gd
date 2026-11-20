@@ -19,6 +19,8 @@ func on_un_stun() -> void: pass
 
 @export_category("Parameters")
 @export var distance_to_attack: float = 5.
+## How much the unit overshoots when calculating the distance to jump during attack
+@export var attack_range_mult: float = 1.33
 @export var jump_velocity: float = 5.0
 
 var state := GshibyAI.State.SCOUTING :
@@ -62,7 +64,7 @@ func _enter_state(_state: State) -> void:
 			movement.jump(jump_velocity)
 			
 			var to_target := Vector3(1,0,1)*(nav.target_position - movement.global_position)
-			var speed: float = 2.0 * jump_velocity / (to_target.length() * movement.default_gravity)
+			var speed: float = 2.0*jump_velocity / (attack_range_mult*to_target.length()*movement.default_gravity)
 			movement.velocity.x = to_target.x * speed
 			movement.velocity.z = to_target.z * speed
 			
@@ -79,8 +81,10 @@ func _process_state(_state: State, delta: float) -> void:
 	match state:
 		State.SCOUTING:
 			scout(delta)
+			do_nav_movement()
 		State.CHASING:
 			chase(delta)
+			do_nav_movement()
 		State.ATTACKING:
 			if movement.is_on_floor():
 				state = State.SCOUTING
@@ -105,7 +109,6 @@ func find_scouting_point() -> void:
 
 func _physics_process(_delta: float) -> void:
 	_process_state(state, _delta)
-	do_nav_movement()
 
 func do_nav_movement() -> void:
 	## TODO Nie kalkuluje sie predkosc Y ??
